@@ -1,8 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import PropertyDetailView from "../views/PropertyDetailView.vue";
-import SubmitPropertyView from "../views/SubmitPropertyView.vue";
-import ManageView from "../views/ManageView.vue";
+
+// Lazy-loaded route components for optimal initial bundle size and mobile performance
+const HomeView = () => import("../views/HomeView.vue");
+const PropertyDetailView = () => import("../views/PropertyDetailView.vue");
+const SubmitPropertyView = () => import("../views/SubmitPropertyView.vue");
+const ManageView = () => import("../views/ManageView.vue");
 
 const routes = [
   {

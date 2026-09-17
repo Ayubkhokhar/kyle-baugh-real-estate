@@ -118,7 +118,15 @@ function handleConsultSubmit() {
               <div class="absolute -inset-3.5 border border-border-brass/80 rounded translate-x-2 translate-y-2 pointer-events-none hidden sm:block"></div>
               <div class="relative bg-canvas-white p-2.5 shadow-xl border border-border-subtle">
                 <div class="relative aspect-[4/5] overflow-hidden bg-surface-linen">
-                  <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAjYRx4css-T_-AENSBByIhtA1ar3h-k_YDrBx-q0I0TROujIGFVGNdJKUMkSWuarmqws42eeIs-XykO0t437gE720__boPCHG8giZD33unv4UuBcsiW5KTG-BKuAIjImAtBhkMhyRXohPFlTl_pYO5b_-iDsMjBqxvxuuymG-554tWTz9Isj4zRIMXmO6LoymP7wYyS6twqo0lzZEJjdOYmrolz-yjc0kZEd6cB_YvSBShcLeEG3Kzg" :alt="siteSettings.advisorName"/>
+                  <img
+                    class="w-full h-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAjYRx4css-T_-AENSBByIhtA1ar3h-k_YDrBx-q0I0TROujIGFVGNdJKUMkSWuarmqws42eeIs-XykO0t437gE720__boPCHG8giZD33unv4UuBcsiW5KTG-BKuAIjImAtBhkMhyRXohPFlTl_pYO5b_-iDsMjBqxvxuuymG-554tWTz9Isj4zRIMXmO6LoymP7wYyS6twqo0lzZEJjdOYmrolz-yjc0kZEd6cB_YvSBShcLeEG3Kzg"
+                    :alt="siteSettings.advisorName + ' - Dallas Luxury Real Estate Advisor'"
+                    fetchpriority="high"
+                    width="400"
+                    height="500"
+                    decoding="async"
+                  />
                   <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent"></div>
                   <div class="absolute bottom-4 left-4 right-4 text-canvas-white flex justify-between items-end">
                     <div>
@@ -197,6 +205,7 @@ function handleConsultSubmit() {
               <input
                 v-model="searchQuery"
                 type="text"
+                aria-label="Search properties by address, architectural style, or enclave"
                 placeholder="Search by address, architectural style, or enclave..."
                 class="w-full pl-9 pr-4 py-2 text-xs bg-surface-alabaster border border-border-subtle rounded focus:outline-none focus:border-secondary"
               />
@@ -204,6 +213,7 @@ function handleConsultSubmit() {
             <div class="sm:w-60">
               <select
                 v-model.number="maxPrice"
+                aria-label="Filter residences by maximum price"
                 class="w-full px-3 py-2 text-xs bg-surface-alabaster border border-border-subtle rounded focus:outline-none focus:border-secondary"
               >
                 <option :value="0">All Price Points</option>
@@ -226,7 +236,11 @@ function handleConsultSubmit() {
             <div class="relative aspect-[16/11] overflow-hidden bg-surface-linen">
               <img
                 :src="prop.heroImage || 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80'"
-                :alt="prop.title"
+                :alt="prop.title + ' - ' + prop.neighborhood"
+                loading="lazy"
+                decoding="async"
+                width="400"
+                height="275"
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
               />
               <div class="absolute top-3.5 left-3.5 flex flex-wrap gap-2">
@@ -520,22 +534,22 @@ function handleConsultSubmit() {
           <form @submit.prevent="handleConsultSubmit" class="space-y-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label class="block text-xs text-charcoal-body uppercase tracking-wider font-semibold mb-2">Full Legal Name *</label>
-                <input v-model="consultForm.fullName" required type="text" placeholder="Eleanor Vance" class="w-full bg-surface-alabaster border border-border-subtle px-4 py-3 text-sm text-primary focus:border-secondary focus:ring-0 rounded transition-colors"/>
+                <label for="consult-name" class="block text-xs text-charcoal-body uppercase tracking-wider font-semibold mb-2">Full Legal Name *</label>
+                <input id="consult-name" v-model="consultForm.fullName" required type="text" placeholder="Eleanor Vance" class="w-full bg-surface-alabaster border border-border-subtle px-4 py-3 text-sm text-primary focus:border-secondary focus:ring-0 rounded transition-colors"/>
               </div>
               <div>
-                <label class="block text-xs text-charcoal-body uppercase tracking-wider font-semibold mb-2">Private Email Address *</label>
-                <input v-model="consultForm.email" required type="email" placeholder="name@domain.com" class="w-full bg-surface-alabaster border border-border-subtle px-4 py-3 text-sm text-primary focus:border-secondary focus:ring-0 rounded transition-colors"/>
+                <label for="consult-email" class="block text-xs text-charcoal-body uppercase tracking-wider font-semibold mb-2">Private Email Address *</label>
+                <input id="consult-email" v-model="consultForm.email" required type="email" placeholder="name@domain.com" class="w-full bg-surface-alabaster border border-border-subtle px-4 py-3 text-sm text-primary focus:border-secondary focus:ring-0 rounded transition-colors"/>
               </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label class="block text-xs text-charcoal-body uppercase tracking-wider font-semibold mb-2">Direct Telephone Number *</label>
-                <input v-model="consultForm.phone" required type="tel" placeholder="214-000-0000" class="w-full bg-surface-alabaster border border-border-subtle px-4 py-3 text-sm text-primary focus:border-secondary focus:ring-0 rounded transition-colors"/>
+                <label for="consult-phone" class="block text-xs text-charcoal-body uppercase tracking-wider font-semibold mb-2">Direct Telephone Number *</label>
+                <input id="consult-phone" v-model="consultForm.phone" required type="tel" placeholder="214-000-0000" class="w-full bg-surface-alabaster border border-border-subtle px-4 py-3 text-sm text-primary focus:border-secondary focus:ring-0 rounded transition-colors"/>
               </div>
               <div>
-                <label class="block text-xs text-charcoal-body uppercase tracking-wider font-semibold mb-2">Dallas Neighborhood</label>
-                <select v-model="consultForm.neighborhood" class="w-full bg-surface-alabaster border border-border-subtle px-4 py-3 text-sm text-primary focus:border-secondary focus:ring-0 rounded transition-colors">
+                <label for="consult-neighborhood" class="block text-xs text-charcoal-body uppercase tracking-wider font-semibold mb-2">Dallas Neighborhood</label>
+                <select id="consult-neighborhood" v-model="consultForm.neighborhood" class="w-full bg-surface-alabaster border border-border-subtle px-4 py-3 text-sm text-primary focus:border-secondary focus:ring-0 rounded transition-colors">
                   <option value="park-cities">Park Cities (Highland Park / University Park)</option>
                   <option value="preston-hollow">Preston Hollow & Estate Area</option>
                   <option value="lakewood">Lakewood & Forest Hills</option>
@@ -547,8 +561,8 @@ function handleConsultSubmit() {
               </div>
             </div>
             <div>
-              <label class="block text-xs text-charcoal-body uppercase tracking-wider font-semibold mb-2">Advisory Objective</label>
-              <select v-model="consultForm.objective" class="w-full bg-surface-alabaster border border-border-subtle px-4 py-3 text-sm text-primary focus:border-secondary focus:ring-0 rounded transition-colors">
+              <label for="consult-objective" class="block text-xs text-charcoal-body uppercase tracking-wider font-semibold mb-2">Advisory Objective</label>
+              <select id="consult-objective" v-model="consultForm.objective" class="w-full bg-surface-alabaster border border-border-subtle px-4 py-3 text-sm text-primary focus:border-secondary focus:ring-0 rounded transition-colors">
                 <option value="acquisition">Discreet Residence Acquisition</option>
                 <option value="sale">Exclusive Listing Representation</option>
                 <option value="renovation">Pre-Market Renovation Feasibility (0% upfront capital)</option>
@@ -557,8 +571,8 @@ function handleConsultSubmit() {
               </select>
             </div>
             <div>
-              <label class="block text-xs text-charcoal-body uppercase tracking-wider font-semibold mb-2">Confidential Portfolio Notes or Property Address</label>
-              <textarea v-model="consultForm.message" rows="4" placeholder="Detail any specific architectural requirements, timing parameters, or current property characteristics..." class="w-full bg-surface-alabaster border border-border-subtle px-4 py-3 text-sm text-primary focus:border-secondary focus:ring-0 rounded transition-colors"></textarea>
+              <label for="consult-message" class="block text-xs text-charcoal-body uppercase tracking-wider font-semibold mb-2">Confidential Portfolio Notes or Property Address</label>
+              <textarea id="consult-message" v-model="consultForm.message" rows="4" placeholder="Detail any specific architectural requirements, timing parameters, or current property characteristics..." class="w-full bg-surface-alabaster border border-border-subtle px-4 py-3 text-sm text-primary focus:border-secondary focus:ring-0 rounded transition-colors"></textarea>
             </div>
             <div class="pt-2">
               <button :disabled="isSubmittingConsult" type="submit" class="w-full py-4 bg-primary text-canvas-white text-xs uppercase tracking-widest hover:bg-secondary transition-all duration-200 border border-primary font-semibold flex items-center justify-center gap-2">

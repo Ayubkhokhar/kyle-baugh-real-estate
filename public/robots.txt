@@ -1,0 +1,22 @@
+# Robots.txt for Kyle Baugh Real Estate Advisory
+User-agent: *
+Allow: /
+Disallow: /manage
+
+# Allow AI & Search Engine Agents
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://kyle-baugh-real-estate.ayubkhokhar786.workers.dev/sitemap.xml
