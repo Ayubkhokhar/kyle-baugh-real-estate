@@ -18,22 +18,28 @@ const maxPrice = ref(0);
 
 const categories = [
   { id: "all", label: "All Residences" },
-  { id: "park-cities", label: "Park Cities & Preston Hollow" },
+  { id: "active", label: "Active Exclusives" },
+  { id: "sold", label: "Closed Track Record" },
+  { id: "park-cities", label: "Park Cities" },
   { id: "lakewood", label: "Lakewood & East Dallas" },
+  { id: "midway-hollow", label: "Midway Hollow" },
   { id: "historic", label: "Historic Landmarks" },
-  { id: "private", label: "Private Off-Market" },
 ];
 
 const filteredProperties = computed(() => {
   return properties.value.filter((p) => {
-    if (activeCategory.value === "park-cities") {
+    if (activeCategory.value === "active") {
+      if (!p.status?.includes("Active")) return false;
+    } else if (activeCategory.value === "sold") {
+      if (!p.status?.includes("Sold") && !p.status?.includes("Leased")) return false;
+    } else if (activeCategory.value === "park-cities") {
       if (p.enclaveCategory !== "park-cities" && !p.neighborhood.includes("Park Cities") && !p.neighborhood.includes("Preston Hollow")) return false;
     } else if (activeCategory.value === "lakewood") {
-      if (p.enclaveCategory !== "lakewood" && !p.neighborhood.includes("Lakewood") && !p.neighborhood.includes("Greenville")) return false;
+      if (p.enclaveCategory !== "lakewood" && !p.neighborhood.includes("Lakewood") && !p.neighborhood.includes("Greenville") && !p.neighborhood.includes("East Dallas")) return false;
+    } else if (activeCategory.value === "midway-hollow") {
+      if (p.enclaveCategory !== "midway-hollow" && !p.neighborhood.includes("Midway")) return false;
     } else if (activeCategory.value === "historic") {
       if (p.enclaveCategory !== "historic" && !p.status?.includes("Historic") && p.yearBuilt > 1940) return false;
-    } else if (activeCategory.value === "private") {
-      if (p.status !== "Private Exclusive" && p.enclaveCategory !== "private") return false;
     }
     if (searchQuery.value.trim()) {
       const q = searchQuery.value.toLowerCase();
@@ -227,17 +233,26 @@ function handleConsultSubmit() {
                 <span
                   :class="[
                     'px-2.5 py-1 backdrop-blur-sm text-[10px] uppercase tracking-wider font-semibold border',
-                    prop.status === 'Active Exclusive' ? 'bg-canvas-white/90 text-status-active border-border-subtle' :
+                    prop.status === 'Active Exclusive' ? 'bg-canvas-white/95 text-status-active border-border-subtle shadow-sm' :
                     prop.status === 'Private Exclusive' ? 'bg-primary text-canvas-white border-border-brass' :
                     prop.status === 'Pending' ? 'bg-secondary text-canvas-white border-secondary' :
+                    prop.status === 'Sold Portfolio' ? 'bg-charcoal-body/90 text-canvas-white border-charcoal-body' :
+                    prop.status === 'Leased' ? 'bg-primary/90 text-canvas-white border-primary' :
                     'bg-charcoal-body text-canvas-white border-charcoal-body'
                   ]"
                 >
                   {{ prop.status }}
                 </span>
                 <span
+                  v-if="prop.isCompassListing"
+                  class="px-2 py-1 bg-surface-linen/90 backdrop-blur-sm text-primary text-[10px] uppercase tracking-wider font-semibold border border-border-brass/70 inline-flex items-center gap-1 shadow-sm"
+                >
+                  <span class="material-symbols-outlined text-[12px] text-secondary">verified</span>
+                  Compass
+                </span>
+                <span
                   v-if="prop.openHouse"
-                  class="px-2.5 py-1 bg-primary/80 backdrop-blur-sm text-canvas-white text-[10px] uppercase tracking-wider font-semibold"
+                  class="px-2.5 py-1 bg-primary/90 backdrop-blur-sm text-canvas-white text-[10px] uppercase tracking-wider font-semibold"
                 >
                   {{ prop.openHouse }}
                 </span>

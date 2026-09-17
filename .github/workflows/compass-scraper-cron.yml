@@ -1,0 +1,50 @@
+name: Compass Profile Auto-Sync Cron
+
+on:
+  schedule:
+    # Runs daily at 04:00 UTC (11:00 PM CDT Dallas time)
+    - cron: '0 4 * * *'
+  workflow_dispatch:
+    # Allows manual one-click trigger from GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  scrape-and-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Compass Profile Scraper
+        run: node scripts/compass-scraper.js
+
+      - name: Check for new listings or media changes
+        id: git-check
+        run: |
+          git status --porcelain
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push changes
+        if: steps.git-check.outputs.has_changes == 'true'
+        run: |
+          git config --global user.name "Compass Sync Bot"
+          git config --global user.email "bot@kylebaugh-advisory.internal"
+          git add src/data/compassProperties.js public/images/compass/ public/data/compassProperties.json
+          git commit -m "chore(cron): sync latest Compass listings & media assets"
+          git push

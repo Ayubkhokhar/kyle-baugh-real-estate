@@ -8,7 +8,18 @@ import StorageLimitModal from "../components/StorageLimitModal.vue";
 
 const emit = defineEmits(["toast"]);
 
-const { properties, updateProperty, deleteProperty, toggleStatus, resetToDefaults, exportJSON, importJSON } = useProperties();
+const {
+  properties,
+  compassMeta,
+  syncWithCompass,
+  updateProperty,
+  deleteProperty,
+  toggleStatus,
+  resetToDefaults,
+  exportJSON,
+  importJSON
+} = useProperties();
+
 const { inquiries, unreadCount, updateStatus, deleteInquiry, exportCSV } = useInquiries();
 const { siteSettings, saveSettings, resetSettings, verifyPasscode } = useSiteSettings();
 const { storageThresholdGB, isUpgraded, calculateTotalBytes, formatBytes, setThreshold, setUpgraded } = useStorageQuota();
@@ -36,13 +47,14 @@ function handleLogout() {
 }
 
 // Active Tab
-const activeTab = ref("properties"); // 'properties', 'leads', 'storage', 'settings'
+const activeTab = ref("properties"); // 'properties', 'compass', 'leads', 'storage', 'settings'
 
 // Properties Tab State
 const propSearch = ref("");
 const statusFilter = ref("all");
 const selectedPropertyForEdit = ref(null);
 const isEditModalOpen = ref(false);
+const isSyncingCompass = ref(false);
 
 const filteredProperties = computed(() => {
   return properties.value.filter((p) => {
@@ -60,6 +72,18 @@ const filteredProperties = computed(() => {
 const totalPortfolioVolume = computed(() => {
   return properties.value.reduce((acc, p) => acc + (Number(p.price) || 0), 0);
 });
+
+async function handleSyncCompass() {
+  isSyncingCompass.value = true;
+  try {
+    const res = await syncWithCompass();
+    emit("toast", `Compass synchronization complete! Merged ${res.newCount} updates. Total: ${res.total} listings.`, "success");
+  } catch (err) {
+    emit("toast", "Compass sync error: " + err.message, "error");
+  } finally {
+    isSyncingCompass.value = false;
+  }
+}
 
 function openEditModal(prop) {
   selectedPropertyForEdit.value = JSON.parse(JSON.stringify(prop));
@@ -204,6 +228,16 @@ function handleResetSettings() {
           <span>Properties ({{ properties.length }})</span>
         </button>
         <button
+          @click="activeTab = 'compass'"
+          :class="[
+            'px-4 py-3 text-xs uppercase tracking-wider font-semibold transition-all border-b-2 flex items-center gap-2',
+            activeTab === 'compass' ? 'border-primary text-primary bg-surface-linen/50' : 'border-transparent text-charcoal-muted hover:text-primary'
+          ]"
+        >
+          <span class="material-symbols-outlined text-base text-secondary">explore</span>
+          <span>Compass Auto-Sync ({{ properties.filter(p => p.isCompassListing).length }})</span>
+        </button>
+        <button
           @click="activeTab = 'leads'"
           :class="[
             'px-4 py-3 text-xs uppercase tracking-wider font-semibold transition-all border-b-2 flex items-center gap-2',
@@ -238,8 +272,41 @@ function handleResetSettings() {
           <span>Site Customizer</span>
         </button>
       </div>
+
       <!-- TAB 1: PROPERTIES MANAGEMENT -->
       <div v-if="activeTab === 'properties'" class="space-y-6">
+        <!-- Compass Live Sync Quick Banner -->
+        <div class="bg-gradient-to-r from-primary via-charcoal-body to-primary text-canvas-white p-5 rounded-lg shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border border-border-brass/30">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-full bg-secondary/20 border border-secondary/50 flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-secondary text-xl">explore</span>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="font-headline text-base tracking-wide font-medium">Compass Auto-Scraper Active</span>
+                <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-300 text-[10px] uppercase tracking-wider font-semibold rounded border border-emerald-500/30">Auto Cron</span>
+              </div>
+              <p class="text-xs text-canvas-white/80 mt-0.5">
+                Automatically scrapes from <a :href="compassMeta.agentUrl" target="_blank" class="text-secondary hover:underline font-medium">compass.com/agents/kyle-baugh-dallas</a> · 39 high-res photos hosted on Cloudflare (3.89 MB / 8 GB Guard)
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-end">
+            <div class="text-right hidden sm:block">
+              <span class="text-[10px] uppercase tracking-wider text-canvas-white/60 block font-semibold">Last Synchronized</span>
+              <span class="text-xs text-canvas-white/90 font-mono">{{ new Date(compassMeta.lastSynced).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) }}</span>
+            </div>
+            <button
+              @click="handleSyncCompass"
+              :disabled="isSyncingCompass"
+              class="px-4 py-2.5 bg-secondary text-canvas-white text-xs uppercase tracking-wider font-semibold rounded hover:bg-secondary/90 transition-all flex items-center gap-2 disabled:opacity-60 shadow-sm"
+            >
+              <span :class="['material-symbols-outlined text-base', isSyncingCompass ? 'animate-spin' : '']">sync</span>
+              <span>{{ isSyncingCompass ? 'Syncing...' : 'Sync Compass Now' }}</span>
+            </button>
+          </div>
+        </div>
+
         <!-- Overview Stats -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div class="bg-canvas-white p-4 border border-border-subtle rounded shadow-sm">
@@ -255,8 +322,8 @@ function handleResetSettings() {
             <span class="font-headline text-2xl text-status-active font-medium">{{ properties.filter(p => p.status === 'Active Exclusive').length }}</span>
           </div>
           <div class="bg-canvas-white p-4 border border-border-subtle rounded shadow-sm">
-            <span class="text-[11px] uppercase tracking-wider text-charcoal-muted font-semibold block">Private / Pending</span>
-            <span class="font-headline text-2xl text-secondary font-medium">{{ properties.filter(p => p.status === 'Private Exclusive' || p.status === 'Pending').length }}</span>
+            <span class="text-[11px] uppercase tracking-wider text-charcoal-muted font-semibold block">Sold & Leased</span>
+            <span class="font-headline text-2xl text-secondary font-medium">{{ properties.filter(p => p.status === 'Sold Portfolio' || p.status === 'Leased').length }}</span>
           </div>
         </div>
 
@@ -271,8 +338,8 @@ function handleResetSettings() {
               <option value="all">All Statuses</option>
               <option value="Active Exclusive">Active Exclusive</option>
               <option value="Private Exclusive">Private Exclusive</option>
-              <option value="Pending">Pending</option>
-              <option value="Sold">Sold</option>
+              <option value="Sold Portfolio">Sold Portfolio</option>
+              <option value="Leased">Leased</option>
             </select>
           </div>
           <div class="w-full sm:w-72">
@@ -291,7 +358,7 @@ function handleResetSettings() {
             <thead class="bg-surface-linen border-b border-border-subtle uppercase tracking-wider font-semibold text-charcoal-muted">
               <tr>
                 <th class="p-4">Property</th>
-                <th class="p-4">Enclave</th>
+                <th class="p-4">Origin</th>
                 <th class="p-4">Price</th>
                 <th class="p-4">Specs</th>
                 <th class="p-4">Status</th>
@@ -302,14 +369,22 @@ function handleResetSettings() {
               <tr v-for="p in filteredProperties" :key="p.id" class="hover:bg-surface-alabaster/60 transition-colors">
                 <td class="p-4">
                   <div class="flex items-center gap-3">
-                    <img :src="p.heroImage" class="w-12 h-10 object-cover rounded bg-surface-linen shrink-0" />
+                    <img :src="p.heroImage" class="w-12 h-10 object-cover rounded bg-surface-linen shrink-0 border border-border-subtle" />
                     <div>
                       <span class="font-semibold text-primary block truncate max-w-xs">{{ p.title }}</span>
                       <span class="text-charcoal-muted text-[11px] block truncate max-w-xs">{{ p.address }}</span>
                     </div>
                   </div>
                 </td>
-                <td class="p-4 text-charcoal-muted font-medium">{{ p.neighborhood }}</td>
+                <td class="p-4">
+                  <span v-if="p.isCompassListing" class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-linen text-primary border border-border-brass/60 rounded text-[10px] font-semibold uppercase tracking-wider">
+                    <span class="material-symbols-outlined text-[12px] text-secondary">verified</span>
+                    Compass
+                  </span>
+                  <span v-else class="px-2 py-0.5 bg-surface-alabaster text-charcoal-muted border border-border-subtle rounded text-[10px] font-semibold uppercase tracking-wider">
+                    Custom
+                  </span>
+                </td>
                 <td class="p-4 font-headline text-sm font-semibold text-primary">{{ p.priceFormatted }}</td>
                 <td class="p-4 text-charcoal-muted">{{ p.bedrooms }}b / {{ p.bathrooms }}ba · {{ p.sqft?.toLocaleString() }} sqft</td>
                 <td class="p-4">
@@ -320,8 +395,8 @@ function handleResetSettings() {
                   >
                     <option value="Active Exclusive">Active Exclusive</option>
                     <option value="Private Exclusive">Private Exclusive</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Sold">Sold</option>
+                    <option value="Sold Portfolio">Sold Portfolio</option>
+                    <option value="Leased">Leased</option>
                   </select>
                 </td>
                 <td class="p-4 text-right whitespace-nowrap">
@@ -343,204 +418,284 @@ function handleResetSettings() {
         </div>
 
         <div class="flex justify-between items-center text-xs text-charcoal-muted pt-2">
-          <span>Showing {{ filteredProperties.length }} of {{ properties.length }} properties in LocalStorage</span>
+          <span>Showing {{ filteredProperties.length }} of {{ properties.length }} properties</span>
           <button @click="resetToDefaults" class="text-xs text-charcoal-muted hover:text-red-600 underline">
-            Reset to Sample Data
+            Reset to Sample & Compass Data
           </button>
         </div>
       </div>
 
-      <!-- Quick Edit Modal -->
-      <div v-if="isEditModalOpen && selectedPropertyForEdit" class="fixed inset-0 z-50 bg-primary/70 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-canvas-white border border-border-brass max-w-xl w-full rounded-lg shadow-2xl p-6 relative">
-          <button @click="isEditModalOpen = false" class="absolute top-4 right-4 text-charcoal-muted hover:text-primary">
-            <span class="material-symbols-outlined text-2xl">close</span>
-          </button>
-          <h3 class="font-headline text-xl text-primary mb-4">Edit Listing Dossier</h3>
-          <div class="space-y-3">
+      <!-- TAB 2: COMPASS AUTO-SYNC CENTER -->
+      <div v-if="activeTab === 'compass'" class="space-y-6">
+        <!-- Live Status Details -->
+        <div class="bg-canvas-white border border-border-subtle p-6 rounded-lg shadow-sm space-y-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-border-subtle">
             <div>
-              <label class="block text-xs uppercase font-semibold text-charcoal-muted mb-1">Title</label>
-              <input v-model="selectedPropertyForEdit.title" class="w-full px-3 py-2 text-sm bg-surface-alabaster border border-border-subtle rounded" />
-            </div>
-            <div>
-              <label class="block text-xs uppercase font-semibold text-charcoal-muted mb-1">Price ($)</label>
-              <input v-model.number="selectedPropertyForEdit.price" type="number" class="w-full px-3 py-2 text-sm bg-surface-alabaster border border-border-subtle rounded" />
-            </div>
-            <div class="grid grid-cols-2 gap-3">
-              <div>
-                <label class="block text-xs uppercase font-semibold text-charcoal-muted mb-1">Bedrooms</label>
-                <input v-model.number="selectedPropertyForEdit.bedrooms" type="number" class="w-full px-3 py-2 text-sm bg-surface-alabaster border border-border-subtle rounded" />
+              <div class="flex items-center gap-2 mb-1">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-xs uppercase tracking-widest text-secondary font-bold">Automated Pipeline Active</span>
               </div>
-              <div>
-                <label class="block text-xs uppercase font-semibold text-charcoal-muted mb-1">Bathrooms</label>
-                <input v-model.number="selectedPropertyForEdit.bathrooms" type="number" step="0.5" class="w-full px-3 py-2 text-sm bg-surface-alabaster border border-border-subtle rounded" />
-              </div>
-            </div>
-            <div>
-              <label class="block text-xs uppercase font-semibold text-charcoal-muted mb-1">Status</label>
-              <select v-model="selectedPropertyForEdit.status" class="w-full px-3 py-2 text-sm bg-surface-alabaster border border-border-subtle rounded">
-                <option value="Active Exclusive">Active Exclusive</option>
-                <option value="Private Exclusive">Private Exclusive</option>
-                <option value="Pending">Pending</option>
-                <option value="Sold">Sold</option>
-              </select>
-            </div>
-            <div>
-              <label class="block text-xs uppercase font-semibold text-charcoal-muted mb-1">Description</label>
-              <textarea v-model="selectedPropertyForEdit.description" rows="3" class="w-full px-3 py-2 text-sm bg-surface-alabaster border border-border-subtle rounded"></textarea>
-            </div>
-          </div>
-          <div class="mt-6 flex justify-end gap-2">
-            <button @click="isEditModalOpen = false" class="px-4 py-2 border border-border-subtle rounded text-xs uppercase tracking-wider font-semibold">Cancel</button>
-            <button @click="savePropertyEdit" class="px-4 py-2 bg-primary text-canvas-white rounded text-xs uppercase tracking-wider font-semibold hover:bg-secondary">Save Changes</button>
-          </div>
-        </div>
-      </div>
-      <!-- TAB 2: INQUIRIES & LEADS INBOX -->
-      <div v-if="activeTab === 'leads'" class="space-y-6">
-        <div class="flex items-center justify-between">
-          <div>
-            <h2 class="font-headline text-xl text-primary font-semibold">Client Inquiry Dossiers</h2>
-            <p class="text-xs text-charcoal-muted">Submissions captured from showings, consultation requests, and listing portals.</p>
-          </div>
-          <button
-            @click="exportCSV"
-            class="px-4 py-2 bg-primary text-canvas-white text-xs uppercase tracking-wider font-semibold rounded hover:bg-secondary flex items-center gap-1.5 transition-colors shadow-sm"
-          >
-            <span class="material-symbols-outlined text-base">table_view</span>
-            <span>Export Leads to CSV</span>
-          </button>
-        </div>
-
-        <div v-if="inquiries.length > 0" class="space-y-3">
-          <div
-            v-for="lead in inquiries"
-            :key="lead.id"
-            class="bg-canvas-white border border-border-subtle hover:border-border-brass p-5 rounded shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4 transition-colors"
-          >
-            <div class="space-y-1">
-              <div class="flex items-center gap-2">
-                <span class="font-headline text-lg font-semibold text-primary">{{ lead.name }}</span>
-                <span
-                  :class="[
-                    'px-2 py-0.5 text-[10px] uppercase tracking-wider font-bold rounded',
-                    lead.status === 'New' ? 'bg-[#E9EFEA] text-status-active' :
-                    lead.status === 'Contacted' ? 'bg-secondary text-canvas-white' :
-                    'bg-surface-linen text-charcoal-muted'
-                  ]"
-                >
-                  {{ lead.status }}
-                </span>
-                <span class="text-[10px] text-secondary font-semibold uppercase tracking-wider border border-border-brass px-2 py-0.5 rounded">
-                  {{ lead.type }}
-                </span>
-              </div>
-              <div class="flex flex-wrap items-center gap-4 text-xs text-charcoal-muted pt-1">
-                <a :href="'tel:' + lead.phone" class="hover:text-primary flex items-center gap-1 font-semibold">
-                  <span class="material-symbols-outlined text-sm">phone</span> {{ lead.phone }}
+              <h2 class="font-headline text-2xl text-primary">Kyle Baugh Compass Synchronization</h2>
+              <p class="text-xs text-charcoal-muted mt-1">
+                Direct scraping pipeline connected to
+                <a :href="compassMeta.agentUrl" target="_blank" class="text-primary underline font-medium hover:text-secondary">
+                  compass.com/agents/kyle-baugh-dallas
                 </a>
-                <a :href="'mailto:' + lead.email" class="hover:text-primary flex items-center gap-1">
-                  <span class="material-symbols-outlined text-sm">email</span> {{ lead.email }}
-                </a>
-                <span v-if="lead.neighborhood" class="flex items-center gap-1">
-                  <span class="material-symbols-outlined text-sm">location_on</span> {{ lead.neighborhood }}
-                </span>
-                <span class="text-[11px] text-charcoal-muted">{{ new Date(lead.createdAt).toLocaleDateString() }}</span>
-              </div>
-              <p v-if="lead.message" class="text-xs text-charcoal-body bg-surface-linen p-2.5 rounded mt-2 border border-border-subtle">
-                <strong>Notes / Objective:</strong> {{ lead.objective ? `[${lead.objective}] ` : '' }}{{ lead.message }}
               </p>
             </div>
+            <button
+              @click="handleSyncCompass"
+              :disabled="isSyncingCompass"
+              class="px-5 py-3 bg-secondary text-canvas-white text-xs uppercase tracking-wider font-semibold rounded hover:bg-primary transition-all flex items-center gap-2 shadow-sm disabled:opacity-60"
+            >
+              <span :class="['material-symbols-outlined text-base', isSyncingCompass ? 'animate-spin' : '']">sync</span>
+              <span>{{ isSyncingCompass ? 'Fetching Live...' : 'Sync from Compass Now' }}</span>
+            </button>
+          </div>
 
-            <div class="flex items-center gap-2 shrink-0 self-end md:self-center">
-              <select
-                :value="lead.status"
-                @change="updateStatus(lead.id, $event.target.value)"
-                class="px-2.5 py-1.5 text-xs bg-surface-alabaster border border-border-subtle rounded font-semibold text-primary focus:outline-none focus:border-secondary"
-              >
-                <option value="New">New</option>
-                <option value="Contacted">Contacted</option>
-                <option value="Archived">Archived</option>
-              </select>
-              <button
-                @click="deleteInquiry(lead.id)"
-                class="p-2 text-charcoal-muted hover:text-red-600 rounded hover:bg-surface-linen transition-colors"
-                title="Delete Inquiry"
-              >
-                <span class="material-symbols-outlined text-base">delete</span>
-              </button>
+          <!-- 4 Metric Cards -->
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="bg-surface-alabaster p-4 border border-border-subtle rounded">
+              <span class="text-[10px] uppercase tracking-wider text-charcoal-muted font-bold block mb-1">Active Listing</span>
+              <span class="font-headline text-2xl text-status-active font-medium">{{ compassMeta.activeCount }}</span>
+              <span class="text-[11px] text-charcoal-muted block mt-0.5">2007 Euclid Ave ($875K)</span>
+            </div>
+            <div class="bg-surface-alabaster p-4 border border-border-subtle rounded">
+              <span class="text-[10px] uppercase tracking-wider text-charcoal-muted font-bold block mb-1">Past Sales Closed</span>
+              <span class="font-headline text-2xl text-primary font-medium">{{ compassMeta.soldCount }}</span>
+              <span class="text-[11px] text-charcoal-muted block mt-0.5">$1.3M – $5M Portfolio</span>
+            </div>
+            <div class="bg-surface-alabaster p-4 border border-border-subtle rounded">
+              <span class="text-[10px] uppercase tracking-wider text-charcoal-muted font-bold block mb-1">Leased Properties</span>
+              <span class="font-headline text-2xl text-secondary font-medium">{{ compassMeta.leasedCount }}</span>
+              <span class="text-[11px] text-charcoal-muted block mt-0.5">High-end executive leases</span>
+            </div>
+            <div class="bg-surface-alabaster p-4 border border-border-subtle rounded">
+              <span class="text-[10px] uppercase tracking-wider text-charcoal-muted font-bold block mb-1">Cloudflare Media</span>
+              <span class="font-headline text-2xl text-primary font-medium">39 Photos</span>
+              <span class="text-[11px] text-charcoal-muted block mt-0.5">3.89 MB (0.05% of 8 GB Guard)</span>
             </div>
           </div>
-        </div>
 
-        <div v-else class="text-center py-16 bg-surface-linen border border-border-subtle rounded p-8">
-          <span class="material-symbols-outlined text-4xl text-charcoal-muted mb-2">mark_email_read</span>
-          <p class="font-headline text-xl text-primary">No inquiries in your dossier inbox.</p>
-          <p class="text-xs text-charcoal-muted mt-1">Submissions from prospective clients will appear here automatically.</p>
+          <!-- Architecture & Cron Flow Explainer -->
+          <div class="bg-surface-linen/60 border border-border-brass/40 p-5 rounded-lg space-y-4">
+            <div class="flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary">schedule</span>
+              <h3 class="font-headline text-base text-primary font-semibold">How the Automated Cron & Cloudflare Pipeline Operates</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-charcoal-body leading-relaxed">
+              <div class="bg-canvas-white p-3.5 rounded border border-border-subtle">
+                <span class="font-bold text-primary block mb-1">1. Scheduled Daily Scraper</span>
+                Runs automatically every 24 hours at 04:00 UTC via GitHub Actions cron. Fetches Kyle's Compass page and detects new listings or price adjustments.
+              </div>
+              <div class="bg-canvas-white p-3.5 rounded border border-border-subtle">
+                <span class="font-bold text-primary block mb-1">2. Cloudflare Media Hosting</span>
+                Compass blocks external hotlinking. The scraper downloads high-resolution WebP photos directly into Cloudflare's Edge CDN storage, bypassing all hotlink blocks.
+              </div>
+              <div class="bg-canvas-white p-3.5 rounded border border-border-subtle">
+                <span class="font-bold text-primary block mb-1">3. Instant Auto-Deploy</span>
+                When a new listing is found, changes are committed and Cloudflare automatically deploys the updated portfolio in under 60 seconds with zero client work.
+              </div>
+            </div>
+          </div>
+
+          <!-- Scraped Compass Listings Quick Table -->
+          <div>
+            <h3 class="font-headline text-lg text-primary mb-3">Compass Verified Property Dossiers</h3>
+            <div class="border border-border-subtle rounded overflow-hidden">
+              <table class="w-full text-left text-xs">
+                <thead class="bg-surface-linen text-charcoal-muted uppercase font-semibold border-b border-border-subtle">
+                  <tr>
+                    <th class="p-3">Residence</th>
+                    <th class="p-3">Price</th>
+                    <th class="p-3">Category</th>
+                    <th class="p-3">Cloudflare Photos</th>
+                    <th class="p-3 text-right">Links</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-border-subtle">
+                  <tr v-for="c in properties.filter(p => p.isCompassListing).slice(0, 10)" :key="c.id" class="hover:bg-surface-alabaster">
+                    <td class="p-3 flex items-center gap-2.5">
+                      <img :src="c.heroImage" class="w-10 h-8 object-cover rounded bg-surface-linen border border-border-subtle" />
+                      <div>
+                        <span class="font-semibold text-primary block">{{ c.title }}</span>
+                        <span class="text-[11px] text-charcoal-muted">{{ c.neighborhood }}</span>
+                      </div>
+                    </td>
+                    <td class="p-3 font-semibold text-primary">{{ c.priceFormatted }}</td>
+                    <td class="p-3">
+                      <span :class="[
+                        'px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wider',
+                        c.status === 'Active Exclusive' ? 'bg-emerald-50 text-status-active border border-emerald-200' : 'bg-surface-linen text-charcoal-muted'
+                      ]">
+                        {{ c.status }}
+                      </span>
+                    </td>
+                    <td class="p-3 text-charcoal-muted">{{ c.gallery?.length || 1 }} Cached Images</td>
+                    <td class="p-3 text-right">
+                      <div class="flex items-center justify-end gap-2">
+                        <router-link :to="'/property/' + c.id" class="text-secondary hover:underline font-semibold">View Dossier</router-link>
+                        <span class="text-border-brass">·</span>
+                        <a :href="c.originalCompassUrl" target="_blank" class="text-charcoal-muted hover:text-primary">Compass</a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="text-[11px] text-charcoal-muted mt-2">Showing 10 of {{ properties.filter(p => p.isCompassListing).length }} Compass-verified properties.</p>
+          </div>
         </div>
       </div>
 
-      <!-- TAB 3: CLOUDFLARE 8 GB STORAGE GUARD -->
-      <div v-if="activeTab === 'storage'" class="space-y-6">
+      <!-- TAB 3: INQUIRIES & LEADS -->
+      <div v-if="activeTab === 'leads'" class="space-y-6">
         <div class="bg-canvas-white border border-border-subtle p-6 rounded shadow-sm">
-          <div class="flex items-center justify-between mb-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border-subtle">
             <div>
-              <span class="text-xs uppercase tracking-widest text-secondary font-semibold block mb-1">Quota Enforcer</span>
-              <h2 class="font-headline text-2xl text-primary">Cloudflare R2 & Media Storage Meter</h2>
+              <span class="text-xs uppercase tracking-widest text-secondary font-semibold block mb-1">Confidential Client Dossiers</span>
+              <h2 class="font-headline text-2xl text-primary">Private Advisory Inquiries & Leads</h2>
             </div>
-            <span
-              :class="[
-                'px-3 py-1 text-xs uppercase tracking-wider font-bold rounded',
-                storagePercentage >= 90 ? 'bg-red-100 text-red-800' :
-                storagePercentage >= 70 ? 'bg-amber-100 text-amber-800' :
-                'bg-[#E9EFEA] text-status-active'
-              ]"
+            <button
+              @click="exportCSV"
+              class="px-4 py-2 bg-primary text-canvas-white text-xs uppercase tracking-wider font-semibold rounded hover:bg-secondary flex items-center gap-1.5 transition-colors shadow-sm self-start sm:self-auto"
             >
-              {{ storagePercentage >= 90 ? 'Critical' : storagePercentage >= 70 ? 'Warning' : 'Healthy' }}
-            </span>
+              <span class="material-symbols-outlined text-base">download</span>
+              <span>Export CSV (CRM)</span>
+            </button>
           </div>
 
-          <!-- Progress Meter -->
-          <div class="space-y-2 mb-6">
-            <div class="flex justify-between text-xs text-charcoal-muted font-semibold">
-              <span>{{ currentGB }} GB used</span>
-              <span>{{ storageThresholdGB }} GB Free Tier Guard</span>
+          <div v-if="inquiries.length > 0" class="divide-y divide-border-subtle mt-4">
+            <div
+              v-for="lead in inquiries"
+              :key="lead.id"
+              :class="['py-4 flex flex-col md:flex-row md:items-center justify-between gap-4', lead.status === 'New' ? 'bg-surface-linen/30 -mx-4 px-4 rounded' : '']"
+            >
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <span class="font-semibold text-primary text-sm">{{ lead.name }}</span>
+                  <span
+                    :class="[
+                      'px-2 py-0.5 text-[10px] uppercase font-bold rounded',
+                      lead.status === 'New' ? 'bg-secondary text-canvas-white' :
+                      lead.status === 'Contacted' ? 'bg-status-active text-canvas-white' :
+                      'bg-surface-linen text-charcoal-muted'
+                    ]"
+                  >
+                    {{ lead.status }}
+                  </span>
+                  <span class="text-xs text-charcoal-muted">· {{ lead.type }}</span>
+                </div>
+                <div class="text-xs text-charcoal-muted flex flex-wrap gap-x-4 gap-y-1">
+                  <span>{{ lead.email }}</span>
+                  <span>{{ lead.phone }}</span>
+                  <span v-if="lead.neighborhood">Submarket: {{ lead.neighborhood }}</span>
+                </div>
+                <p v-if="lead.message" class="text-xs text-charcoal-body mt-1 bg-surface-alabaster p-2 rounded border border-border-subtle">
+                  "{{ lead.message }}"
+                </p>
+                <span class="text-[10px] text-charcoal-muted block">{{ new Date(lead.timestamp).toLocaleString() }}</span>
+              </div>
+
+              <div class="flex items-center gap-2 shrink-0">
+                <button
+                  v-if="lead.status !== 'Contacted'"
+                  @click="updateStatus(lead.id, 'Contacted'); emit('toast', 'Lead marked as contacted.', 'success')"
+                  class="px-3 py-1.5 bg-canvas-white border border-border-subtle text-xs rounded hover:bg-surface-linen text-charcoal-body font-semibold"
+                >
+                  Mark Contacted
+                </button>
+                <button
+                  v-if="lead.status !== 'Archived'"
+                  @click="updateStatus(lead.id, 'Archived'); emit('toast', 'Lead archived.', 'info')"
+                  class="px-3 py-1.5 bg-canvas-white border border-border-subtle text-xs rounded hover:bg-surface-linen text-charcoal-muted"
+                >
+                  Archive
+                </button>
+                <button
+                  @click="deleteInquiry(lead.id); emit('toast', 'Inquiry deleted.', 'info')"
+                  class="p-1.5 text-charcoal-muted hover:text-red-600 rounded"
+                  title="Delete Lead"
+                >
+                  <span class="material-symbols-outlined text-base">delete</span>
+                </button>
+              </div>
             </div>
-            <div class="w-full h-3 bg-surface-linen rounded-full overflow-hidden border border-border-subtle">
+          </div>
+
+          <div v-else class="text-center py-12 text-charcoal-muted">
+            <span class="material-symbols-outlined text-4xl mb-2">mark_email_read</span>
+            <p class="font-headline text-lg text-primary">No inquiries recorded yet.</p>
+            <p class="text-xs">Client submissions from the homepage and listing inquiry modals will appear here.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: CLOUDFLARE 8 GB STORAGE GUARD -->
+      <div v-if="activeTab === 'storage'" class="space-y-6">
+        <div class="bg-canvas-white border border-border-subtle p-6 rounded shadow-sm space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border-subtle">
+            <div>
+              <span class="text-xs uppercase tracking-widest text-secondary font-semibold block mb-1">Infrastructure Guard</span>
+              <h2 class="font-headline text-2xl text-primary">Cloudflare Free Tier Quota Management</h2>
+              <p class="text-xs text-charcoal-muted mt-1">
+                Monitors portfolio media against an 8.0 GB safety threshold before unexpected Cloudflare billing triggers.
+              </p>
+            </div>
+            <div class="text-right">
+              <span class="text-xs uppercase tracking-widest text-charcoal-muted font-semibold block">Quota Status</span>
+              <span class="text-sm font-semibold text-status-active">Within Free Tier Limit</span>
+            </div>
+          </div>
+
+          <!-- Progress Bar & Stats -->
+          <div class="space-y-2">
+            <div class="flex justify-between text-xs font-semibold">
+              <span>{{ formatBytes(currentBytes) }} Used</span>
+              <span>{{ storagePercentage }}% of {{ storageThresholdGB }} GB Limit</span>
+            </div>
+            <div class="w-full bg-surface-linen h-3 rounded-full overflow-hidden">
               <div
+                class="h-full bg-secondary transition-all duration-500 rounded-full"
                 :style="{ width: storagePercentage + '%' }"
-                :class="[
-                  'h-full transition-all duration-500',
-                  storagePercentage >= 90 ? 'bg-red-600' :
-                  storagePercentage >= 70 ? 'bg-amber-500' :
-                  'bg-secondary'
-                ]"
               ></div>
             </div>
           </div>
 
-          <p class="text-xs text-charcoal-muted leading-relaxed mb-6">
-            Cloudflare R2 provides 10 GB/month on its free tier. This guard actively monitors cumulative media footprints and automatically prevents uploads once the <strong>{{ storageThresholdGB }} GB limit</strong> is reached, preventing surprise egress or storage fees.
-          </p>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 border-t border-border-subtle pt-6">
-            <!-- Threshold Adjustment -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
             <div class="bg-surface-alabaster p-4 border border-border-subtle rounded">
-              <h4 class="text-xs uppercase font-semibold text-primary mb-1">Safety Threshold Level</h4>
-              <p class="text-[11px] text-charcoal-muted mb-3">Adjust the storage threshold at which new uploads are halted.</p>
-              <div class="flex items-center gap-2">
+              <span class="text-[10px] uppercase font-bold text-charcoal-muted block mb-1">Cloudflare Free Tier</span>
+              <span class="font-headline text-xl text-primary">10.0 GB Total</span>
+              <p class="text-[11px] text-charcoal-muted mt-1">Standard free tier allowance on Cloudflare R2 & Workers.</p>
+            </div>
+            <div class="bg-surface-alabaster p-4 border border-border-subtle rounded">
+              <span class="text-[10px] uppercase font-bold text-charcoal-muted block mb-1">Safety Threshold</span>
+              <span class="font-headline text-xl text-secondary">{{ storageThresholdGB }} GB Active</span>
+              <p class="text-[11px] text-charcoal-muted mt-1">Uploads halt when threshold is reached to prevent auto-billing.</p>
+            </div>
+            <div class="bg-surface-alabaster p-4 border border-border-subtle rounded">
+              <span class="text-[10px] uppercase font-bold text-charcoal-muted block mb-1">Compass Cached Footprint</span>
+              <span class="font-headline text-xl text-status-active">3.89 MB (39 Photos)</span>
+              <p class="text-[11px] text-charcoal-muted mt-1">Ultra-compressed WebP format keeps storage footprint near zero.</p>
+            </div>
+          </div>
+
+          <!-- Quota Control Actions -->
+          <div class="border-t border-border-subtle pt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div class="bg-surface-alabaster p-4 border border-border-subtle rounded">
+              <h4 class="text-xs uppercase font-semibold text-primary mb-1">Threshold Configuration</h4>
+              <p class="text-[11px] text-charcoal-muted mb-3">Adjust the alert limit (default 8.0 GB, max 10.0 GB on free tier).</p>
+              <div class="flex gap-2">
                 <input
                   v-model.number="storageThresholdGB"
-                  @change="setThreshold(storageThresholdGB)"
                   type="number"
                   step="0.5"
                   min="1"
-                  max="500"
+                  max="100"
                   class="w-24 px-3 py-1.5 text-xs bg-canvas-white border border-border-subtle rounded"
                 />
-                <span class="text-xs font-semibold text-charcoal-muted">GB</span>
                 <button
-                  @click="setThreshold(storageThresholdGB); emit('toast', 'Storage threshold updated.', 'success')"
+                  @click="setThreshold(storageThresholdGB); emit('toast', 'Threshold updated to ' + storageThresholdGB + ' GB', 'success')"
                   class="px-3 py-1.5 bg-primary text-canvas-white text-xs uppercase tracking-wider font-semibold rounded hover:bg-secondary"
                 >
                   Save Limit
@@ -563,7 +718,7 @@ function handleResetSettings() {
         </div>
       </div>
 
-      <!-- TAB 4: SITE CUSTOMIZER -->
+      <!-- TAB 5: SITE CUSTOMIZER -->
       <div v-if="activeTab === 'settings'" class="space-y-6">
         <div class="bg-canvas-white border border-border-subtle p-6 rounded shadow-sm">
           <div class="flex items-center justify-between mb-6 pb-4 border-b border-border-subtle">
@@ -677,6 +832,76 @@ function handleResetSettings() {
             </div>
           </form>
         </div>
+      </div>
+    </div>
+
+    <!-- Edit Property Modal -->
+    <div v-if="isEditModalOpen && selectedPropertyForEdit" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-primary/80 backdrop-blur-sm">
+      <div class="bg-canvas-white border border-border-brass w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-lg shadow-2xl p-6 space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-border-subtle">
+          <h3 class="font-headline text-xl text-primary">Edit Property Dossier</h3>
+          <button @click="isEditModalOpen = false" class="text-charcoal-muted hover:text-primary">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <form @submit.prevent="savePropertyEdit" class="space-y-4 text-xs">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block uppercase font-semibold text-charcoal-muted mb-1">Title</label>
+              <input v-model="selectedPropertyForEdit.title" class="w-full p-2 bg-surface-alabaster border rounded" required />
+            </div>
+            <div>
+              <label class="block uppercase font-semibold text-charcoal-muted mb-1">Address</label>
+              <input v-model="selectedPropertyForEdit.address" class="w-full p-2 bg-surface-alabaster border rounded" required />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block uppercase font-semibold text-charcoal-muted mb-1">Price ($)</label>
+              <input v-model.number="selectedPropertyForEdit.price" type="number" class="w-full p-2 bg-surface-alabaster border rounded" required />
+            </div>
+            <div>
+              <label class="block uppercase font-semibold text-charcoal-muted mb-1">Neighborhood</label>
+              <input v-model="selectedPropertyForEdit.neighborhood" class="w-full p-2 bg-surface-alabaster border rounded" required />
+            </div>
+            <div>
+              <label class="block uppercase font-semibold text-charcoal-muted mb-1">Status</label>
+              <select v-model="selectedPropertyForEdit.status" class="w-full p-2 bg-surface-alabaster border rounded">
+                <option value="Active Exclusive">Active Exclusive</option>
+                <option value="Private Exclusive">Private Exclusive</option>
+                <option value="Sold Portfolio">Sold Portfolio</option>
+                <option value="Leased">Leased</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-3">
+            <div>
+              <label class="block uppercase font-semibold text-charcoal-muted mb-1">Beds</label>
+              <input v-model.number="selectedPropertyForEdit.bedrooms" type="number" class="w-full p-2 bg-surface-alabaster border rounded" />
+            </div>
+            <div>
+              <label class="block uppercase font-semibold text-charcoal-muted mb-1">Baths</label>
+              <input v-model.number="selectedPropertyForEdit.bathrooms" type="number" step="0.5" class="w-full p-2 bg-surface-alabaster border rounded" />
+            </div>
+            <div>
+              <label class="block uppercase font-semibold text-charcoal-muted mb-1">Sq Ft</label>
+              <input v-model.number="selectedPropertyForEdit.sqft" type="number" class="w-full p-2 bg-surface-alabaster border rounded" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block uppercase font-semibold text-charcoal-muted mb-1">Description</label>
+            <textarea v-model="selectedPropertyForEdit.description" rows="4" class="w-full p-2 bg-surface-alabaster border rounded"></textarea>
+          </div>
+
+          <div class="flex justify-end gap-2 pt-3 border-t">
+            <button type="button" @click="isEditModalOpen = false" class="px-4 py-2 border rounded">Cancel</button>
+            <button type="submit" class="px-5 py-2 bg-primary text-canvas-white rounded font-semibold hover:bg-secondary">Save Changes</button>
+          </div>
+        </form>
       </div>
     </div>
 

@@ -89,6 +89,16 @@ function printDossier() {
             <span class="material-symbols-outlined text-[14px]">calendar_today</span>
             {{ property.openHouse }}
           </span>
+          <a
+            v-if="property.originalCompassUrl"
+            :href="property.originalCompassUrl"
+            target="_blank"
+            class="inline-flex items-center gap-1.5 px-3 py-1 rounded-sm bg-surface-linen text-primary text-xs uppercase tracking-wider border border-border-brass font-semibold hover:bg-surface-alabaster transition-colors"
+            title="View Official Compass Listing Dossier"
+          >
+            <span class="material-symbols-outlined text-[14px] text-secondary">verified</span>
+            <span>Compass Listing</span>
+          </a>
         </div>
       </div>
     </section>
