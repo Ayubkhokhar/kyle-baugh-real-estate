@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-headline: 'Playfair Display', serif;
+}
+
+@layer base {
+  body {
+    @apply bg-surface-alabaster text-charcoal-body font-sans;
+  }
+
+  h1, h2, h3, .font-headline, .font-display {
+    font-family: var(--font-headline, 'Playfair Display', serif);
+  }
+}
+
+/* Custom scrollbars matching Architectural Prestige aesthetic */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F4F3EF;
+}
+::-webkit-scrollbar-thumb {
+  background: #D8C7B5;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #BFA181;
+}
