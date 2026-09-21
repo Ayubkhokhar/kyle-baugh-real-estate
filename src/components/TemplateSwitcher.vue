@@ -1,107 +1,185 @@
 <script setup>
 import { ref } from "vue";
 import { useThemeTemplate } from "../composables/useThemeTemplate";
+import { useDesignLayout } from "../composables/useDesignLayout";
 
 const emit = defineEmits(["toast"]);
-const { templates, currentTemplate, setTemplate, getShareUrl } = useThemeTemplate();
+const { templates, currentTemplate, setTemplate } = useThemeTemplate();
+const { designOptions, currentDesign, setDesign } = useDesignLayout();
 
 const isOpen = ref(false);
 
-function handleSelect(id) {
-  setTemplate(id);
-  const matched = templates.find((t) => t.id === id);
-  emit("toast", `Template switched to "${matched?.name}"`, "success");
+function handleSelectDesign(id) {
+  setDesign(id);
+  const matched = designOptions.find((d) => d.id === id);
+  emit("toast", `Layout switched to "${matched?.name}"`, "success");
 }
 
-function handleCopyLink(id) {
-  const shareUrl = getShareUrl(id);
-  navigator.clipboard.writeText(shareUrl);
+function handleSelectTheme(id) {
+  setTemplate(id);
   const matched = templates.find((t) => t.id === id);
-  emit("toast", `Share link for "${matched?.name}" copied to clipboard!`, "info");
+  emit("toast", `Color theme switched to "${matched?.name}"`, "success");
+}
+
+function getCombinedShareUrl(designId, themeId) {
+  if (typeof window === "undefined") return "";
+  const origin = window.location.origin;
+  const path = window.location.pathname;
+  return `${origin}${path}?design=${designId}&template=${themeId}`;
+}
+
+async function handleCopyLink(themeId) {
+  const url = getCombinedShareUrl(currentDesign.value, themeId || currentTemplate.value);
+  try {
+    await navigator.clipboard.writeText(url);
+    const themeName = templates.find((t) => t.id === (themeId || currentTemplate.value))?.name;
+    const designName = designOptions.find((d) => d.id === currentDesign.value)?.name;
+    emit("toast", `Copied share link: ${designName} + ${themeName}!`, "info");
+  } catch (err) {
+    emit("toast", "Link: " + url, "info");
+  }
 }
 </script>
 
 <template>
   <div class="fixed bottom-5 right-5 z-50">
-    <!-- Collapsed Trigger Button -->
+    <!-- Collapsed Floating Trigger Button -->
     <div v-if="!isOpen" class="flex items-center">
       <button
         @click="isOpen = true"
-        class="group flex items-center gap-2 px-3.5 py-2.5 bg-primary text-canvas-white rounded-full shadow-2xl border border-border-brass/40 hover:border-secondary hover:scale-105 transition-all duration-200"
-        title="Switch Luxury Template Theme (A/B Testing)"
-        aria-label="Toggle Luxury Theme Switcher"
+        class="group flex items-center gap-2.5 px-4 py-2.5 bg-primary text-canvas-white rounded-full shadow-2xl border border-border-brass/60 hover:border-secondary hover:scale-105 transition-all duration-200"
+        title="Switch Layout Design & Luxury Palette (A/B Testing)"
+        aria-label="Toggle Design & Theme Switcher"
       >
         <span class="material-symbols-outlined text-secondary text-lg group-hover:rotate-45 transition-transform duration-300">palette</span>
-        <span class="text-xs uppercase tracking-wider font-semibold">Templates</span>
-        <span class="w-2 h-2 rounded-full" :style="{ backgroundColor: templates.find(t => t.id === currentTemplate)?.previewColor }"></span>
+        <div class="text-left hidden sm:block">
+          <span class="text-[9px] uppercase tracking-widest text-border-brass font-bold block leading-none">A/B Testing</span>
+          <span class="text-xs font-semibold leading-tight">
+            {{ currentDesign === 'cinematic' ? 'Cinematic Luxe' : 'Architectural' }}
+          </span>
+        </div>
+        <span class="w-2.5 h-2.5 rounded-full ring-1 ring-canvas-white/40" :style="{ backgroundColor: templates.find(t => t.id === currentTemplate)?.previewColor }"></span>
       </button>
     </div>
 
-    <!-- Expanded Template Panel -->
+    <!-- Expanded Switcher Modal (Matches User Screenshot + Design Switch) -->
     <div
       v-else
-      class="bg-canvas-white/95 backdrop-blur-xl border border-border-brass/70 shadow-2xl rounded-xl p-4 w-80 text-primary transition-all duration-300 animate-in fade-in slide-in-from-bottom-3"
+      class="bg-canvas-white/95 backdrop-blur-2xl border border-border-brass/80 shadow-2xl rounded-2xl p-4 sm:p-5 w-[330px] sm:w-[360px] text-primary transition-all duration-300 animate-in fade-in slide-in-from-bottom-3"
     >
-      <div class="flex items-center justify-between pb-3 mb-3 border-b border-border-subtle">
-        <div class="flex items-center gap-2">
-          <span class="material-symbols-outlined text-secondary text-lg">palette</span>
+      <!-- Header -->
+      <div class="flex items-center justify-between pb-3 mb-3.5 border-b border-border-subtle">
+        <div class="flex items-center gap-2.5">
+          <span class="material-symbols-outlined text-secondary text-xl">palette</span>
           <div>
-            <h4 class="font-headline text-sm font-semibold text-primary">Luxury Design Templates</h4>
-            <span class="text-[10px] text-charcoal-muted uppercase tracking-wider block">A/B Testing Switcher</span>
+            <h4 class="font-headline text-base font-semibold text-primary leading-tight">Luxury Design Switcher</h4>
+            <span class="text-[10px] text-charcoal-muted uppercase tracking-wider font-semibold block">A/B Impression Testing</span>
           </div>
         </div>
         <button
           @click="isOpen = false"
-          class="p-1 text-charcoal-muted hover:text-primary rounded"
-          aria-label="Close template switcher"
+          class="p-1 text-charcoal-muted hover:text-primary rounded-md hover:bg-surface-linen transition-colors"
+          aria-label="Close design switcher"
         >
           <span class="material-symbols-outlined text-base">close</span>
         </button>
       </div>
 
-      <!-- 4 Template Options List -->
-      <div class="space-y-2">
-        <div
-          v-for="t in templates"
-          :key="t.id"
-          @click="handleSelect(t.id)"
-          :class="[
-            'p-2.5 rounded-lg border transition-all cursor-pointer flex items-center justify-between group',
-            currentTemplate === t.id
-              ? 'border-secondary bg-surface-linen/70 ring-1 ring-secondary/50'
-              : 'border-border-subtle hover:border-border-brass bg-surface-alabaster/40'
-          ]"
-        >
-          <div class="flex items-center gap-3">
-            <span
-              class="w-5 h-5 rounded-full border border-black/10 shrink-0 shadow-sm"
-              :style="{ backgroundColor: t.previewColor }"
-            ></span>
-            <div>
-              <div class="flex items-center gap-1.5">
-                <span class="text-xs font-semibold text-primary block leading-tight">{{ t.name }}</span>
-                <span v-if="currentTemplate === t.id" class="text-[9px] px-1.5 py-0.2 bg-secondary text-canvas-white rounded font-bold uppercase">Active</span>
-              </div>
-              <span class="text-[10px] text-charcoal-muted line-clamp-1 mt-0.5">{{ t.tagline }}</span>
-            </div>
-          </div>
+      <!-- 1. DESIGN LAYOUT SWITCH (THE NEW REQUESTED FEATURE) -->
+      <div class="mb-4 pb-3.5 border-b border-border-subtle">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-[10px] uppercase tracking-wider text-charcoal-muted font-bold flex items-center gap-1">
+            <span class="material-symbols-outlined text-xs text-secondary">architecture</span>
+            Layout Architecture:
+          </span>
+          <span class="text-[10px] font-bold text-secondary uppercase tracking-wider">
+            {{ currentDesign === 'cinematic' ? 'Design 2 Active' : 'Design 1 Active' }}
+          </span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-2 p-1 bg-surface-linen/80 rounded-xl border border-border-subtle">
+          <button
+            type="button"
+            @click="handleSelectDesign('editorial')"
+            :class="[
+              'py-2.5 px-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-200 flex flex-col items-center justify-center gap-0.5 text-center',
+              currentDesign === 'editorial'
+                ? 'bg-canvas-white text-primary shadow-sm border border-border-brass font-bold ring-1 ring-secondary/30'
+                : 'text-charcoal-muted hover:text-primary hover:bg-canvas-white/50'
+            ]"
+          >
+            <span class="material-symbols-outlined text-base">auto_stories</span>
+            <span class="text-[11px] leading-tight">1. Architectural</span>
+            <span class="text-[9px] font-normal lowercase opacity-75">Editorial Monograph</span>
+          </button>
 
           <button
-            @click.stop="handleCopyLink(t.id)"
-            class="p-1.5 text-charcoal-muted hover:text-secondary rounded hover:bg-canvas-white/80 transition-colors"
-            :title="'Copy direct URL for ' + t.name"
-            aria-label="Copy template link"
+            type="button"
+            @click="handleSelectDesign('cinematic')"
+            :class="[
+              'py-2.5 px-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-200 flex flex-col items-center justify-center gap-0.5 text-center',
+              currentDesign === 'cinematic'
+                ? 'bg-canvas-white text-primary shadow-sm border border-border-brass font-bold ring-1 ring-secondary/30'
+                : 'text-charcoal-muted hover:text-primary hover:bg-canvas-white/50'
+            ]"
           >
-            <span class="material-symbols-outlined text-base">link</span>
+            <span class="material-symbols-outlined text-base">movie_filter</span>
+            <span class="text-[11px] leading-tight">2. Cinematic</span>
+            <span class="text-[9px] font-normal lowercase opacity-75">Ultra-Modern 100vh</span>
           </button>
         </div>
       </div>
 
-      <div class="pt-3 mt-3 border-t border-border-subtle flex items-center justify-between text-[11px] text-charcoal-muted">
-        <span>Target clients with <code class="text-[10px] bg-surface-linen px-1 rounded font-mono">?template=...</code></span>
+      <!-- 2. LUXURY COLOR PALETTE OPTIONS -->
+      <div class="mb-3">
+        <span class="text-[10px] uppercase tracking-wider text-charcoal-muted font-bold block mb-2 flex items-center gap-1">
+          <span class="material-symbols-outlined text-xs text-secondary">format_paint</span>
+          Color Palette:
+        </span>
+        <div class="space-y-1.5 max-h-56 overflow-y-auto pr-0.5">
+          <div
+            v-for="t in templates"
+            :key="t.id"
+            @click="handleSelectTheme(t.id)"
+            :class="[
+              'p-2.5 rounded-xl border transition-all duration-150 cursor-pointer flex items-center justify-between group',
+              currentTemplate === t.id
+                ? 'border-secondary bg-surface-linen/70 ring-1 ring-secondary/50 shadow-sm'
+                : 'border-border-subtle hover:border-border-brass bg-surface-alabaster/40'
+            ]"
+          >
+            <div class="flex items-center gap-2.5">
+              <span
+                class="w-4.5 h-4.5 rounded-full border border-black/10 shrink-0 shadow-sm"
+                :style="{ backgroundColor: t.previewColor }"
+              ></span>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-xs font-semibold text-primary block leading-tight">{{ t.name }}</span>
+                  <span v-if="currentTemplate === t.id" class="text-[8px] px-1.5 py-0.2 bg-secondary text-canvas-white rounded font-bold uppercase tracking-wider">Active</span>
+                </div>
+                <span class="text-[10px] text-charcoal-muted line-clamp-1 mt-0.5">{{ t.tagline }}</span>
+              </div>
+            </div>
+
+            <button
+              @click.stop="handleCopyLink(t.id)"
+              class="p-1 text-charcoal-muted hover:text-secondary rounded hover:bg-canvas-white/80 transition-colors"
+              :title="'Copy direct URL for ' + t.name"
+              aria-label="Copy template link"
+            >
+              <span class="material-symbols-outlined text-base">link</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer & Shareable Link -->
+      <div class="pt-3 border-t border-border-subtle flex items-center justify-between text-[11px] text-charcoal-muted">
+        <span class="text-[10px] font-mono">?design={{ currentDesign }}&template={{ currentTemplate }}</span>
         <button
           @click="handleCopyLink(currentTemplate)"
-          class="text-secondary hover:underline font-semibold flex items-center gap-0.5"
+          class="text-secondary hover:underline font-bold flex items-center gap-1"
         >
           <span>Copy URL</span>
           <span class="material-symbols-outlined text-xs">share</span>
