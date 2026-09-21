@@ -23,6 +23,12 @@ const {
 const { inquiries, unreadCount, updateStatus, deleteInquiry, exportCSV } = useInquiries();
 const { siteSettings, saveSettings, resetSettings, verifyPasscode } = useSiteSettings();
 const { storageThresholdGB, isUpgraded, calculateTotalBytes, formatBytes, setThreshold, setUpgraded } = useStorageQuota();
+const { templates, currentTemplate, setTemplate, getShareUrl } = useThemeTemplate();
+
+function handleTemplateSelect(id) {
+  setTemplate(id);
+  emit("toast", `Luxury template set to "${templates.find(t => t.id === id)?.name}"`, "success");
+}
 
 // Authentication Gate
 const isAuthenticated = ref(sessionStorage.getItem("kyle_admin_auth") === "true");
@@ -766,6 +772,40 @@ function handleResetSettings() {
               <div>
                 <label class="block text-xs uppercase font-semibold text-charcoal-muted mb-1.5">Office Address</label>
                 <input v-model="settingsForm.officeAddress" class="w-full px-3 py-2 text-sm bg-surface-alabaster border border-border-subtle rounded" />
+              </div>
+            </div>
+
+            <!-- Luxury Design Template Themes (A/B Testing) -->
+            <div class="border-t border-border-subtle pt-4">
+              <div class="flex items-center justify-between mb-2">
+                <div>
+                  <label class="block text-xs uppercase font-semibold text-primary">Luxury Design Template Themes</label>
+                  <span class="text-[11px] text-charcoal-muted">Switch themes live or share targeted URLs with ?template=id to A/B test impressions</span>
+                </div>
+                <span class="text-[10px] px-2 py-0.5 bg-secondary text-canvas-white rounded font-bold uppercase">4 Styles Active</span>
+              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-3">
+                <div
+                  v-for="t in templates"
+                  :key="t.id"
+                  @click="handleTemplateSelect(t.id)"
+                  :class="[
+                    'p-3 rounded-lg border cursor-pointer transition-all flex flex-col justify-between',
+                    currentTemplate === t.id
+                      ? 'border-secondary bg-surface-linen/80 ring-2 ring-secondary/50 shadow-sm'
+                      : 'border-border-subtle hover:border-border-brass bg-surface-alabaster'
+                  ]"
+                >
+                  <div class="flex items-center gap-2 mb-2">
+                    <span class="w-4 h-4 rounded-full border border-black/10 shrink-0" :style="{ backgroundColor: t.previewColor }"></span>
+                    <span class="text-xs font-semibold text-primary leading-tight">{{ t.name }}</span>
+                  </div>
+                  <span class="text-[10px] text-charcoal-muted line-clamp-1 mb-2">{{ t.tagline }}</span>
+                  <div class="flex items-center justify-between pt-1 border-t border-border-subtle/60 text-[10px]">
+                    <span class="font-mono text-secondary font-bold">?template={{ t.id }}</span>
+                    <span v-if="currentTemplate === t.id" class="text-status-active font-bold">ACTIVE</span>
+                  </div>
+                </div>
               </div>
             </div>
 

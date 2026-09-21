@@ -4,16 +4,13 @@ import HeaderNav from "./components/HeaderNav.vue";
 import FooterNav from "./components/FooterNav.vue";
 import MobileBottomNav from "./components/MobileBottomNav.vue";
 import ToastNotification from "./components/ToastNotification.vue";
+import TemplateSwitcher from "./components/TemplateSwitcher.vue";
 import { useSiteSettings } from "./composables/useSiteSettings";
+import { useThemeTemplate } from "./composables/useThemeTemplate";
 
 const { siteSettings } = useSiteSettings();
+const { currentTemplate } = useThemeTemplate();
 const toastRef = ref(null);
-
-onMounted(() => {
-  if (siteSettings.value?.fontFamily && typeof document !== "undefined") {
-    document.documentElement.style.setProperty("--font-headline", siteSettings.value.fontFamily);
-  }
-});
 
 function handleToast(message, type = "success") {
   if (toastRef.value) {
@@ -23,7 +20,7 @@ function handleToast(message, type = "success") {
 </script>
 
 <template>
-  <div class="min-h-screen flex flex-col bg-surface-alabaster text-charcoal-body">
+  <div class="min-h-screen flex flex-col bg-surface-alabaster text-charcoal-body transition-colors duration-300">
     <HeaderNav />
     
     <main class="flex-grow">
@@ -33,6 +30,7 @@ function handleToast(message, type = "success") {
     <FooterNav />
     <MobileBottomNav />
 
+    <TemplateSwitcher @toast="handleToast" />
     <ToastNotification ref="toastRef" />
   </div>
 </template>

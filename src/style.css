@@ -4,11 +4,179 @@
 
 :root {
   --font-headline: 'Playfair Display', serif;
+  --bg-app: #FBFBF9;
+  --surface-card: #FFFFFF;
+  --surface-subtle: #F4F3EF;
+  --border-color: #E7E5DF;
+  --border-accent: #D8C7B5;
+  --text-primary: #16181B;
+  --text-body: #35383E;
+  --text-muted: #6E727A;
+  --accent-gold: #BFA181;
+}
+
+/* ========================================================
+   THEME 1: ARCHITECTURAL PRESTIGE (Default Classic Luxury)
+   ======================================================== */
+.theme-prestige {
+  --font-headline: 'Playfair Display', serif;
+  --bg-app: #FBFBF9;
+  --surface-card: #FFFFFF;
+  --surface-subtle: #F4F3EF;
+  --border-color: #E7E5DF;
+  --border-accent: #D8C7B5;
+  --text-primary: #16181B;
+  --text-body: #35383E;
+  --text-muted: #6E727A;
+  --accent-gold: #BFA181;
+}
+
+/* ========================================================
+   THEME 2: MODERN MINIMALIST NOIR (Cinematic Obsidian Dark)
+   ======================================================== */
+.theme-noir {
+  --font-headline: 'Plus Jakarta Sans', sans-serif;
+  --bg-app: #0B0D10;
+  --surface-card: #14171C;
+  --surface-subtle: #1C2027;
+  --border-color: #262B33;
+  --border-accent: #3A414D;
+  --text-primary: #F8FAFC;
+  --text-body: #CBD5E1;
+  --text-muted: #94A3B8;
+  --accent-gold: #D4AF37;
+}
+
+.theme-noir body {
+  background-color: #0B0D10 !important;
+  color: #CBD5E1 !important;
+}
+
+.theme-noir .bg-surface-alabaster {
+  background-color: #0B0D10 !important;
+}
+
+.theme-noir .bg-canvas-white {
+  background-color: #14171C !important;
+}
+
+.theme-noir .bg-surface-linen {
+  background-color: #1C2027 !important;
+}
+
+.theme-noir .text-primary {
+  color: #F8FAFC !important;
+}
+
+.theme-noir .text-charcoal-body {
+  color: #CBD5E1 !important;
+}
+
+.theme-noir .text-charcoal-muted {
+  color: #94A3B8 !important;
+}
+
+.theme-noir .border-border-subtle {
+  border-color: #262B33 !important;
+}
+
+.theme-noir .border-border-brass {
+  border-color: #3A414D !important;
+}
+
+/* ========================================================
+   THEME 3: EDITORIAL ESTATE ATELIER (French Heritage Parchment)
+   ======================================================== */
+.theme-atelier {
+  --font-headline: 'Cormorant Garamond', serif;
+  --bg-app: #F5F2EB;
+  --surface-card: #FAF8F5;
+  --surface-subtle: #ECE8DE;
+  --border-color: #D5CEBF;
+  --border-accent: #BAAF99;
+  --text-primary: #1A1815;
+  --text-body: #3B3731;
+  --text-muted: #736D64;
+  --accent-gold: #9E7E50;
+}
+
+.theme-atelier body {
+  background-color: #F5F2EB !important;
+  color: #3B3731 !important;
+}
+
+.theme-atelier .bg-surface-alabaster {
+  background-color: #F5F2EB !important;
+}
+
+.theme-atelier .bg-canvas-white {
+  background-color: #FAF8F5 !important;
+}
+
+.theme-atelier .bg-surface-linen {
+  background-color: #ECE8DE !important;
+}
+
+.theme-atelier .text-primary {
+  color: #1A1815 !important;
+}
+
+.theme-atelier .border-border-subtle {
+  border-color: #D5CEBF !important;
+}
+
+.theme-atelier .border-border-brass {
+  border-color: #BAAF99 !important;
+}
+
+/* ========================================================
+   THEME 4: METROPOLITAN PENTHOUSE (Contemporary Glass & Slate)
+   ======================================================== */
+.theme-penthouse {
+  --font-headline: 'Plus Jakarta Sans', sans-serif;
+  --bg-app: #F0F4F8;
+  --surface-card: rgba(255, 255, 255, 0.90);
+  --surface-subtle: #E2E8F0;
+  --border-color: #CBD5E1;
+  --border-accent: #94A3B8;
+  --text-primary: #0F172A;
+  --text-body: #334155;
+  --text-muted: #64748B;
+  --accent-gold: #0284C7;
+}
+
+.theme-penthouse body {
+  background-color: #F0F4F8 !important;
+  color: #334155 !important;
+}
+
+.theme-penthouse .bg-surface-alabaster {
+  background-color: #F0F4F8 !important;
+}
+
+.theme-penthouse .bg-canvas-white {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+.theme-penthouse .bg-surface-linen {
+  background-color: #E2E8F0 !important;
+}
+
+.theme-penthouse .text-primary {
+  color: #0F172A !important;
+}
+
+.theme-penthouse .border-border-subtle {
+  border-color: #CBD5E1 !important;
 }
 
 @layer base {
   body {
-    @apply bg-surface-alabaster text-charcoal-body font-sans;
+    background-color: var(--bg-app);
+    color: var(--text-body);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   h1, h2, h3, .font-headline, .font-display {
@@ -16,18 +184,18 @@
   }
 }
 
-/* Custom scrollbars matching Architectural Prestige aesthetic */
+/* Custom Luxury Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F4F3EF;
+  background: var(--surface-subtle);
 }
 ::-webkit-scrollbar-thumb {
-  background: #D8C7B5;
+  background: var(--border-accent);
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #BFA181;
+  background: var(--accent-gold);
 }

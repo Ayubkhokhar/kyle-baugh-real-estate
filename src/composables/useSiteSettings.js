@@ -1,18 +1,20 @@
 import { ref, watch } from "vue";
+import { agentProfile } from "../data/agentProfile";
 
 const SETTINGS_KEY = "kyle_site_settings_v1";
 
 const defaultSettings = {
-  advisorName: "Kyle Baugh",
-  title: "Lead Real Estate Advisor & Construction Specialist",
-  brokerage: "Kyle Baugh Real Estate Advisory",
-  phone: "214.980.3933",
-  phoneTel: "2149803933",
-  email: "kyle@kylebaughrealty.com",
-  officeAddress: "Preston Center, Dallas TX 75225",
+  advisorName: agentProfile?.advisorName || "Kyle Baugh",
+  title: agentProfile?.title || "Lead Real Estate Advisor & Luxury Specialist",
+  brokerage: agentProfile?.brokerage || "Compass RE Texas, LLC",
+  phone: agentProfile?.phone || "214.980.3933",
+  phoneTel: agentProfile?.phoneTel || "2149803933",
+  email: agentProfile?.email || "kyle.baugh@compass.com",
+  officeAddress: agentProfile?.officeAddress || "6220 Gaston Avenue, Suite 100, Dallas, TX 75214",
+  headshot: agentProfile?.headshot || "/images/compass/agent-headshot.webp",
   licenseInfo: "Licensed Texas Real Estate Broker",
-  heroHeading: "Modern Strategy. Construction Expertise. Unmatched Dallas Results.",
-  heroSubheading: "Multimillion-dollar producer representing Dallas\'s most coveted architecturally significant enclaves—Park Cities, Preston Hollow, Lakewood, East Dallas, and Bluffview. Powered by 13+ years of commercial construction rigor and data-driven market intelligence.",
+  heroHeading: agentProfile?.heroHeading || "Modern Strategy. Construction Expertise. Unmatched Dallas Results.",
+  heroSubheading: agentProfile?.heroSubheading || "Multimillion-dollar producer representing Dallas's most coveted architecturally significant enclaves—Park Cities, Preston Hollow, Lakewood, East Dallas, and Bluffview.",
   stat1Value: "#1 Office Peer",
   stat1Label: "Ranked Volume Among 200+ Peers",
   stat2Value: "13+ Years",
