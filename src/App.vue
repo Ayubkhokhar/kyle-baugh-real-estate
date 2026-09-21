@@ -5,6 +5,7 @@ import FooterNav from "./components/FooterNav.vue";
 import MobileBottomNav from "./components/MobileBottomNav.vue";
 import ToastNotification from "./components/ToastNotification.vue";
 import TemplateSwitcher from "./components/TemplateSwitcher.vue";
+import DesignSwitcher from "./components/DesignSwitcher.vue";
 import { useSiteSettings } from "./composables/useSiteSettings";
 import { useThemeTemplate } from "./composables/useThemeTemplate";
 
@@ -30,6 +31,7 @@ function handleToast(message, type = "success") {
     <FooterNav />
     <MobileBottomNav />
 
+    <DesignSwitcher @toast="handleToast" />
     <TemplateSwitcher @toast="handleToast" />
     <ToastNotification ref="toastRef" />
   </div>
