@@ -20,5 +20,5 @@
 ## Active Listings & Portfolio
 - Primary Active Listing: 2007 Euclid Avenue, Dallas, TX 75206 ($875,000, 2 Bed, 2 Bath, 1,779 Sq Ft)
 - Closed Deal Volume: Over $240M+ in residential career transactions ($1.3M to $5.0M estates)
-- Public Portal: https://kyle-baugh-real-estate.ayubkhokhar786.workers.dev/
-- Valuation Request: https://kyle-baugh-real-estate.ayubkhokhar786.workers.dev/submit
+- Public Portal: https://realestate-advisory.ayubkhokhar786.workers.dev/
+- Valuation Request: https://realestate-advisory.ayubkhokhar786.workers.dev/submit

@@ -19,4 +19,4 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://kyle-baugh-real-estate.ayubkhokhar786.workers.dev/sitemap.xml
+Sitemap: https://realestate-advisory.ayubkhokhar786.workers.dev/sitemap.xml
