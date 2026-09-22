@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { defaultProperties } from "../data/seedProperties";
 import { compassProperties, compassSyncMeta as initialCompassMeta } from "../data/compassProperties";
+import { useAgentResolver } from "./useAgentResolver";
 
 const STORAGE_KEY = "kyle_baugh_properties_v1";
 const COMPASS_META_KEY = "kyle_baugh_compass_meta_v1";
@@ -28,29 +29,32 @@ function mergeProperties(existingList, incomingCompassList) {
 }
 
 function loadProperties() {
+  const { activeAgentData } = useAgentResolver();
+  const currentProperties = activeAgentData.value?.properties || compassProperties;
+  const currentAgentId = activeAgentData.value?.id || "kyle";
+
   try {
     if (typeof localStorage !== "undefined") {
-      const savedAgent = localStorage.getItem("active_agent_name");
-      const currentAgent = compassProperties[0]?.agentName || "Amy Detwiler";
-      if (savedAgent && savedAgent !== currentAgent) {
+      const savedAgent = localStorage.getItem("active_agent_id");
+      if (savedAgent && savedAgent !== currentAgentId) {
         localStorage.removeItem(STORAGE_KEY);
-        localStorage.setItem("active_agent_name", currentAgent);
-        return compassProperties.length > 0 ? [...compassProperties] : [...defaultProperties];
+        localStorage.setItem("active_agent_id", currentAgentId);
+        return [...currentProperties];
       }
-      localStorage.setItem("active_agent_name", currentAgent);
+      localStorage.setItem("active_agent_id", currentAgentId);
 
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          return mergeProperties(compassProperties, parsed);
+          return mergeProperties(currentProperties, parsed);
         }
       }
     }
   } catch (err) {
     console.warn("Failed to load properties from localStorage:", err);
   }
-  return compassProperties.length > 0 ? [...compassProperties] : mergeProperties(defaultProperties, compassProperties);
+  return currentProperties.length > 0 ? [...currentProperties] : mergeProperties(defaultProperties, compassProperties);
 }
 
 function loadCompassMeta() {

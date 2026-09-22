@@ -1,33 +1,37 @@
 import { ref, watch } from "vue";
-import { agentProfile } from "../data/agentProfile";
+import { useAgentResolver } from "./useAgentResolver";
 
 const SETTINGS_KEY = "kyle_site_settings_v1";
 
-const defaultSettings = {
-  advisorName: agentProfile?.advisorName || "Kyle Baugh",
-  title: agentProfile?.title || "Lead Real Estate Advisor & Luxury Specialist",
-  brokerage: agentProfile?.brokerage || "Compass RE Texas, LLC",
-  phone: agentProfile?.phone || "214.980.3933",
-  phoneTel: agentProfile?.phoneTel || "2149803933",
-  email: agentProfile?.email || "kyle.baugh@compass.com",
-  officeAddress: agentProfile?.officeAddress || "6220 Gaston Avenue, Suite 100, Dallas, TX 75214",
-  headshot: agentProfile?.headshot || "/images/compass/agent-headshot.webp",
-  licenseInfo: "Licensed Texas Real Estate Broker",
-  heroHeading: agentProfile?.heroHeading || "Modern Strategy. Construction Expertise. Unmatched Dallas Results.",
-  heroSubheading: agentProfile?.heroSubheading || "Multimillion-dollar producer representing Dallas's most coveted architecturally significant enclaves—Park Cities, Preston Hollow, Lakewood, East Dallas, and Bluffview.",
-  stat1Value: "#1 Office Peer",
-  stat1Label: "Ranked Volume Among 200+ Peers",
-  stat2Value: "13+ Years",
-  stat2Label: "Commercial & Residential Rigor",
-  stat3Value: "B.S. Science",
-  stat3Label: "OU Construction Science Degree",
-  stat4Value: "Multi-Year",
-  stat4Label: "D Magazine Best Real Estate Agent",
-  adminPasscode: "admin123",
-  fontFamily: "'Playfair Display', serif",
-  cloudflareWorkerUrl: "",
-  cloudflareCustomDomain: "",
-};
+export function getAgentDefaultSettings() {
+  const { activeAgentData } = useAgentResolver();
+  const profile = activeAgentData.value?.profile || {};
+  return {
+    advisorName: profile.advisorName || "Kyle Baugh",
+    title: profile.title || "Lead Real Estate Advisor & Luxury Specialist",
+    brokerage: profile.brokerage || "Compass RE Texas, LLC",
+    phone: profile.phone || "214.980.3933",
+    phoneTel: profile.phoneTel || "2149803933",
+    email: profile.email || "kyle.baugh@compass.com",
+    officeAddress: profile.officeAddress || "6220 Gaston Avenue, Suite 100, Dallas, TX 75214",
+    headshot: profile.headshot || "/images/compass/kyle-headshot.webp",
+    licenseInfo: "Licensed Texas Real Estate Broker",
+    heroHeading: profile.heroHeading || "Modern Strategy. Construction Expertise. Unmatched Dallas Results.",
+    heroSubheading: profile.heroSubheading || "Multimillion-dollar producer representing Dallas's most coveted architecturally significant enclaves—Park Cities, Preston Hollow, Lakewood, East Dallas, and Bluffview.",
+    stat1Value: profile.stat1Value || "#1 Office Peer",
+    stat1Label: profile.stat1Label || "Ranked Volume Among 200+ Peers",
+    stat2Value: profile.stat2Value || "13+ Years",
+    stat2Label: profile.stat2Label || "Commercial & Residential Rigor",
+    stat3Value: profile.stat3Value || "B.S. Science",
+    stat3Label: profile.stat3Label || "OU Construction Science Degree",
+    stat4Value: profile.stat4Value || "Multi-Year",
+    stat4Label: profile.stat4Label || "D Magazine Best Real Estate Agent",
+    adminPasscode: "admin123",
+    fontFamily: "'Playfair Display', serif",
+    cloudflareWorkerUrl: "",
+    cloudflareCustomDomain: "",
+  };
+}
 
 function applyFont(font) {
   if (typeof document !== "undefined") {
@@ -36,6 +40,7 @@ function applyFont(font) {
 }
 
 function loadSettings() {
+  const defaultSettings = getAgentDefaultSettings();
   try {
     if (typeof localStorage !== "undefined") {
       const saved = localStorage.getItem(SETTINGS_KEY);
@@ -66,17 +71,28 @@ export function useSiteSettings() {
     if (updated.fontFamily) {
       applyFont(updated.fontFamily);
     }
-    localStorage.setItem(SETTINGS_KEY, JSON.stringify(siteSettings.value));
+    try {
+      if (typeof localStorage !== "undefined") {
+        localStorage.setItem(SETTINGS_KEY, JSON.stringify(siteSettings.value));
+      }
+    } catch (e) {
+      console.warn("Failed to persist site settings:", e);
+    }
   }
 
   function resetSettings() {
-    siteSettings.value = { ...defaultSettings };
-    applyFont(defaultSettings.fontFamily);
-    localStorage.setItem(SETTINGS_KEY, JSON.stringify(siteSettings.value));
+    const defaults = getAgentDefaultSettings();
+    siteSettings.value = { ...defaults };
+    applyFont(defaults.fontFamily);
+    try {
+      if (typeof localStorage !== "undefined") {
+        localStorage.removeItem(SETTINGS_KEY);
+      }
+    } catch (e) {}
   }
 
-  function verifyPasscode(input) {
-    return input.trim() === siteSettings.value.adminPasscode.trim();
+  function verifyPasscode(entered) {
+    return entered === siteSettings.value.adminPasscode;
   }
 
   return {

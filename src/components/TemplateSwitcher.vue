@@ -2,10 +2,12 @@
 import { ref } from "vue";
 import { useThemeTemplate } from "../composables/useThemeTemplate";
 import { useDesignLayout } from "../composables/useDesignLayout";
+import { useAgentResolver } from "../composables/useAgentResolver";
 
 const emit = defineEmits(["toast"]);
 const { templates, currentTemplate, setTemplate } = useThemeTemplate();
 const { designOptions, currentDesign, setDesign } = useDesignLayout();
+const { availableAgents, currentAgentId, setAgent, getAgentShareUrl } = useAgentResolver();
 
 const isOpen = ref(false);
 
@@ -21,11 +23,16 @@ function handleSelectTheme(id) {
   emit("toast", `Color theme switched to "${matched?.name}"`, "success");
 }
 
+function handleSwitchAgent(agentId) {
+  setAgent(agentId);
+}
+
 function getCombinedShareUrl(designId, themeId) {
   if (typeof window === "undefined") return "";
-  const origin = window.location.origin;
-  const path = window.location.pathname;
-  return `${origin}${path}?design=${designId}&template=${themeId}`;
+  return getAgentShareUrl(currentAgentId.value, {
+    design: designId,
+    template: themeId,
+  });
 }
 
 async function handleCopyLink(themeId) {
@@ -33,8 +40,8 @@ async function handleCopyLink(themeId) {
   try {
     await navigator.clipboard.writeText(url);
     const themeName = templates.find((t) => t.id === (themeId || currentTemplate.value))?.name;
-    const designName = designOptions.find((d) => d.id === currentDesign.value)?.name;
-    emit("toast", `Copied share link: ${designName} + ${themeName}!`, "info");
+    const agentName = availableAgents.find((a) => a.id === currentAgentId.value)?.name;
+    emit("toast", `Copied share link for ${agentName} (${themeName})!`, "info");
   } catch (err) {
     emit("toast", "Link: " + url, "info");
   }
@@ -53,7 +60,9 @@ async function handleCopyLink(themeId) {
       >
         <span class="material-symbols-outlined text-secondary text-lg group-hover:rotate-45 transition-transform duration-300">palette</span>
         <div class="text-left hidden sm:block">
-          <span class="text-[9px] uppercase tracking-widest text-border-brass font-bold block leading-none">A/B Testing</span>
+          <span class="text-[9px] uppercase tracking-widest text-border-brass font-bold block leading-none">
+            {{ currentAgentId === 'amy' ? 'Amy Detwiler' : 'Kyle Baugh' }}
+          </span>
           <span class="text-xs font-semibold leading-tight">
             {{ currentDesign === 'cinematic' ? 'Cinematic Luxe' : 'Architectural' }}
           </span>
@@ -62,18 +71,18 @@ async function handleCopyLink(themeId) {
       </button>
     </div>
 
-    <!-- Expanded Switcher Modal (Matches User Screenshot + Design Switch) -->
+    <!-- Expanded Switcher Modal -->
     <div
       v-else
-      class="bg-canvas-white/95 backdrop-blur-2xl border border-border-brass/80 shadow-2xl rounded-2xl p-4 sm:p-5 w-[330px] sm:w-[360px] text-primary transition-all duration-300 animate-in fade-in slide-in-from-bottom-3"
+      class="bg-canvas-white/95 backdrop-blur-2xl border border-border-brass/80 shadow-2xl rounded-2xl p-4 sm:p-5 w-[330px] sm:w-[370px] text-primary transition-all duration-300 animate-in fade-in slide-in-from-bottom-3"
     >
       <!-- Header -->
-      <div class="flex items-center justify-between pb-3 mb-3.5 border-b border-border-subtle">
+      <div class="flex items-center justify-between pb-3 mb-3 border-b border-border-subtle">
         <div class="flex items-center gap-2.5">
           <span class="material-symbols-outlined text-secondary text-xl">palette</span>
           <div>
-            <h4 class="font-headline text-base font-semibold text-primary leading-tight">Luxury Design Switcher</h4>
-            <span class="text-[10px] text-charcoal-muted uppercase tracking-wider font-semibold block">A/B Impression Testing</span>
+            <h4 class="font-headline text-base font-semibold text-primary leading-tight">Luxury Client Showcase</h4>
+            <span class="text-[10px] text-charcoal-muted uppercase tracking-wider font-semibold block">Multi-Client Isolated Switcher</span>
           </div>
         </div>
         <button
@@ -85,9 +94,49 @@ async function handleCopyLink(themeId) {
         </button>
       </div>
 
-      <!-- 1. DESIGN LAYOUT SWITCH (THE NEW REQUESTED FEATURE) -->
-      <div class="mb-4 pb-3.5 border-b border-border-subtle">
-        <div class="flex items-center justify-between mb-2">
+      <!-- 0. CLIENT / AGENT SELECTION -->
+      <div class="mb-3 pb-3 border-b border-border-subtle">
+        <div class="flex items-center justify-between mb-1.5">
+          <span class="text-[10px] uppercase tracking-wider text-charcoal-muted font-bold flex items-center gap-1">
+            <span class="material-symbols-outlined text-xs text-secondary">badge</span>
+            Client Portfolio:
+          </span>
+          <span class="text-[10px] font-bold text-secondary uppercase tracking-wider">
+            {{ currentAgentId === 'amy' ? 'Amy Detwiler' : 'Kyle Baugh (Default)' }}
+          </span>
+        </div>
+
+        <div class="grid grid-cols-2 gap-1.5 p-1 bg-surface-linen/80 rounded-xl border border-border-subtle">
+          <button
+            type="button"
+            @click="handleSwitchAgent('kyle')"
+            :class="[
+              'py-1.5 px-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1',
+              currentAgentId === 'kyle'
+                ? 'bg-canvas-white text-primary shadow-sm border border-border-brass font-bold ring-1 ring-secondary/30'
+                : 'text-charcoal-muted hover:text-primary hover:bg-canvas-white/50'
+            ]"
+          >
+            <span>🏛️ Kyle Baugh</span>
+          </button>
+          <button
+            type="button"
+            @click="handleSwitchAgent('amy')"
+            :class="[
+              'py-1.5 px-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all flex items-center justify-center gap-1',
+              currentAgentId === 'amy'
+                ? 'bg-canvas-white text-primary shadow-sm border border-border-brass font-bold ring-1 ring-secondary/30'
+                : 'text-charcoal-muted hover:text-primary hover:bg-canvas-white/50'
+            ]"
+          >
+            <span>👑 Amy Detwiler</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 1. DESIGN LAYOUT SWITCH -->
+      <div class="mb-3.5 pb-3 border-b border-border-subtle">
+        <div class="flex items-center justify-between mb-1.5">
           <span class="text-[10px] uppercase tracking-wider text-charcoal-muted font-bold flex items-center gap-1">
             <span class="material-symbols-outlined text-xs text-secondary">architecture</span>
             Layout Architecture:
@@ -102,7 +151,7 @@ async function handleCopyLink(themeId) {
             type="button"
             @click="handleSelectDesign('editorial')"
             :class="[
-              'py-2.5 px-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-200 flex flex-col items-center justify-center gap-0.5 text-center',
+              'py-2 px-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-200 flex flex-col items-center justify-center gap-0.5 text-center',
               currentDesign === 'editorial'
                 ? 'bg-canvas-white text-primary shadow-sm border border-border-brass font-bold ring-1 ring-secondary/30'
                 : 'text-charcoal-muted hover:text-primary hover:bg-canvas-white/50'
@@ -117,7 +166,7 @@ async function handleCopyLink(themeId) {
             type="button"
             @click="handleSelectDesign('cinematic')"
             :class="[
-              'py-2.5 px-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-200 flex flex-col items-center justify-center gap-0.5 text-center',
+              'py-2 px-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-200 flex flex-col items-center justify-center gap-0.5 text-center',
               currentDesign === 'cinematic'
                 ? 'bg-canvas-white text-primary shadow-sm border border-border-brass font-bold ring-1 ring-secondary/30'
                 : 'text-charcoal-muted hover:text-primary hover:bg-canvas-white/50'
@@ -132,25 +181,25 @@ async function handleCopyLink(themeId) {
 
       <!-- 2. LUXURY COLOR PALETTE OPTIONS -->
       <div class="mb-3">
-        <span class="text-[10px] uppercase tracking-wider text-charcoal-muted font-bold block mb-2 flex items-center gap-1">
+        <span class="text-[10px] uppercase tracking-wider text-charcoal-muted font-bold block mb-1.5 flex items-center gap-1">
           <span class="material-symbols-outlined text-xs text-secondary">format_paint</span>
           Color Palette:
         </span>
-        <div class="space-y-1.5 max-h-56 overflow-y-auto pr-0.5">
+        <div class="space-y-1 max-h-44 overflow-y-auto pr-0.5">
           <div
             v-for="t in templates"
             :key="t.id"
             @click="handleSelectTheme(t.id)"
             :class="[
-              'p-2.5 rounded-xl border transition-all duration-150 cursor-pointer flex items-center justify-between group',
+              'p-2 rounded-xl border transition-all duration-150 cursor-pointer flex items-center justify-between group',
               currentTemplate === t.id
                 ? 'border-secondary bg-surface-linen/70 ring-1 ring-secondary/50 shadow-sm'
                 : 'border-border-subtle hover:border-border-brass bg-surface-alabaster/40'
             ]"
           >
-            <div class="flex items-center gap-2.5">
+            <div class="flex items-center gap-2">
               <span
-                class="w-4.5 h-4.5 rounded-full border border-black/10 shrink-0 shadow-sm"
+                class="w-4 h-4 rounded-full border border-black/10 shrink-0 shadow-sm"
                 :style="{ backgroundColor: t.previewColor }"
               ></span>
               <div>
@@ -174,14 +223,16 @@ async function handleCopyLink(themeId) {
         </div>
       </div>
 
-      <!-- Footer & Shareable Link -->
-      <div class="pt-3 border-t border-border-subtle flex items-center justify-between text-[11px] text-charcoal-muted">
-        <span class="text-[10px] font-mono">?design={{ currentDesign }}&template={{ currentTemplate }}</span>
+      <!-- Footer & Isolated Shareable Link -->
+      <div class="pt-2.5 border-t border-border-subtle flex items-center justify-between text-[11px] text-charcoal-muted">
+        <span class="text-[10px] font-mono">
+          {{ currentAgentId === 'kyle' ? 'Default: Kyle Baugh' : '?agent=amy' }}
+        </span>
         <button
           @click="handleCopyLink(currentTemplate)"
           class="text-secondary hover:underline font-bold flex items-center gap-1"
         >
-          <span>Copy URL</span>
+          <span>Copy Dedicated Link</span>
           <span class="material-symbols-outlined text-xs">share</span>
         </button>
       </div>
