@@ -4,16 +4,12 @@ import { useRouter } from "vue-router";
 import { useProperties } from "../composables/useProperties";
 import { useSiteSettings } from "../composables/useSiteSettings";
 import { useInquiries } from "../composables/useInquiries";
-import { useDesignLayout } from "../composables/useDesignLayout";
-
 import EditorialLayout from "../components/designs/EditorialLayout.vue";
-import CinematicLayout from "../components/designs/CinematicLayout.vue";
 
 const router = useRouter();
 const { properties } = useProperties();
 const { siteSettings } = useSiteSettings();
 const { addInquiry } = useInquiries();
-const { currentDesign } = useDesignLayout();
 
 const emit = defineEmits(["toast"]);
 
@@ -38,11 +34,11 @@ const filteredProperties = computed(() => {
     } else if (activeCategory.value === "sold") {
       if (!p.status?.includes("Sold") && !p.status?.includes("Leased")) return false;
     } else if (activeCategory.value === "park-cities") {
-      if (p.enclaveCategory !== "park-cities" && !p.neighborhood.includes("Park Cities") && !p.neighborhood.includes("Preston Hollow")) return false;
+      if (p.enclaveCategory !== "park-cities" && !p.neighborhood?.includes("Park Cities") && !p.neighborhood?.includes("Preston Hollow")) return false;
     } else if (activeCategory.value === "lakewood") {
-      if (p.enclaveCategory !== "lakewood" && !p.neighborhood.includes("Lakewood") && !p.neighborhood.includes("Greenville") && !p.neighborhood.includes("East Dallas")) return false;
+      if (p.enclaveCategory !== "lakewood" && !p.neighborhood?.includes("Lakewood") && !p.neighborhood?.includes("Greenville") && !p.neighborhood?.includes("East Dallas")) return false;
     } else if (activeCategory.value === "midway-hollow") {
-      if (p.enclaveCategory !== "midway-hollow" && !p.neighborhood.includes("Midway")) return false;
+      if (p.enclaveCategory !== "midway-hollow" && !p.neighborhood?.includes("Midway")) return false;
     } else if (activeCategory.value === "historic") {
       if (p.enclaveCategory !== "historic" && !p.status?.includes("Historic") && p.yearBuilt > 1940) return false;
     }
@@ -78,7 +74,7 @@ function handleConsultSubmit() {
       objective: consultForm.value.objective,
       message: consultForm.value.message || "Consultation requested from homepage.",
     });
-    emit("toast", "Your confidential inquiry has been submitted to Kyle Baugh.", "success");
+    emit("toast", "Your confidential inquiry has been submitted to " + siteSettings.value.advisorName + ".", "success");
     consultForm.value = { fullName: "", email: "", phone: "", neighborhood: "park-cities", objective: "acquisition", message: "" };
     isSubmittingConsult.value = false;
   }, 400);
@@ -86,39 +82,18 @@ function handleConsultSubmit() {
 </script>
 
 <template>
-  <div>
-    <!-- DESIGN 2: MODERN CINEMATIC LUXE -->
-    <CinematicLayout
-      v-if="currentDesign === 'cinematic'"
-      :site-settings="siteSettings"
-      :filtered-properties="filteredProperties"
-      :categories="categories"
-      :active-category="activeCategory"
-      :search-query="searchQuery"
-      :max-price="maxPrice"
-      :consult-form="consultForm"
-      :is-submitting-consult="isSubmittingConsult"
-      @update:active-category="activeCategory = $event"
-      @update:search-query="searchQuery = $event"
-      @update:max-price="maxPrice = $event"
-      @submit-consult="handleConsultSubmit"
-    />
-
-    <!-- DESIGN 1: ARCHITECTURAL DOSSIER (ORIGINAL EDITORIAL) -->
-    <EditorialLayout
-      v-else
-      :site-settings="siteSettings"
-      :filtered-properties="filteredProperties"
-      :categories="categories"
-      :active-category="activeCategory"
-      :search-query="searchQuery"
-      :max-price="maxPrice"
-      :consult-form="consultForm"
-      :is-submitting-consult="isSubmittingConsult"
-      @update:active-category="activeCategory = $event"
-      @update:search-query="searchQuery = $event"
-      @update:max-price="maxPrice = $event"
-      @submit-consult="handleConsultSubmit"
-    />
-  </div>
+  <EditorialLayout
+    :site-settings="siteSettings"
+    :filtered-properties="filteredProperties"
+    :categories="categories"
+    :active-category="activeCategory"
+    :search-query="searchQuery"
+    :max-price="maxPrice"
+    :consult-form="consultForm"
+    :is-submitting-consult="isSubmittingConsult"
+    @update:active-category="activeCategory = $event"
+    @update:search-query="searchQuery = $event"
+    @update:max-price="maxPrice = $event"
+    @submit-consult="handleConsultSubmit"
+  />
 </template>

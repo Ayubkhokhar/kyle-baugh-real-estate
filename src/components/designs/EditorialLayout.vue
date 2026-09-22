@@ -81,8 +81,8 @@ const emit = defineEmits([
               <div class="relative bg-canvas-white p-2.5 shadow-xl border border-border-subtle">
                 <div class="relative aspect-[4/5] overflow-hidden bg-surface-linen">
                   <img
-                    class="w-full h-full object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAjYRx4css-T_-AENSBByIhtA1ar3h-k_YDrBx-q0I0TROujIGFVGNdJKUMkSWuarmqws42eeIs-XykO0t437gE720__boPCHG8giZD33unv4UuBcsiW5KTG-BKuAIjImAtBhkMhyRXohPFlTl_pYO5b_-iDsMjBqxvxuuymG-554tWTz9Isj4zRIMXmO6LoymP7wYyS6twqo0lzZEJjdOYmrolz-yjc0kZEd6cB_YvSBShcLeEG3Kzg"
+                    class="w-full h-full object-cover object-top"
+                    :src="siteSettings.headshot || '/images/compass/agent-headshot.webp'"
                     :alt="siteSettings.advisorName + ' - Dallas Luxury Real Estate Advisor'"
                     fetchpriority="high"
                     width="400"
@@ -93,7 +93,7 @@ const emit = defineEmits([
                   <div class="absolute bottom-4 left-4 right-4 text-canvas-white flex justify-between items-end">
                     <div>
                       <p class="font-headline text-xl text-canvas-white">{{ siteSettings.advisorName }}</p>
-                      <p class="text-[11px] uppercase tracking-widest text-border-brass font-semibold">Founder & Lead Advisor</p>
+                      <p class="text-[11px] uppercase tracking-widest text-border-brass font-semibold">{{ siteSettings.title || 'Founder & Lead Advisor' }}</p>
                     </div>
                     <div class="px-2.5 py-1 bg-surface-alabaster/90 text-primary text-[10px] uppercase tracking-wider font-semibold border border-border-subtle backdrop-blur-sm">
                       D Magazine Best
@@ -292,7 +292,7 @@ const emit = defineEmits([
       </div>
     </section>
 
-    <!-- CONSTRUCTION PEDIGREE -->
+    <!-- ADVISORY & PEDIGREE SECTION -->
     <section class="py-20 lg:py-28 bg-surface-alabaster border-b border-border-subtle relative" id="construction">
       <div class="max-w-7xl mx-auto px-5 lg:px-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
@@ -301,16 +301,18 @@ const emit = defineEmits([
               <div class="aspect-[4/3] bg-surface-linen overflow-hidden relative">
                 <img
                   class="w-full h-full object-cover"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0TjsYGkE-EuLYqK9GfMImfBFfz1a1GpwvMaQ-u0iXCX54-2zB8wxKqPjccANw9si801E5Er6py5jvwquhj6LQwYnz6QxMGaa-BIP4NznMoJ7qxULr6tGg4JM95DVfiHAFhu-YdMAJxpKWYhBn094pYJZYA9lV6ehL3F7himl4jw-RqtpK9Hmnj_jg06u8Szd6T4wf6VetngNMNAUPxF9ed8MOKtwTXfopC83o0LVwWfZyTggcBFTHrQ"
-                  alt="Kyle Baugh On-Site Construction Forensics"
+                  :src="siteSettings.pedigreeImage || '/images/compass/2007-euclid-avenue-cover.webp'"
+                  :alt="siteSettings.advisorName + ' - Architectural Advisory'"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div class="mt-3 p-4 bg-surface-linen border border-border-subtle flex items-start gap-4">
-                <span class="material-symbols-outlined text-secondary text-2xl mt-0.5">architecture</span>
+                <span class="material-symbols-outlined text-secondary text-2xl mt-0.5">verified</span>
                 <div>
-                  <p class="font-semibold text-primary text-sm">Institutional Construction Foundation</p>
+                  <p class="font-semibold text-primary text-sm">{{ siteSettings.pedigreeBadgeTitle || 'Institutional Advisory Foundation' }}</p>
                   <p class="text-xs text-charcoal-muted leading-relaxed">
-                    Bachelor of Science in Construction Science, University of Oklahoma. Former manager of NASA flight facilities and Dallas Love Field infrastructure.
+                    {{ siteSettings.pedigreeBadgeText }}
                   </p>
                 </div>
               </div>
@@ -319,45 +321,27 @@ const emit = defineEmits([
           <div class="lg:col-span-6 flex flex-col space-y-6">
             <div class="flex items-center gap-2">
               <span class="w-6 h-[1px] bg-secondary"></span>
-              <span class="text-xs text-secondary uppercase tracking-widest font-semibold">Construction Pedigree</span>
+              <span class="text-xs text-secondary uppercase tracking-widest font-semibold">{{ siteSettings.pedigreeTag || 'Advisory Pedigree' }}</span>
             </div>
             <h2 class="font-headline text-3xl sm:text-4xl text-primary leading-tight">
-              Structural Precision Meets Dallas Real Estate Discretion.
+              {{ siteSettings.pedigreeHeading }}
             </h2>
             <p class="text-base text-charcoal-body font-light leading-relaxed">
-              Most Dallas agents view properties through paint colors and staging. With a formal degree in Construction Science and years leading multi-million-dollar commercial projects, Kyle deconstructs each home down to its concrete pilings, beam deflections, and mechanical lifespan.
+              {{ siteSettings.pedigreeBio }}
             </p>
             <div class="space-y-4 pt-2">
-              <div class="p-4 bg-canvas-white border border-border-subtle flex gap-4 shadow-sm">
+              <div
+                v-for="(point, pIdx) in siteSettings.pedigreePoints"
+                :key="pIdx"
+                class="p-4 bg-canvas-white border border-border-subtle flex gap-4 shadow-sm"
+              >
                 <div class="w-10 h-10 bg-surface-linen border border-border-brass flex items-center justify-center shrink-0">
-                  <span class="material-symbols-outlined text-primary text-xl">foundation</span>
+                  <span class="material-symbols-outlined text-primary text-xl">{{ point.icon }}</span>
                 </div>
                 <div>
-                  <h3 class="font-semibold text-primary text-sm">Pier & Beam / Crawlspace Structural Forensics</h3>
+                  <h3 class="font-semibold text-primary text-sm">{{ point.title }}</h3>
                   <p class="text-xs text-charcoal-muted mt-1 leading-relaxed">
-                    Dallas's shifting Blackland Prairie soils demand relentless scrutiny. We audit subflooring, moisture barriers, and pier settlement before writing or accepting offers.
-                  </p>
-                </div>
-              </div>
-              <div class="p-4 bg-canvas-white border border-border-subtle flex gap-4 shadow-sm">
-                <div class="w-10 h-10 bg-surface-linen border border-border-brass flex items-center justify-center shrink-0">
-                  <span class="material-symbols-outlined text-primary text-xl">payments</span>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-primary text-sm">Concierge Pre-Sale Renovation Capital (0% Upfront)</h3>
-                  <p class="text-xs text-charcoal-muted mt-1 leading-relaxed">
-                    Kyle coordinates, scopes, and front-funds strategic aesthetic renovations—recouped strictly at closing with zero out-of-pocket interest to maximize your sale net.
-                  </p>
-                </div>
-              </div>
-              <div class="p-4 bg-canvas-white border border-border-subtle flex gap-4 shadow-sm">
-                <div class="w-10 h-10 bg-surface-linen border border-border-brass flex items-center justify-center shrink-0">
-                  <span class="material-symbols-outlined text-primary text-xl">lock</span>
-                </div>
-                <div>
-                  <h3 class="font-semibold text-primary text-sm">Off-Market Syndication & Private Discretion</h3>
-                  <p class="text-xs text-charcoal-muted mt-1 leading-relaxed">
-                    Over 35% of Kyle's transaction volume trades completely off-MLS through direct family office networks, safeguarding privacy and avoiding public speculation.
+                    {{ point.desc }}
                   </p>
                 </div>
               </div>

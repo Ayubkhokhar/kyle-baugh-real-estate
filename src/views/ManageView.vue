@@ -5,7 +5,6 @@ import { useInquiries } from "../composables/useInquiries";
 import { useSiteSettings } from "../composables/useSiteSettings";
 import { useStorageQuota } from "../composables/useStorageQuota";
 import { useThemeTemplate } from "../composables/useThemeTemplate";
-import { useDesignLayout } from "../composables/useDesignLayout";
 import StorageLimitModal from "../components/StorageLimitModal.vue";
 
 const emit = defineEmits(["toast"]);
@@ -26,13 +25,6 @@ const { inquiries, unreadCount, updateStatus, deleteInquiry, exportCSV } = useIn
 const { siteSettings, saveSettings, resetSettings, verifyPasscode } = useSiteSettings();
 const { storageThresholdGB, isUpgraded, calculateTotalBytes, formatBytes, setThreshold, setUpgraded } = useStorageQuota();
 const { templates, currentTemplate, setTemplate, getShareUrl } = useThemeTemplate();
-const { designOptions, currentDesign, setDesign, getShareUrl: getDesignShareUrl } = useDesignLayout();
-
-function handleDesignSelect(id) {
-  setDesign(id);
-  const active = designOptions.find((d) => d.id === id);
-  emit("toast", `Default layout set to "${active?.name}"`, "success");
-}
 
 function handleTemplateSelect(id) {
   setTemplate(id);
@@ -735,74 +727,6 @@ function handleResetSettings() {
 
       <!-- TAB 5: SITE CUSTOMIZER -->
       <div v-if="activeTab === 'settings'" class="space-y-6">
-        <!-- 2 Design Architecture Options -->
-        <div class="bg-canvas-white border border-border-subtle p-6 rounded shadow-sm">
-          <div class="flex items-center justify-between mb-4 pb-3 border-b border-border-subtle">
-            <div>
-              <span class="text-xs uppercase tracking-widest text-secondary font-semibold block mb-1">Modern Architectural Options</span>
-              <h2 class="font-headline text-2xl text-primary">Website Design Layout Architecture</h2>
-            </div>
-            <span class="text-xs px-2.5 py-1 rounded bg-surface-linen text-charcoal-body font-semibold border border-border-subtle">
-              Active: {{ currentDesign === 'cinematic' ? 'Design 2: Cinematic Luxe' : 'Design 1: Architectural Dossier' }}
-            </span>
-          </div>
-
-          <p class="text-xs text-charcoal-muted mb-4 leading-relaxed">
-            Select the default architectural layout structure for your public showcase. Both designs adapt to whichever color scheme is selected.
-          </p>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div
-              v-for="design in designOptions"
-              :key="design.id"
-              @click="handleDesignSelect(design.id)"
-              :class="[
-                'p-5 border rounded-lg transition-all duration-200 cursor-pointer flex flex-col justify-between relative',
-                currentDesign === design.id
-                  ? 'border-secondary bg-surface-linen/60 ring-2 ring-secondary/30 shadow-md'
-                  : 'border-border-subtle hover:border-secondary/50 bg-canvas-white'
-              ]"
-            >
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <div class="flex items-center gap-2">
-                    <span class="material-symbols-outlined text-secondary text-xl">{{ design.icon }}</span>
-                    <h3 class="font-headline text-lg text-primary font-bold">{{ design.name }}</h3>
-                  </div>
-                  <span
-                    :class="[
-                      'text-[10px] px-2 py-0.5 rounded font-semibold uppercase tracking-wider',
-                      currentDesign === design.id ? 'bg-secondary text-canvas-white' : 'bg-surface-linen text-charcoal-body border'
-                    ]"
-                  >
-                    {{ design.badge }}
-                  </span>
-                </div>
-                <p class="text-xs text-charcoal-body mb-3 leading-relaxed">
-                  {{ design.description }}
-                </p>
-                <div class="text-[11px] text-secondary font-semibold mb-4">
-                  {{ design.tagline }}
-                </div>
-              </div>
-
-              <div class="pt-3 border-t border-border-subtle flex items-center justify-between text-xs">
-                <span class="text-charcoal-muted font-mono text-[10px]">?design={{ design.id }}</span>
-                <button
-                  type="button"
-                  @click.stop="handleDesignSelect(design.id)"
-                  :class="[
-                    'px-3 py-1 rounded text-xs font-semibold uppercase tracking-wider transition-colors',
-                    currentDesign === design.id ? 'bg-secondary text-canvas-white' : 'bg-primary text-canvas-white hover:bg-secondary'
-                  ]"
-                >
-                  {{ currentDesign === design.id ? 'Active Default' : 'Select Layout' }}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div class="bg-canvas-white border border-border-subtle p-6 rounded shadow-sm">
           <div class="flex items-center justify-between mb-6 pb-4 border-b border-border-subtle">
             <div>

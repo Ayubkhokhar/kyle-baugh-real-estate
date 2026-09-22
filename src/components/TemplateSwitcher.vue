@@ -1,21 +1,13 @@
 <script setup>
 import { ref } from "vue";
 import { useThemeTemplate } from "../composables/useThemeTemplate";
-import { useDesignLayout } from "../composables/useDesignLayout";
 import { useAgentResolver } from "../composables/useAgentResolver";
 
 const emit = defineEmits(["toast"]);
 const { templates, currentTemplate, setTemplate } = useThemeTemplate();
-const { designOptions, currentDesign, setDesign } = useDesignLayout();
 const { availableAgents, currentAgentId, setAgent, getAgentShareUrl } = useAgentResolver();
 
 const isOpen = ref(false);
-
-function handleSelectDesign(id) {
-  setDesign(id);
-  const matched = designOptions.find((d) => d.id === id);
-  emit("toast", `Layout switched to "${matched?.name}"`, "success");
-}
 
 function handleSelectTheme(id) {
   setTemplate(id);
@@ -27,16 +19,15 @@ function handleSwitchAgent(agentId) {
   setAgent(agentId);
 }
 
-function getCombinedShareUrl(designId, themeId) {
+function getCombinedShareUrl(themeId) {
   if (typeof window === "undefined") return "";
   return getAgentShareUrl(currentAgentId.value, {
-    design: designId,
     template: themeId,
   });
 }
 
 async function handleCopyLink(themeId) {
-  const url = getCombinedShareUrl(currentDesign.value, themeId || currentTemplate.value);
+  const url = getCombinedShareUrl(themeId || currentTemplate.value);
   try {
     await navigator.clipboard.writeText(url);
     const themeName = templates.find((t) => t.id === (themeId || currentTemplate.value))?.name;
@@ -64,7 +55,7 @@ async function handleCopyLink(themeId) {
             {{ currentAgentId === 'amy' ? 'Amy Detwiler' : 'Kyle Baugh' }}
           </span>
           <span class="text-xs font-semibold leading-tight">
-            {{ currentDesign === 'cinematic' ? 'Cinematic Luxe' : 'Architectural' }}
+            Editorial Monograph
           </span>
         </div>
         <span class="w-2.5 h-2.5 rounded-full ring-1 ring-canvas-white/40" :style="{ backgroundColor: templates.find(t => t.id === currentTemplate)?.previewColor }"></span>
@@ -130,51 +121,6 @@ async function handleCopyLink(themeId) {
             ]"
           >
             <span>👑 Amy Detwiler</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- 1. DESIGN LAYOUT SWITCH -->
-      <div class="mb-3.5 pb-3 border-b border-border-subtle">
-        <div class="flex items-center justify-between mb-1.5">
-          <span class="text-[10px] uppercase tracking-wider text-charcoal-muted font-bold flex items-center gap-1">
-            <span class="material-symbols-outlined text-xs text-secondary">architecture</span>
-            Layout Architecture:
-          </span>
-          <span class="text-[10px] font-bold text-secondary uppercase tracking-wider">
-            {{ currentDesign === 'cinematic' ? 'Design 2 Active' : 'Design 1 Active' }}
-          </span>
-        </div>
-
-        <div class="grid grid-cols-2 gap-2 p-1 bg-surface-linen/80 rounded-xl border border-border-subtle">
-          <button
-            type="button"
-            @click="handleSelectDesign('editorial')"
-            :class="[
-              'py-2 px-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-200 flex flex-col items-center justify-center gap-0.5 text-center',
-              currentDesign === 'editorial'
-                ? 'bg-canvas-white text-primary shadow-sm border border-border-brass font-bold ring-1 ring-secondary/30'
-                : 'text-charcoal-muted hover:text-primary hover:bg-canvas-white/50'
-            ]"
-          >
-            <span class="material-symbols-outlined text-base">auto_stories</span>
-            <span class="text-[11px] leading-tight">1. Architectural</span>
-            <span class="text-[9px] font-normal lowercase opacity-75">Editorial Monograph</span>
-          </button>
-
-          <button
-            type="button"
-            @click="handleSelectDesign('cinematic')"
-            :class="[
-              'py-2 px-2 rounded-lg text-xs font-semibold uppercase tracking-wider transition-all duration-200 flex flex-col items-center justify-center gap-0.5 text-center',
-              currentDesign === 'cinematic'
-                ? 'bg-canvas-white text-primary shadow-sm border border-border-brass font-bold ring-1 ring-secondary/30'
-                : 'text-charcoal-muted hover:text-primary hover:bg-canvas-white/50'
-            ]"
-          >
-            <span class="material-symbols-outlined text-base">movie_filter</span>
-            <span class="text-[11px] leading-tight">2. Cinematic</span>
-            <span class="text-[9px] font-normal lowercase opacity-75">Ultra-Modern 100vh</span>
           </button>
         </div>
       </div>
