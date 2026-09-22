@@ -13,6 +13,21 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/kyle",
+    name: "kyle-home",
+    component: HomeView,
+  },
+  {
+    path: "/amy",
+    name: "amy-home",
+    component: HomeView,
+  },
+  {
+    path: "/agent/:agentSlug",
+    name: "agent-home",
+    component: HomeView,
+  },
+  {
     path: "/property/:id",
     name: "property-detail",
     component: PropertyDetailView,

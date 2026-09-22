@@ -29,15 +29,36 @@ export const availableAgents = [
 
 function getInitialAgentId() {
   if (typeof window !== "undefined") {
-    // 1. URL Query Parameter (?agent=amy or ?agent=kyle or ?client=amy)
+    const pathname = window.location.pathname.toLowerCase();
+    const hostname = window.location.hostname.toLowerCase();
     const params = new URLSearchParams(window.location.search);
+
+    // 1. Subdomain Check (e.g. amydetwiler.workers.dev or amy.workers.dev)
+    if (hostname.includes("amy") || hostname.includes("detwiler")) {
+      return "amy";
+    }
+    if (hostname.includes("kyle") || hostname.includes("baugh")) {
+      // Continue to path check in case /amy is accessed on kyle domain
+    }
+
+    // 2. Clean Path Check (e.g. /amy, /amy-detwiler, /agent/amy)
+    if (pathname.includes("/amy") || pathname.includes("/detwiler")) {
+      localStorage.setItem(AGENT_STORAGE_KEY, "amy");
+      return "amy";
+    }
+    if (pathname.includes("/kyle") || pathname.includes("/baugh")) {
+      localStorage.setItem(AGENT_STORAGE_KEY, "kyle");
+      return "kyle";
+    }
+
+    // 3. URL Query Parameter (?agent=amy or ?client=amy)
     const queryAgent = (params.get("agent") || params.get("client") || "").toLowerCase().trim();
     if (queryAgent && availableAgents.some((a) => a.id === queryAgent)) {
       localStorage.setItem(AGENT_STORAGE_KEY, queryAgent);
       return queryAgent;
     }
 
-    // 2. LocalStorage (if previously explicitly selected)
+    // 4. LocalStorage (only if previously explicitly selected)
     const saved = localStorage.getItem(AGENT_STORAGE_KEY);
     if (saved && availableAgents.some((a) => a.id === saved)) {
       return saved;
@@ -61,13 +82,15 @@ export function useAgentResolver() {
       localStorage.setItem(AGENT_STORAGE_KEY, id);
       const url = new URL(window.location.href);
       if (id === "kyle") {
+        url.pathname = "/kyle";
         url.searchParams.delete("agent");
         url.searchParams.delete("client");
       } else {
-        url.searchParams.set("agent", id);
+        url.pathname = "/amy";
+        url.searchParams.delete("agent");
+        url.searchParams.delete("client");
       }
       window.history.replaceState({}, "", url.toString());
-      // Refresh window to reinitialize cleanly if switching between different agents
       window.location.reload();
     }
   }
@@ -75,16 +98,13 @@ export function useAgentResolver() {
   function getAgentShareUrl(agentId, extraParams = {}) {
     if (typeof window === "undefined") return "";
     const origin = window.location.origin;
-    const path = window.location.pathname;
+    const targetPath = agentId === "amy" ? "/amy" : "/kyle";
     const params = new URLSearchParams();
-    if (agentId && agentId !== "kyle") {
-      params.set("agent", agentId);
-    }
     for (const [k, v] of Object.entries(extraParams)) {
       if (v) params.set(k, v);
     }
     const qs = params.toString();
-    return qs ? `${origin}${path}?${qs}` : `${origin}${path}`;
+    return qs ? `${origin}${targetPath}?${qs}` : `${origin}${targetPath}`;
   }
 
   return {
