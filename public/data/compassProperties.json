@@ -1,85 +1,85 @@
 {
   "meta": {
-    "lastSynced": "2026-09-21T12:37:11.490Z"
+    "lastSynced": "2026-09-22T07:40:16.653Z"
   },
   "properties": [
     {
-      "id": "compass-2007-euclid-avenue",
-      "slug": "2007-euclid-avenue",
-      "title": "2007 Euclid Avenue",
-      "address": "2007 Euclid Avenue, Dallas, TX 75206",
-      "neighborhood": "Dallas, Dallas",
+      "id": "compass-4401-arcady-avenue",
+      "slug": "4401-arcady-avenue",
+      "title": "4401 Arcady Avenue",
+      "address": "4401 Arcady Avenue, Highland Park, TX 75205",
+      "neighborhood": "Highland Park, Dallas",
       "enclaveCategory": "dallas",
-      "price": 875000,
-      "priceFormatted": "$875,000",
-      "pricePerSqft": 492,
+      "price": 15995000,
+      "priceFormatted": "$15,995,000",
+      "pricePerSqft": 1851,
       "status": "Active Exclusive",
       "openHouse": "Open House Sunday 2:00 - 4:00 PM",
-      "bedrooms": 2,
-      "bathrooms": 2,
-      "sqft": 1779,
+      "bedrooms": 6,
+      "bathrooms": 8,
+      "sqft": 8643,
       "lotSize": "0.20 Acres",
       "garage": "2-Car Garage",
       "yearBuilt": 1928,
       "typology": "Single Family Residence",
-      "heroImage": "/images/compass/2007-euclid-avenue-cover.webp",
+      "heroImage": "/images/compass/4401-arcady-avenue-cover.webp",
       "gallery": [
         {
-          "url": "/images/compass/2007-euclid-avenue-cover.webp",
+          "url": "/images/compass/4401-arcady-avenue-cover.webp",
           "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
+          "caption": "Represented by Amy Detwiler in Highland Park."
         },
         {
-          "url": "/images/compass/2007-euclid-avenue-photo-1.webp",
+          "url": "/images/compass/4401-arcady-avenue-photo-1.webp",
           "title": "Interior & Grounds · View 1",
-          "caption": "Luxury appointment at 2007 Euclid Avenue."
+          "caption": "Luxury appointment at 4401 Arcady Avenue."
         },
         {
-          "url": "/images/compass/2007-euclid-avenue-photo-2.webp",
+          "url": "/images/compass/4401-arcady-avenue-photo-2.webp",
           "title": "Interior & Grounds · View 2",
-          "caption": "Luxury appointment at 2007 Euclid Avenue."
+          "caption": "Luxury appointment at 4401 Arcady Avenue."
         },
         {
-          "url": "/images/compass/2007-euclid-avenue-photo-3.webp",
+          "url": "/images/compass/4401-arcady-avenue-photo-3.webp",
           "title": "Interior & Grounds · View 3",
-          "caption": "Luxury appointment at 2007 Euclid Avenue."
+          "caption": "Luxury appointment at 4401 Arcady Avenue."
         },
         {
-          "url": "/images/compass/2007-euclid-avenue-photo-4.webp",
+          "url": "/images/compass/4401-arcady-avenue-photo-4.webp",
           "title": "Interior & Grounds · View 4",
-          "caption": "Luxury appointment at 2007 Euclid Avenue."
+          "caption": "Luxury appointment at 4401 Arcady Avenue."
         },
         {
-          "url": "/images/compass/2007-euclid-avenue-photo-5.webp",
+          "url": "/images/compass/4401-arcady-avenue-photo-5.webp",
           "title": "Interior & Grounds · View 5",
-          "caption": "Luxury appointment at 2007 Euclid Avenue."
+          "caption": "Luxury appointment at 4401 Arcady Avenue."
         },
         {
-          "url": "/images/compass/2007-euclid-avenue-photo-6.webp",
+          "url": "/images/compass/4401-arcady-avenue-photo-6.webp",
           "title": "Interior & Grounds · View 6",
-          "caption": "Luxury appointment at 2007 Euclid Avenue."
+          "caption": "Luxury appointment at 4401 Arcady Avenue."
         },
         {
-          "url": "/images/compass/2007-euclid-avenue-photo-7.webp",
+          "url": "/images/compass/4401-arcady-avenue-photo-7.webp",
           "title": "Interior & Grounds · View 7",
-          "caption": "Luxury appointment at 2007 Euclid Avenue."
+          "caption": "Luxury appointment at 4401 Arcady Avenue."
         },
         {
-          "url": "/images/compass/2007-euclid-avenue-photo-8.webp",
+          "url": "/images/compass/4401-arcady-avenue-photo-8.webp",
           "title": "Interior & Grounds · View 8",
-          "caption": "Luxury appointment at 2007 Euclid Avenue."
+          "caption": "Luxury appointment at 4401 Arcady Avenue."
         }
       ],
       "tagline": "Preserved Architectural Character with Modern Luxury Appointed Interiors",
-      "description": "Exclusively presented by Kyle Baugh. Located in the coveted Dallas enclave, this exceptional residence features 2 bedrooms, 2 bathrooms, and 1,779 square feet of masterfully curated architectural design.",
+      "description": "Exclusively presented by Amy Detwiler. Located in the coveted Highland Park enclave, this exceptional residence features 6 bedrooms, 8 bathrooms, and 8,643 square feet of masterfully curated architectural design.",
       "forensics": [
         {
           "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
+          "value": "Amy Detwiler Real Estate Advisory"
         },
         {
           "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
+          "value": "Highland Park Luxury Corridor"
         },
         {
           "label": "Transaction Type",
@@ -91,107 +91,49 @@
         }
       ],
       "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "2 Bedrooms · 2 Bathrooms luxury configuration",
+        "Prime Highland Park location with premier accessibility",
+        "6 Bedrooms · 8 Bathrooms luxury configuration",
         "Open for private confidential viewings"
       ],
       "featured": true,
       "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/2007-Euclid-Ave-Dallas-TX-75206/1AR708_pid/",
-      "scrapedAt": "2026-09-21T12:37:11.463Z",
+      "originalCompassUrl": "https://www.compass.com/homedetails/4401-Arcady-Ave-Highland-Park-TX-75205/193LEI_pid/",
+      "scrapedAt": "2026-09-22T07:39:55.057Z",
       "approxSizeMB": 0.12
     },
     {
-      "id": "compass-3821-shenandoah-st",
-      "slug": "3821-shenandoah-st",
-      "title": "3821 Shenandoah St",
-      "address": "3821 Shenandoah St, Park Cities, TX",
-      "neighborhood": "Park Cities, Dallas",
-      "enclaveCategory": "park-cities",
-      "price": 4995000,
-      "priceFormatted": "$4,995,000",
-      "pricePerSqft": 0,
-      "status": "Sold Portfolio",
-      "openHouse": null,
-      "bedrooms": 5,
-      "bathrooms": 6,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Single Family Residence",
-      "heroImage": "/images/compass/3821-shenandoah-st-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/3821-shenandoah-st-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Park Cities."
-        }
-      ],
-      "tagline": "Premier Park Cities Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Park Cities. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Park Cities Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Residential Acquisition / Sale"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Park Cities location with premier accessibility",
-        "5 Bedrooms · 6 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": true,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/agents/kyle-baugh-dallas/",
-      "scrapedAt": "2026-09-21T12:37:11.466Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-6521-winton-street",
-      "slug": "6521-winton-street",
-      "title": "6521 Winton Street",
-      "address": "6521 Winton Street, Dallas, TX 75214",
+      "id": "compass-5531-walnut-hill-lane",
+      "slug": "5531-walnut-hill-lane",
+      "title": "5531 Walnut Hill Lane",
+      "address": "5531 Walnut Hill Lane, Dallas, TX 75229",
       "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "lakewood",
-      "price": 2600000,
-      "priceFormatted": "$2,600,000",
-      "pricePerSqft": 0,
+      "enclaveCategory": "dallas",
+      "price": 14997000,
+      "priceFormatted": "$14,997,000",
+      "pricePerSqft": 1250,
       "status": "Sold Portfolio",
       "openHouse": null,
       "bedrooms": 5,
-      "bathrooms": 6,
-      "sqft": 0,
+      "bathrooms": 9,
+      "sqft": 11997,
       "lotSize": "0.20 Acres",
       "garage": "2-Car Garage",
       "yearBuilt": 2018,
       "typology": "Single Family Residence",
-      "heroImage": "/images/compass/6521-winton-street-cover.webp",
+      "heroImage": "/images/compass/5531-walnut-hill-lane-cover.webp",
       "gallery": [
         {
-          "url": "/images/compass/6521-winton-street-cover.webp",
+          "url": "/images/compass/5531-walnut-hill-lane-cover.webp",
           "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
+          "caption": "Represented by Amy Detwiler in Dallas."
         }
       ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
       "forensics": [
         {
           "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
+          "value": "Amy Detwiler Real Estate Advisory"
         },
         {
           "label": "Market Submarket",
@@ -208,48 +150,280 @@
       ],
       "highlights": [
         "Prime Dallas location with premier accessibility",
-        "5 Bedrooms · 6 Bathrooms luxury configuration",
+        "5 Bedrooms · 9 Bathrooms luxury configuration",
         "Successfully represented and closed"
       ],
       "featured": true,
       "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/6521-Winton-St-Dallas-TX-75214/1355112566349947913_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.467Z",
+      "originalCompassUrl": "https://www.compass.com/homedetails/5531-Walnut-Hill-Ln-Dallas-TX-75229/1A0EU9_pid/",
+      "scrapedAt": "2026-09-22T07:39:55.590Z",
       "approxSizeMB": 0.12
     },
     {
-      "id": "compass-3120-purdue-avenue",
-      "slug": "3120-purdue-avenue",
-      "title": "3120 Purdue Avenue",
-      "address": "3120 Purdue Avenue, University Park, TX 75225",
-      "neighborhood": "University Park, Dallas",
-      "enclaveCategory": "park-cities",
-      "price": 2395000,
-      "priceFormatted": "$2,395,000",
-      "pricePerSqft": 0,
+      "id": "compass-4620-melissa-lane",
+      "slug": "4620-melissa-lane",
+      "title": "4620 Melissa Lane",
+      "address": "4620 Melissa Lane, Dallas, TX 75229",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 7950000,
+      "priceFormatted": "$7,950,000",
+      "pricePerSqft": 1008,
       "status": "Sold Portfolio",
       "openHouse": null,
-      "bedrooms": 4,
-      "bathrooms": 6,
-      "sqft": 0,
+      "bedrooms": 5,
+      "bathrooms": 8,
+      "sqft": 7888,
       "lotSize": "0.20 Acres",
       "garage": "2-Car Garage",
       "yearBuilt": 2018,
       "typology": "Single Family Residence",
-      "heroImage": "/images/compass/3120-purdue-avenue-cover.webp",
+      "heroImage": "/images/compass/4620-melissa-lane-cover.webp",
       "gallery": [
         {
-          "url": "/images/compass/3120-purdue-avenue-cover.webp",
+          "url": "/images/compass/4620-melissa-lane-cover.webp",
           "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in University Park."
+          "caption": "Represented by Amy Detwiler in Dallas."
         }
       ],
-      "tagline": "Premier University Park Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in University Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
       "forensics": [
         {
           "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
+        "5 Bedrooms · 8 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/4620-Melissa-Ln-Dallas-TX-75229/1B33E0_pid/",
+      "scrapedAt": "2026-09-22T07:39:56.034Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4745-crooked-lane",
+      "slug": "4745-crooked-lane",
+      "title": "4745 Crooked Lane",
+      "address": "4745 Crooked Lane, Dallas, TX 75229",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 7950000,
+      "priceFormatted": "$7,950,000",
+      "pricePerSqft": 1148,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 7,
+      "sqft": 6928,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/4745-crooked-lane-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4745-crooked-lane-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
+        "5 Bedrooms · 7 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/4745-Crooked-Ln-Dallas-TX-75229/1949AH_pid/",
+      "scrapedAt": "2026-09-22T07:39:56.493Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-6131-lupton-drive",
+      "slug": "6131-lupton-drive",
+      "title": "6131 Lupton Drive",
+      "address": "6131 Lupton Drive, Dallas, TX 75225",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 6745000,
+      "priceFormatted": "$6,745,000",
+      "pricePerSqft": 854,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 6,
+      "bathrooms": 8,
+      "sqft": 7896,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/6131-lupton-drive-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/6131-lupton-drive-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
+        "6 Bedrooms · 8 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/6131-Lupton-Dr-Dallas-TX-75225/19Q5CM_pid/",
+      "scrapedAt": "2026-09-22T07:39:56.963Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-6039-waggoner-drive",
+      "slug": "6039-waggoner-drive",
+      "title": "6039 Waggoner Drive",
+      "address": "6039 Waggoner Drive, Dallas, TX 75230",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 6220000,
+      "priceFormatted": "$6,220,000",
+      "pricePerSqft": 1006,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 3,
+      "bathrooms": 5,
+      "sqft": 6184,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/6039-waggoner-drive-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/6039-waggoner-drive-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
+        "3 Bedrooms · 5 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/6039-Waggoner-Dr-Dallas-TX-75230/1AE24W_pid/",
+      "scrapedAt": "2026-09-22T07:39:57.443Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-3637-haynie-avenue",
+      "slug": "3637-haynie-avenue",
+      "title": "3637 Haynie Avenue",
+      "address": "3637 Haynie Avenue, University Park, TX 75205",
+      "neighborhood": "University Park, Dallas",
+      "enclaveCategory": "park-cities",
+      "price": 5395000,
+      "priceFormatted": "$5,395,000",
+      "pricePerSqft": 871,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 7,
+      "sqft": 6196,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/3637-haynie-avenue-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/3637-haynie-avenue-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in University Park."
+        }
+      ],
+      "tagline": "Premier University Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in University Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
         },
         {
           "label": "Market Submarket",
@@ -266,454 +440,106 @@
       ],
       "highlights": [
         "Prime University Park location with premier accessibility",
+        "5 Bedrooms · 7 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/3637-Haynie-Ave-University-Park-TX-75205/1AJ6PQ_pid/",
+      "scrapedAt": "2026-09-22T07:39:57.946Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4630-south-lindhurst-avenue",
+      "slug": "4630-south-lindhurst-avenue",
+      "title": "4630 South Lindhurst Avenue",
+      "address": "4630 South Lindhurst Avenue, Dallas, TX 75229",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 4995000,
+      "priceFormatted": "$4,995,000",
+      "pricePerSqft": 1037,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 4,
+      "bathrooms": 6,
+      "sqft": 4817,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/4630-south-lindhurst-avenue-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4630-south-lindhurst-avenue-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
         "4 Bedrooms · 6 Bathrooms luxury configuration",
         "Successfully represented and closed"
       ],
       "featured": true,
       "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/3120-Purdue-Ave-University-Park-TX-75225/1039003851312969281_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.468Z",
+      "originalCompassUrl": "https://www.compass.com/homedetails/4630-S-Lindhurst-Ave-Dallas-TX-75229/1A24P7_pid/",
+      "scrapedAt": "2026-09-22T07:39:58.373Z",
       "approxSizeMB": 0.12
     },
     {
-      "id": "compass-5647-swiss-avenue",
-      "slug": "5647-swiss-avenue",
-      "title": "5647 Swiss Avenue",
-      "address": "5647 Swiss Avenue, Dallas, TX 75214",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "historic",
-      "price": 2395000,
-      "priceFormatted": "$2,395,000",
-      "pricePerSqft": 0,
-      "status": "Sold Portfolio",
-      "openHouse": null,
-      "bedrooms": 5,
-      "bathrooms": 4,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Single Family Residence",
-      "heroImage": "/images/compass/5647-swiss-avenue-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/5647-swiss-avenue-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Residential Acquisition / Sale"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "5 Bedrooms · 4 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": true,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/5647-Swiss-Ave-Dallas-TX-75214/1027514056358896393_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.469Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-6706-southridge-drive",
-      "slug": "6706-southridge-drive",
-      "title": "6706 Southridge Drive",
-      "address": "6706 Southridge Drive, Dallas, TX 75214",
+      "id": "compass-9102-bluff-hollow-court",
+      "slug": "9102-bluff-hollow-court",
+      "title": "9102 Bluff Hollow Court",
+      "address": "9102 Bluff Hollow Court, Dallas, TX 75220",
       "neighborhood": "Dallas, Dallas",
       "enclaveCategory": "dallas",
-      "price": 2200000,
-      "priceFormatted": "$2,200,000",
-      "pricePerSqft": 0,
-      "status": "Sold Portfolio",
-      "openHouse": null,
-      "bedrooms": 3,
-      "bathrooms": 3,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Single Family Residence",
-      "heroImage": "/images/compass/6706-southridge-drive-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/6706-southridge-drive-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Residential Acquisition / Sale"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "3 Bedrooms · 3 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": true,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/6706-Southridge-Dr-Dallas-TX-75214/1754672854446518185_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.470Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-6230-llano-avenue",
-      "slug": "6230-llano-avenue",
-      "title": "6230 Llano Avenue",
-      "address": "6230 Llano Avenue, Dallas, TX 75214",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "dallas",
-      "price": 1925000,
-      "priceFormatted": "$1,925,000",
-      "pricePerSqft": 0,
-      "status": "Sold Portfolio",
-      "openHouse": null,
-      "bedrooms": 4,
-      "bathrooms": 4,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Single Family Residence",
-      "heroImage": "/images/compass/6230-llano-avenue-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/6230-llano-avenue-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Residential Acquisition / Sale"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "4 Bedrooms · 4 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/6230-Llano-Ave-Dallas-TX-75214/1851259492457113825_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.470Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-5414-richmond-avenue",
-      "slug": "5414-richmond-avenue",
-      "title": "5414 Richmond Avenue",
-      "address": "5414 Richmond Avenue, Dallas, TX 75206",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "lakewood",
-      "price": 1899000,
-      "priceFormatted": "$1,899,000",
-      "pricePerSqft": 0,
-      "status": "Sold Portfolio",
-      "openHouse": null,
-      "bedrooms": 4,
-      "bathrooms": 4,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Single Family Residence",
-      "heroImage": "/images/compass/5414-richmond-avenue-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/5414-richmond-avenue-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Residential Acquisition / Sale"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "4 Bedrooms · 4 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/5414-Richmond-Ave-Dallas-TX-75206/1014456616134599913_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.471Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-5431-richmond-avenue",
-      "slug": "5431-richmond-avenue",
-      "title": "5431 Richmond Avenue",
-      "address": "5431 Richmond Avenue, Dallas, TX 75206",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "lakewood",
-      "price": 1795000,
-      "priceFormatted": "$1,795,000",
-      "pricePerSqft": 0,
-      "status": "Sold Portfolio",
-      "openHouse": null,
-      "bedrooms": 4,
-      "bathrooms": 4,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Single Family Residence",
-      "heroImage": "/images/compass/5431-richmond-avenue-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/5431-richmond-avenue-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Residential Acquisition / Sale"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "4 Bedrooms · 4 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/5431-Richmond-Ave-Dallas-TX-75206/1517448343707892921_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.472Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-5307-mccommas-boulevard",
-      "slug": "5307-mccommas-boulevard",
-      "title": "5307 McCommas Boulevard",
-      "address": "5307 McCommas Boulevard, Dallas, TX 75206",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "lakewood",
-      "price": 1650000,
-      "priceFormatted": "$1,650,000",
-      "pricePerSqft": 0,
-      "status": "Sold Portfolio",
-      "openHouse": null,
-      "bedrooms": 5,
-      "bathrooms": 6,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Single Family Residence",
-      "heroImage": "/images/compass/5307-mccommas-boulevard-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/5307-mccommas-boulevard-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Residential Acquisition / Sale"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "5 Bedrooms · 6 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/5307-McCommas-Blvd-Dallas-TX-75206/1324357809401757265_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.473Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-7822-purdue-avenue",
-      "slug": "7822-purdue-avenue",
-      "title": "7822 Purdue Avenue",
-      "address": "7822 Purdue Avenue, Dallas, TX 75225",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "park-cities",
-      "price": 1595000,
-      "priceFormatted": "$1,595,000",
-      "pricePerSqft": 0,
-      "status": "Sold Portfolio",
-      "openHouse": null,
-      "bedrooms": 4,
-      "bathrooms": 3,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Single Family Residence",
-      "heroImage": "/images/compass/7822-purdue-avenue-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/7822-purdue-avenue-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Residential Acquisition / Sale"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "4 Bedrooms · 3 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/7822-Purdue-Ave-Dallas-TX-75225/1549478707401651649_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.473Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-5318-mccommas-boulevard",
-      "slug": "5318-mccommas-boulevard",
-      "title": "5318 McCommas Boulevard",
-      "address": "5318 McCommas Boulevard, Dallas, TX 75206",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "lakewood",
-      "price": 1590000,
-      "priceFormatted": "$1,590,000",
-      "pricePerSqft": 0,
+      "price": 3975000,
+      "priceFormatted": "$3,975,000",
+      "pricePerSqft": 749,
       "status": "Sold Portfolio",
       "openHouse": null,
       "bedrooms": 4,
       "bathrooms": 5,
-      "sqft": 0,
+      "sqft": 5306,
       "lotSize": "0.20 Acres",
       "garage": "2-Car Garage",
       "yearBuilt": 2018,
       "typology": "Single Family Residence",
-      "heroImage": "/images/compass/5318-mccommas-boulevard-cover.webp",
+      "heroImage": "/images/compass/9102-bluff-hollow-court-cover.webp",
       "gallery": [
         {
-          "url": "/images/compass/5318-mccommas-boulevard-cover.webp",
+          "url": "/images/compass/9102-bluff-hollow-court-cover.webp",
           "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
+          "caption": "Represented by Amy Detwiler in Dallas."
         }
       ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
       "forensics": [
         {
           "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
+          "value": "Amy Detwiler Real Estate Advisory"
         },
         {
           "label": "Market Submarket",
@@ -733,21 +559,1007 @@
         "4 Bedrooms · 5 Bathrooms luxury configuration",
         "Successfully represented and closed"
       ],
-      "featured": false,
+      "featured": true,
       "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/5318-McCommas-Blvd-Dallas-TX-75206/1598687616064603665_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.474Z",
+      "originalCompassUrl": "https://www.compass.com/homedetails/9102-Bluff-Hollow-Ct-Dallas-TX-75220/1AEZEH_pid/",
+      "scrapedAt": "2026-09-22T07:39:58.804Z",
       "approxSizeMB": 0.12
     },
     {
-      "id": "compass-9107-vinewood-drive",
-      "slug": "9107-vinewood-drive",
-      "title": "9107 Vinewood Drive",
-      "address": "9107 Vinewood Drive, Dallas, TX 75228",
+      "id": "compass-9250-meadowbrook-drive",
+      "slug": "9250-meadowbrook-drive",
+      "title": "9250 Meadowbrook Drive",
+      "address": "9250 Meadowbrook Drive, Dallas, TX 75220",
       "neighborhood": "Dallas, Dallas",
       "enclaveCategory": "dallas",
-      "price": 1585000,
-      "priceFormatted": "$1,585,000",
+      "price": 15995000,
+      "priceFormatted": "$15,995,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 6,
+      "bathrooms": 10,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/9250-meadowbrook-drive-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/9250-meadowbrook-drive-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
+        "6 Bedrooms · 10 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/9250-Meadowbrook-Dr-Dallas-TX-75220/1270740564500907217_lid/",
+      "scrapedAt": "2026-09-22T07:39:59.379Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-3851-potomac-avenue",
+      "slug": "3851-potomac-avenue",
+      "title": "3851 Potomac Avenue",
+      "address": "3851 Potomac Avenue, Highland Park, TX 75205",
+      "neighborhood": "Highland Park, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 13900000,
+      "priceFormatted": "$13,900,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 8,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/3851-potomac-avenue-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/3851-potomac-avenue-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Highland Park."
+        }
+      ],
+      "tagline": "Premier Highland Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Highland Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Highland Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Highland Park location with premier accessibility",
+        "5 Bedrooms · 8 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/3851-Potomac-Ave-Highland-Park-TX-75205/1095035434124872105_lid/",
+      "scrapedAt": "2026-09-22T07:39:59.864Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4020-glenwick-lane",
+      "slug": "4020-glenwick-lane",
+      "title": "4020 Glenwick Lane",
+      "address": "4020 Glenwick Lane, University Park, TX 75205",
+      "neighborhood": "University Park, Dallas",
+      "enclaveCategory": "park-cities",
+      "price": 13400000,
+      "priceFormatted": "$13,400,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 7,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/4020-glenwick-lane-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4020-glenwick-lane-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in University Park."
+        }
+      ],
+      "tagline": "Premier University Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in University Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "University Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime University Park location with premier accessibility",
+        "5 Bedrooms · 7 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/4020-Glenwick-Ln-University-Park-TX-75205/1367391329997500689_lid/",
+      "scrapedAt": "2026-09-22T07:40:00.338Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-9131-devonshire-drive",
+      "slug": "9131-devonshire-drive",
+      "title": "9131 Devonshire Drive",
+      "address": "9131 Devonshire Drive, Dallas, TX 75209",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 11995000,
+      "priceFormatted": "$11,995,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 4,
+      "bathrooms": 5,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/9131-devonshire-drive-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/9131-devonshire-drive-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
+        "4 Bedrooms · 5 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/9131-Devonshire-Dr-Dallas-TX-75209/1517449091905069665_lid/",
+      "scrapedAt": "2026-09-22T07:40:00.821Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4436-belclaire-avenue",
+      "slug": "4436-belclaire-avenue",
+      "title": "4436 Belclaire Avenue",
+      "address": "4436 Belclaire Avenue, Highland Park, TX 75205",
+      "neighborhood": "Highland Park, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 10950000,
+      "priceFormatted": "$10,950,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 8,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/4436-belclaire-avenue-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4436-belclaire-avenue-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Highland Park."
+        }
+      ],
+      "tagline": "Premier Highland Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Highland Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Highland Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Highland Park location with premier accessibility",
+        "5 Bedrooms · 8 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/agents/amy-detwiler/",
+      "scrapedAt": "2026-09-22T07:40:01.506Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-3509-crescent-avenue",
+      "slug": "3509-crescent-avenue",
+      "title": "3509 Crescent Avenue",
+      "address": "3509 Crescent Avenue, Highland Park, TX 75205",
+      "neighborhood": "Highland Park, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 9995000,
+      "priceFormatted": "$9,995,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 4,
+      "bathrooms": 5,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/3509-crescent-avenue-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/3509-crescent-avenue-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Highland Park."
+        }
+      ],
+      "tagline": "Premier Highland Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Highland Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Highland Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Highland Park location with premier accessibility",
+        "4 Bedrooms · 5 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/3509-Crescent-Ave-Highland-Park-TX-75205/1819744531004572449_lid/",
+      "scrapedAt": "2026-09-22T07:40:01.989Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-9639-hollow-way-rdnorth-dallas",
+      "slug": "9639-hollow-way-rdnorth-dallas",
+      "title": "9639 Hollow Way RdNorth Dallas",
+      "address": "9639 Hollow Way RdNorth Dallas, Dallas, TX",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 9995000,
+      "priceFormatted": "$9,995,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 6,
+      "bathrooms": 8.5,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/9639-hollow-way-rdnorth-dallas-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/9639-hollow-way-rdnorth-dallas-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
+        "6 Bedrooms · 8.5 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/agents/amy-detwiler/",
+      "scrapedAt": "2026-09-22T07:40:02.405Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4947-brookview-drive",
+      "slug": "4947-brookview-drive",
+      "title": "4947 Brookview Drive",
+      "address": "4947 Brookview Drive, Dallas, TX 75220",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 9995000,
+      "priceFormatted": "$9,995,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 6,
+      "bathrooms": 11,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/4947-brookview-drive-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4947-brookview-drive-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
+        "6 Bedrooms · 11 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/4947-Brookview-Dr-Dallas-TX-75220/1682130942140659753_lid/",
+      "scrapedAt": "2026-09-22T07:40:02.860Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-3500-greenbrier-drive",
+      "slug": "3500-greenbrier-drive",
+      "title": "3500 Greenbrier Drive",
+      "address": "3500 Greenbrier Drive, University Park, TX 75225",
+      "neighborhood": "University Park, Dallas",
+      "enclaveCategory": "park-cities",
+      "price": 9995000,
+      "priceFormatted": "$9,995,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 7,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/3500-greenbrier-drive-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/3500-greenbrier-drive-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in University Park."
+        }
+      ],
+      "tagline": "Premier University Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in University Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "University Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime University Park location with premier accessibility",
+        "5 Bedrooms · 7 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/3500-Greenbrier-Dr-University-Park-TX-75225/1078971183096899401_lid/",
+      "scrapedAt": "2026-09-22T07:40:03.303Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-5138-deloache-avenue",
+      "slug": "5138-deloache-avenue",
+      "title": "5138 Deloache Avenue",
+      "address": "5138 Deloache Avenue, Dallas, TX 75220",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 9250000,
+      "priceFormatted": "$9,250,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 6,
+      "bathrooms": 10,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/5138-deloache-avenue-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/5138-deloache-avenue-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
+        "6 Bedrooms · 10 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/5138-Deloache-Ave-Dallas-TX-75220/1250862679631727993_lid/",
+      "scrapedAt": "2026-09-22T07:40:03.823Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4415-fairfax-avenue",
+      "slug": "4415-fairfax-avenue",
+      "title": "4415 Fairfax Avenue",
+      "address": "4415 Fairfax Avenue, Highland Park, TX 75205",
+      "neighborhood": "Highland Park, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 8495000,
+      "priceFormatted": "$8,495,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 7,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/4415-fairfax-avenue-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4415-fairfax-avenue-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Highland Park."
+        }
+      ],
+      "tagline": "Premier Highland Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Highland Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Highland Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Highland Park location with premier accessibility",
+        "5 Bedrooms · 7 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/4415-Fairfax-Ave-Highland-Park-TX-75205/1663908010233582089_lid/",
+      "scrapedAt": "2026-09-22T07:40:04.296Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-3912-miramar-avenue",
+      "slug": "3912-miramar-avenue",
+      "title": "3912 Miramar Avenue",
+      "address": "3912 Miramar Avenue, Highland Park, TX 75205",
+      "neighborhood": "Highland Park, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 7995000,
+      "priceFormatted": "$7,995,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 8,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/3912-miramar-avenue-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/3912-miramar-avenue-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Highland Park."
+        }
+      ],
+      "tagline": "Premier Highland Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Highland Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Highland Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Highland Park location with premier accessibility",
+        "5 Bedrooms · 8 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/3912-Miramar-Ave-Highland-Park-TX-75205/626789904105585353_lid/",
+      "scrapedAt": "2026-09-22T07:40:04.763Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-5400-edlen-drive",
+      "slug": "5400-edlen-drive",
+      "title": "5400 Edlen Drive",
+      "address": "5400 Edlen Drive, Dallas, TX 75220",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 7995000,
+      "priceFormatted": "$7,995,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 10,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/5400-edlen-drive-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/5400-edlen-drive-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
+        "5 Bedrooms · 10 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/agents/amy-detwiler/",
+      "scrapedAt": "2026-09-22T07:40:05.216Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-11565-east-ricks-circle",
+      "slug": "11565-east-ricks-circle",
+      "title": "11565 East Ricks Circle",
+      "address": "11565 East Ricks Circle, Dallas, TX 75230",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 7895000,
+      "priceFormatted": "$7,895,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 8,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/11565-east-ricks-circle-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/11565-east-ricks-circle-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
+        "5 Bedrooms · 8 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/11565-E-Ricks-Cir-Dallas-TX-75230/2057370926468041201_lid/",
+      "scrapedAt": "2026-09-22T07:40:05.699Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4515-harrys-lane",
+      "slug": "4515-harrys-lane",
+      "title": "4515 Harrys Lane",
+      "address": "4515 Harrys Lane, Dallas, TX 75229",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 6995000,
+      "priceFormatted": "$6,995,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 4,
+      "bathrooms": 6,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/4515-harrys-lane-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4515-harrys-lane-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
+        "4 Bedrooms · 6 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/4515-Harrys-Ln-Dallas-TX-75229/1297122158988327809_lid/",
+      "scrapedAt": "2026-09-22T07:40:06.182Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4408-lorraine-avenue",
+      "slug": "4408-lorraine-avenue",
+      "title": "4408 Lorraine Avenue",
+      "address": "4408 Lorraine Avenue, Highland Park, TX 75205",
+      "neighborhood": "Highland Park, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 6495000,
+      "priceFormatted": "$6,495,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 8,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/4408-lorraine-avenue-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4408-lorraine-avenue-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Highland Park."
+        }
+      ],
+      "tagline": "Premier Highland Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Highland Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Highland Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Highland Park location with premier accessibility",
+        "5 Bedrooms · 8 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/4408-Lorraine-Ave-Highland-Park-TX-75205/687770788153338881_lid/",
+      "scrapedAt": "2026-09-22T07:40:06.737Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4505-south-versailles-avenue",
+      "slug": "4505-south-versailles-avenue",
+      "title": "4505 South Versailles Avenue",
+      "address": "4505 South Versailles Avenue, Highland Park, TX 75205",
+      "neighborhood": "Highland Park, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 6195000,
+      "priceFormatted": "$6,195,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 7,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/4505-south-versailles-avenue-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4505-south-versailles-avenue-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Highland Park."
+        }
+      ],
+      "tagline": "Premier Highland Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Highland Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Highland Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Highland Park location with premier accessibility",
+        "5 Bedrooms · 7 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/4505-S-Versailles-Ave-Highland-Park-TX-75205/2113953793159262121_lid/",
+      "scrapedAt": "2026-09-22T07:40:07.158Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4412-lorraine-avehighland-park",
+      "slug": "4412-lorraine-avehighland-park",
+      "title": "4412 Lorraine AveHighland Park",
+      "address": "4412 Lorraine AveHighland Park, Dallas, TX",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 5995000,
+      "priceFormatted": "$5,995,000",
       "pricePerSqft": 0,
       "status": "Sold Portfolio",
       "openHouse": null,
@@ -758,20 +1570,78 @@
       "garage": "2-Car Garage",
       "yearBuilt": 2018,
       "typology": "Single Family Residence",
-      "heroImage": "/images/compass/9107-vinewood-drive-cover.webp",
+      "heroImage": "/images/compass/4412-lorraine-avehighland-park-cover.webp",
       "gallery": [
         {
-          "url": "/images/compass/9107-vinewood-drive-cover.webp",
+          "url": "/images/compass/4412-lorraine-avehighland-park-cover.webp",
           "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
+          "caption": "Represented by Amy Detwiler in Dallas."
         }
       ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
       "forensics": [
         {
           "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
+        "5 Bedrooms · 6 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": true,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/agents/amy-detwiler/",
+      "scrapedAt": "2026-09-22T07:40:07.638Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4524-park-lane",
+      "slug": "4524-park-lane",
+      "title": "4524 Park Lane",
+      "address": "4524 Park Lane, Dallas, TX 75220",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 30000,
+      "priceFormatted": "$30,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 6,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/4524-park-lane-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4524-park-lane-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
         },
         {
           "label": "Market Submarket",
@@ -793,43 +1663,101 @@
       ],
       "featured": false,
       "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/9107-Vinewood-Dr-Dallas-TX-75228/1401106581493412065_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.475Z",
+      "originalCompassUrl": "https://www.compass.com/homedetails/4524-Park-Ln-Dallas-TX-75220/1140678376367838049_lid/",
+      "scrapedAt": "2026-09-22T07:40:08.202Z",
       "approxSizeMB": 0.12
     },
     {
-      "id": "compass-5837-llano-avenue",
-      "slug": "5837-llano-avenue",
-      "title": "5837 Llano Avenue",
-      "address": "5837 Llano Avenue, Dallas, TX 75206",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "dallas",
-      "price": 1490000,
-      "priceFormatted": "$1,490,000",
+      "id": "compass-3220-colgate-avenue",
+      "slug": "3220-colgate-avenue",
+      "title": "3220 Colgate Avenue",
+      "address": "3220 Colgate Avenue, University Park, TX 75225",
+      "neighborhood": "University Park, Dallas",
+      "enclaveCategory": "park-cities",
+      "price": 28000,
+      "priceFormatted": "$28,000",
       "pricePerSqft": 0,
       "status": "Sold Portfolio",
       "openHouse": null,
       "bedrooms": 5,
-      "bathrooms": 4,
+      "bathrooms": 7,
       "sqft": 0,
       "lotSize": "0.20 Acres",
       "garage": "2-Car Garage",
       "yearBuilt": 2018,
       "typology": "Single Family Residence",
-      "heroImage": "/images/compass/5837-llano-avenue-cover.webp",
+      "heroImage": "/images/compass/3220-colgate-avenue-cover.webp",
       "gallery": [
         {
-          "url": "/images/compass/5837-llano-avenue-cover.webp",
+          "url": "/images/compass/3220-colgate-avenue-cover.webp",
           "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
+          "caption": "Represented by Amy Detwiler in University Park."
         }
       ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "tagline": "Premier University Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in University Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
       "forensics": [
         {
           "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "University Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime University Park location with premier accessibility",
+        "5 Bedrooms · 7 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": false,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/3220-Colgate-Ave-University-Park-TX-75225/2120003178018004625_lid/",
+      "scrapedAt": "2026-09-22T07:40:08.758Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-6442-lakehurst-avenue",
+      "slug": "6442-lakehurst-avenue",
+      "title": "6442 Lakehurst Avenue",
+      "address": "6442 Lakehurst Avenue, Dallas, TX 75230",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 27500,
+      "priceFormatted": "$27,500",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 8,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/6442-lakehurst-avenue-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/6442-lakehurst-avenue-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
         },
         {
           "label": "Market Submarket",
@@ -838,6 +1766,470 @@
         {
           "label": "Transaction Type",
           "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
+        "5 Bedrooms · 8 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": false,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/6442-Lakehurst-Ave-Dallas-TX-75230/1332073706272213417_lid/",
+      "scrapedAt": "2026-09-22T07:40:09.331Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-3537-milton-avenue",
+      "slug": "3537-milton-avenue",
+      "title": "3537 Milton Avenue",
+      "address": "3537 Milton Avenue, University Park, TX 75205",
+      "neighborhood": "University Park, Dallas",
+      "enclaveCategory": "park-cities",
+      "price": 27000,
+      "priceFormatted": "$27,000",
+      "pricePerSqft": 0,
+      "status": "Sold Portfolio",
+      "openHouse": null,
+      "bedrooms": 4,
+      "bathrooms": 7,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Single Family Residence",
+      "heroImage": "/images/compass/3537-milton-avenue-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/3537-milton-avenue-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in University Park."
+        }
+      ],
+      "tagline": "Premier University Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in University Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "University Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Residential Acquisition / Sale"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime University Park location with premier accessibility",
+        "4 Bedrooms · 7 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": false,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/3537-Milton-Ave-University-Park-TX-75205/1713430152065599969_lid/",
+      "scrapedAt": "2026-09-22T07:40:09.838Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-8600-douglas-avenue",
+      "slug": "8600-douglas-avenue",
+      "title": "8600 Douglas Avenue",
+      "address": "8600 Douglas Avenue, Dallas, TX 75225",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 17500,
+      "priceFormatted": "$17,500",
+      "pricePerSqft": 0,
+      "status": "Leased",
+      "openHouse": null,
+      "bedrooms": 4,
+      "bathrooms": 6,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Luxury Lease",
+      "heroImage": "/images/compass/8600-douglas-avenue-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/8600-douglas-avenue-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Executive Lease"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
+        "4 Bedrooms · 6 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": false,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/8600-Douglas-Ave-Dallas-TX-75225/1339431272936092697_lid/",
+      "scrapedAt": "2026-09-22T07:40:10.342Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4308-bryn-mawr-drive",
+      "slug": "4308-bryn-mawr-drive",
+      "title": "4308 Bryn Mawr Drive",
+      "address": "4308 Bryn Mawr Drive, University Park, TX 75225",
+      "neighborhood": "University Park, Dallas",
+      "enclaveCategory": "park-cities",
+      "price": 13500,
+      "priceFormatted": "$13,500",
+      "pricePerSqft": 0,
+      "status": "Leased",
+      "openHouse": null,
+      "bedrooms": 4,
+      "bathrooms": 5,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Luxury Lease",
+      "heroImage": "/images/compass/4308-bryn-mawr-drive-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4308-bryn-mawr-drive-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in University Park."
+        }
+      ],
+      "tagline": "Premier University Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in University Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "University Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Executive Lease"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime University Park location with premier accessibility",
+        "4 Bedrooms · 5 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": false,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/4308-Bryn-Mawr-Dr-University-Park-TX-75225/1096325995654255401_lid/",
+      "scrapedAt": "2026-09-22T07:40:10.790Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4300-grassmere-lane",
+      "slug": "4300-grassmere-lane",
+      "title": "4300 Grassmere Lane",
+      "address": "4300 Grassmere Lane, University Park, TX 75205",
+      "neighborhood": "University Park, Dallas",
+      "enclaveCategory": "park-cities",
+      "price": 12000,
+      "priceFormatted": "$12,000",
+      "pricePerSqft": 0,
+      "status": "Leased",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 6,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Luxury Lease",
+      "heroImage": "/images/compass/4300-grassmere-lane-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4300-grassmere-lane-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in University Park."
+        }
+      ],
+      "tagline": "Premier University Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in University Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "University Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Executive Lease"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime University Park location with premier accessibility",
+        "5 Bedrooms · 6 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": false,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/4300-Grassmere-Ln-University-Park-TX-75205/1767068910260606041_lid/",
+      "scrapedAt": "2026-09-22T07:40:11.319Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-7414-caruth-boulevard",
+      "slug": "7414-caruth-boulevard",
+      "title": "7414 Caruth Boulevard",
+      "address": "7414 Caruth Boulevard, Dallas, TX 75225",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 11000,
+      "priceFormatted": "$11,000",
+      "pricePerSqft": 0,
+      "status": "Leased",
+      "openHouse": null,
+      "bedrooms": 4,
+      "bathrooms": 4,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Luxury Lease",
+      "heroImage": "/images/compass/7414-caruth-boulevard-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/7414-caruth-boulevard-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Executive Lease"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Dallas location with premier accessibility",
+        "4 Bedrooms · 4 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": false,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/7414-Caruth-Blvd-Dallas-TX-75225/1882847252270127489_lid/",
+      "scrapedAt": "2026-09-22T07:40:11.761Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4434-glenwick-lane",
+      "slug": "4434-glenwick-lane",
+      "title": "4434 Glenwick Lane",
+      "address": "4434 Glenwick Lane, University Park, TX 75205",
+      "neighborhood": "University Park, Dallas",
+      "enclaveCategory": "park-cities",
+      "price": 10500,
+      "priceFormatted": "$10,500",
+      "pricePerSqft": 0,
+      "status": "Leased",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 5,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Luxury Lease",
+      "heroImage": "/images/compass/4434-glenwick-lane-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4434-glenwick-lane-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in University Park."
+        }
+      ],
+      "tagline": "Premier University Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in University Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "University Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Executive Lease"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime University Park location with premier accessibility",
+        "5 Bedrooms · 5 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": false,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/4434-Glenwick-Ln-University-Park-TX-75205/2088053997146238233_lid/",
+      "scrapedAt": "2026-09-22T07:40:12.269Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4403-glenwick-lane",
+      "slug": "4403-glenwick-lane",
+      "title": "4403 Glenwick Lane",
+      "address": "4403 Glenwick Lane, University Park, TX 75205",
+      "neighborhood": "University Park, Dallas",
+      "enclaveCategory": "park-cities",
+      "price": 9500,
+      "priceFormatted": "$9,500",
+      "pricePerSqft": 0,
+      "status": "Leased",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 5,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Luxury Lease",
+      "heroImage": "/images/compass/4403-glenwick-lane-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4403-glenwick-lane-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in University Park."
+        }
+      ],
+      "tagline": "Premier University Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in University Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "University Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Executive Lease"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime University Park location with premier accessibility",
+        "5 Bedrooms · 5 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": false,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/4403-Glenwick-Ln-University-Park-TX-75205/2034378865169260449_lid/",
+      "scrapedAt": "2026-09-22T07:40:12.693Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-12424-ruthdale-drive",
+      "slug": "12424-ruthdale-drive",
+      "title": "12424 Ruthdale Drive",
+      "address": "12424 Ruthdale Drive, Dallas, TX 75244",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 8500,
+      "priceFormatted": "$8,500",
+      "pricePerSqft": 0,
+      "status": "Leased",
+      "openHouse": null,
+      "bedrooms": 5,
+      "bathrooms": 4,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Luxury Lease",
+      "heroImage": "/images/compass/12424-ruthdale-drive-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/12424-ruthdale-drive-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Dallas Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Executive Lease"
         },
         {
           "label": "Listing Source",
@@ -851,309 +2243,19 @@
       ],
       "featured": false,
       "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/5837-Llano-Ave-Dallas-TX-75206/1878411302150854897_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.475Z",
+      "originalCompassUrl": "https://www.compass.com/homedetails/12424-Ruthdale-Dr-Dallas-TX-75244/1577633889088827777_lid/",
+      "scrapedAt": "2026-09-22T07:40:13.239Z",
       "approxSizeMB": 0.12
     },
     {
-      "id": "compass-7614-kaywood-drive",
-      "slug": "7614-kaywood-drive",
-      "title": "7614 Kaywood Drive",
-      "address": "7614 Kaywood Drive, Dallas, TX 75209",
-      "neighborhood": "Dallas, Dallas",
+      "id": "compass-3525-normandy-avenue",
+      "slug": "3525-normandy-avenue",
+      "title": "3525 Normandy Avenue",
+      "address": "3525 Normandy Avenue, Unit 32, Highland Park, TX 75205",
+      "neighborhood": "Unit 32, Dallas",
       "enclaveCategory": "dallas",
-      "price": 1450000,
-      "priceFormatted": "$1,450,000",
-      "pricePerSqft": 0,
-      "status": "Sold Portfolio",
-      "openHouse": null,
-      "bedrooms": 4,
-      "bathrooms": 4,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Single Family Residence",
-      "heroImage": "/images/compass/7614-kaywood-drive-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/7614-kaywood-drive-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Residential Acquisition / Sale"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "4 Bedrooms · 4 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/7614-Kaywood-Dr-Dallas-TX-75209/1065355388218685681_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.476Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-4818-hanover-avenue",
-      "slug": "4818-hanover-avenue",
-      "title": "4818 Hanover Avenue",
-      "address": "4818 Hanover Avenue, Dallas, TX 75209",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "dallas",
-      "price": 1350000,
-      "priceFormatted": "$1,350,000",
-      "pricePerSqft": 0,
-      "status": "Sold Portfolio",
-      "openHouse": null,
-      "bedrooms": 3,
-      "bathrooms": 2,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Single Family Residence",
-      "heroImage": "/images/compass/4818-hanover-avenue-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/4818-hanover-avenue-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Residential Acquisition / Sale"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "3 Bedrooms · 2 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/4818-Hanover-Ave-Dallas-TX-75209/1610833461487955401_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.477Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-9941-coppedge-ln",
-      "slug": "9941-coppedge-ln",
-      "title": "9941 Coppedge Ln",
-      "address": "9941 Coppedge Ln, Dallas, TX",
-      "neighborhood": "Midway Hollow, Dallas",
-      "enclaveCategory": "midway-hollow",
-      "price": 1350000,
-      "priceFormatted": "$1,350,000",
-      "pricePerSqft": 0,
-      "status": "Sold Portfolio",
-      "openHouse": null,
-      "bedrooms": 6,
-      "bathrooms": 4.5,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Single Family Residence",
-      "heroImage": "/images/compass/9941-coppedge-ln-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/9941-coppedge-ln-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Midway Hollow."
-        }
-      ],
-      "tagline": "Premier Midway Hollow Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Midway Hollow. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Midway Hollow Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Residential Acquisition / Sale"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Midway Hollow location with premier accessibility",
-        "6 Bedrooms · 4.5 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/agents/kyle-baugh-dallas/",
-      "scrapedAt": "2026-09-21T12:37:11.477Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-5514-richmond-avenue",
-      "slug": "5514-richmond-avenue",
-      "title": "5514 Richmond Avenue",
-      "address": "5514 Richmond Avenue, Dallas, TX 75206",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "lakewood",
-      "price": 1350000,
-      "priceFormatted": "$1,350,000",
-      "pricePerSqft": 0,
-      "status": "Sold Portfolio",
-      "openHouse": null,
-      "bedrooms": 4,
-      "bathrooms": 3,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Single Family Residence",
-      "heroImage": "/images/compass/5514-richmond-avenue-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/5514-richmond-avenue-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Residential Acquisition / Sale"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "4 Bedrooms · 3 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/5514-Richmond-Ave-Dallas-TX-75206/1029642881634390113_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.478Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-6122-mccommas-boulevard",
-      "slug": "6122-mccommas-boulevard",
-      "title": "6122 McCommas Boulevard",
-      "address": "6122 McCommas Boulevard, Dallas, TX 75214",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "lakewood",
-      "price": 1299000,
-      "priceFormatted": "$1,299,000",
-      "pricePerSqft": 0,
-      "status": "Sold Portfolio",
-      "openHouse": null,
-      "bedrooms": 4,
-      "bathrooms": 4,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Single Family Residence",
-      "heroImage": "/images/compass/6122-mccommas-boulevard-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/6122-mccommas-boulevard-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Residential Acquisition / Sale"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "4 Bedrooms · 4 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/agents/kyle-baugh-dallas/",
-      "scrapedAt": "2026-09-21T12:37:11.479Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-5722-llano-avenue",
-      "slug": "5722-llano-avenue",
-      "title": "5722 Llano Avenue",
-      "address": "5722 Llano Avenue, Dallas, TX 75206",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "dallas",
-      "price": 5900,
-      "priceFormatted": "$5,900",
+      "price": 7600,
+      "priceFormatted": "$7,600",
       "pricePerSqft": 0,
       "status": "Leased",
       "openHouse": null,
@@ -1164,20 +2266,310 @@
       "garage": "2-Car Garage",
       "yearBuilt": 2018,
       "typology": "Luxury Lease",
-      "heroImage": "/images/compass/5722-llano-avenue-cover.webp",
+      "heroImage": "/images/compass/3525-normandy-avenue-cover.webp",
       "gallery": [
         {
-          "url": "/images/compass/5722-llano-avenue-cover.webp",
+          "url": "/images/compass/3525-normandy-avenue-cover.webp",
           "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
+          "caption": "Represented by Amy Detwiler in Unit 32."
         }
       ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "tagline": "Premier Unit 32 Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Unit 32. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
       "forensics": [
         {
           "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Unit 32 Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Executive Lease"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Unit 32 location with premier accessibility",
+        "3 Bedrooms · 3 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": false,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/3525-Normandy-Ave-Unit-32-Highland-Park-TX-75205/1926224959724486769_lid/",
+      "scrapedAt": "2026-09-22T07:40:13.641Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4624-byron-circle",
+      "slug": "4624-byron-circle",
+      "title": "4624 Byron Circle",
+      "address": "4624 Byron Circle, Irving, TX 75038",
+      "neighborhood": "Irving, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 7500,
+      "priceFormatted": "$7,500",
+      "pricePerSqft": 0,
+      "status": "Leased",
+      "openHouse": null,
+      "bedrooms": 4,
+      "bathrooms": 6,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Luxury Lease",
+      "heroImage": "/images/compass/4624-byron-circle-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4624-byron-circle-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Irving."
+        }
+      ],
+      "tagline": "Premier Irving Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Irving. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Irving Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Executive Lease"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Irving location with premier accessibility",
+        "4 Bedrooms · 6 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": false,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/4624-Byron-Cir-Irving-TX-75038/2042991839383814033_lid/",
+      "scrapedAt": "2026-09-22T07:40:14.170Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-3638-granada-avenue",
+      "slug": "3638-granada-avenue",
+      "title": "3638 Granada Avenue",
+      "address": "3638 Granada Avenue, University Park, TX 75205",
+      "neighborhood": "University Park, Dallas",
+      "enclaveCategory": "park-cities",
+      "price": 7000,
+      "priceFormatted": "$7,000",
+      "pricePerSqft": 0,
+      "status": "Leased",
+      "openHouse": null,
+      "bedrooms": 4,
+      "bathrooms": 4,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Luxury Lease",
+      "heroImage": "/images/compass/3638-granada-avenue-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/3638-granada-avenue-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in University Park."
+        }
+      ],
+      "tagline": "Premier University Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in University Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "University Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Executive Lease"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime University Park location with premier accessibility",
+        "4 Bedrooms · 4 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": false,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/3638-Granada-Ave-University-Park-TX-75205/1178551315131724049_lid/",
+      "scrapedAt": "2026-09-22T07:40:14.665Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4308-westway-avenue",
+      "slug": "4308-westway-avenue",
+      "title": "4308 Westway Avenue",
+      "address": "4308 Westway Avenue, Highland Park, TX 75205",
+      "neighborhood": "Highland Park, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 7000,
+      "priceFormatted": "$7,000",
+      "pricePerSqft": 0,
+      "status": "Leased",
+      "openHouse": null,
+      "bedrooms": 4,
+      "bathrooms": 4,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Luxury Lease",
+      "heroImage": "/images/compass/4308-westway-avenue-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4308-westway-avenue-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Highland Park."
+        }
+      ],
+      "tagline": "Premier Highland Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Highland Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Highland Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Executive Lease"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Highland Park location with premier accessibility",
+        "4 Bedrooms · 4 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": false,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/4308-Westway-Ave-Highland-Park-TX-75205/1329247990224910649_lid/",
+      "scrapedAt": "2026-09-22T07:40:15.218Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-4528-arcady-avenue",
+      "slug": "4528-arcady-avenue",
+      "title": "4528 Arcady Avenue",
+      "address": "4528 Arcady Avenue, Highland Park, TX 75205",
+      "neighborhood": "Highland Park, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 6550,
+      "priceFormatted": "$6,550",
+      "pricePerSqft": 0,
+      "status": "Leased",
+      "openHouse": null,
+      "bedrooms": 2,
+      "bathrooms": 3,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Luxury Lease",
+      "heroImage": "/images/compass/4528-arcady-avenue-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/4528-arcady-avenue-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Highland Park."
+        }
+      ],
+      "tagline": "Premier Highland Park Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Highland Park. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
+        },
+        {
+          "label": "Market Submarket",
+          "value": "Highland Park Luxury Corridor"
+        },
+        {
+          "label": "Transaction Type",
+          "value": "Executive Lease"
+        },
+        {
+          "label": "Listing Source",
+          "value": "Compass Verified Profile"
+        }
+      ],
+      "highlights": [
+        "Prime Highland Park location with premier accessibility",
+        "2 Bedrooms · 3 Bathrooms luxury configuration",
+        "Successfully represented and closed"
+      ],
+      "featured": false,
+      "isCompassListing": true,
+      "originalCompassUrl": "https://www.compass.com/homedetails/4528-Arcady-Ave-Highland-Park-TX-75205/1282645397787573153_lid/",
+      "scrapedAt": "2026-09-22T07:40:15.713Z",
+      "approxSizeMB": 0.12
+    },
+    {
+      "id": "compass-6521-del-norte-lane",
+      "slug": "6521-del-norte-lane",
+      "title": "6521 Del Norte Lane",
+      "address": "6521 Del Norte Lane, Dallas, TX 75225",
+      "neighborhood": "Dallas, Dallas",
+      "enclaveCategory": "dallas",
+      "price": 5995,
+      "priceFormatted": "$5,995",
+      "pricePerSqft": 0,
+      "status": "Leased",
+      "openHouse": null,
+      "bedrooms": 3,
+      "bathrooms": 3,
+      "sqft": 0,
+      "lotSize": "0.20 Acres",
+      "garage": "2-Car Garage",
+      "yearBuilt": 2018,
+      "typology": "Luxury Lease",
+      "heroImage": "/images/compass/6521-del-norte-lane-cover.webp",
+      "gallery": [
+        {
+          "url": "/images/compass/6521-del-norte-lane-cover.webp",
+          "title": "Architectural Exterior",
+          "caption": "Represented by Amy Detwiler in Dallas."
+        }
+      ],
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "forensics": [
+        {
+          "label": "Representation",
+          "value": "Amy Detwiler Real Estate Advisory"
         },
         {
           "label": "Market Submarket",
@@ -1199,43 +2591,43 @@
       ],
       "featured": false,
       "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/5722-Llano-Ave-Dallas-TX-75206/1300107801605984217_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.479Z",
+      "originalCompassUrl": "https://www.compass.com/homedetails/6521-Del-Norte-Ln-Dallas-TX-75225/1368330849098775457_lid/",
+      "scrapedAt": "2026-09-22T07:40:16.231Z",
       "approxSizeMB": 0.12
     },
     {
-      "id": "compass-2130-roanoke-avenue",
-      "slug": "2130-roanoke-avenue",
-      "title": "2130 Roanoke Avenue",
-      "address": "2130 Roanoke Avenue, Dallas, TX 75235",
+      "id": "compass-7724-verbena-court",
+      "slug": "7724-verbena-court",
+      "title": "7724 Verbena Court",
+      "address": "7724 Verbena Court, Dallas, TX 75230",
       "neighborhood": "Dallas, Dallas",
       "enclaveCategory": "dallas",
-      "price": 4500,
-      "priceFormatted": "$4,500",
+      "price": 5500,
+      "priceFormatted": "$5,500",
       "pricePerSqft": 0,
       "status": "Leased",
       "openHouse": null,
-      "bedrooms": 4,
+      "bedrooms": 3,
       "bathrooms": 3,
       "sqft": 0,
       "lotSize": "0.20 Acres",
       "garage": "2-Car Garage",
       "yearBuilt": 2018,
       "typology": "Luxury Lease",
-      "heroImage": "/images/compass/2130-roanoke-avenue-cover.webp",
+      "heroImage": "/images/compass/7724-verbena-court-cover.webp",
       "gallery": [
         {
-          "url": "/images/compass/2130-roanoke-avenue-cover.webp",
+          "url": "/images/compass/7724-verbena-court-cover.webp",
           "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
+          "caption": "Represented by Amy Detwiler in Dallas."
         }
       ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
+      "tagline": "Premier Dallas Transaction Represented by Amy Detwiler",
+      "description": "Represented by Amy Detwiler in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
       "forensics": [
         {
           "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
+          "value": "Amy Detwiler Real Estate Advisory"
         },
         {
           "label": "Market Submarket",
@@ -1252,593 +2644,13 @@
       ],
       "highlights": [
         "Prime Dallas location with premier accessibility",
-        "4 Bedrooms · 3 Bathrooms luxury configuration",
+        "3 Bedrooms · 3 Bathrooms luxury configuration",
         "Successfully represented and closed"
       ],
       "featured": false,
       "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/2130-Roanoke-Ave-Dallas-TX-75235/1476932293502050001_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.480Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-2007-euclid-avenue",
-      "slug": "2007-euclid-avenue",
-      "title": "2007 Euclid Avenue",
-      "address": "2007 Euclid Avenue, Dallas, TX 75206",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "dallas",
-      "price": 4300,
-      "priceFormatted": "$4,300",
-      "pricePerSqft": 0,
-      "status": "Leased",
-      "openHouse": null,
-      "bedrooms": 2,
-      "bathrooms": 2,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Luxury Lease",
-      "heroImage": "/images/compass/2007-euclid-avenue-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/2007-euclid-avenue-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Executive Lease"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "2 Bedrooms · 2 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/2007-Euclid-Ave-Dallas-TX-75206/1384913072086113201_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.481Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-2103-madera-street",
-      "slug": "2103-madera-street",
-      "title": "2103 Madera Street",
-      "address": "2103 Madera Street, Dallas, TX 75206",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "dallas",
-      "price": 4000,
-      "priceFormatted": "$4,000",
-      "pricePerSqft": 0,
-      "status": "Leased",
-      "openHouse": null,
-      "bedrooms": 2,
-      "bathrooms": 2,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Luxury Lease",
-      "heroImage": "/images/compass/2103-madera-street-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/2103-madera-street-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Executive Lease"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "2 Bedrooms · 2 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/2103-Madera-St-Dallas-TX-75206/1370682869931435017_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.482Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-2451-north-garrett-avenue",
-      "slug": "2451-north-garrett-avenue",
-      "title": "2451 North Garrett Avenue",
-      "address": "2451 North Garrett Avenue, Dallas, TX 75206",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "dallas",
-      "price": 4000,
-      "priceFormatted": "$4,000",
-      "pricePerSqft": 0,
-      "status": "Leased",
-      "openHouse": null,
-      "bedrooms": 2,
-      "bathrooms": 3,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Luxury Lease",
-      "heroImage": "/images/compass/2451-north-garrett-avenue-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/2451-north-garrett-avenue-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Executive Lease"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "2 Bedrooms · 3 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/2451-N-Garrett-Ave-Dallas-TX-75206/840626495762731017_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.482Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-6148-winton-street",
-      "slug": "6148-winton-street",
-      "title": "6148 Winton Street",
-      "address": "6148 Winton Street, Dallas, TX 75214",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "lakewood",
-      "price": 3600,
-      "priceFormatted": "$3,600",
-      "pricePerSqft": 0,
-      "status": "Leased",
-      "openHouse": null,
-      "bedrooms": 2,
-      "bathrooms": 2,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Luxury Lease",
-      "heroImage": "/images/compass/6148-winton-street-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/6148-winton-street-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Executive Lease"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "2 Bedrooms · 2 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/6148-Winton-St-Dallas-TX-75214/1694160489556151209_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.483Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-5508-richmond-avenue",
-      "slug": "5508-richmond-avenue",
-      "title": "5508 Richmond Avenue",
-      "address": "5508 Richmond Avenue, Dallas, TX 75206",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "lakewood",
-      "price": 3400,
-      "priceFormatted": "$3,400",
-      "pricePerSqft": 0,
-      "status": "Leased",
-      "openHouse": null,
-      "bedrooms": 3,
-      "bathrooms": 2,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Luxury Lease",
-      "heroImage": "/images/compass/5508-richmond-avenue-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/5508-richmond-avenue-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Executive Lease"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "3 Bedrooms · 2 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/5508-Richmond-Ave-Dallas-TX-75206/619617476570925945_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.483Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-5456-richmond-avenue",
-      "slug": "5456-richmond-avenue",
-      "title": "5456 Richmond Avenue",
-      "address": "5456 Richmond Avenue, Dallas, TX 75206",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "lakewood",
-      "price": 3200,
-      "priceFormatted": "$3,200",
-      "pricePerSqft": 0,
-      "status": "Leased",
-      "openHouse": null,
-      "bedrooms": 2,
-      "bathrooms": 1,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Luxury Lease",
-      "heroImage": "/images/compass/5456-richmond-avenue-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/5456-richmond-avenue-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Executive Lease"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "2 Bedrooms · 1 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/5456-Richmond-Ave-Dallas-TX-75206/1223287091730982161_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.484Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-2246-ash-grove-way",
-      "slug": "2246-ash-grove-way",
-      "title": "2246 Ash Grove Way",
-      "address": "2246 Ash Grove Way, Dallas, TX 75228",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "dallas",
-      "price": 2600,
-      "priceFormatted": "$2,600",
-      "pricePerSqft": 0,
-      "status": "Leased",
-      "openHouse": null,
-      "bedrooms": 4,
-      "bathrooms": 2,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Luxury Lease",
-      "heroImage": "/images/compass/2246-ash-grove-way-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/2246-ash-grove-way-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Executive Lease"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "4 Bedrooms · 2 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/2246-Ash-Grove-Way-Dallas-TX-75228/666844849302319985_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.485Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-8621-grumman-drive",
-      "slug": "8621-grumman-drive",
-      "title": "8621 Grumman Drive",
-      "address": "8621 Grumman Drive, Dallas, TX 75228",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "dallas",
-      "price": 2500,
-      "priceFormatted": "$2,500",
-      "pricePerSqft": 0,
-      "status": "Leased",
-      "openHouse": null,
-      "bedrooms": 3,
-      "bathrooms": 2,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Luxury Lease",
-      "heroImage": "/images/compass/8621-grumman-drive-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/8621-grumman-drive-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Executive Lease"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "3 Bedrooms · 2 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/8621-Grumman-Dr-Dallas-TX-75228/1217818514236483753_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.486Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-5936-la-vista-drive",
-      "slug": "5936-la-vista-drive",
-      "title": "5936 La Vista Drive",
-      "address": "5936 La Vista Drive, Dallas, TX 75206",
-      "neighborhood": "Dallas, Dallas",
-      "enclaveCategory": "dallas",
-      "price": 2300,
-      "priceFormatted": "$2,300",
-      "pricePerSqft": 0,
-      "status": "Leased",
-      "openHouse": null,
-      "bedrooms": 2,
-      "bathrooms": 1,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Luxury Lease",
-      "heroImage": "/images/compass/5936-la-vista-drive-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/5936-la-vista-drive-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Dallas."
-        }
-      ],
-      "tagline": "Premier Dallas Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Dallas. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Dallas Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Executive Lease"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Dallas location with premier accessibility",
-        "2 Bedrooms · 1 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/5936-La-Vista-Dr-Dallas-TX-75206/1457594597176115385_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.487Z",
-      "approxSizeMB": 0.12
-    },
-    {
-      "id": "compass-5221-shoregate-drive",
-      "slug": "5221-shoregate-drive",
-      "title": "5221 Shoregate Drive",
-      "address": "5221 Shoregate Drive, Garland, TX 75043",
-      "neighborhood": "Garland, Dallas",
-      "enclaveCategory": "dallas",
-      "price": 2200,
-      "priceFormatted": "$2,200",
-      "pricePerSqft": 0,
-      "status": "Leased",
-      "openHouse": null,
-      "bedrooms": 4,
-      "bathrooms": 2,
-      "sqft": 0,
-      "lotSize": "0.20 Acres",
-      "garage": "2-Car Garage",
-      "yearBuilt": 2018,
-      "typology": "Luxury Lease",
-      "heroImage": "/images/compass/5221-shoregate-drive-cover.webp",
-      "gallery": [
-        {
-          "url": "/images/compass/5221-shoregate-drive-cover.webp",
-          "title": "Architectural Exterior",
-          "caption": "Represented by Kyle Baugh in Garland."
-        }
-      ],
-      "tagline": "Premier Garland Transaction Represented by Kyle Baugh",
-      "description": "Represented by Kyle Baugh in Garland. Closed transaction demonstrating premier luxury real estate advisory in the Dallas market.",
-      "forensics": [
-        {
-          "label": "Representation",
-          "value": "Kyle Baugh Real Estate Advisory"
-        },
-        {
-          "label": "Market Submarket",
-          "value": "Garland Luxury Corridor"
-        },
-        {
-          "label": "Transaction Type",
-          "value": "Executive Lease"
-        },
-        {
-          "label": "Listing Source",
-          "value": "Compass Verified Profile"
-        }
-      ],
-      "highlights": [
-        "Prime Garland location with premier accessibility",
-        "4 Bedrooms · 2 Bathrooms luxury configuration",
-        "Successfully represented and closed"
-      ],
-      "featured": false,
-      "isCompassListing": true,
-      "originalCompassUrl": "https://www.compass.com/homedetails/5221-Shoregate-Dr-Garland-TX-75043/798680050415523633_lid/",
-      "scrapedAt": "2026-09-21T12:37:11.488Z",
+      "originalCompassUrl": "https://www.compass.com/homedetails/7724-Verbena-Ct-Dallas-TX-75230/1824888810744110649_lid/",
+      "scrapedAt": "2026-09-22T07:40:16.643Z",
       "approxSizeMB": 0.12
     }
   ]

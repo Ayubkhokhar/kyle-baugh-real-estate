@@ -40,9 +40,15 @@ function loadSettings() {
     if (typeof localStorage !== "undefined") {
       const saved = localStorage.getItem(SETTINGS_KEY);
       if (saved) {
-        const parsed = { ...defaultSettings, ...JSON.parse(saved) };
-        applyFont(parsed.fontFamily || defaultSettings.fontFamily);
-        return parsed;
+        const parsed = JSON.parse(saved);
+        if (parsed.advisorName && parsed.advisorName !== defaultSettings.advisorName) {
+          localStorage.removeItem(SETTINGS_KEY);
+          applyFont(defaultSettings.fontFamily);
+          return { ...defaultSettings };
+        }
+        const merged = { ...defaultSettings, ...parsed };
+        applyFont(merged.fontFamily || defaultSettings.fontFamily);
+        return merged;
       }
     }
   } catch (e) {

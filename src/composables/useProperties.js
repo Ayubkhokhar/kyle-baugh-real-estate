@@ -30,20 +30,27 @@ function mergeProperties(existingList, incomingCompassList) {
 function loadProperties() {
   try {
     if (typeof localStorage !== "undefined") {
+      const savedAgent = localStorage.getItem("active_agent_name");
+      const currentAgent = compassProperties[0]?.agentName || "Amy Detwiler";
+      if (savedAgent && savedAgent !== currentAgent) {
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.setItem("active_agent_name", currentAgent);
+        return compassProperties.length > 0 ? [...compassProperties] : [...defaultProperties];
+      }
+      localStorage.setItem("active_agent_name", currentAgent);
+
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          // Merge in any newly scraped compass properties
-          return mergeProperties(parsed, compassProperties);
+          return mergeProperties(compassProperties, parsed);
         }
       }
     }
   } catch (err) {
     console.warn("Failed to load properties from localStorage:", err);
   }
-  // Initialize from default seed properties + compass properties
-  return mergeProperties(defaultProperties, compassProperties);
+  return compassProperties.length > 0 ? [...compassProperties] : mergeProperties(defaultProperties, compassProperties);
 }
 
 function loadCompassMeta() {
