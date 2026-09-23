@@ -41,5 +41,27 @@ export const amyProfile = {
       title: "Unmatched Multi-Million Dollar Track Record",
       desc: "Over $74M+ in currently represented luxury estates, including the iconic 4401 Arcady Avenue residence."
     }
+  ],
+  navAdvisoryLabel: "Market Advisory",
+  footerBio: "Dallas's premier luxury real estate advisory providing discreet, fiduciary-level representation for landmark Highland Park, University Park, and Preston Hollow estates.",
+  endorsementsTitle: "Highland Park & Preston Hollow Proven Discretion",
+  endorsementsSubheading: "Read first-hand accounts from Dallas executives, family offices, and legacy estate sellers represented by Amy Detwiler.",
+  endorsements: [
+    {
+      stars: 5,
+      quote: "Amy orchestrated the off-market sale of our multi-acre Preston Hollow estate with absolute privacy. No MLS circus, no disruptive public open houses—just qualified private buyers.",
+      story: "Her network across Dallas's top business leaders and private wealth advisors is unparalleled. She achieved full ask within three weeks while preserving complete family confidentiality.",
+      author: "William & Caroline T.",
+      location: "Preston Hollow Estate Owners",
+      role: "Verified Seller"
+    },
+    {
+      stars: 5,
+      quote: "Relocating from California to Park Cities seemed impossible in this tight market until we met Amy. She secured an architectural gem before it ever hit public inventory.",
+      story: "Amy's market intelligence across Highland Park and University Park is surgical. She knows every street, every architect, and every off-market opportunity before anyone else.",
+      author: "Dr. Marcus & Elena B.",
+      location: "Highland Park Residence",
+      role: "Verified Buyer"
+    }
   ]
 };

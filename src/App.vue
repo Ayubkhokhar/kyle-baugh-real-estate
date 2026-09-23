@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, watchEffect } from "vue";
 import HeaderNav from "./components/HeaderNav.vue";
 import FooterNav from "./components/FooterNav.vue";
 import MobileBottomNav from "./components/MobileBottomNav.vue";
@@ -17,6 +17,34 @@ function handleToast(message, type = "success") {
     toastRef.value.show(message, type);
   }
 }
+
+// Dynamically update document head title and meta tags based on active agent
+watchEffect(() => {
+  if (typeof document !== "undefined") {
+    const name = siteSettings.value.advisorName || "Dallas Luxury Real Estate";
+    const title = siteSettings.value.title || "Dallas Luxury Real Estate Advisory";
+    document.title = `${name} | ${title}`;
+
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute(
+        "content",
+        `${name} · ${siteSettings.value.heroSubheading || "Premier Dallas luxury residences, architectural estates, and market advisory."}`
+      );
+    }
+
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute("content", `${name} | ${title}`);
+
+    const ogSiteName = document.querySelector('meta[property="og:site_name"]');
+    if (ogSiteName) ogSiteName.setAttribute("content", `${name} Real Estate Advisory`);
+
+    const ogImage = document.querySelector('meta[property="og:image"]');
+    if (ogImage && siteSettings.value.headshot) {
+      ogImage.setAttribute("content", siteSettings.value.headshot);
+    }
+  }
+});
 </script>
 
 <template>

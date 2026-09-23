@@ -1,10 +1,27 @@
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { defaultProperties } from "../data/seedProperties";
-import { compassProperties, compassSyncMeta as initialCompassMeta } from "../data/compassProperties";
+import { compassProperties as kyleProperties, compassSyncMeta as kyleCompassMeta } from "../data/compassProperties";
+import { compassProperties as amyProperties } from "../data/agents/amyProperties";
 import { useAgentResolver } from "./useAgentResolver";
 
-const STORAGE_KEY = "kyle_baugh_properties_v1";
-const COMPASS_META_KEY = "kyle_baugh_compass_meta_v1";
+const amyCompassMeta = {
+  lastSynced: "2026-09-22T07:40:16.643Z",
+  totalProperties: 45,
+  activeCount: 1,
+  soldCount: 44,
+  leasedCount: 0,
+  imagesDownloaded: 45,
+  agentUrl: "https://www.compass.com/agents/amy-detwiler/",
+  syncedAgent: "Amy Detwiler",
+};
+
+function getAgentStorageKey(agentId) {
+  return "properties_" + (agentId || "kyle") + "_v2";
+}
+
+function getCompassMetaKey(agentId) {
+  return "compass_meta_" + (agentId || "kyle") + "_v2";
+}
 
 function mergeProperties(existingList, incomingCompassList) {
   const merged = [...existingList];
@@ -28,60 +45,84 @@ function mergeProperties(existingList, incomingCompassList) {
   return merged;
 }
 
+function getInitialListForAgent(agentId) {
+  if (agentId === "amy") {
+    return amyProperties;
+  }
+  return kyleProperties.length > 0 ? kyleProperties : mergeProperties(defaultProperties, kyleProperties);
+}
+
+function getInitialMetaForAgent(agentId) {
+  if (agentId === "amy") {
+    return amyCompassMeta;
+  }
+  return kyleCompassMeta;
+}
+
 function loadProperties() {
-  const { activeAgentData } = useAgentResolver();
-  const currentProperties = activeAgentData.value?.properties || compassProperties;
-  const currentAgentId = activeAgentData.value?.id || "kyle";
+  const { currentAgentId } = useAgentResolver();
+  const agentId = currentAgentId.value || "kyle";
+  const defaultList = getInitialListForAgent(agentId);
+  const storageKey = getAgentStorageKey(agentId);
 
   try {
     if (typeof localStorage !== "undefined") {
-      const savedAgent = localStorage.getItem("active_agent_id");
-      if (savedAgent && savedAgent !== currentAgentId) {
-        localStorage.removeItem(STORAGE_KEY);
-        localStorage.setItem("active_agent_id", currentAgentId);
-        return [...currentProperties];
-      }
-      localStorage.setItem("active_agent_id", currentAgentId);
-
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = localStorage.getItem(storageKey);
       if (raw) {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed) && parsed.length > 0) {
-          return mergeProperties(currentProperties, parsed);
+          return mergeProperties(defaultList, parsed);
         }
       }
     }
   } catch (err) {
     console.warn("Failed to load properties from localStorage:", err);
   }
-  return currentProperties.length > 0 ? [...currentProperties] : mergeProperties(defaultProperties, compassProperties);
+  return [...defaultList];
 }
 
 function loadCompassMeta() {
+  const { currentAgentId } = useAgentResolver();
+  const agentId = currentAgentId.value || "kyle";
+  const defaultMeta = getInitialMetaForAgent(agentId);
+  const metaKey = getCompassMetaKey(agentId);
+
   try {
     if (typeof localStorage !== "undefined") {
-      const raw = localStorage.getItem(COMPASS_META_KEY);
+      const raw = localStorage.getItem(metaKey);
       if (raw) return JSON.parse(raw);
     }
   } catch (e) {}
-  return { ...initialCompassMeta };
+  return { ...defaultMeta };
 }
 
 const properties = ref(loadProperties());
 const compassMeta = ref(loadCompassMeta());
 
+// Watch for agent changes and reactively swap property catalogs
+const { currentAgentId } = useAgentResolver();
+watch(currentAgentId, () => {
+  properties.value = loadProperties();
+  compassMeta.value = loadCompassMeta();
+});
+
 export function useProperties() {
   function persist() {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(properties.value));
-      localStorage.setItem(COMPASS_META_KEY, JSON.stringify(compassMeta.value));
+      const agentId = currentAgentId.value || "kyle";
+      localStorage.setItem(getAgentStorageKey(agentId), JSON.stringify(properties.value));
+      localStorage.setItem(getCompassMetaKey(agentId), JSON.stringify(compassMeta.value));
     } catch (e) {
       console.error("Failed to persist to localStorage (quota exceeded?):", e);
     }
   }
 
   function getPropertyById(id) {
-    return properties.value.find((p) => String(p.id) === String(id) || p.slug === String(id));
+    const match = properties.value.find((p) => String(p.id) === String(id) || p.slug === String(id));
+    if (match) return match;
+    // Cross-agent fallback so direct links to any listing never fail
+    const allKnown = [...amyProperties, ...kyleProperties, ...defaultProperties];
+    return allKnown.find((p) => String(p.id) === String(id) || p.slug === String(id)) || null;
   }
 
   function addProperty(newProp) {
@@ -152,7 +193,7 @@ export function useProperties() {
   }
 
   function toggleStatus(id, newStatus) {
-    const prop = getPropertyById(id);
+    const prop = properties.value.find((p) => String(p.id) === String(id));
     if (prop) {
       prop.status = newStatus;
       persist();
@@ -160,54 +201,39 @@ export function useProperties() {
   }
 
   async function syncWithCompass() {
-    try {
-      // Try to fetch latest public/data/compassProperties.json
-      const res = await fetch("/data/compassProperties.json?t=" + Date.now());
-      if (res.ok) {
-        const data = await res.json();
-        if (data.properties && Array.isArray(data.properties)) {
-          const beforeCount = properties.value.length;
-          properties.value = mergeProperties(properties.value, data.properties);
-          const newCount = properties.value.length - beforeCount;
-          compassMeta.value = {
-            lastSynced: new Date().toISOString(),
-            totalProperties: properties.value.filter(p => p.isCompassListing).length,
-            activeCount: properties.value.filter(p => p.isCompassListing && p.status === 'Active Exclusive').length,
-            soldCount: properties.value.filter(p => p.isCompassListing && p.status === 'Sold Portfolio').length,
-            leasedCount: properties.value.filter(p => p.isCompassListing && p.status === 'Leased').length,
-            imagesDownloaded: 39,
-            agentUrl: initialCompassMeta.agentUrl
-          };
-          persist();
-          return { success: true, newCount, total: properties.value.length };
-        }
-      }
-    } catch (err) {
-      console.warn("Could not fetch remote JSON, applying bundle data:", err);
-    }
-
-    // Fallback to static bundle
+    const agentId = currentAgentId.value || "kyle";
+    const defaultMeta = getInitialMetaForAgent(agentId);
     const beforeCount = properties.value.length;
-    properties.value = mergeProperties(properties.value, compassProperties);
+    const defaultList = getInitialListForAgent(agentId);
+
+    properties.value = mergeProperties(properties.value, defaultList);
     const newCount = properties.value.length - beforeCount;
-    compassMeta.value = { ...initialCompassMeta, lastSynced: new Date().toISOString() };
+    compassMeta.value = {
+      ...defaultMeta,
+      lastSynced: new Date().toISOString(),
+      totalProperties: properties.value.filter(p => p.isCompassListing).length,
+      activeCount: properties.value.filter(p => p.isCompassListing && p.status?.includes("Active")).length,
+      soldCount: properties.value.filter(p => p.isCompassListing && (p.status?.includes("Sold") || p.status?.includes("Leased"))).length,
+    };
     persist();
     return { success: true, newCount, total: properties.value.length };
   }
 
   function resetToDefaults() {
-    properties.value = mergeProperties(defaultProperties, compassProperties);
-    compassMeta.value = { ...initialCompassMeta };
+    const agentId = currentAgentId.value || "kyle";
+    properties.value = [...getInitialListForAgent(agentId)];
+    compassMeta.value = { ...getInitialMetaForAgent(agentId) };
     persist();
   }
 
   function exportJSON() {
+    const agentId = currentAgentId.value || "kyle";
     const dataStr = JSON.stringify(properties.value, null, 2);
     const blob = new Blob([dataStr], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `kyle-baugh-properties-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `${agentId}-properties-backup-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
   }

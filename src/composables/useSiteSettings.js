@@ -1,7 +1,9 @@
 import { ref, watch } from "vue";
 import { useAgentResolver } from "./useAgentResolver";
 
-const SETTINGS_KEY = "kyle_site_settings_v1";
+function getSettingsKey(agentId) {
+  return "agent_settings_" + (agentId || "kyle") + "_v1";
+}
 
 export function getAgentDefaultSettings() {
   const { activeAgentData } = useAgentResolver();
@@ -15,6 +17,7 @@ export function getAgentDefaultSettings() {
     email: profile.email || "kyle.baugh@compass.com",
     officeAddress: profile.officeAddress || "6220 Gaston Avenue, Suite 100, Dallas, TX 75214",
     headshot: profile.headshot || "/images/compass/kyle-headshot.webp",
+    profileUrl: profile.profileUrl || "https://www.compass.com/agents/kyle-baugh-dallas/",
     licenseInfo: "Licensed Texas Real Estate Broker",
     heroHeading: profile.heroHeading || "Modern Strategy. Construction Expertise. Unmatched Dallas Results.",
     heroSubheading: profile.heroSubheading || "Multimillion-dollar producer representing Dallas's most coveted architecturally significant enclaves—Park Cities, Preston Hollow, Lakewood, East Dallas, and Bluffview.",
@@ -33,6 +36,11 @@ export function getAgentDefaultSettings() {
     pedigreeBadgeText: profile.pedigreeBadgeText || "Decades of verified transaction volume and deep market intelligence.",
     pedigreeBio: profile.pedigreeBio || "Representing Dallas's premier luxury enclaves with unmatched discretion.",
     pedigreePoints: profile.pedigreePoints || [],
+    navAdvisoryLabel: profile.navAdvisoryLabel || (profile.advisorName === "Amy Detwiler" ? "Market Advisory" : "Construction Advisory"),
+    footerBio: profile.footerBio || "An independent, high-equity residential real estate advisory providing fiduciary-level representation throughout Dallas's premier enclaves.",
+    endorsementsTitle: profile.endorsementsTitle || "Uncompromising Advocacy",
+    endorsementsSubheading: profile.endorsementsSubheading || "Read first-hand accounts from high-net-worth Dallas families and clients.",
+    endorsements: profile.endorsements || [],
     adminPasscode: "admin123",
     fontFamily: "'Playfair Display', serif",
     cloudflareWorkerUrl: "",
@@ -47,14 +55,16 @@ function applyFont(font) {
 }
 
 function loadSettings() {
+  const { currentAgentId } = useAgentResolver();
   const defaultSettings = getAgentDefaultSettings();
+  const key = getSettingsKey(currentAgentId.value);
   try {
     if (typeof localStorage !== "undefined") {
-      const saved = localStorage.getItem(SETTINGS_KEY);
+      const saved = localStorage.getItem(key);
       if (saved) {
         const parsed = JSON.parse(saved);
         if (parsed.advisorName && parsed.advisorName !== defaultSettings.advisorName) {
-          localStorage.removeItem(SETTINGS_KEY);
+          localStorage.removeItem(key);
           applyFont(defaultSettings.fontFamily);
           return { ...defaultSettings };
         }
@@ -72,6 +82,12 @@ function loadSettings() {
 
 const siteSettings = ref(loadSettings());
 
+// Watch for agent changes and reactively update settings
+const { currentAgentId } = useAgentResolver();
+watch(currentAgentId, () => {
+  siteSettings.value = loadSettings();
+});
+
 export function useSiteSettings() {
   function saveSettings(updated) {
     siteSettings.value = { ...siteSettings.value, ...updated };
@@ -80,7 +96,8 @@ export function useSiteSettings() {
     }
     try {
       if (typeof localStorage !== "undefined") {
-        localStorage.setItem(SETTINGS_KEY, JSON.stringify(siteSettings.value));
+        const key = getSettingsKey(currentAgentId.value);
+        localStorage.setItem(key, JSON.stringify(siteSettings.value));
       }
     } catch (e) {
       console.warn("Failed to persist site settings:", e);
@@ -93,7 +110,8 @@ export function useSiteSettings() {
     applyFont(defaults.fontFamily);
     try {
       if (typeof localStorage !== "undefined") {
-        localStorage.removeItem(SETTINGS_KEY);
+        const key = getSettingsKey(currentAgentId.value);
+        localStorage.removeItem(key);
       }
     } catch (e) {}
   }

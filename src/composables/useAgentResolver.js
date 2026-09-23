@@ -107,11 +107,20 @@ export function useAgentResolver() {
     return qs ? `${origin}${targetPath}?${qs}` : `${origin}${targetPath}`;
   }
 
+  function setAgentWithoutReload(id) {
+    if (!availableAgents.some((a) => a.id === id)) return;
+    currentAgentId.value = id;
+    if (typeof window !== "undefined") {
+      localStorage.setItem(AGENT_STORAGE_KEY, id);
+    }
+  }
+
   return {
     availableAgents,
     currentAgentId,
     activeAgentData,
     setAgent,
+    setAgentWithoutReload,
     getAgentShareUrl,
   };
 }

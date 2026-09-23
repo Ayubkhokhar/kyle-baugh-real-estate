@@ -3,11 +3,13 @@ import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useSiteSettings } from "../composables/useSiteSettings";
 import { useInquiries } from "../composables/useInquiries";
+import { useAgentResolver } from "../composables/useAgentResolver";
 
 const router = useRouter();
 const route = useRoute();
 const { siteSettings } = useSiteSettings();
 const { unreadCount } = useInquiries();
+const { currentAgentId } = useAgentResolver();
 
 const isDrawerOpen = ref(false);
 
@@ -22,11 +24,15 @@ function closeDrawer() {
 function navigateTo(hashOrPath) {
   closeDrawer();
   if (hashOrPath.startsWith("#")) {
-    if (route.path !== "/") {
-      router.push("/" + hashOrPath);
-    } else {
+    const isHome = ["/", "/kyle", "/amy"].includes(route.path) || route.path.startsWith("/agent/");
+    if (isHome) {
       const el = document.querySelector(hashOrPath);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      const basePath = currentAgentId.value === "amy" ? "/amy" : "/";
+      router.push(basePath + hashOrPath);
     }
   } else {
     router.push(hashOrPath);
@@ -51,7 +57,7 @@ function navigateTo(hashOrPath) {
           <span class="material-symbols-outlined text-2xl">menu</span>
         </button>
 
-        <router-link to="/" class="flex flex-col group text-left">
+        <router-link :to="currentAgentId === 'amy' ? '/amy' : '/'" class="flex flex-col group text-left">
           <span
             class="font-headline text-xl sm:text-2xl tracking-widest uppercase text-primary font-bold"
           >
@@ -77,7 +83,7 @@ function navigateTo(hashOrPath) {
           @click="navigateTo('#construction')"
           class="text-xs uppercase tracking-wider text-charcoal-muted hover:text-secondary transition-colors duration-150"
         >
-          Construction Advisory
+          {{ siteSettings.navAdvisoryLabel || siteSettings.pedigreeTag || 'Advisory Pedigree' }}
         </button>
         <button
           @click="navigateTo('#track-record')"
@@ -92,14 +98,14 @@ function navigateTo(hashOrPath) {
           Endorsements
         </button>
         <router-link
-          to="/submit"
+          :to="currentAgentId === 'amy' ? '/submit?agent=amy' : '/submit'"
           class="text-xs uppercase tracking-wider text-charcoal-muted hover:text-secondary transition-colors duration-150 flex items-center gap-1"
         >
           <span class="material-symbols-outlined text-base">add_circle</span>
           <span>Submit Property</span>
         </router-link>
         <router-link
-          to="/manage"
+          :to="currentAgentId === 'amy' ? '/amy/manage' : '/kyle/manage'"
           class="text-xs uppercase tracking-wider text-charcoal-muted hover:text-secondary transition-colors duration-150 flex items-center gap-1.5"
         >
           <span class="material-symbols-outlined text-base">dashboard</span>
@@ -175,10 +181,10 @@ function navigateTo(hashOrPath) {
 
       <!-- Profile Header Module in Drawer -->
       <div class="flex items-center gap-3 p-3 bg-surface-linen rounded border border-border-subtle">
-        <div class="w-12 h-12 rounded-full overflow-hidden border border-border-brass shrink-0">
+        <div class="w-12 h-12 rounded-full overflow-hidden border border-border-brass shrink-0 bg-surface-linen">
           <img
-            class="w-full h-full object-cover"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjZXfjxPNY2MR3h7aqXg-Zc0vdFvR4KyHG9f077W85nld6B3A0IMbD8BrZniZR-Ijz0qhwxh1yh-vwKaiYpL4m2eGExvbkv-S_Lc1dYjypFi0sPG5uwW3e-7VNGldoBxsVo-Pp60jW27zxoMcyhU5xFHAH0k6DBrgLOJhn-uGogoMuTBwB1XS5Te3CZRMF6XLtgz3td8MEjBcOmKABykEAVifnj9x2sTJbV7h9HfNQgHwcvf5yPB6Qtw"
+            class="w-full h-full object-cover object-top"
+            :src="siteSettings.headshot || '/images/compass/agent-headshot.webp'"
             :alt="siteSettings.advisorName"
           />
         </div>
@@ -203,7 +209,7 @@ function navigateTo(hashOrPath) {
           class="flex items-center gap-3 px-3 py-2.5 text-charcoal-body rounded hover:bg-surface-linen transition-colors text-left"
         >
           <span class="material-symbols-outlined text-charcoal-muted">architecture</span>
-          <span class="text-xs uppercase tracking-wider font-semibold">Construction Advisory</span>
+          <span class="text-xs uppercase tracking-wider font-semibold">{{ siteSettings.navAdvisoryLabel || siteSettings.pedigreeTag || 'Advisory Pedigree' }}</span>
         </button>
         <button
           @click="navigateTo('#track-record')"
@@ -213,7 +219,7 @@ function navigateTo(hashOrPath) {
           <span class="text-xs uppercase tracking-wider font-semibold">Track Record</span>
         </button>
         <router-link
-          to="/submit"
+          :to="currentAgentId === 'amy' ? '/submit?agent=amy' : '/submit'"
           @click="closeDrawer"
           class="flex items-center gap-3 px-3 py-2.5 text-charcoal-body rounded hover:bg-surface-linen transition-colors"
         >
@@ -221,7 +227,7 @@ function navigateTo(hashOrPath) {
           <span class="text-xs uppercase tracking-wider font-semibold">Submit Listing</span>
         </router-link>
         <router-link
-          to="/manage"
+          :to="currentAgentId === 'amy' ? '/amy/manage' : '/kyle/manage'"
           @click="closeDrawer"
           class="flex items-center gap-3 px-3 py-2.5 text-charcoal-body rounded hover:bg-surface-linen transition-colors justify-between"
         >

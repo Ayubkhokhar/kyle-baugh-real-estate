@@ -45,7 +45,7 @@ function openBooking() {
 }
 
 function handleBooked(payload) {
-  emit("toast", `Showing confirmed for ${payload.name}. Kyle Baugh will follow up shortly.`, "success");
+  emit("toast", `Showing confirmed for ${payload.name}. ${siteSettings.value.advisorName} will follow up shortly.`, "success");
 }
 
 function shareListing() {

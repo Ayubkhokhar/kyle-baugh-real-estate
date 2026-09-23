@@ -5,6 +5,7 @@ import { useInquiries } from "../composables/useInquiries";
 import { useSiteSettings } from "../composables/useSiteSettings";
 import { useStorageQuota } from "../composables/useStorageQuota";
 import { useThemeTemplate } from "../composables/useThemeTemplate";
+import { useAgentResolver } from "../composables/useAgentResolver";
 import StorageLimitModal from "../components/StorageLimitModal.vue";
 
 const emit = defineEmits(["toast"]);
@@ -25,6 +26,7 @@ const { inquiries, unreadCount, updateStatus, deleteInquiry, exportCSV } = useIn
 const { siteSettings, saveSettings, resetSettings, verifyPasscode } = useSiteSettings();
 const { storageThresholdGB, isUpgraded, calculateTotalBytes, formatBytes, setThreshold, setUpgraded } = useStorageQuota();
 const { templates, currentTemplate, setTemplate, getShareUrl } = useThemeTemplate();
+const { availableAgents, currentAgentId, setAgent } = useAgentResolver();
 
 function handleTemplateSelect(id) {
   setTemplate(id);
@@ -32,14 +34,17 @@ function handleTemplateSelect(id) {
 }
 
 // Authentication Gate
-const isAuthenticated = ref(sessionStorage.getItem("kyle_admin_auth") === "true");
+const isAuthenticated = ref(
+  sessionStorage.getItem("admin_auth_v1") === "true" ||
+  sessionStorage.getItem("kyle_admin_auth") === "true"
+);
 const passcodeInput = ref("");
 const authError = ref(false);
 
 function handleLogin() {
   if (verifyPasscode(passcodeInput.value)) {
     isAuthenticated.value = true;
-    sessionStorage.setItem("kyle_admin_auth", "true");
+    sessionStorage.setItem("admin_auth_v1", "true");
     authError.value = false;
     emit("toast", "Welcome back, " + siteSettings.value.advisorName, "success");
   } else {
@@ -49,6 +54,7 @@ function handleLogin() {
 
 function handleLogout() {
   isAuthenticated.value = false;
+  sessionStorage.removeItem("admin_auth_v1");
   sessionStorage.removeItem("kyle_admin_auth");
   passcodeInput.value = "";
 }
@@ -190,9 +196,33 @@ function handleResetSettings() {
             <span class="w-2 h-2 rounded-full bg-status-active"></span>
             <span class="text-xs uppercase tracking-widest text-charcoal-muted font-semibold">Real Estate Management Console</span>
           </div>
-          <h1 class="font-headline text-2xl sm:text-3xl text-primary">{{ siteSettings.advisorName }} Advisory Dashboard</h1>
+          <div class="flex flex-wrap items-center gap-3">
+            <h1 class="font-headline text-2xl sm:text-3xl text-primary">{{ siteSettings.advisorName }} Advisory Dashboard</h1>
+            <!-- Client Switcher in Dashboard -->
+            <div class="inline-flex rounded-lg border border-border-subtle p-0.5 bg-surface-linen text-xs">
+              <button
+                v-for="a in availableAgents"
+                :key="a.id"
+                type="button"
+                @click="setAgent(a.id)"
+                :class="[
+                  'px-2.5 py-1 rounded-md text-[11px] font-semibold uppercase tracking-wider transition-colors',
+                  currentAgentId === a.id ? 'bg-canvas-white text-primary shadow-xs font-bold border border-border-brass/50' : 'text-charcoal-muted hover:text-primary'
+                ]"
+              >
+                {{ a.name }}
+              </button>
+            </div>
+          </div>
         </div>
         <div class="flex flex-wrap items-center gap-2">
+          <router-link
+            :to="currentAgentId === 'amy' ? '/amy' : '/'"
+            class="px-3 py-2 bg-canvas-white border border-border-brass text-xs uppercase tracking-wider font-semibold rounded hover:bg-surface-linen flex items-center gap-1.5 transition-colors text-primary"
+          >
+            <span class="material-symbols-outlined text-base">visibility</span>
+            <span>View Public Site</span>
+          </router-link>
           <button
             @click="exportJSON"
             class="px-3 py-2 bg-canvas-white border border-border-subtle text-xs uppercase tracking-wider font-semibold rounded hover:bg-surface-linen flex items-center gap-1.5 transition-colors"
@@ -206,7 +236,7 @@ function handleResetSettings() {
             <input type="file" accept=".json" @change="handleImportFile" class="hidden" />
           </label>
           <router-link
-            to="/submit"
+            :to="currentAgentId === 'amy' ? '/submit?agent=amy' : '/submit'"
             class="px-4 py-2 bg-primary text-canvas-white text-xs uppercase tracking-wider font-semibold rounded hover:bg-secondary flex items-center gap-1.5 transition-colors shadow-sm"
           >
             <span class="material-symbols-outlined text-base">add</span>
@@ -294,7 +324,7 @@ function handleResetSettings() {
                 <span class="px-2 py-0.5 bg-emerald-500/20 text-emerald-300 text-[10px] uppercase tracking-wider font-semibold rounded border border-emerald-500/30">Auto Cron</span>
               </div>
               <p class="text-xs text-canvas-white/80 mt-0.5">
-                Automatically scrapes from <a :href="compassMeta.agentUrl" target="_blank" class="text-secondary hover:underline font-medium">compass.com/agents/kyle-baugh-dallas</a> · 39 high-res photos hosted on Cloudflare (3.89 MB / 8 GB Guard)
+                Automatically scrapes from <a :href="compassMeta.agentUrl || siteSettings.profileUrl" target="_blank" class="text-secondary hover:underline font-medium">{{ (compassMeta.agentUrl || siteSettings.profileUrl || '').replace('https://www.', '').replace('https://', '') }}</a> · High-res photos hosted on Cloudflare
               </p>
             </div>
           </div>
@@ -442,11 +472,11 @@ function handleResetSettings() {
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
                 <span class="text-xs uppercase tracking-widest text-secondary font-bold">Automated Pipeline Active</span>
               </div>
-              <h2 class="font-headline text-2xl text-primary">Kyle Baugh Compass Synchronization</h2>
+              <h2 class="font-headline text-2xl text-primary">{{ siteSettings.advisorName }} Compass Synchronization</h2>
               <p class="text-xs text-charcoal-muted mt-1">
                 Direct scraping pipeline connected to
-                <a :href="compassMeta.agentUrl" target="_blank" class="text-primary underline font-medium hover:text-secondary">
-                  compass.com/agents/kyle-baugh-dallas
+                <a :href="compassMeta.agentUrl || siteSettings.profileUrl" target="_blank" class="text-primary underline font-medium hover:text-secondary">
+                  {{ (compassMeta.agentUrl || siteSettings.profileUrl || '').replace('https://www.', '').replace('https://', '') }}
                 </a>
               </p>
             </div>
@@ -465,12 +495,12 @@ function handleResetSettings() {
             <div class="bg-surface-alabaster p-4 border border-border-subtle rounded">
               <span class="text-[10px] uppercase tracking-wider text-charcoal-muted font-bold block mb-1">Active Listing</span>
               <span class="font-headline text-2xl text-status-active font-medium">{{ compassMeta.activeCount }}</span>
-              <span class="text-[11px] text-charcoal-muted block mt-0.5">2007 Euclid Ave ($875K)</span>
+              <span class="text-[11px] text-charcoal-muted block mt-0.5">Active Exclusives</span>
             </div>
             <div class="bg-surface-alabaster p-4 border border-border-subtle rounded">
               <span class="text-[10px] uppercase tracking-wider text-charcoal-muted font-bold block mb-1">Past Sales Closed</span>
               <span class="font-headline text-2xl text-primary font-medium">{{ compassMeta.soldCount }}</span>
-              <span class="text-[11px] text-charcoal-muted block mt-0.5">$1.3M – $5M Portfolio</span>
+              <span class="text-[11px] text-charcoal-muted block mt-0.5">Closed Track Record</span>
             </div>
             <div class="bg-surface-alabaster p-4 border border-border-subtle rounded">
               <span class="text-[10px] uppercase tracking-wider text-charcoal-muted font-bold block mb-1">Leased Properties</span>
@@ -478,9 +508,9 @@ function handleResetSettings() {
               <span class="text-[11px] text-charcoal-muted block mt-0.5">High-end executive leases</span>
             </div>
             <div class="bg-surface-alabaster p-4 border border-border-subtle rounded">
-              <span class="text-[10px] uppercase tracking-wider text-charcoal-muted font-bold block mb-1">Cloudflare Media</span>
-              <span class="font-headline text-2xl text-primary font-medium">39 Photos</span>
-              <span class="text-[11px] text-charcoal-muted block mt-0.5">3.89 MB (0.05% of 8 GB Guard)</span>
+              <span class="text-[10px] uppercase tracking-wider text-charcoal-muted font-bold block mb-1">Total Properties</span>
+              <span class="font-headline text-2xl text-primary font-medium">{{ properties.length }}</span>
+              <span class="text-[11px] text-charcoal-muted block mt-0.5">Hosted on Cloudflare Edge</span>
             </div>
           </div>
 
@@ -493,7 +523,7 @@ function handleResetSettings() {
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-charcoal-body leading-relaxed">
               <div class="bg-canvas-white p-3.5 rounded border border-border-subtle">
                 <span class="font-bold text-primary block mb-1">1. Scheduled Daily Scraper</span>
-                Runs automatically every 24 hours at 04:00 UTC via GitHub Actions cron. Fetches Kyle's Compass page and detects new listings or price adjustments.
+                Runs automatically every 24 hours at 04:00 UTC via GitHub Actions cron. Fetches {{ siteSettings.advisorName }}'s Compass page and detects new listings or price adjustments.
               </div>
               <div class="bg-canvas-white p-3.5 rounded border border-border-subtle">
                 <span class="font-bold text-primary block mb-1">2. Cloudflare Media Hosting</span>

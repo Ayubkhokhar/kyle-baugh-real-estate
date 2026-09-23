@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useAgentResolver } from "../composables/useAgentResolver";
 
 // Lazy-loaded route components for optimal initial bundle size and mobile performance
 const HomeView = () => import("../views/HomeView.vue");
@@ -43,6 +44,21 @@ const routes = [
     component: ManageView,
   },
   {
+    path: "/amy/manage",
+    name: "amy-manage",
+    component: ManageView,
+  },
+  {
+    path: "/kyle/manage",
+    name: "kyle-manage",
+    component: ManageView,
+  },
+  {
+    path: "/:agentSlug/manage",
+    name: "agent-manage",
+    component: ManageView,
+  },
+  {
     path: "/:pathMatch(.*)*",
     redirect: "/",
   },
@@ -63,6 +79,27 @@ const router = createRouter({
     }
     return { top: 0, behavior: "smooth" };
   },
+});
+
+router.beforeEach((to, from, next) => {
+  const { setAgentWithoutReload, currentAgentId } = useAgentResolver();
+  const path = to.path.toLowerCase();
+  const queryAgent = (to.query.agent || to.query.client || "").toLowerCase();
+
+  if (path.includes("/amy") || queryAgent === "amy") {
+    if (currentAgentId.value !== "amy") {
+      setAgentWithoutReload("amy");
+    }
+  } else if (path.includes("/kyle") || queryAgent === "kyle") {
+    if (currentAgentId.value !== "kyle") {
+      setAgentWithoutReload("kyle");
+    }
+  } else if (path === "/" && !queryAgent) {
+    if (currentAgentId.value !== "kyle") {
+      setAgentWithoutReload("kyle");
+    }
+  }
+  next();
 });
 
 export default router;

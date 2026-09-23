@@ -416,50 +416,34 @@ const emit = defineEmits([
             <span class="text-xs text-secondary uppercase tracking-widest font-semibold">Client Endorsements</span>
             <span class="w-6 h-[1px] bg-secondary"></span>
           </div>
-          <h2 class="font-headline text-3xl sm:text-4xl text-primary">Uncompromising Advocacy</h2>
+          <h2 class="font-headline text-3xl sm:text-4xl text-primary">{{ siteSettings.endorsementsTitle || 'Uncompromising Advocacy' }}</h2>
           <p class="text-xs text-charcoal-muted mt-2 leading-relaxed">
-            Read first-hand accounts from high-net-worth Dallas families and executives who relied on Kyle's construction-first model.
+            {{ siteSettings.endorsementsSubheading || 'Read first-hand accounts from high-net-worth Dallas families and clients.' }}
           </p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-          <div class="bg-canvas-white p-8 lg:p-10 border border-border-subtle flex flex-col justify-between shadow-sm">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12" v-if="siteSettings.endorsements && siteSettings.endorsements.length > 0">
+          <div
+            v-for="(review, rIdx) in siteSettings.endorsements"
+            :key="rIdx"
+            class="bg-canvas-white p-8 lg:p-10 border border-border-subtle flex flex-col justify-between shadow-sm"
+          >
             <div>
               <div class="flex items-center gap-1 text-secondary mb-6">
-                <span v-for="i in 5" :key="i" class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+                <span v-for="i in (review.stars || 5)" :key="i" class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
               </div>
               <p class="font-headline text-lg sm:text-xl text-primary mb-4 italic leading-snug">
-                "Kyle crawled under the pier-and-beam foundation on our first tour. He spotted a $45,000 subfloor structural deflection that two standard home inspectors completely overlooked."
+                "{{ review.quote }}"
               </p>
               <p class="text-xs text-charcoal-body font-light leading-relaxed">
-                His construction science background saved us an enormous financial catastrophe in University Park. When we finally found our dream home, his contract tactics negotiated a $60,000 credit.
+                {{ review.story }}
               </p>
             </div>
             <div class="pt-6 mt-6 border-t border-border-subtle flex items-center justify-between">
               <div>
-                <p class="font-semibold text-primary text-sm">David & Claire R.</p>
-                <p class="text-[10px] text-charcoal-muted uppercase tracking-wider">Park Cities Homeowners</p>
+                <p class="font-semibold text-primary text-sm">{{ review.author }}</p>
+                <p class="text-[10px] text-charcoal-muted uppercase tracking-wider">{{ review.location }}</p>
               </div>
-              <span class="text-[10px] px-2.5 py-1 bg-surface-linen border border-border-subtle text-secondary uppercase font-semibold">Verified Buyer</span>
-            </div>
-          </div>
-          <div class="bg-canvas-white p-8 lg:p-10 border border-border-subtle flex flex-col justify-between shadow-sm">
-            <div>
-              <div class="flex items-center gap-1 text-secondary mb-6">
-                <span v-for="i in 5" :key="i" class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
-              </div>
-              <p class="font-headline text-lg sm:text-xl text-primary mb-4 italic leading-snug">
-                "Kyle front-funded and orchestrated a 3-week cosmetic overhaul on our Lakewood listing. We sold for $185,000 over our initial target in four days."
-              </p>
-              <p class="text-xs text-charcoal-body font-light leading-relaxed">
-                His project management was surgical. Subcontractors showed up on time, finishes were executed to architectural spec, and his off-market syndication had buyers queuing.
-              </p>
-            </div>
-            <div class="pt-6 mt-6 border-t border-border-subtle flex items-center justify-between">
-              <div>
-                <p class="font-semibold text-primary text-sm">Matt S.</p>
-                <p class="text-[10px] text-charcoal-muted uppercase tracking-wider">Lakewood Estate Seller</p>
-              </div>
-              <span class="text-[10px] px-2.5 py-1 bg-surface-linen border border-border-subtle text-secondary uppercase font-semibold">Verified Seller</span>
+              <span class="text-[10px] px-2.5 py-1 bg-surface-linen border border-border-subtle text-secondary uppercase font-semibold">{{ review.role }}</span>
             </div>
           </div>
         </div>

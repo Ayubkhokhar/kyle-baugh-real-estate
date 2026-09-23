@@ -41,5 +41,27 @@ export const agentProfile = {
       title: "Off-Market Syndication & Private Discretion",
       desc: "Over 35% of Kyle's transaction volume trades completely off-MLS through direct family office networks, safeguarding privacy and avoiding public speculation."
     }
+  ],
+  navAdvisoryLabel: "Construction Advisory",
+  footerBio: "An independent, high-equity residential real estate advisory providing fiduciary-level representation and construction forensics throughout Dallas's premier enclaves.",
+  endorsementsTitle: "Uncompromising Construction & Market Advocacy",
+  endorsementsSubheading: "Read first-hand accounts from high-net-worth Dallas families and executives who relied on Kyle's construction-first advisory.",
+  endorsements: [
+    {
+      stars: 5,
+      quote: "Kyle crawled under the pier-and-beam foundation on our first tour. He spotted a $45,000 subfloor structural deflection that two standard home inspectors completely overlooked.",
+      story: "His construction science background saved us an enormous financial catastrophe in University Park. When we finally found our dream home, his contract tactics negotiated a $60,000 credit.",
+      author: "David & Claire R.",
+      location: "Park Cities Homeowners",
+      role: "Verified Buyer"
+    },
+    {
+      stars: 5,
+      quote: "Kyle front-funded and orchestrated a 3-week cosmetic overhaul on our Lakewood listing. We sold for $185,000 over our initial target in four days.",
+      story: "His project management was surgical. Subcontractors showed up on time, finishes were executed to architectural spec, and his off-market syndication had buyers queuing.",
+      author: "Matt S.",
+      location: "Lakewood Estate Seller",
+      role: "Verified Seller"
+    }
   ]
 };

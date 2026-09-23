@@ -1,8 +1,12 @@
 <script setup>
+import { computed } from "vue";
 import { useSiteSettings } from "../composables/useSiteSettings";
+import { useAgentResolver } from "../composables/useAgentResolver";
 
 const { siteSettings } = useSiteSettings();
+const { currentAgentId } = useAgentResolver();
 const currentYear = new Date().getFullYear();
+const basePath = computed(() => (currentAgentId.value === "amy" ? "/amy" : ""));
 </script>
 
 <template>
@@ -18,7 +22,7 @@ const currentYear = new Date().getFullYear();
             {{ siteSettings.brokerage }}
           </span>
           <p class="text-xs text-on-primary-container max-w-sm pt-2 leading-relaxed">
-            An independent, high-equity residential real estate advisory providing fiduciary-level representation and construction forensics throughout Dallas\'s premier enclaves.
+            {{ siteSettings.footerBio || "An independent, high-equity residential real estate advisory providing fiduciary-level representation throughout Dallas's premier enclaves." }}
           </p>
           <div class="pt-2 text-border-brass text-xs tracking-widest uppercase font-semibold">
             {{ siteSettings.licenseInfo }}
@@ -31,12 +35,12 @@ const currentYear = new Date().getFullYear();
             Dallas Core Enclaves
           </p>
           <ul class="space-y-2 text-xs text-on-primary-container">
-            <li><router-link to="/#portfolio" class="hover:text-canvas-white transition-colors">Park Cities (Highland & University Park)</router-link></li>
-            <li><router-link to="/#portfolio" class="hover:text-canvas-white transition-colors">Preston Hollow & Estate Corridor</router-link></li>
-            <li><router-link to="/#portfolio" class="hover:text-canvas-white transition-colors">Lakewood & White Rock Lake</router-link></li>
-            <li><router-link to="/#portfolio" class="hover:text-canvas-white transition-colors">East Dallas & Lower Greenville</router-link></li>
-            <li><router-link to="/#portfolio" class="hover:text-canvas-white transition-colors">Swiss Avenue Historic District</router-link></li>
-            <li><router-link to="/#portfolio" class="hover:text-canvas-white transition-colors">Bluffview & Devonshire</router-link></li>
+            <li><router-link :to="basePath + '#portfolio'" class="hover:text-canvas-white transition-colors">Park Cities (Highland & University Park)</router-link></li>
+            <li><router-link :to="basePath + '#portfolio'" class="hover:text-canvas-white transition-colors">Preston Hollow & Estate Corridor</router-link></li>
+            <li><router-link :to="basePath + '#portfolio'" class="hover:text-canvas-white transition-colors">Lakewood & White Rock Lake</router-link></li>
+            <li><router-link :to="basePath + '#portfolio'" class="hover:text-canvas-white transition-colors">East Dallas & Lower Greenville</router-link></li>
+            <li><router-link :to="basePath + '#portfolio'" class="hover:text-canvas-white transition-colors">Swiss Avenue Historic District</router-link></li>
+            <li><router-link :to="basePath + '#portfolio'" class="hover:text-canvas-white transition-colors">Bluffview & Devonshire</router-link></li>
           </ul>
         </div>
 
@@ -46,11 +50,11 @@ const currentYear = new Date().getFullYear();
             Brokerage Disciplines
           </p>
           <ul class="space-y-2 text-xs text-on-primary-container">
-            <li><router-link to="/#construction" class="hover:text-canvas-white transition-colors">Forensic Structural Due Diligence</router-link></li>
-            <li><router-link to="/#construction" class="hover:text-canvas-white transition-colors">Concierge 0% Pre-Listing Capital</router-link></li>
-            <li><router-link to="/#portfolio" class="hover:text-canvas-white transition-colors">Off-Market Private Acquisitions</router-link></li>
-            <li><router-link to="/submit" class="hover:text-canvas-white transition-colors">Comparative CMA & Equity Valuation</router-link></li>
-            <li><router-link to="/#track-record" class="hover:text-canvas-white transition-colors">Landmark Historic Restoration Oversight</router-link></li>
+            <li><router-link :to="basePath + '#construction'" class="hover:text-canvas-white transition-colors">{{ siteSettings.navAdvisoryLabel || siteSettings.pedigreeTag || 'Advisory Pedigree' }}</router-link></li>
+            <li><router-link :to="basePath + '#construction'" class="hover:text-canvas-white transition-colors">Concierge 0% Pre-Listing Capital</router-link></li>
+            <li><router-link :to="basePath + '#portfolio'" class="hover:text-canvas-white transition-colors">Off-Market Private Acquisitions</router-link></li>
+            <li><router-link :to="currentAgentId === 'amy' ? '/submit?agent=amy' : '/submit'" class="hover:text-canvas-white transition-colors">Comparative CMA & Equity Valuation</router-link></li>
+            <li><router-link :to="basePath + '#track-record'" class="hover:text-canvas-white transition-colors">Landmark Historic Restoration Oversight</router-link></li>
           </ul>
         </div>
 
