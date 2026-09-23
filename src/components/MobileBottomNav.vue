@@ -1,18 +1,22 @@
 <script setup>
 import { useRoute, useRouter } from "vue-router";
 import { useInquiries } from "../composables/useInquiries";
+import { useAgentResolver } from "../composables/useAgentResolver";
 
 const route = useRoute();
 const router = useRouter();
 const { unreadCount } = useInquiries();
+const { currentAgentId } = useAgentResolver();
 
 function navigate(target) {
   if (target.startsWith("#")) {
-    if (route.path !== "/") {
-      router.push("/" + target);
-    } else {
+    const isHome = ["/", "/kyle", "/amy", "/carson"].includes(route.path) || route.path.startsWith("/agent/");
+    if (isHome) {
       const el = document.querySelector(target);
       if (el) el.scrollIntoView({ behavior: "smooth" });
+    } else {
+      const basePath = currentAgentId.value === "kyle" ? "/kyle" : `/${currentAgentId.value}`;
+      router.push(basePath + target);
     }
   } else {
     router.push(target);
@@ -26,10 +30,10 @@ function navigate(target) {
   >
     <!-- Tab 1: Home -->
     <button
-      @click="navigate('/')"
+      @click="navigate(currentAgentId === 'kyle' ? '/kyle' : `/${currentAgentId}`)"
       :class="[
         'flex flex-col items-center justify-center gap-1 transition-colors',
-        route.path === '/' && !route.hash ? 'text-primary font-semibold' : 'text-charcoal-muted'
+        (route.path === '/' || route.path === `/${currentAgentId}`) && !route.hash ? 'text-primary font-semibold' : 'text-charcoal-muted'
       ]"
     >
       <span class="material-symbols-outlined text-[22px]">real_estate_agent</span>
@@ -47,7 +51,7 @@ function navigate(target) {
 
     <!-- Tab 3: Submit -->
     <router-link
-      to="/submit"
+      :to="currentAgentId === 'kyle' ? '/submit' : `/submit?agent=${currentAgentId}`"
       :class="[
         'flex flex-col items-center justify-center gap-1 transition-colors',
         route.path === '/submit' ? 'text-primary font-semibold' : 'text-charcoal-muted'
@@ -59,10 +63,10 @@ function navigate(target) {
 
     <!-- Tab 4: Manage -->
     <router-link
-      to="/manage"
+      :to="`/${currentAgentId}/manage`"
       :class="[
         'flex flex-col items-center justify-center gap-1 transition-colors relative',
-        route.path === '/manage' ? 'text-primary font-semibold' : 'text-charcoal-muted'
+        route.path.includes('/manage') ? 'text-primary font-semibold' : 'text-charcoal-muted'
       ]"
     >
       <span class="material-symbols-outlined text-[22px]">admin_panel_settings</span>

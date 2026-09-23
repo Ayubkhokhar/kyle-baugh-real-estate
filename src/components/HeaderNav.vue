@@ -24,14 +24,14 @@ function closeDrawer() {
 function navigateTo(hashOrPath) {
   closeDrawer();
   if (hashOrPath.startsWith("#")) {
-    const isHome = ["/", "/kyle", "/amy"].includes(route.path) || route.path.startsWith("/agent/");
+    const isHome = ["/", "/kyle", "/amy", "/carson"].includes(route.path) || route.path.startsWith("/agent/");
     if (isHome) {
       const el = document.querySelector(hashOrPath);
       if (el) {
         el.scrollIntoView({ behavior: "smooth" });
       }
     } else {
-      const basePath = currentAgentId.value === "amy" ? "/amy" : "/";
+      const basePath = currentAgentId.value === "kyle" ? "/kyle" : `/${currentAgentId.value}`;
       router.push(basePath + hashOrPath);
     }
   } else {
@@ -57,7 +57,7 @@ function navigateTo(hashOrPath) {
           <span class="material-symbols-outlined text-2xl">menu</span>
         </button>
 
-        <router-link :to="currentAgentId === 'amy' ? '/amy' : '/'" class="flex flex-col group text-left">
+        <router-link :to="currentAgentId === 'kyle' ? '/kyle' : `/${currentAgentId}`" class="flex flex-col group text-left">
           <span
             class="font-headline text-xl sm:text-2xl tracking-widest uppercase text-primary font-bold"
           >
@@ -98,14 +98,14 @@ function navigateTo(hashOrPath) {
           Endorsements
         </button>
         <router-link
-          :to="currentAgentId === 'amy' ? '/submit?agent=amy' : '/submit'"
+          :to="currentAgentId === 'kyle' ? '/submit' : `/submit?agent=${currentAgentId}`"
           class="text-xs uppercase tracking-wider text-charcoal-muted hover:text-secondary transition-colors duration-150 flex items-center gap-1"
         >
           <span class="material-symbols-outlined text-base">add_circle</span>
           <span>Submit Property</span>
         </router-link>
         <router-link
-          :to="currentAgentId === 'amy' ? '/amy/manage' : '/kyle/manage'"
+          :to="`/${currentAgentId}/manage`"
           class="text-xs uppercase tracking-wider text-charcoal-muted hover:text-secondary transition-colors duration-150 flex items-center gap-1.5"
         >
           <span class="material-symbols-outlined text-base">dashboard</span>
@@ -219,7 +219,7 @@ function navigateTo(hashOrPath) {
           <span class="text-xs uppercase tracking-wider font-semibold">Track Record</span>
         </button>
         <router-link
-          :to="currentAgentId === 'amy' ? '/submit?agent=amy' : '/submit'"
+          :to="currentAgentId === 'kyle' ? '/submit' : `/submit?agent=${currentAgentId}`"
           @click="closeDrawer"
           class="flex items-center gap-3 px-3 py-2.5 text-charcoal-body rounded hover:bg-surface-linen transition-colors"
         >
@@ -227,7 +227,7 @@ function navigateTo(hashOrPath) {
           <span class="text-xs uppercase tracking-wider font-semibold">Submit Listing</span>
         </router-link>
         <router-link
-          :to="currentAgentId === 'amy' ? '/amy/manage' : '/kyle/manage'"
+          :to="`/${currentAgentId}/manage`"
           @click="closeDrawer"
           class="flex items-center gap-3 px-3 py-2.5 text-charcoal-body rounded hover:bg-surface-linen transition-colors justify-between"
         >

@@ -24,6 +24,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/carson",
+    name: "carson-home",
+    component: HomeView,
+  },
+  {
     path: "/agent/:agentSlug",
     name: "agent-home",
     component: HomeView,
@@ -46,6 +51,11 @@ const routes = [
   {
     path: "/amy/manage",
     name: "amy-manage",
+    component: ManageView,
+  },
+  {
+    path: "/carson/manage",
+    name: "carson-manage",
     component: ManageView,
   },
   {
@@ -82,19 +92,20 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const { setAgentWithoutReload, currentAgentId } = useAgentResolver();
+  const { setAgentWithoutReload, currentAgentId, availableAgents } = useAgentResolver();
   const path = to.path.toLowerCase();
   const queryAgent = (to.query.agent || to.query.client || "").toLowerCase();
 
-  if (path.includes("/amy") || queryAgent === "amy") {
-    if (currentAgentId.value !== "amy") {
-      setAgentWithoutReload("amy");
+  for (const agent of availableAgents) {
+    if (path.includes(`/${agent.id}`) || queryAgent === agent.id) {
+      if (currentAgentId.value !== agent.id) {
+        setAgentWithoutReload(agent.id);
+      }
+      return next();
     }
-  } else if (path.includes("/kyle") || queryAgent === "kyle") {
-    if (currentAgentId.value !== "kyle") {
-      setAgentWithoutReload("kyle");
-    }
-  } else if (path === "/" && !queryAgent) {
+  }
+
+  if (path === "/" && !queryAgent) {
     if (currentAgentId.value !== "kyle") {
       setAgentWithoutReload("kyle");
     }

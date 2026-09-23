@@ -2,6 +2,7 @@ import { ref, computed, watch } from "vue";
 import { defaultProperties } from "../data/seedProperties";
 import { compassProperties as kyleProperties, compassSyncMeta as kyleCompassMeta } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as carsonProperties } from "../data/agents/carsonProperties";
 import { useAgentResolver } from "./useAgentResolver";
 
 const amyCompassMeta = {
@@ -13,6 +14,17 @@ const amyCompassMeta = {
   imagesDownloaded: 45,
   agentUrl: "https://www.compass.com/agents/amy-detwiler/",
   syncedAgent: "Amy Detwiler",
+};
+
+const carsonCompassMeta = {
+  lastSynced: "2026-09-23T08:19:27.210Z",
+  totalProperties: 37,
+  activeCount: 1,
+  soldCount: 36,
+  leasedCount: 0,
+  imagesDownloaded: 45,
+  agentUrl: "https://www.compass.com/agents/carson-hill/",
+  syncedAgent: "Carson Hill",
 };
 
 function getAgentStorageKey(agentId) {
@@ -49,12 +61,18 @@ function getInitialListForAgent(agentId) {
   if (agentId === "amy") {
     return amyProperties;
   }
+  if (agentId === "carson") {
+    return carsonProperties;
+  }
   return kyleProperties.length > 0 ? kyleProperties : mergeProperties(defaultProperties, kyleProperties);
 }
 
 function getInitialMetaForAgent(agentId) {
   if (agentId === "amy") {
     return amyCompassMeta;
+  }
+  if (agentId === "carson") {
+    return carsonCompassMeta;
   }
   return kyleCompassMeta;
 }
@@ -121,7 +139,7 @@ export function useProperties() {
     const match = properties.value.find((p) => String(p.id) === String(id) || p.slug === String(id));
     if (match) return match;
     // Cross-agent fallback so direct links to any listing never fail
-    const allKnown = [...amyProperties, ...kyleProperties, ...defaultProperties];
+    const allKnown = [...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
     return allKnown.find((p) => String(p.id) === String(id) || p.slug === String(id)) || null;
   }
 

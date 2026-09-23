@@ -1,8 +1,10 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { carsonProfile } from "../data/agents/carsonProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as carsonProperties } from "../data/agents/carsonProperties";
 
 const AGENT_STORAGE_KEY = "kyle_active_agent_v1";
 
@@ -25,6 +27,15 @@ export const availableAgents = [
     properties: amyProperties,
     previewColor: "#D4AF37",
   },
+  {
+    id: "carson",
+    name: "Carson Hill",
+    title: "East Dallas & Lakewood Modern Real Estate Specialist",
+    slug: "carson",
+    profile: carsonProfile,
+    properties: carsonProperties,
+    previewColor: "#3B6E8C",
+  },
 ];
 
 function getInitialAgentId() {
@@ -33,25 +44,22 @@ function getInitialAgentId() {
     const hostname = window.location.hostname.toLowerCase();
     const params = new URLSearchParams(window.location.search);
 
-    // 1. Subdomain Check (e.g. amydetwiler.workers.dev or amy.workers.dev)
-    if (hostname.includes("amy") || hostname.includes("detwiler")) {
-      return "amy";
-    }
-    if (hostname.includes("kyle") || hostname.includes("baugh")) {
-      // Continue to path check in case /amy is accessed on kyle domain
-    }
-
-    // 2. Clean Path Check (e.g. /amy, /amy-detwiler, /agent/amy)
-    if (pathname.includes("/amy") || pathname.includes("/detwiler")) {
-      localStorage.setItem(AGENT_STORAGE_KEY, "amy");
-      return "amy";
-    }
-    if (pathname.includes("/kyle") || pathname.includes("/baugh")) {
-      localStorage.setItem(AGENT_STORAGE_KEY, "kyle");
-      return "kyle";
+    // 1. Subdomain Check (e.g. carson.workers.dev or amydetwiler.workers.dev)
+    for (const agent of availableAgents) {
+      if (agent.id !== "kyle" && (hostname.includes(agent.id) || hostname.includes(agent.name.toLowerCase().split(" ")[0]))) {
+        return agent.id;
+      }
     }
 
-    // 3. URL Query Parameter (?agent=amy or ?client=amy)
+    // 2. Clean Path Check (e.g. /carson, /amy, /kyle, /agent/carson)
+    for (const agent of availableAgents) {
+      if (pathname.includes(`/${agent.id}`) || pathname.includes(`/${agent.slug}`)) {
+        localStorage.setItem(AGENT_STORAGE_KEY, agent.id);
+        return agent.id;
+      }
+    }
+
+    // 3. URL Query Parameter (?agent=carson or ?client=carson)
     const queryAgent = (params.get("agent") || params.get("client") || "").toLowerCase().trim();
     if (queryAgent && availableAgents.some((a) => a.id === queryAgent)) {
       localStorage.setItem(AGENT_STORAGE_KEY, queryAgent);
@@ -81,15 +89,9 @@ export function useAgentResolver() {
     if (typeof window !== "undefined") {
       localStorage.setItem(AGENT_STORAGE_KEY, id);
       const url = new URL(window.location.href);
-      if (id === "kyle") {
-        url.pathname = "/kyle";
-        url.searchParams.delete("agent");
-        url.searchParams.delete("client");
-      } else {
-        url.pathname = "/amy";
-        url.searchParams.delete("agent");
-        url.searchParams.delete("client");
-      }
+      url.pathname = id === "kyle" ? "/kyle" : `/${id}`;
+      url.searchParams.delete("agent");
+      url.searchParams.delete("client");
       window.history.replaceState({}, "", url.toString());
       window.location.reload();
     }
@@ -98,7 +100,7 @@ export function useAgentResolver() {
   function getAgentShareUrl(agentId, extraParams = {}) {
     if (typeof window === "undefined") return "";
     const origin = window.location.origin;
-    const targetPath = agentId === "amy" ? "/amy" : "/kyle";
+    const targetPath = agentId === "kyle" ? "/kyle" : `/${agentId}`;
     const params = new URLSearchParams();
     for (const [k, v] of Object.entries(extraParams)) {
       if (v) params.set(k, v);

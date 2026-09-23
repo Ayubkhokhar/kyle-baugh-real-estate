@@ -217,7 +217,7 @@ function handleResetSettings() {
         </div>
         <div class="flex flex-wrap items-center gap-2">
           <router-link
-            :to="currentAgentId === 'amy' ? '/amy' : '/'"
+            :to="currentAgentId === 'kyle' ? '/kyle' : `/${currentAgentId}`"
             class="px-3 py-2 bg-canvas-white border border-border-brass text-xs uppercase tracking-wider font-semibold rounded hover:bg-surface-linen flex items-center gap-1.5 transition-colors text-primary"
           >
             <span class="material-symbols-outlined text-base">visibility</span>

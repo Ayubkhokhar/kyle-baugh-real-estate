@@ -6,7 +6,7 @@ import { useAgentResolver } from "../composables/useAgentResolver";
 const { siteSettings } = useSiteSettings();
 const { currentAgentId } = useAgentResolver();
 const currentYear = new Date().getFullYear();
-const basePath = computed(() => (currentAgentId.value === "amy" ? "/amy" : ""));
+const basePath = computed(() => (currentAgentId.value === "kyle" ? "/kyle" : `/${currentAgentId.value}`));
 </script>
 
 <template>
@@ -53,7 +53,7 @@ const basePath = computed(() => (currentAgentId.value === "amy" ? "/amy" : ""));
             <li><router-link :to="basePath + '#construction'" class="hover:text-canvas-white transition-colors">{{ siteSettings.navAdvisoryLabel || siteSettings.pedigreeTag || 'Advisory Pedigree' }}</router-link></li>
             <li><router-link :to="basePath + '#construction'" class="hover:text-canvas-white transition-colors">Concierge 0% Pre-Listing Capital</router-link></li>
             <li><router-link :to="basePath + '#portfolio'" class="hover:text-canvas-white transition-colors">Off-Market Private Acquisitions</router-link></li>
-            <li><router-link :to="currentAgentId === 'amy' ? '/submit?agent=amy' : '/submit'" class="hover:text-canvas-white transition-colors">Comparative CMA & Equity Valuation</router-link></li>
+            <li><router-link :to="currentAgentId === 'kyle' ? '/submit' : `/submit?agent=${currentAgentId}`" class="hover:text-canvas-white transition-colors">Comparative CMA & Equity Valuation</router-link></li>
             <li><router-link :to="basePath + '#track-record'" class="hover:text-canvas-white transition-colors">Landmark Historic Restoration Oversight</router-link></li>
           </ul>
         </div>
