@@ -1,6 +1,6 @@
 // scripts/auto-register.js
 // Autonomous code-rewriter that injects new real estate agents into Vue router, resolver, and properties state.
-// 100% deterministic, zero AI tokens required.
+// 100% deterministic, zero AI tokens required. Handles hyphenated slugs safely.
 
 import fs from "fs";
 import path from "path";
@@ -14,17 +14,26 @@ const RESOLVER_PATH = path.join(rootDir, "src", "composables", "useAgentResolver
 const PROPERTIES_PATH = path.join(rootDir, "src", "composables", "useProperties.js");
 const ROUTER_PATH = path.join(rootDir, "src", "router", "index.js");
 
+export function toIdentifier(str) {
+  // Convert "brandon-stewart" or "liz_chalfant" into valid JS identifier "brandonStewart", "lizChalfant"
+  return (str || "agent")
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9]+(.)/g, (_, chr) => chr.toUpperCase())
+    .replace(/[^a-zA-Z0-9]/g, "");
+}
+
 export function registerAgentInCodebase({
   slug,
   name,
-  title = "Dallas Premier Real Estate Specialist",
+  title = "Dallas Luxury & Architectural Specialist",
   color = "#BFA181",
   totalProperties = 1,
   activeCount = 1,
   soldCount = 0,
   agentUrl = "",
 }) {
-  console.log(`[Auto-Register] Registering agent '${name}' (${slug}) into codebase...`);
+  const ident = toIdentifier(slug);
+  console.log(`[Auto-Register] Registering '${name}' (slug: '${slug}', identifier: '${ident}') into codebase...`);
 
   let resolverModified = false;
   let propertiesModified = false;
@@ -35,8 +44,8 @@ export function registerAgentInCodebase({
     let resolverContent = fs.readFileSync(RESOLVER_PATH, "utf-8");
 
     // Profile import
-    const profileImport = `import { ${slug}Profile } from "../data/agents/${slug}Profile";`;
-    if (!resolverContent.includes(`../data/agents/${slug}Profile`)) {
+    const profileImport = `import { ${ident}Profile } from "../data/agents/${ident}Profile";`;
+    if (!resolverContent.includes(`../data/agents/${ident}Profile`)) {
       resolverContent = resolverContent.replace(
         /(import\s+\{\s*\w+Profile\s*\}\s+from\s+["']\.\.\/data\/agents\/\w+Profile["'];?\r?\n)/,
         `$1${profileImport}\n`
@@ -45,8 +54,8 @@ export function registerAgentInCodebase({
     }
 
     // Properties import
-    const propImport = `import { compassProperties as ${slug}Properties } from "../data/agents/${slug}Properties";`;
-    if (!resolverContent.includes(`../data/agents/${slug}Properties`)) {
+    const propImport = `import { compassProperties as ${ident}Properties } from "../data/agents/${ident}Properties";`;
+    if (!resolverContent.includes(`../data/agents/${ident}Properties`)) {
       resolverContent = resolverContent.replace(
         /(import\s+\{\s*compassProperties\s+as\s+\w+Properties\s*\}\s+from\s+["']\.\.\/data\/agents\/\w+Properties["'];?\r?\n)/,
         `$1${propImport}\n`
@@ -60,8 +69,8 @@ export function registerAgentInCodebase({
     name: "${name.replace(/"/g, '\\"')}",
     title: "${title.replace(/"/g, '\\"')}",
     slug: "${slug}",
-    profile: ${slug}Profile,
-    properties: ${slug}Properties,
+    profile: ${ident}Profile,
+    properties: ${ident}Properties,
     previewColor: "${color}",
   },`;
 
@@ -78,8 +87,6 @@ export function registerAgentInCodebase({
     if (resolverModified) {
       fs.writeFileSync(RESOLVER_PATH, resolverContent, "utf-8");
       console.log(`[Auto-Register] ✓ Updated useAgentResolver.js`);
-    } else {
-      console.log(`[Auto-Register] - useAgentResolver.js already up to date`);
     }
   }
 
@@ -88,8 +95,8 @@ export function registerAgentInCodebase({
     let propContent = fs.readFileSync(PROPERTIES_PATH, "utf-8");
 
     // Properties import
-    const propImport = `import { compassProperties as ${slug}Properties } from "../data/agents/${slug}Properties";`;
-    if (!propContent.includes(`../data/agents/${slug}Properties`)) {
+    const propImport = `import { compassProperties as ${ident}Properties } from "../data/agents/${ident}Properties";`;
+    if (!propContent.includes(`../data/agents/${ident}Properties`)) {
       propContent = propContent.replace(
         /(import\s+\{\s*compassProperties\s+as\s+\w+Properties\s*\}\s+from\s+["']\.\.\/data\/agents\/\w+Properties["'];?\r?\n)/,
         `$1${propImport}\n`
@@ -98,7 +105,7 @@ export function registerAgentInCodebase({
     }
 
     // Meta object
-    const metaBlock = `const ${slug}CompassMeta = {
+    const metaBlock = `const ${ident}CompassMeta = {
   lastSynced: "${new Date().toISOString()}",
   totalProperties: ${totalProperties},
   activeCount: ${activeCount},
@@ -109,7 +116,7 @@ export function registerAgentInCodebase({
   syncedAgent: "${name.replace(/"/g, '\\"')}",
 };`;
 
-    if (!propContent.includes(`const ${slug}CompassMeta =`)) {
+    if (!propContent.includes(`const ${ident}CompassMeta =`)) {
       propContent = propContent.replace(
         /(const\s+\w+CompassMeta\s*=\s*\{[\s\S]*?\};\r?\n)/,
         `$1\n${metaBlock}\n`
@@ -118,7 +125,7 @@ export function registerAgentInCodebase({
     }
 
     // getInitialListForAgent branch
-    const listBranch = `  if (agentId === "${slug}") {\n    return ${slug}Properties;\n  }\n`;
+    const listBranch = `  if (agentId === "${slug}") {\n    return ${ident}Properties;\n  }\n`;
     if (!propContent.includes(`agentId === "${slug}"`)) {
       propContent = propContent.replace(
         /(function\s+getInitialListForAgent\s*\([^\)]*\)\s*\{)/,
@@ -128,9 +135,9 @@ export function registerAgentInCodebase({
     }
 
     // getInitialMetaForAgent branch
-    const metaBranch = `  if (agentId === "${slug}") {\n    return ${slug}CompassMeta;\n  }\n`;
+    const metaBranch = `  if (agentId === "${slug}") {\n    return ${ident}CompassMeta;\n  }\n`;
     const metaSearch = "function getInitialMetaForAgent";
-    if (propContent.includes(metaSearch) && !propContent.includes(`return ${slug}CompassMeta;`)) {
+    if (propContent.includes(metaSearch) && !propContent.includes(`return ${ident}CompassMeta;`)) {
       propContent = propContent.replace(
         /(function\s+getInitialMetaForAgent\s*\([^\)]*\)\s*\{)/,
         `$1\n${metaBranch}`
@@ -139,10 +146,10 @@ export function registerAgentInCodebase({
     }
 
     // allKnown fallback array
-    if (!propContent.includes(`...${slug}Properties`)) {
+    if (!propContent.includes(`...${ident}Properties`)) {
       propContent = propContent.replace(
         /const\s+allKnown\s*=\s*\[/,
-        `const allKnown = [...${slug}Properties, `
+        `const allKnown = [...${ident}Properties, `
       );
       propertiesModified = true;
     }
@@ -150,8 +157,6 @@ export function registerAgentInCodebase({
     if (propertiesModified) {
       fs.writeFileSync(PROPERTIES_PATH, propContent, "utf-8");
       console.log(`[Auto-Register] ✓ Updated useProperties.js`);
-    } else {
-      console.log(`[Auto-Register] - useProperties.js already up to date`);
     }
   }
 
@@ -161,18 +166,17 @@ export function registerAgentInCodebase({
 
     const homeRoute = `  {
     path: "/${slug}",
-    name: "${slug}-home",
+    name: "${ident}-home",
     component: HomeView,
   },`;
 
     const manageRoute = `  {
     path: "/${slug}/manage",
-    name: "${slug}-manage",
+    name: "${ident}-manage",
     component: ManageView,
   },`;
 
     if (!routerContent.includes(`path: "/${slug}"`)) {
-      // Insert right before /agent/:agentSlug
       routerContent = routerContent.replace(
         /(\s*\{\s*path:\s*["']\/agent\/:agentSlug["'])/,
         `\n${homeRoute}$1`
@@ -181,7 +185,6 @@ export function registerAgentInCodebase({
     }
 
     if (!routerContent.includes(`path: "/${slug}/manage"`)) {
-      // Insert right before /:agentSlug/manage or /kyle/manage
       routerContent = routerContent.replace(
         /(\s*\{\s*path:\s*["']\/:agentSlug\/manage["'])/,
         `\n${manageRoute}$1`
@@ -192,30 +195,14 @@ export function registerAgentInCodebase({
     if (routerModified) {
       fs.writeFileSync(ROUTER_PATH, routerContent, "utf-8");
       console.log(`[Auto-Register] ✓ Updated router/index.js`);
-    } else {
-      console.log(`[Auto-Register] - router/index.js already up to date`);
     }
   }
 
   return {
     success: true,
+    ident,
     resolverModified,
     propertiesModified,
     routerModified,
   };
-}
-
-// Standalone CLI runner: node scripts/auto-register.js <slug> <name> <title> <agentUrl>
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
-  const [,, slug, name, title, agentUrl] = process.argv;
-  if (!slug || !name) {
-    console.error("Usage: node scripts/auto-register.js <slug> <name> [title] [agentUrl]");
-    process.exit(1);
-  }
-  registerAgentInCodebase({
-    slug,
-    name,
-    title: title || `${name} - Dallas Luxury Specialist`,
-    agentUrl: agentUrl || "",
-  });
 }
