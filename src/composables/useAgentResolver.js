@@ -3,10 +3,12 @@ import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
 import { carsonProfile } from "../data/agents/carsonProfile";
 import { alexProfile } from "../data/agents/alexProfile";
+import { summerProfile } from "../data/agents/summerProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
 import { compassProperties as carsonProperties } from "../data/agents/carsonProperties";
 import { compassProperties as alexProperties } from "../data/agents/alexProperties";
+import { compassProperties as summerProperties } from "../data/agents/summerProperties";
 
 const AGENT_STORAGE_KEY = "kyle_active_agent_v1";
 
@@ -46,6 +48,15 @@ export const availableAgents = [
     profile: alexProfile,
     properties: alexProperties,
     previewColor: "#D97757",
+  },
+  {
+    id: "summer",
+    name: "Summer Graham",
+    title: "Lakewood & East Dallas Luxury Real Estate Specialist",
+    slug: "summer",
+    profile: summerProfile,
+    properties: summerProperties,
+    previewColor: "#4A7C59",
   },
 ];
 

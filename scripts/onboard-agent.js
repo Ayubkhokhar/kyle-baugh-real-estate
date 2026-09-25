@@ -354,6 +354,19 @@ export const compassProperties = ${JSON.stringify(properties, null, 2)};
     heroSubheading = "Top producing luxury advisor representing Dallas's most distinguished residential corridors—Lakewood, University Park, Preston Hollow, and Briarwood.";
     stat3Val = "$3.75M";
     stat3Lbl = "Flagship San Fernando Way Sale";
+  } else if (agentSlug === 'summer') {
+    profileTitle = "Lakewood & East Dallas Luxury Real Estate Specialist";
+    heroHeading = "Boutique Strategy. Lakewood Distinction. Exceptional Dallas Results.";
+    heroSubheading = "Top producing luxury advisor representing architectural residences and premier estates across Lakewood, Belmont Conservation District, and Lake Highlands.";
+    stat3Val = "$2.295M";
+    stat3Lbl = "Flagship Blessing Drive Estate";
+    pedigreeBio = `${agentName} delivers high-touch, design-focused residential advisory across Lakewood, Lower Greenville, Belmont Conservation District, and Lake Highlands. Known for cutting-edge digital marketing, discreet negotiation, and relentless client advocacy.`;
+    quote1 = `${agentName} negotiated our Belmont Avenue home flawlessly. Her knowledge of architectural craftsmanship and pricing dynamics secured full value for our estate.`;
+    quote1Auth = "Harrison & Claire D.";
+    quote1Loc = "Belmont Conservation District";
+    quote2 = `Working with ${agentName} on Blessing Drive was a masterclass in luxury representation. Seamless communication, incredible photography, and zero wasted time.`;
+    quote2Auth = "Jonathan & Sarah P.";
+    quote2Loc = "Lakewood Seller";
   }
 
   const profileContent = `// Dedicated Profile for ${agentName}
