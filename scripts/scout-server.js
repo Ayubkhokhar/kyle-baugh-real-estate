@@ -169,8 +169,8 @@ app.get("/api/outreach/history", (req, res) => {
   }
 });
 
-// 5. EMBEDDED DASHBOARD HTML UI
-app.get("*", (req, res) => {
+// 5. EMBEDDED DASHBOARD HTML UI (Catch-all fallback)
+app.use((req, res) => {
   res.send(`<!DOCTYPE html>
 <html lang="en">
 <head>
