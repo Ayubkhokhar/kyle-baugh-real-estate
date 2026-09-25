@@ -15,6 +15,11 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
+# Environment and Local Mailer Credentials
+.env
+.env.local
+config/mailer-settings.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
