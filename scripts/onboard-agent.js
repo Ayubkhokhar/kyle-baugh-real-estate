@@ -367,6 +367,19 @@ export const compassProperties = ${JSON.stringify(properties, null, 2)};
     quote2 = `Working with ${agentName} on Blessing Drive was a masterclass in luxury representation. Seamless communication, incredible photography, and zero wasted time.`;
     quote2Auth = "Jonathan & Sarah P.";
     quote2Loc = "Lakewood Seller";
+  } else if (agentSlug === 'jd') {
+    profileTitle = "Dallas Modern & Historic Architectural Specialist";
+    heroHeading = "Urban Energy. Architectural Precision. Unmatched Dallas Results.";
+    heroSubheading = "Top producing real estate advisor representing premier residences across Preston Hollow, Lakewood, Swiss Avenue Historic District, and East Dallas.";
+    stat3Val = "$1.795M";
+    stat3Lbl = "Flagship Northaven Road Estate";
+    pedigreeBio = `${agentName} provides high-touch, design-focused residential advisory across Preston Hollow, Lakewood, East Dallas, and the Swiss Avenue Historic District. Known for cutting-edge digital marketing, property valuation rigor, and dedicated client advocacy.`;
+    quote1 = `${agentName} guided our home purchase near Swiss Avenue with unmatched market insight. His attention to structural detail and negotiation tenacity saved us tens of thousands.`;
+    quote1Auth = "Nathan & Victoria K.";
+    quote1Loc = "Swiss Avenue District Buyer";
+    quote2 = `JD represented our property on Northaven Road with supreme professionalism. Instant digital exposure, flawless open house coordination, and closed above expectations.`;
+    quote2Auth = "Robert & Kimberly S.";
+    quote2Loc = "Preston Hollow Seller";
   }
 
   const profileContent = `// Dedicated Profile for ${agentName}

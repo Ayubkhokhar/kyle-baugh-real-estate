@@ -4,11 +4,13 @@ import { amyProfile } from "../data/agents/amyProfile";
 import { carsonProfile } from "../data/agents/carsonProfile";
 import { alexProfile } from "../data/agents/alexProfile";
 import { summerProfile } from "../data/agents/summerProfile";
+import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
 import { compassProperties as carsonProperties } from "../data/agents/carsonProperties";
 import { compassProperties as alexProperties } from "../data/agents/alexProperties";
 import { compassProperties as summerProperties } from "../data/agents/summerProperties";
+import { compassProperties as jdProperties } from "../data/agents/jdProperties";
 
 const AGENT_STORAGE_KEY = "kyle_active_agent_v1";
 
@@ -57,6 +59,15 @@ export const availableAgents = [
     profile: summerProfile,
     properties: summerProperties,
     previewColor: "#4A7C59",
+  },
+  {
+    id: "jd",
+    name: "JD Gonzales",
+    title: "Dallas Modern & Historic Architectural Specialist",
+    slug: "jd",
+    profile: jdProfile,
+    properties: jdProperties,
+    previewColor: "#7A6B58",
   },
 ];
 

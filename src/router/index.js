@@ -39,6 +39,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/jd",
+    name: "jd-home",
+    component: HomeView,
+  },
+  {
     path: "/agent/:agentSlug",
     name: "agent-home",
     component: HomeView,
@@ -76,6 +81,11 @@ const routes = [
   {
     path: "/summer/manage",
     name: "summer-manage",
+    component: ManageView,
+  },
+  {
+    path: "/jd/manage",
+    name: "jd-manage",
     component: ManageView,
   },
   {

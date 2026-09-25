@@ -5,6 +5,7 @@ import { compassProperties as amyProperties } from "../data/agents/amyProperties
 import { compassProperties as carsonProperties } from "../data/agents/carsonProperties";
 import { compassProperties as alexProperties } from "../data/agents/alexProperties";
 import { compassProperties as summerProperties } from "../data/agents/summerProperties";
+import { compassProperties as jdProperties } from "../data/agents/jdProperties";
 import { useAgentResolver } from "./useAgentResolver";
 
 const amyCompassMeta = {
@@ -51,6 +52,17 @@ const summerCompassMeta = {
   syncedAgent: "Summer Graham",
 };
 
+const jdCompassMeta = {
+  lastSynced: "2026-09-25T14:35:35.396Z",
+  totalProperties: 37,
+  activeCount: 1,
+  soldCount: 36,
+  leasedCount: 0,
+  imagesDownloaded: 45,
+  agentUrl: "https://www.compass.com/agents/jd-gonzales/",
+  syncedAgent: "JD Gonzales",
+};
+
 function getAgentStorageKey(agentId) {
   return "properties_" + (agentId || "kyle") + "_v2";
 }
@@ -94,6 +106,9 @@ function getInitialListForAgent(agentId) {
   if (agentId === "summer") {
     return summerProperties;
   }
+  if (agentId === "jd") {
+    return jdProperties;
+  }
   return kyleProperties.length > 0 ? kyleProperties : mergeProperties(defaultProperties, kyleProperties);
 }
 
@@ -109,6 +124,9 @@ function getInitialMetaForAgent(agentId) {
   }
   if (agentId === "summer") {
     return summerCompassMeta;
+  }
+  if (agentId === "jd") {
+    return jdCompassMeta;
   }
   return kyleCompassMeta;
 }
@@ -175,7 +193,7 @@ export function useProperties() {
     const match = properties.value.find((p) => String(p.id) === String(id) || p.slug === String(id));
     if (match) return match;
     // Cross-agent fallback so direct links to any listing never fail
-    const allKnown = [...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
+    const allKnown = [...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
     return allKnown.find((p) => String(p.id) === String(id) || p.slug === String(id)) || null;
   }
 
