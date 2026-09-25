@@ -6,11 +6,11 @@ import { useAgentResolver } from "../composables/useAgentResolver";
 const route = useRoute();
 const router = useRouter();
 const { unreadCount } = useInquiries();
-const { currentAgentId } = useAgentResolver();
+const { currentAgentId, availableAgents } = useAgentResolver();
 
 function navigate(target) {
   if (target.startsWith("#")) {
-    const isHome = ["/", "/kyle", "/amy", "/carson"].includes(route.path) || route.path.startsWith("/agent/");
+    const isHome = route.path === "/" || availableAgents.some((a) => route.path === `/${a.id}`) || route.path.startsWith("/agent/");
     if (isHome) {
       const el = document.querySelector(target);
       if (el) el.scrollIntoView({ behavior: "smooth" });

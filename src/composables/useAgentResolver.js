@@ -2,9 +2,11 @@ import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
 import { carsonProfile } from "../data/agents/carsonProfile";
+import { alexProfile } from "../data/agents/alexProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
 import { compassProperties as carsonProperties } from "../data/agents/carsonProperties";
+import { compassProperties as alexProperties } from "../data/agents/alexProperties";
 
 const AGENT_STORAGE_KEY = "kyle_active_agent_v1";
 
@@ -35,6 +37,15 @@ export const availableAgents = [
     profile: carsonProfile,
     properties: carsonProperties,
     previewColor: "#3B6E8C",
+  },
+  {
+    id: "alex",
+    name: "Alex Marler",
+    title: "Lakewood & University Park Luxury Specialist",
+    slug: "alex",
+    profile: alexProfile,
+    properties: alexProperties,
+    previewColor: "#D97757",
   },
 ];
 

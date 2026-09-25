@@ -9,7 +9,7 @@ const router = useRouter();
 const route = useRoute();
 const { siteSettings } = useSiteSettings();
 const { unreadCount } = useInquiries();
-const { currentAgentId } = useAgentResolver();
+const { currentAgentId, availableAgents } = useAgentResolver();
 
 const isDrawerOpen = ref(false);
 
@@ -24,7 +24,7 @@ function closeDrawer() {
 function navigateTo(hashOrPath) {
   closeDrawer();
   if (hashOrPath.startsWith("#")) {
-    const isHome = ["/", "/kyle", "/amy", "/carson"].includes(route.path) || route.path.startsWith("/agent/");
+    const isHome = route.path === "/" || availableAgents.some((a) => route.path === `/${a.id}`) || route.path.startsWith("/agent/");
     if (isHome) {
       const el = document.querySelector(hashOrPath);
       if (el) {

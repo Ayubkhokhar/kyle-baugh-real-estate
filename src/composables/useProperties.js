@@ -3,6 +3,7 @@ import { defaultProperties } from "../data/seedProperties";
 import { compassProperties as kyleProperties, compassSyncMeta as kyleCompassMeta } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
 import { compassProperties as carsonProperties } from "../data/agents/carsonProperties";
+import { compassProperties as alexProperties } from "../data/agents/alexProperties";
 import { useAgentResolver } from "./useAgentResolver";
 
 const amyCompassMeta = {
@@ -25,6 +26,17 @@ const carsonCompassMeta = {
   imagesDownloaded: 45,
   agentUrl: "https://www.compass.com/agents/carson-hill/",
   syncedAgent: "Carson Hill",
+};
+
+const alexCompassMeta = {
+  lastSynced: "2026-09-25T08:58:04.000Z",
+  totalProperties: 38,
+  activeCount: 1,
+  soldCount: 37,
+  leasedCount: 0,
+  imagesDownloaded: 46,
+  agentUrl: "https://www.compass.com/agents/alex-marler/",
+  syncedAgent: "Alex Marler",
 };
 
 function getAgentStorageKey(agentId) {
@@ -64,6 +76,9 @@ function getInitialListForAgent(agentId) {
   if (agentId === "carson") {
     return carsonProperties;
   }
+  if (agentId === "alex") {
+    return alexProperties;
+  }
   return kyleProperties.length > 0 ? kyleProperties : mergeProperties(defaultProperties, kyleProperties);
 }
 
@@ -73,6 +88,9 @@ function getInitialMetaForAgent(agentId) {
   }
   if (agentId === "carson") {
     return carsonCompassMeta;
+  }
+  if (agentId === "alex") {
+    return alexCompassMeta;
   }
   return kyleCompassMeta;
 }
@@ -139,7 +157,7 @@ export function useProperties() {
     const match = properties.value.find((p) => String(p.id) === String(id) || p.slug === String(id));
     if (match) return match;
     // Cross-agent fallback so direct links to any listing never fail
-    const allKnown = [...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
+    const allKnown = [...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
     return allKnown.find((p) => String(p.id) === String(id) || p.slug === String(id)) || null;
   }
 

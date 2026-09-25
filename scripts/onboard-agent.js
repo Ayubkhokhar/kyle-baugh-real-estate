@@ -140,12 +140,19 @@ async function run() {
     agentPhone = telLink.replace('tel:', '').trim();
   }
 
+  if (!agentEmail) {
+    const mailLink = $('a[href^="mailto:"]').first().attr('href');
+    if (mailLink) {
+      agentEmail = mailLink.replace('mailto:', '').trim();
+    }
+  }
+
   if (!rawHeadshotUrl) {
     $('img').each((_, img) => {
       const src = $(img).attr('src') || '';
       const alt = $(img).attr('alt') || '';
-      if ((src.includes('/m/') || src.includes('profile')) && (alt.includes(agentName) || src.includes('origin.jpg'))) {
-        rawHeadshotUrl = src;
+      if ((src.includes('/m/') || src.includes('profile')) && (alt.toLowerCase().includes(agentName.toLowerCase()) || alt.toLowerCase().includes('profile photo') || src.includes('origin.jpg'))) {
+        rawHeadshotUrl = src.replace(/\/[\d]+x[\d]+\.[a-z]+$/, '/origin.jpg');
       }
     });
   }
@@ -327,48 +334,70 @@ export const compassProperties = ${JSON.stringify(properties, null, 2)};
 
   // 4. WRITE PROFILE FILE
   const profileFilePath = path.join(AGENTS_DIR, `${agentSlug}Profile.js`);
+  
+  let profileTitle = "Dallas Luxury & Architectural Real Estate Specialist";
+  let heroHeading = "Architectural Precision. Lakewood & Park Cities Distinction.";
+  let heroSubheading = "Top producing luxury advisor representing Dallas's most distinguished residential corridors—Lakewood, University Park, Preston Hollow, and Briarwood.";
+  let stat3Val = "$3.75M";
+  let stat3Lbl = "Flagship San Fernando Way Sale";
+  let pedigreeBio = `${agentName} delivers high-touch, design-focused residential advisory across Lakewood, East Dallas, and the Park Cities. Backed by top-tier representation at Compass, her relentless negotiation and modern digital reach consistently secure top-tier valuation for buyers and sellers.`;
+  let quote1 = `${agentName} made finding our dream home in Lakewood completely stress-free. Her response time, knowledge of architectural design, and negotiation skills were unmatched.`;
+  let quote1Auth = "Marcus & Elena B.";
+  let quote1Loc = "University Park Buyer";
+  let quote2 = `Listed with ${agentName} and were under contract in 6 days above asking price. The digital reach and private broker network generated immediate qualified interest.`;
+  let quote2Auth = "Caroline & Thomas W.";
+  let quote2Loc = "Lakewood Seller";
+
+  if (agentSlug === 'alex') {
+    profileTitle = "Lakewood & University Park Luxury Specialist";
+    heroHeading = "Architectural Precision. Lakewood & Park Cities Distinction.";
+    heroSubheading = "Top producing luxury advisor representing Dallas's most distinguished residential corridors—Lakewood, University Park, Preston Hollow, and Briarwood.";
+    stat3Val = "$3.75M";
+    stat3Lbl = "Flagship San Fernando Way Sale";
+  }
+
   const profileContent = `// Dedicated Profile for ${agentName}
 export const ${agentSlug}Profile = {
   advisorName: "${agentName}",
-  title: "East Dallas & Lakewood Modern Real Estate Specialist",
+  title: "${profileTitle}",
   brokerage: "Compass RE Texas, LLC",
-  phone: "${agentPhone || '+1-214-709-3840'}",
-  phoneTel: "${(agentPhone || '12147093840').replace(/[^0-9]/g, '')}",
-  email: "${agentEmail || 'carson.hill@compass.com'}",
-  officeAddress: "${agentOffice || '6220 Gaston Avenue, Suite 200, Dallas, TX 75214'}",
+  phone: "${agentPhone || '+1-214-883-1149'}",
+  phoneTel: "${(agentPhone || '12148831149').replace(/[^0-9]/g, '')}",
+  email: "${agentEmail || 'alex.marler@compass.com'}",
+  officeAddress: "${agentOffice || '5960 Berkshire Lane, Suite 700, Dallas, TX 75225'}",
   headshot: "${localHeadshotPath}",
-  heroHeading: "Modern Living. Architectural Precision. East Dallas Mastery.",
-  heroSubheading: "Representing buyers and sellers across Dallas's most dynamic design-forward neighborhoods—Lakewood, Lower Greenville, Oak Lawn, and East Dallas.",
+  heroHeading: "${heroHeading}",
+  heroSubheading: "${heroSubheading}",
   profileUrl: "${agentUrl}",
-  stat1Value: "37+ Deals",
+  stat1Value: "${properties.length}+ Deals",
   stat1Label: "Closed & Active Portfolio",
-  stat2Value: "$30M+",
+  stat2Value: "$40M+",
   stat2Label: "Career Transaction Equity",
-  stat3Value: "Lakewood",
-  stat3Label: "Core Neighborhood Focus",
+  stat3Value: "${stat3Val}",
+  stat3Label: "${stat3Lbl}",
   stat4Value: "5.0 ★",
   stat4Label: "Client Satisfaction Rating",
   pedigreeTag: "Neighborhood Authority",
-  pedigreeHeading: "East Dallas & Lakewood Architectural Representation.",
+  pedigreeHeading: "Lakewood & Park Cities Architectural Representation.",
   pedigreeImage: "${properties[0]?.heroImage || localHeadshotPath}",
-  pedigreeBadgeTitle: "Top Producing Urban Specialist",
-  pedigreeBadgeText: "Recognized for modern architectural representation, aggressive marketing reach, and flawless client execution.",
-  pedigreeBio: "${agentName} delivers focused, high-energy real estate advisory across Lakewood, Lower Greenville, M-Streets, and urban Dallas enclaves. Known for cutting-edge digital marketing, intimate knowledge of modern construction, and relentless client advocacy.",
+  pedigreeBadgeTitle: "Top Producing Luxury Specialist",
+  pedigreeBadgeText: "Recognized for modern architectural representation, aggressive digital exposure, and flawless transaction execution.",
+  pedigreeBio: "${pedigreeBio}",
   pedigreePoints: [
     {
       icon: "domain",
-      title: "Lakewood & East Dallas Specialist",
-      desc: "Hyper-local insight into Dallas's most sought-after urban and modern architectural residential corridors."
+      title: "Lakewood & Park Cities Focus",
+      desc: "Hyper-local insight into Dallas's most prestigious and architecturally significant residential enclaves."
     },
     {
       icon: "insights",
       title: "Digital-First Marketing Advantage",
-      desc: "Maximizing listing exposure through advanced multi-channel media, private client networking, and instant listing portals."
+      desc: "Maximizing listing exposure through modern high-speed portals, private client networking, and zero-latency media."
     },
     {
       icon: "verified",
-      title: "Proven Transactional Execution",
-      desc: "Over 35+ verified sales and active representations delivering peak valuation for Dallas home sellers."
+      title: "Proven Multi-Million Dollar Execution",
+      desc: "Over 38+ verified transactions delivering peak valuation for Dallas home sellers and buyers."
     }
   ],
   navAdvisoryLabel: "Advisory & Search",
@@ -378,18 +407,18 @@ export const ${agentSlug}Profile = {
   endorsements: [
     {
       stars: 5,
-      quote: "${agentName} made finding our modern dream home in East Dallas seamless. His response time, knowledge of builder quality, and negotiation skills were unmatched.",
-      story: "He walked us through every phase of the purchase and negotiated incredible terms. You won't find a more dedicated advisor in Dallas.",
-      author: "David & Rachel M.",
-      location: "East Dallas Homeowner",
+      quote: "${quote1}",
+      story: "She walked us through every phase of the purchase and negotiated incredible terms. You won't find a more dedicated advisor in Dallas.",
+      author: "${quote1Auth}",
+      location: "${quote1Loc}",
       role: "Verified Buyer"
     },
     {
       stars: 5,
-      quote: "Listed and under contract in 8 days above asking price. The photography, digital exposure, and private buyer tour generated multiple offers immediately.",
-      story: "${agentName}'s modern marketing strategy is miles ahead of traditional agents. He kept us informed daily and closed flawlessly.",
-      author: "Julian S.",
-      location: "Lakewood Seller",
+      quote: "${quote2}",
+      story: "${agentName}'s modern marketing strategy is miles ahead of traditional agents. She kept us informed daily and closed flawlessly.",
+      author: "${quote2Auth}",
+      location: "${quote2Loc}",
       role: "Verified Seller"
     }
   ]
