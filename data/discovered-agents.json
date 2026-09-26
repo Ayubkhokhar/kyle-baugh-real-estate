@@ -32,8 +32,9 @@
     "phone": "(214) 642-8800",
     "email": "christine.leite@compass.com",
     "activeListingsCount": 3,
-    "status": "ready_to_launch",
-    "notes": "High-touch luxury advisor with background in custom residential design."
+    "status": "launched",
+    "notes": "High-touch luxury advisor with background in custom residential design.",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/christine-leite"
   },
   {
     "slug": "megan-johnson",

@@ -54,9 +54,24 @@ export function renderTemplate(templateKey, agentData) {
   const liveUrl = `${baseUrl}/${slug}`;
   const manageUrl = `${baseUrl}/${slug}/manage`;
 
-  const activeListing = agentData.activeListingAddress
-    ? agentData.activeListingAddress
-    : (agentData.name ? `${agentData.name}'s portfolio` : "your Dallas portfolio");
+  let activeListing = agentData.activeListingAddress;
+  if (!activeListing && slug) {
+    try {
+      const camel = slug.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+      const pFile = slug === "kyle" ? "compassProperties.js" : `${camel}Properties.js`;
+      const pPath = slug === "kyle"
+        ? path.join(rootDir, "src", "data", pFile)
+        : path.join(rootDir, "src", "data", "agents", pFile);
+      if (fs.existsSync(pPath)) {
+        const pContent = fs.readFileSync(pPath, "utf-8");
+        const matchAddr = pContent.match(/address:\s*["']([^,"']+)/i);
+        if (matchAddr) activeListing = matchAddr[1].trim();
+      }
+    } catch (e) {}
+  }
+  if (!activeListing) {
+    activeListing = agentData.name ? `${agentData.name}'s portfolio` : "your Dallas portfolio";
+  }
 
   const flagshipSale = agentData.topSoldAddress
     ? `flagship sale at ${agentData.topSoldAddress}`

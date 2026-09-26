@@ -29,11 +29,86 @@ app.use((req, res, next) => {
   next();
 });
 
-// 1. API: DISCOVERED AGENTS
+// Helper: Get active roster enriched with CRM outreach state
+function getActiveRoster() {
+  const resolverPath = path.join(rootDir, "src", "composables", "useAgentResolver.js");
+  if (!fs.existsSync(resolverPath)) return [];
+  const content = fs.readFileSync(resolverPath, "utf-8");
+  const matches = [...content.matchAll(/id:\s*["']([^"']+)["'],\s*name:\s*["']([^"']+)["'],\s*title:\s*["']([^"']+)["']/g)];
+
+  const discovered = getDiscoveredAgents();
+  let history = [];
+  if (fs.existsSync(historyPath)) {
+    try {
+      history = JSON.parse(fs.readFileSync(historyPath, "utf-8"));
+    } catch (e) {}
+  }
+
+  // Pre-load known emails & phones from profile files
+  const profileContacts = {
+    "kyle": { email: "kyle.baugh@compass.com", phone: "(214) 980-3933" },
+    "amy": { email: "amy.detwiler@compass.com", phone: "(214) 536-8680" },
+    "carson": { email: "carson.hill@compass.com", phone: "(214) 709-3840" },
+    "alex": { email: "alex.marler@compass.com", phone: "(214) 883-1149" },
+    "summer": { email: "summer.graham@compass.com", phone: "(214) 699-6640" },
+    "jd": { email: "jd.gonzales@compass.com", phone: "(214) 450-2611" },
+    "liz-chalfant": { email: "liz.chalfant@compass.com", phone: "(214) 732-2344" },
+    "christine-leite": { email: "christine.leite@compass.com", phone: "(469) 471-7489" },
+  };
+
+  return matches.map((m) => {
+    const slug = m[1];
+    const name = m[2];
+    const title = m[3];
+
+    const disc = discovered.find((d) => d.slug === slug || (d.name && d.name.toLowerCase() === name.toLowerCase()));
+    const sentHistory = history.filter((h) => h.slug === slug || (disc && disc.email && h.recipient === disc.email));
+    const lastHistory = sentHistory[0];
+
+    const fallback = profileContacts[slug] || {};
+    const email = disc?.email || fallback.email || "";
+    const phone = disc?.phone || fallback.phone || "";
+
+    const contactCount = disc?.contactCount || sentHistory.length || 0;
+    const isContacted = contactCount > 0 || disc?.status === "contacted";
+    const isReplied = disc?.status === "replied";
+
+    let outreachStatus = "needs_outreach";
+    if (isReplied) {
+      outreachStatus = "replied";
+    } else if (isContacted) {
+      outreachStatus = "contacted";
+    }
+
+    return {
+      id: slug,
+      slug,
+      name,
+      title,
+      email,
+      phone,
+      liveUrl: `https://realestate-advisory.ayubkhokhar786.workers.dev/${slug}`,
+      manageUrl: `https://realestate-advisory.ayubkhokhar786.workers.dev/${slug}/manage`,
+      outreachStatus, // 'needs_outreach' | 'contacted' | 'replied'
+      contactCount,
+      lastContactedAt: disc?.lastContactedAt || lastHistory?.sentAt || null,
+      lastSubject: disc?.lastSubject || lastHistory?.subject || null,
+      contactStage: disc?.contactStage || (lastHistory ? "initial_sent" : null),
+    };
+  });
+}
+
+// 1. API: DISCOVERED AGENTS (Unbuilt Prospects Only)
 app.get("/api/agents/discovered", (req, res) => {
   try {
+    const roster = getActiveRoster();
+    const builtSlugs = new Set(roster.map((r) => r.slug));
+
     const agents = getDiscoveredAgents();
-    res.json({ success: true, agents });
+    // Exclude already-built agents from the discovery pool!
+    const unbuiltAgents = agents.filter((a) => !builtSlugs.has(a.slug));
+
+    res.json({ success: true, agents: unbuiltAgents, totalBuilt: roster.length });
   } catch (e) {
     res.status(500).json({ success: false, error: e.message });
   }
@@ -48,19 +123,10 @@ app.post("/api/agents/crawl", async (req, res) => {
   }
 });
 
-// 2. API: ACTIVE ROSTER IN CODEBASE
+// 2. API: ACTIVE ROSTER IN CODEBASE (Enriched with Outreach Status)
 app.get("/api/agents/roster", (req, res) => {
   try {
-    const resolverPath = path.join(rootDir, "src", "composables", "useAgentResolver.js");
-    const content = fs.readFileSync(resolverPath, "utf-8");
-    const matches = [...content.matchAll(/id:\s*["']([^"']+)["'],\s*name:\s*["']([^"']+)["'],\s*title:\s*["']([^"']+)["']/g)];
-    const roster = matches.map((m) => ({
-      id: m[1],
-      name: m[2],
-      title: m[3],
-      liveUrl: `https://realestate-advisory.ayubkhokhar786.workers.dev/${m[1]}`,
-      manageUrl: `https://realestate-advisory.ayubkhokhar786.workers.dev/${m[1]}/manage`,
-    }));
+    const roster = getActiveRoster();
     res.json({ success: true, roster });
   } catch (e) {
     res.status(500).json({ success: false, error: e.message });
@@ -417,9 +483,23 @@ app.use((req, res) => {
 
     <!-- TAB 3: LIVE PORTALS ROSTER -->
     <section id="view-roster" class="hidden space-y-4">
-      <div>
-        <h2 class="text-xl font-bold text-white">Live Client Portals</h2>
-        <p class="text-sm text-slate-400">Currently active isolated websites on Cloudflare Edge.</p>
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-xl font-bold text-white">Live Client Portals & Outreach</h2>
+          <p class="text-sm text-slate-400">Currently active isolated websites on Cloudflare Edge with real-time contact status.</p>
+        </div>
+        <div class="flex items-center gap-2 text-xs">
+          <span class="text-slate-500 font-medium">FILTER:</span>
+          <button onclick="filterRoster('all')" id="rosterFilter-all" class="px-3 py-1 rounded-full bg-amber-500 text-slate-950 font-bold transition">
+            All (<span id="countRosterAll">0</span>)
+          </button>
+          <button onclick="filterRoster('needs_outreach')" id="rosterFilter-needs_outreach" class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white transition">
+            ⏳ Needs Outreach (<span id="countRosterNeeds">0</span>)
+          </button>
+          <button onclick="filterRoster('contacted')" id="rosterFilter-contacted" class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white transition">
+            ✓ Contacted (<span id="countRosterContacted">0</span>)
+          </button>
+        </div>
       </div>
       <div id="rosterGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <!-- Loaded via JavaScript -->
@@ -826,6 +906,7 @@ app.use((req, res) => {
           body: JSON.stringify({ slug, status: newStatus })
         });
         loadDiscoveredAgents();
+        loadRoster();
       } catch (e) {
         alert('Failed to update status: ' + e.message);
       }
@@ -883,35 +964,152 @@ app.use((req, res) => {
       }
     }
 
-    // 4. Load Roster
+    // 4. Load Roster & CRM Controls
+    let rawRosterList = [];
+    let activeRosterFilter = 'all';
+
+    function filterRoster(filterType) {
+      activeRosterFilter = filterType;
+      ['all', 'needs_outreach', 'contacted'].forEach(f => {
+        const btn = document.getElementById('rosterFilter-' + f);
+        if (btn) {
+          if (f === filterType) {
+            btn.className = 'px-3 py-1 rounded-full bg-amber-500 text-slate-950 font-bold transition';
+          } else {
+            btn.className = 'px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white transition';
+          }
+        }
+      });
+      renderRosterGrid();
+    }
+
     async function loadRoster() {
-      const grid = document.getElementById('rosterGrid');
       try {
         const res = await fetch('/api/agents/roster');
         const data = await res.json();
-        document.getElementById('rosterCount').textContent = data.roster.length;
-        grid.innerHTML = data.roster.map(r => \`
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 flex flex-col justify-between space-y-4">
+        rawRosterList = data.roster || [];
+        updateRosterCounts();
+        renderRosterGrid();
+      } catch (e) {
+        document.getElementById('rosterGrid').innerHTML = '<div class="p-6 text-red-400">Failed to load roster.</div>';
+      }
+    }
+
+    function updateRosterCounts() {
+      const total = rawRosterList.length;
+      const needs = rawRosterList.filter(r => r.outreachStatus === 'needs_outreach').length;
+      const contacted = rawRosterList.filter(r => r.outreachStatus === 'contacted' || r.outreachStatus === 'replied').length;
+
+      const badgeHeader = document.getElementById('rosterCount');
+      if (badgeHeader) badgeHeader.textContent = total;
+
+      const elAll = document.getElementById('countRosterAll');
+      if (elAll) elAll.textContent = total;
+
+      const elNeeds = document.getElementById('countRosterNeeds');
+      if (elNeeds) elNeeds.textContent = needs;
+
+      const elContacted = document.getElementById('countRosterContacted');
+      if (elContacted) elContacted.textContent = contacted;
+    }
+
+    function renderRosterGrid() {
+      const grid = document.getElementById('rosterGrid');
+      let filtered = rawRosterList;
+
+      if (activeRosterFilter === 'needs_outreach') {
+        filtered = rawRosterList.filter(r => r.outreachStatus === 'needs_outreach');
+      } else if (activeRosterFilter === 'contacted') {
+        filtered = rawRosterList.filter(r => r.outreachStatus === 'contacted' || r.outreachStatus === 'replied');
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="p-8 text-center text-slate-500 col-span-3">No portals found in this category.</div>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map(r => {
+        const isContacted = r.outreachStatus === 'contacted' || r.contactCount > 0;
+        const isReplied = r.outreachStatus === 'replied';
+        const lastDate = r.lastContactedAt ? new Date(r.lastContactedAt).toLocaleDateString() : '';
+
+        return \`
+          <div class="bg-slate-900 border \${isReplied ? 'border-purple-500/50 bg-purple-500/5' : (isContacted ? 'border-blue-500/40 bg-blue-500/5' : 'border-amber-500/30 bg-amber-500/5')} rounded-xl p-5 flex flex-col justify-between space-y-4">
             <div>
               <div class="flex items-center justify-between mb-1">
                 <h3 class="font-bold text-white text-base">\${r.name}</h3>
-                <span class="text-xs font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">/\${r.id}</span>
+                <span class="text-xs font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">/\${r.slug}</span>
               </div>
-              <p class="text-xs text-slate-400">\${r.title}</p>
+              <p class="text-xs text-slate-400 mb-2">\${r.title}</p>
+              
+              <div class="space-y-1 text-xs text-slate-400 mb-3 bg-slate-950/60 p-2.5 rounded border border-slate-800/60">
+                <div class="flex items-center gap-1.5 truncate">
+                  <i class="fa-solid fa-envelope text-slate-500 w-3.5"></i>
+                  <span class="text-slate-300 font-mono">\${r.email || 'Email not listed'}</span>
+                </div>
+                \${r.phone ? \`
+                  <div class="flex items-center gap-1.5">
+                    <i class="fa-solid fa-phone text-slate-500 w-3.5"></i>
+                    <span>\${r.phone}</span>
+                  </div>
+                \` : ''}
+              </div>
+
+              <!-- Status Badge -->
+              <div class="flex items-center justify-between">
+                \${isReplied ? \`
+                  <span class="text-xs px-2.5 py-1 rounded font-mono bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                    💬 Replied
+                  </span>
+                \` : (isContacted ? \`
+                  <span class="text-xs px-2.5 py-1 rounded font-mono bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                    ✓ Contacted (\${lastDate || 'Sent'})
+                  </span>
+                \` : \`
+                  <span class="text-xs px-2.5 py-1 rounded font-mono bg-amber-500/20 text-amber-400 border border-amber-500/30">
+                    ⏳ Built · Needs Outreach
+                  </span>
+                \`)}
+                <span class="text-[11px] text-slate-500 font-mono">Cloudflare Edge</span>
+              </div>
+
+              \${r.lastSubject ? \`
+                <p class="text-xs text-slate-400 mt-2 bg-slate-950/80 p-2 rounded truncate border border-slate-800/80">
+                  <i class="fa-solid fa-paper-plane mr-1 text-slate-500"></i> \${r.lastSubject}
+                </p>
+              \` : ''}
             </div>
-            <div class="pt-3 border-t border-slate-800 flex items-center justify-between gap-2">
-              <a href="\${r.liveUrl}" target="_blank" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 rounded">
-                <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i> View Portal
-              </a>
-              <a href="\${r.manageUrl}" target="_blank" class="px-3 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs font-semibold rounded">
-                Manage Console
-              </a>
+
+            <div class="pt-3 border-t border-slate-800/80 space-y-2">
+              <!-- Live Site Links -->
+              <div class="grid grid-cols-2 gap-2">
+                <a href="\${r.liveUrl}" target="_blank" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs font-medium text-slate-200 rounded text-center transition">
+                  <i class="fa-solid fa-arrow-up-right-from-square mr-1"></i> View Portal
+                </a>
+                <a href="\${r.manageUrl}" target="_blank" class="px-3 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs font-semibold rounded text-center transition">
+                  Manage Console
+                </a>
+              </div>
+
+              <!-- Outreach Action Controls -->
+              \${isContacted ? \`
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                  <button onclick="openEmailForAgent('\${r.name}', '\${r.slug}', '\${r.email}', 'followup_ignored')" class="px-2.5 py-1.5 bg-blue-600/30 hover:bg-blue-600/40 border border-blue-500/50 text-blue-300 font-semibold rounded text-xs text-center transition">
+                    🔄 Follow-Up #1
+                  </button>
+                  <button onclick="openEmailForAgent('\${r.name}', '\${r.slug}', '\${r.email}', 'followup_silent')" class="px-2.5 py-1.5 bg-purple-600/30 hover:bg-purple-600/40 border border-purple-500/50 text-purple-300 font-semibold rounded text-xs text-center transition">
+                    💬 Follow-Up #2
+                  </button>
+                </div>
+              \` : \`
+                <button onclick="openEmailForAgent('\${r.name}', '\${r.slug}', '\${r.email}', 'initial')" class="w-full px-3 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs text-center transition flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/10">
+                  <i class="fa-solid fa-paper-plane"></i> Send Initial Pitch
+                </button>
+              \`}
             </div>
           </div>
-        \`).join('');
-      } catch (e) {
-        grid.innerHTML = '<div class="p-6 text-red-400">Failed to load roster.</div>';
-      }
+        \`;
+      }).join('');
     }
 
     // 5. Load Outreach History
@@ -1016,6 +1214,7 @@ app.use((req, res) => {
           closeEmailModal();
           loadOutreachHistory();
           loadDiscoveredAgents(); // Refreshes CRM status to Contacted
+          loadRoster(); // Refreshes Roster cards to Contacted!
         } else {
           alert('Failed to send email: ' + (data.error || 'Unknown error'));
         }
