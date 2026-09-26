@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "liz-chalfant",
+    "name": "Liz Chalfant",
+    "brokerage": "Compass RE Texas, LLC",
+    "territory": "Lakewood, Highland Park & Preston Hollow",
+    "url": "https://www.compass.com/agents/liz-chalfant/",
+    "phone": "(214) 732-2344",
+    "email": "liz.chalfant@compass.com",
+    "activeListingsCount": 2,
+    "status": "ready_to_launch",
+    "notes": "Specializes in luxury architectural residences and premier Dallas enclaves."
+  },
+  {
+    "slug": "christine-leite",
+    "name": "Christine Leite",
+    "brokerage": "Compass RE Texas, LLC",
+    "territory": "Dallas Luxury & Custom Estates",
+    "url": "https://www.compass.com/agents/christine-leite/",
+    "phone": "(214) 642-8800",
+    "email": "christine.leite@compass.com",
+    "activeListingsCount": 3,
+    "status": "ready_to_launch",
+    "notes": "High-touch luxury advisor with background in custom residential design."
+  },
+  {
+    "slug": "megan-johnson",
+    "name": "Megan Johnson",
+    "brokerage": "Compass RE Texas, LLC",
+    "territory": "Preston Hollow & North Dallas",
+    "url": "https://www.compass.com/agents/megan-johnson/",
+    "phone": "(214) 538-3400",
+    "email": "megan.johnson@compass.com",
+    "activeListingsCount": 2,
+    "status": "ready_to_launch",
+    "notes": "Known for design and construction acumen in Dallas residential advisory."
+  },
+  {
+    "slug": "erika-orbin",
+    "name": "Erika Orbin",
+    "brokerage": "Compass RE Texas, LLC",
+    "territory": "Park Cities & Historic Dallas",
+    "url": "https://www.compass.com/agents/erika-orbin/",
+    "phone": "(214) 912-7000",
+    "email": "erika.orbin@compass.com",
+    "activeListingsCount": 2,
+    "status": "ready_to_launch",
+    "notes": "Deep family roots in Dallas residential development and estates."
+  }
+]

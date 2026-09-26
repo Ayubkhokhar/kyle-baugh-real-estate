@@ -1,12 +1,14 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { lizChalfantProfile } from "../data/agents/lizChalfantProfile";
 import { carsonProfile } from "../data/agents/carsonProfile";
 import { alexProfile } from "../data/agents/alexProfile";
 import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as lizChalfantProperties } from "../data/agents/lizChalfantProperties";
 import { compassProperties as carsonProperties } from "../data/agents/carsonProperties";
 import { compassProperties as alexProperties } from "../data/agents/alexProperties";
 import { compassProperties as summerProperties } from "../data/agents/summerProperties";
@@ -68,6 +70,15 @@ export const availableAgents = [
     profile: jdProfile,
     properties: jdProperties,
     previewColor: "#7A6B58",
+  },
+  {
+    id: "liz-chalfant",
+    name: "Liz Chalfant",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "liz-chalfant",
+    profile: lizChalfantProfile,
+    properties: lizChalfantProperties,
+    previewColor: "#BFA181",
   },
 ];
 

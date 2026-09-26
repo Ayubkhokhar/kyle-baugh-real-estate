@@ -2,6 +2,7 @@ import { ref, computed, watch } from "vue";
 import { defaultProperties } from "../data/seedProperties";
 import { compassProperties as kyleProperties, compassSyncMeta as kyleCompassMeta } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as lizChalfantProperties } from "../data/agents/lizChalfantProperties";
 import { compassProperties as carsonProperties } from "../data/agents/carsonProperties";
 import { compassProperties as alexProperties } from "../data/agents/alexProperties";
 import { compassProperties as summerProperties } from "../data/agents/summerProperties";
@@ -17,6 +18,17 @@ const amyCompassMeta = {
   imagesDownloaded: 45,
   agentUrl: "https://www.compass.com/agents/amy-detwiler/",
   syncedAgent: "Amy Detwiler",
+};
+
+const lizChalfantCompassMeta = {
+  lastSynced: "2026-09-26T05:03:51.558Z",
+  totalProperties: 22,
+  activeCount: 1,
+  soldCount: 18,
+  leasedCount: 0,
+  imagesDownloaded: 30,
+  agentUrl: "https://www.compass.com/agents/liz-chalfant/",
+  syncedAgent: "Liz Chalfant",
 };
 
 const carsonCompassMeta = {
@@ -94,6 +106,10 @@ function mergeProperties(existingList, incomingCompassList) {
 }
 
 function getInitialListForAgent(agentId) {
+  if (agentId === "liz-chalfant") {
+    return lizChalfantProperties;
+  }
+
   if (agentId === "amy") {
     return amyProperties;
   }
@@ -113,6 +129,10 @@ function getInitialListForAgent(agentId) {
 }
 
 function getInitialMetaForAgent(agentId) {
+  if (agentId === "liz-chalfant") {
+    return lizChalfantCompassMeta;
+  }
+
   if (agentId === "amy") {
     return amyCompassMeta;
   }
@@ -193,7 +213,7 @@ export function useProperties() {
     const match = properties.value.find((p) => String(p.id) === String(id) || p.slug === String(id));
     if (match) return match;
     // Cross-agent fallback so direct links to any listing never fail
-    const allKnown = [...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
+    const allKnown = [...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
     return allKnown.find((p) => String(p.id) === String(id) || p.slug === String(id)) || null;
   }
 
