@@ -5,4 +5,8 @@ import "./style.css";
 
 const app = createApp(App);
 app.use(router);
-app.mount("#app");
+
+// Ensure router has resolved initial location before mounting to prevent any flash of agent navigation
+router.isReady().then(() => {
+  app.mount("#app");
+});

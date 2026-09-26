@@ -15,7 +15,9 @@ const { currentTemplate } = useThemeTemplate();
 const toastRef = ref(null);
 
 const isSpecialView = computed(() => {
-  const p = route?.path?.toLowerCase() || "";
+  if (route.meta?.hideAgentNav) return true;
+  const rawPath = route?.path || (typeof window !== "undefined" ? window.location.pathname : "");
+  const p = rawPath.toLowerCase().replace(/\/+$/, "") || "/";
   return p === "/" || p === "/login" || p === "/portal";
 });
 

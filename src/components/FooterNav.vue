@@ -1,16 +1,25 @@
 <script setup>
 import { computed } from "vue";
+import { useRoute } from "vue-router";
 import { useSiteSettings } from "../composables/useSiteSettings";
 import { useAgentResolver } from "../composables/useAgentResolver";
 
+const route = useRoute();
 const { siteSettings } = useSiteSettings();
 const { currentAgentId } = useAgentResolver();
 const currentYear = new Date().getFullYear();
 const basePath = computed(() => (currentAgentId.value === "kyle" ? "/kyle" : `/${currentAgentId.value}`));
+
+const shouldHide = computed(() => {
+  if (route.meta?.hideAgentNav) return true;
+  const rawPath = route?.path || (typeof window !== "undefined" ? window.location.pathname : "");
+  const p = rawPath.toLowerCase().replace(/\/+$/, "") || "/";
+  return p === "/" || p === "/login" || p === "/portal";
+});
 </script>
 
 <template>
-  <footer class="bg-primary text-canvas-white pt-16 pb-24 md:pb-16 border-t border-border-subtle">
+  <footer v-if="!shouldHide" class="bg-primary text-canvas-white pt-16 pb-24 md:pb-16 border-t border-border-subtle">
     <div class="max-w-7xl mx-auto px-5 lg:px-12">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-charcoal-body/40">
         <!-- Brand & Advisory Authority Column -->

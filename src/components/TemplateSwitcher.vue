@@ -1,11 +1,20 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import { useRoute } from "vue-router";
 import { useThemeTemplate } from "../composables/useThemeTemplate";
 import { useAgentResolver } from "../composables/useAgentResolver";
 
+const route = useRoute();
 const emit = defineEmits(["toast"]);
 const { templates, currentTemplate, setTemplate } = useThemeTemplate();
 const { availableAgents, currentAgentId, setAgent, getAgentShareUrl } = useAgentResolver();
+
+const shouldHide = computed(() => {
+  if (route.meta?.hideAgentNav) return true;
+  const rawPath = route?.path || (typeof window !== "undefined" ? window.location.pathname : "");
+  const p = rawPath.toLowerCase().replace(/\/+$/, "") || "/";
+  return p === "/" || p === "/login" || p === "/portal";
+});
 
 const isOpen = ref(false);
 
@@ -40,7 +49,7 @@ async function handleCopyLink(themeId) {
 </script>
 
 <template>
-  <div class="fixed bottom-5 right-5 z-50">
+  <div v-if="!shouldHide" class="fixed bottom-5 right-5 z-50">
     <!-- Collapsed Floating Trigger Button -->
     <div v-if="!isOpen" class="flex items-center">
       <button

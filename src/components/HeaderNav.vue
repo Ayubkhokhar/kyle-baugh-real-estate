@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useSiteSettings } from "../composables/useSiteSettings";
 import { useInquiries } from "../composables/useInquiries";
@@ -10,6 +10,13 @@ const route = useRoute();
 const { siteSettings } = useSiteSettings();
 const { unreadCount } = useInquiries();
 const { currentAgentId, availableAgents } = useAgentResolver();
+
+const shouldHide = computed(() => {
+  if (route.meta?.hideAgentNav) return true;
+  const rawPath = route?.path || (typeof window !== "undefined" ? window.location.pathname : "");
+  const p = rawPath.toLowerCase().replace(/\/+$/, "") || "/";
+  return p === "/" || p === "/login" || p === "/portal";
+});
 
 const isDrawerOpen = ref(false);
 
@@ -42,6 +49,7 @@ function navigateTo(hashOrPath) {
 
 <template>
   <header
+    v-if="!shouldHide"
     class="bg-surface-alabaster/95 backdrop-blur-md text-primary sticky top-0 z-40 border-b border-border-subtle shadow-sm"
   >
     <div

@@ -1,4 +1,5 @@
 <script setup>
+import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useInquiries } from "../composables/useInquiries";
 import { useAgentResolver } from "../composables/useAgentResolver";
@@ -7,6 +8,13 @@ const route = useRoute();
 const router = useRouter();
 const { unreadCount } = useInquiries();
 const { currentAgentId, availableAgents } = useAgentResolver();
+
+const shouldHide = computed(() => {
+  if (route.meta?.hideAgentNav) return true;
+  const rawPath = route?.path || (typeof window !== "undefined" ? window.location.pathname : "");
+  const p = rawPath.toLowerCase().replace(/\/+$/, "") || "/";
+  return p === "/" || p === "/login" || p === "/portal";
+});
 
 function navigate(target) {
   if (target.startsWith("#")) {
@@ -26,6 +34,7 @@ function navigate(target) {
 
 <template>
   <nav
+    v-if="!shouldHide"
     class="lg:hidden fixed bottom-0 left-0 w-full z-40 flex justify-around items-center px-4 py-2 bg-surface-alabaster/95 backdrop-blur-md border-t border-border-subtle shadow-lg text-primary"
   >
     <!-- Tab 1: Home -->

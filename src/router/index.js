@@ -15,16 +15,19 @@ const routes = [
     path: "/",
     name: "home",
     component: LandingView,
+    meta: { hideAgentNav: true },
   },
   {
     path: "/login",
     name: "admin-login",
     component: LoginView,
+    meta: { hideAgentNav: true },
   },
   {
     path: "/portal",
     name: "master-portal",
     component: MasterPortalView,
+    meta: { hideAgentNav: true },
   },
   {
     path: "/kyle",
