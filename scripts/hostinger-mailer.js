@@ -38,11 +38,11 @@ export function getMailerConfig() {
   }
 
   return {
-    host: process.env.HOSTINGER_SMTP_HOST || fileConfig.host || "smtp.hostinger.com",
-    port: Number(process.env.HOSTINGER_SMTP_PORT || fileConfig.port || 465),
-    secure: (process.env.HOSTINGER_SMTP_SECURE || fileConfig.secure || "true") === "true",
-    user: process.env.HOSTINGER_EMAIL || fileConfig.user || "ayub@webpenter.com",
-    pass: process.env.HOSTINGER_PASSWORD || fileConfig.pass || "",
+    host: fileConfig.host || process.env.HOSTINGER_SMTP_HOST || "smtp.titan.email",
+    port: Number(fileConfig.port || process.env.HOSTINGER_SMTP_PORT || 465),
+    secure: fileConfig.secure !== undefined ? Boolean(fileConfig.secure) : (process.env.HOSTINGER_SMTP_SECURE || "true") === "true",
+    user: fileConfig.user || process.env.HOSTINGER_EMAIL || "ayub@webpenter.com",
+    pass: fileConfig.pass || process.env.HOSTINGER_PASSWORD || "",
     senderName: fileConfig.senderName || "Ayub Khokhar | Webpenter Real Estate Advisory",
     replyTo: fileConfig.replyTo || "ayub@webpenter.com",
   };

@@ -471,7 +471,8 @@ app.use((req, res) => {
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">SMTP Host</label>
-              <input type="text" id="smtpHost" required value="smtp.hostinger.com" class="w-full px-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white font-mono text-sm">
+              <input type="text" id="smtpHost" required value="smtp.titan.email" class="w-full px-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white font-mono text-sm">
+              <p class="text-xs text-slate-500 mt-1">Hostinger Titan Email: <code>smtp.titan.email</code></p>
             </div>
             <div>
               <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Port (SSL)</label>
@@ -670,7 +671,11 @@ app.use((req, res) => {
       if (tab === 'discovery') loadDiscoveredAgents();
       if (tab === 'roster') loadRoster();
       if (tab === 'outbox') loadOutreachHistory();
-      if (tab === 'settings') loadCrmTemplates();
+      if (tab === 'settings') {
+        loadCrmTemplates();
+        loadMailerSettings();
+        loadGroqSettings();
+      }
     }
 
     // Logger
@@ -1023,6 +1028,33 @@ app.use((req, res) => {
     }
 
     // 7. Settings & SMTP Test
+    async function loadMailerSettings() {
+      try {
+        const res = await fetch('/api/mailer/settings');
+        const s = data.config || data.settings;
+        if (s) {
+          const hostEl = document.getElementById('smtpHost');
+          const portEl = document.getElementById('smtpPort');
+          const userEl = document.getElementById('smtpUser');
+          const senderEl = document.getElementById('smtpSenderName');
+          const passEl = document.getElementById('smtpPass');
+          if (hostEl && s.host) hostEl.value = s.host;
+          if (portEl && s.port) portEl.value = s.port;
+          if (userEl && s.user) userEl.value = s.user;
+          if (senderEl && s.senderName) senderEl.value = s.senderName;
+          if (passEl && s.isPasswordSet) {
+            passEl.placeholder = '•••••••• (Saved securely - leave blank to keep)';
+          }
+          const badge = document.getElementById('smtpBadge');
+          if (badge && s.isPasswordSet) {
+            badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500"></span> SMTP: <strong class="text-white">Active (' + (s.user || 'ayub@webpenter.com') + ')</strong>';
+          }
+        }
+      } catch (e) {
+        console.error('Failed to load mailer settings:', e);
+      }
+    }
+
     async function testSmtpConnection() {
       const badge = document.getElementById('smtpBadge');
       badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-yellow-400 animate-spin"></span> Testing connection...';
@@ -1034,7 +1066,7 @@ app.use((req, res) => {
           alert('Success: ' + data.message);
         } else {
           badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-red-500"></span> SMTP: <strong class="text-red-400">Offline</strong>';
-          alert('Hostinger Connection Failed: ' + data.error + '\\nPlease update your email password in the Settings tab.');
+          alert('Hostinger Connection Failed: ' + data.error + '\\nPlease update your email password or verify host (smtp.titan.email) in Settings.');
           switchTab('settings');
         }
       } catch (err) {
@@ -1245,6 +1277,7 @@ app.use((req, res) => {
     loadDiscoveredAgents();
     loadRoster();
     loadGroqSettings();
+    loadMailerSettings();
   </script>
 </body>
 </html>`);
