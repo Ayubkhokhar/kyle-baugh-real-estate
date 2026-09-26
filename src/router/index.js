@@ -3,6 +3,8 @@ import { useAgentResolver } from "../composables/useAgentResolver";
 
 // Lazy-loaded route components for optimal initial bundle size and mobile performance
 const HomeView = () => import("../views/HomeView.vue");
+const LandingView = () => import("../views/LandingView.vue");
+const LoginView = () => import("../views/LoginView.vue");
 const MasterPortalView = () => import("../views/MasterPortalView.vue");
 const PropertyDetailView = () => import("../views/PropertyDetailView.vue");
 const SubmitPropertyView = () => import("../views/SubmitPropertyView.vue");
@@ -12,6 +14,16 @@ const routes = [
   {
     path: "/",
     name: "home",
+    component: LandingView,
+  },
+  {
+    path: "/login",
+    name: "admin-login",
+    component: LoginView,
+  },
+  {
+    path: "/portal",
+    name: "master-portal",
     component: MasterPortalView,
   },
   {
@@ -147,6 +159,14 @@ router.beforeEach((to, from, next) => {
   const path = to.path.toLowerCase();
   const queryAgent = (to.query.agent || to.query.client || "").toLowerCase();
 
+  // Security Gate: Protect /portal
+  if (path === "/portal") {
+    const isAuth = typeof window !== "undefined" && sessionStorage.getItem("webpenter_master_auth") === "true";
+    if (!isAuth) {
+      return next("/login");
+    }
+  }
+
   for (const agent of availableAgents) {
     if (path.includes(`/${agent.id}`) || queryAgent === agent.id) {
       if (currentAgentId.value !== agent.id) {
@@ -156,11 +176,6 @@ router.beforeEach((to, from, next) => {
     }
   }
 
-  if (path === "/" && !queryAgent) {
-    if (currentAgentId.value !== "kyle") {
-      setAgentWithoutReload("kyle");
-    }
-  }
   next();
 });
 

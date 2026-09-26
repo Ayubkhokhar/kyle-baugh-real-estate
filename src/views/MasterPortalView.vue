@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { availableAgents } from "../composables/useAgentResolver";
 
@@ -8,6 +8,23 @@ const searchQuery = ref("");
 const selectedEnclave = ref("all");
 const copiedSlug = ref(null);
 const activePitchAgent = ref(null);
+
+onMounted(() => {
+  if (typeof window !== "undefined") {
+    const isAuth = sessionStorage.getItem("webpenter_master_auth") === "true";
+    if (!isAuth) {
+      router.replace("/login");
+    }
+  }
+});
+
+function handleLogout() {
+  if (typeof window !== "undefined") {
+    sessionStorage.removeItem("webpenter_master_auth");
+    sessionStorage.removeItem("admin_auth_v1");
+  }
+  router.push("/");
+}
 
 const enclaves = [
   { id: "all", label: "All Enclaves" },
@@ -119,6 +136,12 @@ function copyPitchText(text) {
           >
             Kyle Baugh Site &rarr;
           </router-link>
+          <button
+            @click="handleLogout"
+            class="px-3 py-1.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 text-xs font-mono rounded-lg border border-red-500/30 transition flex items-center gap-1"
+          >
+            <span>🔒</span> Logout
+          </button>
         </div>
       </div>
     </header>
