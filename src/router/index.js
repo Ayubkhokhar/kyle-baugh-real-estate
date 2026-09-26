@@ -3,6 +3,7 @@ import { useAgentResolver } from "../composables/useAgentResolver";
 
 // Lazy-loaded route components for optimal initial bundle size and mobile performance
 const HomeView = () => import("../views/HomeView.vue");
+const MasterPortalView = () => import("../views/MasterPortalView.vue");
 const PropertyDetailView = () => import("../views/PropertyDetailView.vue");
 const SubmitPropertyView = () => import("../views/SubmitPropertyView.vue");
 const ManageView = () => import("../views/ManageView.vue");
@@ -11,7 +12,7 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: HomeView,
+    component: MasterPortalView,
   },
   {
     path: "/kyle",
