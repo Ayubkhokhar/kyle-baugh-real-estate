@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "outreach-1790410436351",
+    "agentName": "Liz Chalfant",
+    "slug": "liz-chalfant",
+    "recipient": "liz.chalfant@compass.com",
+    "sender": "ayub@webpenter.com",
+    "subject": "Liz Chalfant's portfolio + your Dallas portfolio (Built this for you)",
+    "sentAt": "2026-09-26T08:13:56.359Z",
+    "messageId": "<121d4d63-45ac-b468-debe-9b0e6013a27c@webpenter.com>",
+    "status": "sent",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/liz-chalfant"
+  }
+]

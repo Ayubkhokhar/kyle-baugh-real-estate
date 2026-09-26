@@ -49,6 +49,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/christine-leite",
+    name: "christineLeite-home",
+    component: HomeView,
+  },
+  {
     path: "/agent/:agentSlug",
     name: "agent-home",
     component: HomeView,
@@ -101,6 +106,11 @@ const routes = [
   {
     path: "/liz-chalfant/manage",
     name: "lizChalfant-manage",
+    component: ManageView,
+  },
+  {
+    path: "/christine-leite/manage",
+    name: "christineLeite-manage",
     component: ManageView,
   },
   {
