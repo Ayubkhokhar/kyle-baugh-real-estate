@@ -8,8 +8,9 @@
     "phone": "(214) 732-2344",
     "email": "liz.chalfant@compass.com",
     "activeListingsCount": 2,
-    "status": "ready_to_launch",
-    "notes": "Specializes in luxury architectural residences and premier Dallas enclaves."
+    "status": "launched",
+    "notes": "Specializes in luxury architectural residences and premier Dallas enclaves.",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/liz-chalfant"
   },
   {
     "slug": "christine-leite",

@@ -9,6 +9,7 @@ import { fileURLToPath } from "url";
 import { getDiscoveredAgents, crawlCompassDallasDirectory, saveDiscoveredAgents } from "./agent-discovery.js";
 import { runAgentPipeline } from "./agent-pipeline.js";
 import { getMailerConfig, saveMailerConfig, testConnection, sendOutreachEmail, generatePitch } from "./hostinger-mailer.js";
+import { getGroqApiKey, saveGroqApiKey, testGroqKey, generateAIPitch } from "./groq-generator.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -139,9 +140,44 @@ app.post("/api/mailer/test", async (req, res) => {
   res.json(result);
 });
 
-app.post("/api/mailer/preview", (req, res) => {
+app.post("/api/mailer/preview", async (req, res) => {
   try {
-    const pitch = generatePitch(req.body);
+    const pitch = await generateAIPitch(req.body);
+    res.json({ success: true, pitch });
+  } catch (e) {
+    res.status(500).json({ success: false, error: e.message });
+  }
+});
+
+// 4b. API: GROQ AI GENERATION & CONFIGURATION
+app.get("/api/groq/settings", (req, res) => {
+  const key = getGroqApiKey();
+  res.json({
+    success: true,
+    hasKey: Boolean(key),
+    maskedKey: key ? `${key.slice(0, 7)}...${key.slice(-4)}` : "",
+  });
+});
+
+app.post("/api/groq/settings", (req, res) => {
+  try {
+    const { apiKey } = req.body;
+    saveGroqApiKey(apiKey);
+    res.json({ success: true, message: "Groq API key saved successfully!" });
+  } catch (e) {
+    res.status(500).json({ success: false, error: e.message });
+  }
+});
+
+app.post("/api/groq/test", async (req, res) => {
+  const { apiKey } = req.body;
+  const result = await testGroqKey(apiKey);
+  res.json(result);
+});
+
+app.post("/api/mailer/generate-ai", async (req, res) => {
+  try {
+    const pitch = await generateAIPitch(req.body);
     res.json({ success: true, pitch });
   } catch (e) {
     res.status(500).json({ success: false, error: e.message });
@@ -401,6 +437,36 @@ app.use((req, res) => {
           </div>
         </form>
       </div>
+
+      <!-- Groq AI Configuration Card -->
+      <div class="max-w-2xl bg-slate-900 border border-slate-800 rounded-xl p-6 mt-6">
+        <div class="flex items-center justify-between mb-1">
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-brain text-amber-400"></i> Groq AI Email Generator (Llama 3.3 70B)
+          </h2>
+          <span id="groqBadge" class="text-xs px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700 text-slate-400">
+            Checking...
+          </span>
+        </div>
+        <p class="text-sm text-slate-400 mb-6">Generates hyper-personalized cold outreach emails tailored to the agent's real listings, flagship sales, and territory in under 1 second.</p>
+
+        <form onsubmit="handleSaveGroqSettings(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Groq API Key</label>
+            <input type="password" id="groqApiKey" placeholder="gsk_..." class="w-full px-4 py-2 bg-slate-950 border border-slate-800 rounded-lg text-white font-mono text-sm">
+            <p class="text-xs text-slate-500 mt-1">Get your free API key at <a href="https://console.groq.com/keys" target="_blank" class="text-amber-400 underline">console.groq.com/keys</a></p>
+          </div>
+
+          <div class="flex items-center gap-3 pt-2">
+            <button type="submit" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg text-sm transition">
+              Save Groq Key
+            </button>
+            <button type="button" onclick="testGroqConnection()" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-sm rounded-lg transition">
+              Test Groq API
+            </button>
+          </div>
+        </form>
+      </div>
     </section>
 
   </main>
@@ -411,6 +477,24 @@ app.use((req, res) => {
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
         <h3 class="font-bold text-white text-lg">Send Outreach Pitch</h3>
         <button onclick="closeEmailModal()" class="text-slate-400 hover:text-white">&times;</button>
+      </div>
+
+      <!-- Groq AI Rewrite Toolbar -->
+      <div class="bg-slate-950/80 border border-slate-800 rounded-lg p-3 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Groq AI Tone:
+          </span>
+          <select id="modalAITone" class="bg-slate-900 border border-slate-800 rounded px-2.5 py-1 text-xs text-slate-200 focus:outline-none">
+            <option value="High-End Luxury & Direct">High-End Luxury & Direct</option>
+            <option value="Short & Punchy (<120 words)">Short & Punchy (&lt;120 words)</option>
+            <option value="Warm & Advisory">Warm & Advisory</option>
+            <option value="Aggressive Value Proposition">Aggressive Value Proposition</option>
+          </select>
+        </div>
+        <button type="button" onclick="rewriteWithGroqAI()" id="groqRewriteBtn" class="px-3.5 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/50 text-amber-300 font-semibold text-xs rounded transition flex items-center gap-1.5">
+          <i class="fa-solid fa-bolt"></i> <span>Regenerate with Groq AI</span>
+        </button>
       </div>
 
       <div class="space-y-3">
@@ -750,9 +834,107 @@ app.use((req, res) => {
       }
     }
 
+    // 8. Groq AI Integration Functions
+    async function loadGroqSettings() {
+      const badge = document.getElementById('groqBadge');
+      try {
+        const res = await fetch('/api/groq/settings');
+        const data = await res.json();
+        if (data.hasKey) {
+          badge.className = 'text-xs px-2.5 py-1 rounded-full bg-green-500/20 text-green-400 font-mono';
+          badge.textContent = '✓ Active (' + data.maskedKey + ')';
+        } else {
+          badge.className = 'text-xs px-2.5 py-1 rounded-full bg-slate-800 text-slate-400';
+          badge.textContent = 'Not Configured';
+        }
+      } catch (e) {}
+    }
+
+    async function handleSaveGroqSettings(e) {
+      e.preventDefault();
+      const apiKey = document.getElementById('groqApiKey').value.trim();
+      if (!apiKey) return alert('Please enter your Groq API key.');
+
+      try {
+        const res = await fetch('/api/groq/settings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ apiKey })
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert('Groq API key saved!');
+          testGroqConnection();
+        } else {
+          alert('Error: ' + data.error);
+        }
+      } catch (err) {
+        alert('Failed: ' + err.message);
+      }
+    }
+
+    async function testGroqConnection() {
+      const badge = document.getElementById('groqBadge');
+      badge.textContent = 'Testing API...';
+      const apiKey = document.getElementById('groqApiKey').value.trim();
+
+      try {
+        const res = await fetch('/api/groq/test', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ apiKey })
+        });
+        const data = await res.json();
+        if (data.success) {
+          badge.className = 'text-xs px-2.5 py-1 rounded-full bg-green-500/20 text-green-400 font-mono';
+          badge.textContent = '✓ Llama 3.3 70B Active';
+          alert('Groq Success: ' + data.message);
+        } else {
+          badge.className = 'text-xs px-2.5 py-1 rounded-full bg-red-500/20 text-red-400 font-mono';
+          badge.textContent = 'Error: Invalid Key';
+          alert('Groq Error: ' + data.error);
+        }
+      } catch (err) {
+        alert('Connection error: ' + err.message);
+      }
+    }
+
+    async function rewriteWithGroqAI() {
+      const tone = document.getElementById('modalAITone').value;
+      const btn = document.getElementById('groqRewriteBtn');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Generating...';
+
+      try {
+        const res = await fetch('/api/mailer/generate-ai', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: currentPreparedPayload.name || 'Advisor',
+            slug: currentPreparedPayload.slug || 'portal',
+            email: document.getElementById('modalRecipient').value,
+            tone: tone
+          })
+        });
+        const data = await res.json();
+        if (data.pitch) {
+          document.getElementById('modalSubject').value = data.pitch.subject;
+          document.getElementById('modalBody').value = data.pitch.textBody;
+        } else {
+          alert('Failed to generate pitch: ' + (data.error || 'Unknown error'));
+        }
+      } catch (err) {
+        alert('AI generation error: ' + err.message);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-bolt mr-1"></i> <span>Regenerate with Groq AI</span>';
+      }
+    }
+
     // Initial Load
     loadDiscoveredAgents();
     loadRoster();
+    loadGroqSettings();
   </script>
 </body>
 </html>`);
