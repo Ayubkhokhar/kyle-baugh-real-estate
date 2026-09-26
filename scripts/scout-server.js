@@ -22,6 +22,12 @@ const PORT = process.env.SCOUT_PORT || 4000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Disable browser caching so UI updates immediately
+app.use((req, res, next) => {
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, private");
+  next();
+});
+
 // 1. API: DISCOVERED AGENTS
 app.get("/api/agents/discovered", (req, res) => {
   try {
@@ -235,10 +241,14 @@ app.use((req, res) => {
         </div>
       </div>
 
-      <div class="flex items-center gap-4 text-sm">
+      <div class="flex items-center gap-3 text-sm">
         <div id="smtpBadge" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-xs text-slate-300">
           <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-          <span>Hostinger SMTP: <strong class="text-white">ayub@webpenter.com</strong></span>
+          <span>SMTP: <strong class="text-white">ayub@webpenter.com</strong></span>
+        </div>
+        <div id="headerGroqBadge" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800 border border-slate-700 text-xs text-slate-300">
+          <i class="fa-solid fa-brain text-amber-400"></i>
+          <span>Groq AI: <strong id="headerGroqStatus" class="text-slate-400">Checking...</strong></span>
         </div>
         <button onclick="testSmtpConnection()" class="px-3 py-1.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-medium text-slate-200 transition">
           <i class="fa-solid fa-plug mr-1 text-amber-400"></i> Test SMTP
@@ -263,7 +273,7 @@ app.use((req, res) => {
         <i class="fa-solid fa-paper-plane mr-2"></i> Email Outbox & Logs
       </button>
       <button onclick="switchTab('settings')" id="tab-settings" class="py-3 text-slate-400 hover:text-white">
-        <i class="fa-solid fa-gear mr-2"></i> Settings (Hostinger)
+        <i class="fa-solid fa-gear mr-2"></i> Settings (Hostinger & Groq AI)
       </button>
     </div>
   </div>
@@ -837,15 +847,30 @@ app.use((req, res) => {
     // 8. Groq AI Integration Functions
     async function loadGroqSettings() {
       const badge = document.getElementById('groqBadge');
+      const headerStatus = document.getElementById('headerGroqStatus');
+      const keyInput = document.getElementById('groqApiKey');
       try {
         const res = await fetch('/api/groq/settings');
         const data = await res.json();
         if (data.hasKey) {
-          badge.className = 'text-xs px-2.5 py-1 rounded-full bg-green-500/20 text-green-400 font-mono';
-          badge.textContent = '✓ Active (' + data.maskedKey + ')';
+          if (badge) {
+            badge.className = 'text-xs px-2.5 py-1 rounded-full bg-green-500/20 text-green-400 font-mono';
+            badge.textContent = '✓ Active (' + data.maskedKey + ')';
+          }
+          if (headerStatus) {
+            headerStatus.innerHTML = '<span class="text-green-400 font-medium">Llama 3.3 Active</span>';
+          }
+          if (keyInput) {
+            keyInput.placeholder = 'Configured in .env (' + data.maskedKey + ') - enter new key to replace';
+          }
         } else {
-          badge.className = 'text-xs px-2.5 py-1 rounded-full bg-slate-800 text-slate-400';
-          badge.textContent = 'Not Configured';
+          if (badge) {
+            badge.className = 'text-xs px-2.5 py-1 rounded-full bg-slate-800 text-slate-400';
+            badge.textContent = 'Not Configured';
+          }
+          if (headerStatus) {
+            headerStatus.innerHTML = '<span class="text-slate-400">Not Configured</span>';
+          }
         }
       } catch (e) {}
     }
