@@ -1,0 +1,17 @@
+{
+  "initial": {
+    "name": "Initial Showcase Pitch",
+    "subject": "{ActiveListing} + your Dallas portfolio (Built this for you)",
+    "body": "Hi {FirstName},\n\nI noticed you’ve been doing strong numbers across Dallas ({FlagshipSale}), but your digital presence is still tied to the generic corporate brokerage layout.\n\nWhen high-net-worth buyers and sellers look you up, you deserve an ultra-fast, bespoke architectural portal that reflects your luxury standard.\n\nI built a live, working concept for your brand featuring {ActiveListing} and {TotalDeals} past sales:\n\n👉 Your Live Portal: {LiveUrl}\n\nWhy this beats standard websites:\n1. $0 / month hosting forever: Hosted on Cloudflare's global edge network, meaning you never pay monthly hosting or server maintenance retainers.\n2. 60-Second Self-Serve Console: Upload new off-market or active listings from your phone in under 60 seconds with no web developer required.\n\n👉 Try your private listing console here:\n{ManageUrl}\n(Passcode: admin123)\n\nIf you like the aesthetic, I can hand over the keys and connect it to your custom domain this week.\n\nBest regards,\nAyub Khokhar\nWebpenter Real Estate Advisory\nayub@webpenter.com"
+  },
+  "followup_ignored": {
+    "name": "Follow-Up #1: Ignored / No Response",
+    "subject": "Re: {ActiveListing} (Did you get a chance to see this?)",
+    "body": "Hi {FirstName},\n\nQuick follow-up on the modern digital portal I built for your Dallas portfolio:\n👉 {LiveUrl}\n\nI know your inbox gets flooded with MLS alerts and client inquiries, so I wanted to make sure this didn't get buried.\n\nKey advantages recap:\n- $0 / month hosting forever: Hosted on Cloudflare Edge, meaning zero monthly server or maintenance retainers.\n- 60-Second Self-Serve Console: Upload pocket or active listings straight from your phone ({ManageUrl} - Passcode: admin123)\n\nWould you be open to a 2-minute chat this week to hand over the administrative keys and connect it to your custom domain?\n\nBest regards,\nAyub Khokhar\nWebpenter Real Estate Advisory\nayub@webpenter.com"
+  },
+  "followup_silent": {
+    "name": "Follow-Up #2: Replied Initially but Went Silent",
+    "subject": "Re: Next steps for {FirstName}'s custom Dallas showcase",
+    "body": "Hi {FirstName},\n\nFollowing up on our earlier note regarding your bespoke showcase ({LiveUrl}).\n\nI understand you're busy closing transactions, so I wanted to check in and see if you had any questions on:\n1. Handing over the private listing console keys to you and your team\n2. Connecting your custom domain while keeping monthly hosting at $0 forever\n3. Uploading any upcoming off-market or pocket listings\n\nIf you'd like, I can transfer full control to you today so you can test it directly on your mobile.\n\nLet me know what works best for your schedule!\n\nBest regards,\nAyub Khokhar\nWebpenter Real Estate Advisory\nayub@webpenter.com"
+  }
+}

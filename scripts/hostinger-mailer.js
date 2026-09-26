@@ -7,6 +7,7 @@ import fs from "fs";
 import path from "path";
 import dotenv from "dotenv";
 import { fileURLToPath } from "url";
+import { recordAgentContact } from "./crm-manager.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -236,8 +237,17 @@ export async function sendOutreachEmail({
     const history = JSON.parse(rawHistory);
     history.unshift(historyEntry);
     fs.writeFileSync(trackerPath, JSON.stringify(history, null, 2), "utf-8");
+
+    // Automatically stamp agent as contacted in CRM
+    recordAgentContact({
+      slug,
+      email: to,
+      name,
+      stage: customSubject?.toLowerCase().includes("re:") ? "followup_sent" : "initial_sent",
+      subject,
+    });
   } catch (err) {
-    console.error("Failed to append outreach history:", err);
+    console.error("Failed to append outreach history / CRM record:", err);
   }
 
   return {

@@ -10,6 +10,7 @@ import { getDiscoveredAgents, crawlCompassDallasDirectory, saveDiscoveredAgents 
 import { runAgentPipeline } from "./agent-pipeline.js";
 import { getMailerConfig, saveMailerConfig, testConnection, sendOutreachEmail, generatePitch } from "./hostinger-mailer.js";
 import { getGroqApiKey, saveGroqApiKey, testGroqKey, generateAIPitch } from "./groq-generator.js";
+import { getTemplates, saveTemplates, renderTemplate, setAgentStatus } from "./crm-manager.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -89,7 +90,6 @@ app.post("/api/agents/onboard", async (req, res) => {
       logCallback,
     });
 
-    // Update discovered list status if present
     const discovered = getDiscoveredAgents();
     const match = discovered.find((d) => d.slug === slug || d.url === url);
     if (match) {
@@ -185,6 +185,45 @@ app.post("/api/mailer/generate-ai", async (req, res) => {
   try {
     const pitch = await generateAIPitch(req.body);
     res.json({ success: true, pitch });
+  } catch (e) {
+    res.status(500).json({ success: false, error: e.message });
+  }
+});
+
+// 4c. API: CRM LIFECYCLE & FOLLOW-UP TEMPLATES
+app.get("/api/crm/templates", (req, res) => {
+  try {
+    const templates = getTemplates();
+    res.json({ success: true, templates });
+  } catch (e) {
+    res.status(500).json({ success: false, error: e.message });
+  }
+});
+
+app.post("/api/crm/templates", (req, res) => {
+  try {
+    const result = saveTemplates(req.body);
+    res.json(result);
+  } catch (e) {
+    res.status(500).json({ success: false, error: e.message });
+  }
+});
+
+app.post("/api/crm/render", (req, res) => {
+  try {
+    const { templateKey, agentData } = req.body;
+    const rendered = renderTemplate(templateKey, agentData);
+    res.json({ success: true, rendered });
+  } catch (e) {
+    res.status(500).json({ success: false, error: e.message });
+  }
+});
+
+app.post("/api/crm/status", (req, res) => {
+  try {
+    const { slug, status, contactStage, notes } = req.body;
+    const result = setAgentStatus(slug, { status, contactStage, notes });
+    res.json(result);
   } catch (e) {
     res.status(500).json({ success: false, error: e.message });
   }
@@ -295,6 +334,23 @@ app.use((req, res) => {
         </div>
       </div>
 
+      <!-- CRM Lifecycle Filter Tabs -->
+      <div class="flex items-center gap-2 border-b border-slate-800 pb-3 text-xs">
+        <span class="text-slate-500 font-semibold mr-2 uppercase tracking-wider">Filter:</span>
+        <button onclick="filterAgents('all')" id="filter-all" class="px-3 py-1 rounded-full bg-amber-500 text-slate-950 font-bold transition">
+          All (<span id="countAll">0</span>)
+        </button>
+        <button onclick="filterAgents('new')" id="filter-new" class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white transition">
+          🟢 New / Uncontacted (<span id="countNew">0</span>)
+        </button>
+        <button onclick="filterAgents('contacted')" id="filter-contacted" class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white transition">
+          ✓ Contacted (<span id="countContacted">0</span>)
+        </button>
+        <button onclick="filterAgents('replied')" id="filter-replied" class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white transition">
+          💬 Replied (<span id="countReplied">0</span>)
+        </button>
+      </div>
+
       <!-- Agents Grid -->
       <div id="discoveryList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <!-- Loaded via JavaScript -->
@@ -312,12 +368,12 @@ app.use((req, res) => {
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div class="md:col-span-2">
               <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">Compass Agent URL</label>
-              <input type="url" id="customUrl" required placeholder="https://www.compass.com/agents/brandon-stewart/" 
+              <input type="url" id="customUrl" required placeholder="https://www.compass.com/agents/liz-chalfant/" 
                 class="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-white focus:outline-none focus:border-amber-500 font-mono text-sm">
             </div>
             <div>
-              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">URL Slug (e.g. brandon)</label>
-              <input type="text" id="customSlug" required placeholder="brandon" 
+              <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">URL Slug (e.g. liz-chalfant)</label>
+              <input type="text" id="customSlug" required placeholder="liz-chalfant" 
                 class="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-white focus:outline-none focus:border-amber-500 font-mono text-sm">
             </div>
           </div>
@@ -403,8 +459,10 @@ app.use((req, res) => {
       </div>
     </section>
 
-    <!-- TAB 5: SETTINGS -->
+    <!-- TAB 5: SETTINGS & TEMPLATES -->
     <section id="view-settings" class="hidden space-y-6">
+
+      <!-- Hostinger SMTP Configuration Card -->
       <div class="max-w-2xl bg-slate-900 border border-slate-800 rounded-xl p-6">
         <h2 class="text-xl font-bold text-white mb-1">Hostinger SMTP Settings</h2>
         <p class="text-sm text-slate-400 mb-6">Send emails directly from your official custom domain mailbox (<code>ayub@webpenter.com</code>) with zero middleman services.</p>
@@ -449,7 +507,7 @@ app.use((req, res) => {
       </div>
 
       <!-- Groq AI Configuration Card -->
-      <div class="max-w-2xl bg-slate-900 border border-slate-800 rounded-xl p-6 mt-6">
+      <div class="max-w-2xl bg-slate-900 border border-slate-800 rounded-xl p-6">
         <div class="flex items-center justify-between mb-1">
           <h2 class="text-xl font-bold text-white flex items-center gap-2">
             <i class="fa-solid fa-brain text-amber-400"></i> Groq AI Email Generator (Llama 3.3 70B)
@@ -477,6 +535,50 @@ app.use((req, res) => {
           </div>
         </form>
       </div>
+
+      <!-- Editable Follow-Up Templates Card -->
+      <div class="max-w-2xl bg-slate-900 border border-slate-800 rounded-xl p-6">
+        <h2 class="text-xl font-bold text-white mb-1">
+          <i class="fa-solid fa-envelope-open-text text-amber-400 mr-2"></i> Outreach & Follow-Up Templates
+        </h2>
+        <p class="text-sm text-slate-400 mb-6">Customize the default email copy for each contact stage. Dynamic tags available: <code>{FirstName}</code>, <code>{ActiveListing}</code>, <code>{FlagshipSale}</code>, <code>{TotalDeals}</code>, <code>{LiveUrl}</code>, <code>{ManageUrl}</code>.</p>
+
+        <form onsubmit="handleSaveTemplates(event)" class="space-y-6">
+          <!-- Template 1: Initial -->
+          <div class="border border-slate-800 rounded-lg p-4 bg-slate-950">
+            <h3 class="text-sm font-bold text-amber-400 mb-2">1. Initial Showcase Pitch</h3>
+            <div class="space-y-2">
+              <input type="text" id="tmpl_initial_sub" class="w-full px-3 py-1.5 bg-slate-900 border border-slate-800 rounded text-xs text-white" placeholder="Subject">
+              <textarea id="tmpl_initial_body" rows="6" class="w-full px-3 py-1.5 bg-slate-900 border border-slate-800 rounded text-xs text-slate-200 font-mono"></textarea>
+            </div>
+          </div>
+
+          <!-- Template 2: Followup Ignored -->
+          <div class="border border-slate-800 rounded-lg p-4 bg-slate-950">
+            <h3 class="text-sm font-bold text-blue-400 mb-2">2. Follow-Up #1: Ignored / No Response Yet</h3>
+            <div class="space-y-2">
+              <input type="text" id="tmpl_ignored_sub" class="w-full px-3 py-1.5 bg-slate-900 border border-slate-800 rounded text-xs text-white" placeholder="Subject">
+              <textarea id="tmpl_ignored_body" rows="6" class="w-full px-3 py-1.5 bg-slate-900 border border-slate-800 rounded text-xs text-slate-200 font-mono"></textarea>
+            </div>
+          </div>
+
+          <!-- Template 3: Followup Silent -->
+          <div class="border border-slate-800 rounded-lg p-4 bg-slate-950">
+            <h3 class="text-sm font-bold text-purple-400 mb-2">3. Follow-Up #2: Replied Initially but Went Silent</h3>
+            <div class="space-y-2">
+              <input type="text" id="tmpl_silent_sub" class="w-full px-3 py-1.5 bg-slate-900 border border-slate-800 rounded text-xs text-white" placeholder="Subject">
+              <textarea id="tmpl_silent_body" rows="6" class="w-full px-3 py-1.5 bg-slate-900 border border-slate-800 rounded text-xs text-slate-200 font-mono"></textarea>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <button type="submit" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-lg text-sm transition">
+              <i class="fa-solid fa-save mr-1"></i> Save Custom Templates
+            </button>
+          </div>
+        </form>
+      </div>
+
     </section>
 
   </main>
@@ -485,8 +587,20 @@ app.use((req, res) => {
   <div id="emailModal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur flex items-center justify-center p-4 z-50">
     <div class="bg-slate-900 border border-slate-800 rounded-xl max-w-2xl w-full p-6 space-y-4">
       <div class="flex items-center justify-between pb-3 border-b border-slate-800">
-        <h3 class="font-bold text-white text-lg">Send Outreach Pitch</h3>
+        <h3 class="font-bold text-white text-lg flex items-center gap-2">
+          <i class="fa-solid fa-paper-plane text-amber-400"></i> Outreach Dispatch Console
+        </h3>
         <button onclick="closeEmailModal()" class="text-slate-400 hover:text-white">&times;</button>
+      </div>
+
+      <!-- Strategy Template Selector -->
+      <div>
+        <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Outreach Stage & Strategy Template</label>
+        <select id="modalTemplateSelect" onchange="handleModalTemplateChange()" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded-lg text-sm text-amber-400 font-medium focus:outline-none focus:border-amber-500">
+          <option value="initial">1. Initial Showcase Pitch</option>
+          <option value="followup_ignored">2. Follow-Up #1: Ignored / No Response</option>
+          <option value="followup_silent">3. Follow-Up #2: Replied Initially but Went Silent</option>
+        </select>
       </div>
 
       <!-- Groq AI Rewrite Toolbar -->
@@ -509,16 +623,16 @@ app.use((req, res) => {
 
       <div class="space-y-3">
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">To</label>
-          <input type="email" id="modalRecipient" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded text-sm text-white">
+          <label class="block text-xs font-semibold text-slate-400 mb-1">Recipient</label>
+          <input type="email" id="modalRecipient" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded text-sm text-white font-mono">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Subject</label>
+          <label class="block text-xs font-semibold text-slate-400 mb-1">Subject (Editable)</label>
           <input type="text" id="modalSubject" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded text-sm text-white font-medium">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Message Body</label>
-          <textarea id="modalBody" rows="10" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded text-sm text-slate-200 font-mono"></textarea>
+          <label class="block text-xs font-semibold text-slate-400 mb-1">Email Body (Editable)</label>
+          <textarea id="modalBody" rows="9" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded text-sm text-slate-200 font-mono"></textarea>
         </div>
       </div>
 
@@ -535,6 +649,11 @@ app.use((req, res) => {
   </div>
 
   <script>
+    let rawAgentsList = [];
+    let activeFilter = 'all';
+    let currentPreparedPayload = {};
+    let cachedTemplates = {};
+
     // Tab Switching
     function switchTab(tab) {
       ['discovery', 'custom', 'roster', 'outbox', 'settings'].forEach(t => {
@@ -551,6 +670,7 @@ app.use((req, res) => {
       if (tab === 'discovery') loadDiscoveredAgents();
       if (tab === 'roster') loadRoster();
       if (tab === 'outbox') loadOutreachHistory();
+      if (tab === 'settings') loadCrmTemplates();
     }
 
     // Logger
@@ -565,54 +685,144 @@ app.use((req, res) => {
       document.getElementById('consoleLog').innerHTML = '';
     }
 
+    // Filter agents
+    function filterAgents(type) {
+      activeFilter = type;
+      ['all', 'new', 'contacted', 'replied'].forEach(f => {
+        const btn = document.getElementById('filter-' + f);
+        if (f === type) {
+          btn.className = 'px-3 py-1 rounded-full bg-amber-500 text-slate-950 font-bold transition';
+        } else {
+          btn.className = 'px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white transition';
+        }
+      });
+      renderAgentsGrid();
+    }
+
     // 1. Load Discovered Agents
     async function loadDiscoveredAgents() {
-      const container = document.getElementById('discoveryList');
       try {
         const res = await fetch('/api/agents/discovered');
         const data = await res.json();
-        if (!data.agents || data.agents.length === 0) {
-          container.innerHTML = '<div class="p-8 text-center text-slate-500 col-span-3">No agents found. Click "Refresh / Crawl Directory".</div>';
-          return;
-        }
+        rawAgentsList = data.agents || [];
+        updateFilterCounts();
+        renderAgentsGrid();
+      } catch (err) {
+        document.getElementById('discoveryList').innerHTML = \`<div class="p-8 text-center text-red-400 col-span-3">Error loading agents: \${err.message}</div>\`;
+      }
+    }
 
-        container.innerHTML = data.agents.map(a => {
-          const isLaunched = a.status === 'launched';
-          return \`
-            <div class="bg-slate-900 border \${isLaunched ? 'border-amber-500/40 bg-amber-500/5' : 'border-slate-800'} rounded-xl p-5 flex flex-col justify-between space-y-4">
-              <div>
-                <div class="flex items-center justify-between mb-2">
-                  <h3 class="font-bold text-white text-base">\${a.name}</h3>
-                  <span class="text-xs px-2 py-0.5 rounded font-mono \${isLaunched ? 'bg-green-500/20 text-green-400' : 'bg-slate-800 text-slate-400'}">
-                    \${isLaunched ? '✓ Live Site' : (a.activeListingsCount ? a.activeListingsCount + ' Listings' : 'Discovered')}
-                  </span>
+    function updateFilterCounts() {
+      const total = rawAgentsList.length;
+      const contacted = rawAgentsList.filter(a => a.status === 'contacted' || a.contactCount > 0).length;
+      const replied = rawAgentsList.filter(a => a.status === 'replied').length;
+      const newLeads = rawAgentsList.filter(a => a.status !== 'contacted' && a.status !== 'replied' && !a.contactCount).length;
+
+      document.getElementById('countAll').textContent = total;
+      document.getElementById('countNew').textContent = newLeads;
+      document.getElementById('countContacted').textContent = contacted;
+      document.getElementById('countReplied').textContent = replied;
+    }
+
+    function renderAgentsGrid() {
+      const container = document.getElementById('discoveryList');
+      let filtered = rawAgentsList;
+
+      if (activeFilter === 'new') {
+        filtered = rawAgentsList.filter(a => a.status !== 'contacted' && a.status !== 'replied' && !a.contactCount);
+      } else if (activeFilter === 'contacted') {
+        filtered = rawAgentsList.filter(a => a.status === 'contacted' || a.contactCount > 0);
+      } else if (activeFilter === 'replied') {
+        filtered = rawAgentsList.filter(a => a.status === 'replied');
+      }
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="p-8 text-center text-slate-500 col-span-3">No agents found in this category.</div>';
+        return;
+      }
+
+      container.innerHTML = filtered.map(a => {
+        const isContacted = a.status === 'contacted' || Boolean(a.contactCount);
+        const isReplied = a.status === 'replied';
+        const isLaunched = a.status === 'launched' || isContacted;
+        const lastDateStr = a.lastContactedAt ? new Date(a.lastContactedAt).toLocaleDateString() : '';
+
+        return \`
+          <div class="bg-slate-900 border \${isReplied ? 'border-purple-500/50 bg-purple-500/5' : (isContacted ? 'border-blue-500/40 bg-blue-500/5' : (isLaunched ? 'border-amber-500/40 bg-amber-500/5' : 'border-slate-800'))} rounded-xl p-5 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <h3 class="font-bold text-white text-base">\${a.name}</h3>
+                <div>
+                  \${isReplied ? \`
+                    <span class="text-xs px-2 py-0.5 rounded font-mono bg-purple-500/20 text-purple-300">💬 Replied</span>
+                  \` : (isContacted ? \`
+                    <span class="text-xs px-2 py-0.5 rounded font-mono bg-blue-500/20 text-blue-300">✓ Contacted (\${lastDateStr})</span>
+                  \` : \`
+                    <span class="text-xs px-2 py-0.5 rounded font-mono \${isLaunched ? 'bg-amber-500/20 text-amber-400' : 'bg-slate-800 text-slate-400'}">
+                      \${isLaunched ? 'Ready to Pitch' : (a.activeListingsCount ? a.activeListingsCount + ' Listings' : 'New Lead')}
+                    </span>
+                  \`)}
                 </div>
-                <p class="text-xs text-amber-400 font-medium mb-1">\${a.territory || 'Dallas Luxury Advisory'}</p>
-                <p class="text-xs text-slate-400"><i class="fa-solid fa-phone mr-1"></i> \${a.phone || 'Phone not listed'}</p>
-                <p class="text-xs text-slate-400"><i class="fa-solid fa-envelope mr-1"></i> \${a.email || 'Email not listed'}</p>
-                \${a.notes ? \`<p class="text-xs text-slate-500 mt-2 italic">\${a.notes}</p>\` : ''}
               </div>
 
-              <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between gap-2">
-                <a href="\${a.url}" target="_blank" class="text-xs text-slate-400 hover:text-white underline">Compass Profile</a>
-                <div class="flex gap-2">
-                  \${isLaunched ? \`
-                    <a href="\${a.liveUrl || '/'+a.slug}" target="_blank" class="px-3 py-1.5 bg-green-600 hover:bg-green-500 text-white rounded text-xs font-semibold">View Live</a>
-                  \` : \`
-                    <button onclick="launchFromDiscovery('\${a.slug}', '\${a.url}')" class="px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs">
-                      <i class="fa-solid fa-bolt mr-1"></i> 1-Click Launch
-                    </button>
-                  \`}
-                  <button onclick="openEmailForAgent('\${a.name}', '\${a.slug}', '\${a.email}')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-xs">
-                    <i class="fa-solid fa-envelope"></i>
+              <p class="text-xs text-amber-400 font-medium mb-1">\${a.territory || 'Dallas Luxury Advisory'}</p>
+              <p class="text-xs text-slate-400"><i class="fa-solid fa-phone mr-1"></i> \${a.phone || 'Phone not listed'}</p>
+              <p class="text-xs text-slate-400"><i class="fa-solid fa-envelope mr-1"></i> \${a.email || 'Email not listed'}</p>
+              \${a.lastSubject ? \`<p class="text-xs text-slate-400 mt-2 bg-slate-950/60 p-2 rounded truncate"><i class="fa-solid fa-paper-plane mr-1 text-slate-500"></i> \${a.lastSubject}</p>\` : ''}
+            </div>
+
+            <div class="pt-3 border-t border-slate-800/80 space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <a href="\${a.url}" target="_blank" class="text-slate-400 hover:text-white underline">Compass Profile</a>
+                <a href="\${a.liveUrl || 'https://realestate-advisory.ayubkhokhar786.workers.dev/' + a.slug}" target="_blank" class="text-amber-400 hover:underline font-mono">View Showcase &rarr;</a>
+              </div>
+
+              \${isContacted ? \`
+                <!-- Follow-Up Action Controls -->
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                  <button onclick="openEmailForAgent('\${a.name}', '\${a.slug}', '\${a.email}', 'followup_ignored')" class="px-2.5 py-1.5 bg-blue-600/30 hover:bg-blue-600/40 border border-blue-500/50 text-blue-300 font-semibold rounded text-xs text-center transition">
+                    🔄 Follow-Up #1 (Ignored)
+                  </button>
+                  <button onclick="openEmailForAgent('\${a.name}', '\${a.slug}', '\${a.email}', 'followup_silent')" class="px-2.5 py-1.5 bg-purple-600/30 hover:bg-purple-600/40 border border-purple-500/50 text-purple-300 font-semibold rounded text-xs text-center transition">
+                    💬 Follow-Up #2 (Silent)
                   </button>
                 </div>
-              </div>
+                <div class="flex justify-between items-center pt-1 text-xs">
+                  <span class="text-slate-500">Status:</span>
+                  <select onchange="changeAgentStatus('\${a.slug}', this.value)" class="bg-slate-950 border border-slate-800 rounded px-2 py-0.5 text-xs text-slate-300">
+                    <option value="contacted" \${a.status === 'contacted' ? 'selected' : ''}>Contacted</option>
+                    <option value="replied" \${a.status === 'replied' ? 'selected' : ''}>Replied / Interested</option>
+                    <option value="new" \${a.status === 'new' ? 'selected' : ''}>Reset to New</option>
+                  </select>
+                </div>
+              \` : \`
+                <!-- Uncontacted Controls -->
+                <div class="flex justify-between items-center gap-2 pt-1">
+                  <button onclick="launchFromDiscovery('\${a.slug}', '\${a.url}')" class="flex-1 px-3 py-1.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs text-center">
+                    <i class="fa-solid fa-bolt mr-1"></i> 1-Click Launch
+                  </button>
+                  <button onclick="openEmailForAgent('\${a.name}', '\${a.slug}', '\${a.email}', 'initial')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 rounded text-xs">
+                    <i class="fa-solid fa-envelope mr-1"></i> Pitch
+                  </button>
+                </div>
+              \`}
             </div>
-          \`;
-        }).join('');
-      } catch (err) {
-        container.innerHTML = \`<div class="p-8 text-center text-red-400 col-span-3">Error loading agents: \${err.message}</div>\`;
+          </div>
+        \`;
+      }).join('');
+    }
+
+    // Status changer
+    async function changeAgentStatus(slug, newStatus) {
+      try {
+        await fetch('/api/crm/status', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug, status: newStatus })
+        });
+        loadDiscoveredAgents();
+      } catch (e) {
+        alert('Failed to update status: ' + e.message);
       }
     }
 
@@ -654,6 +864,7 @@ app.use((req, res) => {
           appendLog(\`SUCCESS! Portal is live at: \${data.result.liveUrl}\`);
           alert(\`Agent '\${data.result.agentName}' successfully onboarded!\\nLive at: \${data.result.liveUrl}\`);
           loadRoster();
+          loadDiscoveredAgents();
         } else {
           appendLog(\`ERROR: \${data.error}\`);
           alert('Error during onboarding: ' + data.error);
@@ -716,7 +927,7 @@ app.use((req, res) => {
             <td class="px-4 py-3 text-slate-400 text-xs">\${new Date(h.sentAt).toLocaleString()}</td>
             <td class="px-4 py-3"><span class="px-2 py-0.5 rounded text-xs bg-green-500/20 text-green-400 font-mono">Delivered</span></td>
             <td class="px-4 py-3 text-right">
-              <button onclick="openFollowUp('\${h.agentName}', '\${h.recipient}', '\${h.slug}')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-xs text-amber-400 rounded">
+              <button onclick="openEmailForAgent('\${h.agentName}', '\${h.slug}', '\${h.recipient}', 'followup_ignored')" class="px-2.5 py-1 bg-blue-600/30 hover:bg-blue-600/40 text-blue-300 text-xs font-semibold rounded">
                 Follow Up
               </button>
             </td>
@@ -727,32 +938,44 @@ app.use((req, res) => {
       }
     }
 
-    // 6. Email Modal Functions
-    let currentPreparedPayload = {};
-    async function openEmailForAgent(name, slug, email) {
+    // 6. Email Modal & Follow-Up Functions
+    async function openEmailForAgent(name, slug, email, templateKey = 'initial') {
+      currentPreparedPayload = { name, slug, to: email, templateKey };
       document.getElementById('modalRecipient').value = email || '';
+      document.getElementById('modalTemplateSelect').value = templateKey;
       document.getElementById('emailModal').classList.remove('hidden');
 
-      try {
-        const res = await fetch('/api/mailer/preview', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, slug, email })
-        });
-        const data = await res.json();
-        if (data.pitch) {
-          document.getElementById('modalSubject').value = data.pitch.subject;
-          document.getElementById('modalBody').value = data.pitch.textBody;
-          currentPreparedPayload = { name, slug, to: email };
-        }
-      } catch (e) {}
+      loadTemplateIntoModal(templateKey);
     }
 
-    function openFollowUp(name, email, slug) {
-      document.getElementById('modalRecipient').value = email;
-      document.getElementById('modalSubject').value = \`Re: Built a bespoke portal for your Dallas portfolio\`;
-      document.getElementById('modalBody').value = \`Hi \${name.split(' ')[0]},\\n\\nJust wanted to make sure this didn't get buried under your MLS alerts!\\n\\nHere's the live link to your modern portfolio with $0 monthly hosting:\\nhttps://realestate-advisory.ayubkhokhar786.workers.dev/\${slug}\\n\\nLet me know if you would like me to connect this to your custom domain this week.\\n\\nBest regards,\\nAyub Khokhar\\nWebpenter Real Estate Advisory\\nayub@webpenter.com\`;
-      document.getElementById('emailModal').classList.remove('hidden');
+    async function loadTemplateIntoModal(templateKey) {
+      try {
+        const res = await fetch('/api/crm/render', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            templateKey,
+            agentData: {
+              name: currentPreparedPayload.name,
+              slug: currentPreparedPayload.slug,
+              email: document.getElementById('modalRecipient').value,
+            }
+          })
+        });
+        const data = await res.json();
+        if (data.rendered) {
+          document.getElementById('modalSubject').value = data.rendered.subject;
+          document.getElementById('modalBody').value = data.rendered.textBody;
+        }
+      } catch (e) {
+        console.error('Failed to render template:', e);
+      }
+    }
+
+    function handleModalTemplateChange() {
+      const selected = document.getElementById('modalTemplateSelect').value;
+      currentPreparedPayload.templateKey = selected;
+      loadTemplateIntoModal(selected);
     }
 
     function closeEmailModal() {
@@ -767,7 +990,7 @@ app.use((req, res) => {
 
       const btn = document.getElementById('modalSendBtn');
       btn.disabled = true;
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Sending...';
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Sending via Hostinger...';
 
       try {
         const res = await fetch('/api/mailer/send', {
@@ -778,7 +1001,8 @@ app.use((req, res) => {
             customSubject: subject,
             customBody,
             name: currentPreparedPayload.name || to,
-            slug: currentPreparedPayload.slug || 'portal'
+            slug: currentPreparedPayload.slug || 'portal',
+            stage: currentPreparedPayload.templateKey || 'initial_sent'
           })
         });
         const data = await res.json();
@@ -786,6 +1010,7 @@ app.use((req, res) => {
           alert('Email sent successfully via Hostinger SMTP!');
           closeEmailModal();
           loadOutreachHistory();
+          loadDiscoveredAgents(); // Refreshes CRM status to Contacted
         } else {
           alert('Failed to send email: ' + (data.error || 'Unknown error'));
         }
@@ -805,15 +1030,15 @@ app.use((req, res) => {
         const res = await fetch('/api/mailer/test', { method: 'POST' });
         const data = await res.json();
         if (data.success) {
-          badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500"></span> Hostinger SMTP: <strong class="text-white">Active (ayub@webpenter.com)</strong>';
+          badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500"></span> SMTP: <strong class="text-white">Active (ayub@webpenter.com)</strong>';
           alert('Success: ' + data.message);
         } else {
-          badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-red-500"></span> Hostinger SMTP: <strong class="text-red-400">Offline</strong>';
+          badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-red-500"></span> SMTP: <strong class="text-red-400">Offline</strong>';
           alert('Hostinger Connection Failed: ' + data.error + '\\nPlease update your email password in the Settings tab.');
           switchTab('settings');
         }
       } catch (err) {
-        badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-red-500"></span> Hostinger SMTP Error';
+        badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-red-500"></span> SMTP Error';
         alert('Test failed: ' + err.message);
       }
     }
@@ -938,7 +1163,8 @@ app.use((req, res) => {
             name: currentPreparedPayload.name || 'Advisor',
             slug: currentPreparedPayload.slug || 'portal',
             email: document.getElementById('modalRecipient').value,
-            tone: tone
+            tone: tone,
+            customNotes: 'Follow-up strategy stage: ' + (currentPreparedPayload.templateKey || 'initial')
           })
         });
         const data = await res.json();
@@ -953,6 +1179,65 @@ app.use((req, res) => {
       } finally {
         btn.disabled = false;
         btn.innerHTML = '<i class="fa-solid fa-bolt mr-1"></i> <span>Regenerate with Groq AI</span>';
+      }
+    }
+
+    // 9. Load & Save CRM Templates
+    async function loadCrmTemplates() {
+      try {
+        const res = await fetch('/api/crm/templates');
+        const data = await res.json();
+        if (data.templates) {
+          cachedTemplates = data.templates;
+          document.getElementById('tmpl_initial_sub').value = data.templates.initial?.subject || '';
+          document.getElementById('tmpl_initial_body').value = data.templates.initial?.body || '';
+
+          document.getElementById('tmpl_ignored_sub').value = data.templates.followup_ignored?.subject || '';
+          document.getElementById('tmpl_ignored_body').value = data.templates.followup_ignored?.body || '';
+
+          document.getElementById('tmpl_silent_sub').value = data.templates.followup_silent?.subject || '';
+          document.getElementById('tmpl_silent_body').value = data.templates.followup_silent?.body || '';
+        }
+      } catch (e) {
+        console.error('Failed to load templates:', e);
+      }
+    }
+
+    async function handleSaveTemplates(e) {
+      e.preventDefault();
+      const updated = {
+        initial: {
+          name: "Initial Showcase Pitch",
+          subject: document.getElementById('tmpl_initial_sub').value,
+          body: document.getElementById('tmpl_initial_body').value
+        },
+        followup_ignored: {
+          name: "Follow-Up #1: Ignored / No Response",
+          subject: document.getElementById('tmpl_ignored_sub').value,
+          body: document.getElementById('tmpl_ignored_body').value
+        },
+        followup_silent: {
+          name: "Follow-Up #2: Replied Initially but Went Silent",
+          subject: document.getElementById('tmpl_silent_sub').value,
+          body: document.getElementById('tmpl_silent_body').value
+        }
+      };
+
+      try {
+        const res = await fetch('/api/crm/templates', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updated)
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert('Custom templates saved successfully!');
+          cachedTemplates = updated;
+        } else {
+          alert('Error: ' + data.error);
+        }
+      } catch (err) {
+        alert('Failed to save templates: ' + err.message);
       }
     }
 
