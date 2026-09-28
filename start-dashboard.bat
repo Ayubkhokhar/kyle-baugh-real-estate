@@ -6,7 +6,10 @@ echo    WEBPENTER - AUTONOMOUS REAL ESTATE OUTREACH SUITE (LOCALHOST)
 echo ======================================================================
 echo.
 echo  Starting local control station on port 4000...
-echo  Your browser will open automatically in 2 seconds.
+echo  Local PC:   http://localhost:4000
+echo  Mobile/LAN: http://192.168.1.25:4000 (Open on your phone on same Wi-Fi)
+echo.
+echo  To access remotely from mobile anywhere, run: start-mobile-tunnel.bat
 echo.
 
 cd /d "%~dp0"

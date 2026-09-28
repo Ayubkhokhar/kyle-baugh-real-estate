@@ -5,6 +5,7 @@
 import express from "express";
 import path from "path";
 import fs from "fs";
+import os from "os";
 import { fileURLToPath } from "url";
 import { getDiscoveredAgents, crawlCompassDallasDirectory, saveDiscoveredAgents } from "./agent-discovery.js";
 import { runAgentPipeline } from "./agent-pipeline.js";
@@ -1508,11 +1509,25 @@ app.use((req, res) => {
 </html>`);
 });
 
-app.listen(PORT, () => {
+function getLocalIp() {
+  const nets = os.networkInterfaces();
+  for (const name of Object.keys(nets)) {
+    for (const net of nets[name]) {
+      if (net.family === "IPv4" && !net.internal) {
+        return net.address;
+      }
+    }
+  }
+  return "localhost";
+}
+
+app.listen(PORT, "0.0.0.0", () => {
+  const lanIp = getLocalIp();
   console.log(`\n======================================================`);
   console.log(`🚀 Dallas Real Estate Outreach Control Suite is LIVE!`);
-  console.log(`URL: http://localhost:${PORT}`);
-  console.log(`Email Engine: ayub@webpenter.com via Hostinger SMTP`);
+  console.log(`💻 Local PC:   http://localhost:${PORT}`);
+  console.log(`📱 Mobile/LAN: http://${lanIp}:${PORT} (Open from phone on Wi-Fi)`);
+  console.log(`📧 Email Engine: ayub@webpenter.com via Hostinger SMTP`);
   console.log(`Zero AI tokens required.`);
   console.log(`======================================================\n`);
 });
