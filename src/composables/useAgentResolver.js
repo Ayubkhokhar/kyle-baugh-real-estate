@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { erikaOrbinProfile } from "../data/agents/erikaOrbinProfile";
 import { meganJohnsonProfile } from "../data/agents/meganJohnsonProfile";
 import { christineLeiteProfile } from "../data/agents/christineLeiteProfile";
 import { lizChalfantProfile } from "../data/agents/lizChalfantProfile";
@@ -10,6 +11,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as erikaOrbinProperties } from "../data/agents/erikaOrbinProperties";
 import { compassProperties as meganJohnsonProperties } from "../data/agents/meganJohnsonProperties";
 import { compassProperties as christineLeiteProperties } from "../data/agents/christineLeiteProperties";
 import { compassProperties as lizChalfantProperties } from "../data/agents/lizChalfantProperties";
@@ -100,6 +102,15 @@ export const availableAgents = [
     slug: "megan-johnson",
     profile: meganJohnsonProfile,
     properties: meganJohnsonProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "erika-orbin",
+    name: "Erika Orbin",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "erika-orbin",
+    profile: erikaOrbinProfile,
+    properties: erikaOrbinProperties,
     previewColor: "#BFA181",
   },
 ];

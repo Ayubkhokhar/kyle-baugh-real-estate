@@ -1,5 +1,17 @@
 [
   {
+    "id": "outreach-1790580639594",
+    "agentName": "Megan Johnson",
+    "slug": "megan-johnson",
+    "recipient": "megan.johnson@compass.com",
+    "sender": "ayub@webpenter.com",
+    "subject": "Megan Johnson's portfolio + your Dallas portfolio (Built this for you)",
+    "sentAt": "2026-09-28T07:30:39.594Z",
+    "messageId": "<bfdca6cc-2512-cc98-2e1e-c073580c1ebc@webpenter.com>",
+    "status": "sent",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/megan-johnson"
+  },
+  {
     "id": "outreach-1790410436351",
     "agentName": "Liz Chalfant",
     "slug": "liz-chalfant",

@@ -45,8 +45,20 @@
     "phone": "(214) 538-3400",
     "email": "megan.johnson@compass.com",
     "activeListingsCount": 2,
-    "status": "ready_to_launch",
-    "notes": "Known for design and construction acumen in Dallas residential advisory."
+    "status": "contacted",
+    "notes": "Known for design and construction acumen in Dallas residential advisory.",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/megan-johnson",
+    "contactStage": "initial_sent",
+    "contactCount": 1,
+    "lastContactedAt": "2026-09-28T07:30:39.613Z",
+    "lastSubject": "Megan Johnson's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial_sent",
+        "subject": "Megan Johnson's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-09-28T07:30:39.613Z"
+      }
+    ]
   },
   {
     "slug": "erika-orbin",
