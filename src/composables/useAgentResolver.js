@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { meganJohnsonProfile } from "../data/agents/meganJohnsonProfile";
 import { christineLeiteProfile } from "../data/agents/christineLeiteProfile";
 import { lizChalfantProfile } from "../data/agents/lizChalfantProfile";
 import { carsonProfile } from "../data/agents/carsonProfile";
@@ -9,6 +10,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as meganJohnsonProperties } from "../data/agents/meganJohnsonProperties";
 import { compassProperties as christineLeiteProperties } from "../data/agents/christineLeiteProperties";
 import { compassProperties as lizChalfantProperties } from "../data/agents/lizChalfantProperties";
 import { compassProperties as carsonProperties } from "../data/agents/carsonProperties";
@@ -89,6 +91,15 @@ export const availableAgents = [
     slug: "christine-leite",
     profile: christineLeiteProfile,
     properties: christineLeiteProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "megan-johnson",
+    name: "Megan Johnson",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "megan-johnson",
+    profile: meganJohnsonProfile,
+    properties: meganJohnsonProperties,
     previewColor: "#BFA181",
   },
 ];
