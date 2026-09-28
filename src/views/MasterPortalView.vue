@@ -152,7 +152,7 @@ function copyPitchText(text) {
       <section class="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 border border-slate-800 rounded-2xl p-5 sm:p-8 relative overflow-hidden shadow-2xl">
         <div class="relative z-10 max-w-2xl space-y-2 sm:space-y-3">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono">
-            <span>🏛️</span> 8 Active Bespoke Portals Deployed
+            <span>🏛️</span> {{ availableAgents.length }} Active Bespoke Portals Deployed
           </div>
           <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             Dallas Agent Portals & Outreach Center
@@ -166,7 +166,7 @@ function copyPitchText(text) {
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 sm:pt-6">
           <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-3">
             <div class="text-xs text-slate-500 font-mono">LIVE SITES</div>
-            <div class="text-xl font-bold text-white">8 Portals</div>
+            <div class="text-xl font-bold text-white">{{ availableAgents.length }} Portals</div>
           </div>
           <div class="bg-slate-950/60 border border-slate-800 rounded-xl p-3">
             <div class="text-xs text-slate-500 font-mono">EDGE HOSTING</div>

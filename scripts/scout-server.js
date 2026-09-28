@@ -797,6 +797,32 @@ app.use((req, res) => {
       }
     }
 
+    // Crawl / Refresh Directory Trigger
+    async function crawlCompass() {
+      const btn = document.getElementById('crawlBtn');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-amber-400 mr-1.5"></i> Crawling Dallas Enclaves...';
+      }
+      try {
+        const res = await fetch('/api/agents/crawl', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) {
+          await loadDiscoveredAgents();
+          alert(\`Directory crawl complete! Found \${data.count} Dallas agent prospects in database.\`);
+        } else {
+          alert('Crawl error: ' + (data.error || 'Failed to crawl'));
+        }
+      } catch (e) {
+        alert('Crawl request failed: ' + e.message);
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = '<i class="fa-solid fa-arrows-rotate text-amber-400 mr-1.5"></i> Refresh / Crawl Directory';
+        }
+      }
+    }
+
     function updateFilterCounts() {
       const total = rawAgentsList.length;
       const contacted = rawAgentsList.filter(a => a.status === 'contacted' || a.contactCount > 0).length;
