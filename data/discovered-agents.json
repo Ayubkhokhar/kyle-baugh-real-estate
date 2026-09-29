@@ -93,8 +93,20 @@
     "phone": "(214) 732-2344",
     "email": "jamie.adams@compass.com",
     "activeListingsCount": 2,
-    "status": "discovered",
-    "notes": "Specializes in luxury architectural residences and premier Dallas enclaves."
+    "status": "contacted",
+    "notes": "Specializes in luxury architectural residences and premier Dallas enclaves.",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/jamie-adams",
+    "contactStage": "initial_sent",
+    "contactCount": 1,
+    "lastContactedAt": "2026-09-28T12:50:29.019Z",
+    "lastSubject": "Jamie - Built a bespoke Dallas digital showcase for your portfolio",
+    "history": [
+      {
+        "stage": "initial_sent",
+        "subject": "Jamie - Built a bespoke Dallas digital showcase for your portfolio",
+        "sentAt": "2026-09-28T12:50:29.019Z"
+      }
+    ]
   },
   {
     "slug": "brooke-altemore",
