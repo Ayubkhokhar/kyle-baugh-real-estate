@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { annaleeAstonProfile } from "../data/agents/annaleeAstonProfile";
 import { brookeAltemoreProfile } from "../data/agents/brookeAltemoreProfile";
 import { jamieAdamsProfile } from "../data/agents/jamieAdamsProfile";
 import { erikaOrbinProfile } from "../data/agents/erikaOrbinProfile";
@@ -13,6 +14,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as annaleeAstonProperties } from "../data/agents/annaleeAstonProperties";
 import { compassProperties as brookeAltemoreProperties } from "../data/agents/brookeAltemoreProperties";
 import { compassProperties as jamieAdamsProperties } from "../data/agents/jamieAdamsProperties";
 import { compassProperties as erikaOrbinProperties } from "../data/agents/erikaOrbinProperties";
@@ -133,6 +135,15 @@ export const availableAgents = [
     slug: "brooke-altemore",
     profile: brookeAltemoreProfile,
     properties: brookeAltemoreProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "annalee-aston",
+    name: "Annalee Aston",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "annalee-aston",
+    profile: annaleeAstonProfile,
+    properties: annaleeAstonProperties,
     previewColor: "#BFA181",
   },
 ];
