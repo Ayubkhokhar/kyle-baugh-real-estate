@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { katyAnnettProfile } from "../data/agents/katyAnnettProfile";
 import { annaleeAstonProfile } from "../data/agents/annaleeAstonProfile";
 import { brookeAltemoreProfile } from "../data/agents/brookeAltemoreProfile";
 import { jamieAdamsProfile } from "../data/agents/jamieAdamsProfile";
@@ -14,6 +15,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as katyAnnettProperties } from "../data/agents/katyAnnettProperties";
 import { compassProperties as annaleeAstonProperties } from "../data/agents/annaleeAstonProperties";
 import { compassProperties as brookeAltemoreProperties } from "../data/agents/brookeAltemoreProperties";
 import { compassProperties as jamieAdamsProperties } from "../data/agents/jamieAdamsProperties";
@@ -144,6 +146,15 @@ export const availableAgents = [
     slug: "annalee-aston",
     profile: annaleeAstonProfile,
     properties: annaleeAstonProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "katy-annett",
+    name: "Katy Annett",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "katy-annett",
+    profile: katyAnnettProfile,
+    properties: katyAnnettProperties,
     previewColor: "#BFA181",
   },
 ];

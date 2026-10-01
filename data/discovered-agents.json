@@ -154,8 +154,20 @@
     "phone": "(214) 802-5400",
     "email": "annalee.aston@compass.com",
     "activeListingsCount": 3,
-    "status": "discovered",
-    "notes": "Top producer focusing on Park Cities luxury architectural residences."
+    "status": "contacted",
+    "notes": "Top producer focusing on Park Cities luxury architectural residences.",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/annalee-aston",
+    "contactStage": "initial_sent",
+    "contactCount": 1,
+    "lastContactedAt": "2026-09-30T13:08:06.797Z",
+    "lastSubject": "Annalee Aston's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial_sent",
+        "subject": "Annalee Aston's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-09-30T13:08:06.797Z"
+      }
+    ]
   },
   {
     "slug": "jacquelyn-austin",
