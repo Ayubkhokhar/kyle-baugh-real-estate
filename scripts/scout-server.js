@@ -55,6 +55,13 @@ function getActiveRoster() {
     "jd": { email: "jd.gonzales@compass.com", phone: "(214) 450-2611" },
     "liz-chalfant": { email: "liz.chalfant@compass.com", phone: "(214) 732-2344" },
     "christine-leite": { email: "christine.leite@compass.com", phone: "(469) 471-7489" },
+    "megan-johnson": { email: "megan.johnson@compass.com", phone: "(214) 707-9917" },
+    "erika-orbin": { email: "erika.orbin@compass.com", phone: "(469) 877-9557" },
+    "jamie-adams": { email: "jamie.adams@compass.com", phone: "(214) 280-9988" },
+    "brooke-altemore": { email: "brooke.altemore@compass.com", phone: "(214) 796-9811" },
+    "annalee-aston": { email: "annalee.aston@compass.com", phone: "(214) 564-2450" },
+    "katy-annett": { email: "katy.annett@compass.com", phone: "(214) 289-4084" },
+    "michele-balady-beach": { email: "michele.beach@compass.com", phone: "(214) 384-2821" },
   };
 
   return matches.map((m) => {
@@ -63,23 +70,92 @@ function getActiveRoster() {
     const title = m[3];
 
     const disc = discovered.find((d) => d.slug === slug || (d.name && d.name.toLowerCase() === name.toLowerCase()));
-    const sentHistory = history.filter((h) => h.slug === slug || (disc && disc.email && h.recipient === disc.email));
+    const fallback = profileContacts[slug] || {};
+    let email = disc?.email || fallback.email || "";
+    let phone = disc?.phone || fallback.phone || "";
+
+    if (!email || !phone) {
+      try {
+        const camel = slug.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+        const pPath = slug === "kyle"
+          ? path.join(rootDir, "src", "data", "agentProfile.js")
+          : path.join(rootDir, "src", "data", "agents", `${camel}Profile.js`);
+        if (fs.existsSync(pPath)) {
+          const content = fs.readFileSync(pPath, "utf-8");
+          if (!email) {
+            const em = content.match(/email:\s*["']([^"']+)["']/i);
+            if (em) email = em[1].trim();
+          }
+          if (!phone) {
+            const ph = content.match(/phone:\s*["']([^"']+)["']/i);
+            if (ph) phone = ph[1].trim();
+          }
+        }
+      } catch (e) {}
+    }
+
+    const sentHistory = history.filter((h) => h.slug === slug || (email && h.recipient && h.recipient.toLowerCase() === email.toLowerCase()));
     const lastHistory = sentHistory[0];
 
-    const fallback = profileContacts[slug] || {};
-    const email = disc?.email || fallback.email || "";
-    const phone = disc?.phone || fallback.phone || "";
-
     const contactCount = disc?.contactCount || sentHistory.length || 0;
-    const isContacted = contactCount > 0 || disc?.status === "contacted";
-    const isReplied = disc?.status === "replied";
 
     let outreachStatus = "needs_outreach";
-    if (isReplied) {
+    if (disc?.status === "replied") {
       outreachStatus = "replied";
-    } else if (isContacted) {
+    } else if (disc?.status === "contacted") {
+      outreachStatus = "contacted";
+    } else if (disc?.status === "needs_outreach" || disc?.status === "new") {
+      outreachStatus = "needs_outreach";
+    } else if (contactCount > 0 || sentHistory.length > 0) {
       outreachStatus = "contacted";
     }
+
+    // Comprehensive stage-by-stage tracking:
+    const historyList = disc?.history || [];
+    
+    // Check initial:
+    const initialSent = (outreachStatus === "contacted" || outreachStatus === "replied") && (
+      sentHistory.some(h => h.stage === 'initial' || h.stage === 'initial_sent' || (!h.subject?.toLowerCase().includes('re:') && !h.subject?.toLowerCase().includes('next step'))) ||
+      historyList.some(h => h.stage === 'initial' || h.stage === 'initial_sent') ||
+      disc?.contactStage === 'initial' || disc?.contactStage === 'initial_sent' || disc?.contactStage === 'followup_1' || disc?.contactStage === 'followup_2' || disc?.contactStage === 'followup_sent' ||
+      contactCount >= 1
+    );
+
+    const initialHistoryEntry = sentHistory.find(h => h.stage === 'initial' || h.stage === 'initial_sent' || (!h.subject?.toLowerCase().includes('re:') && !h.subject?.toLowerCase().includes('next step'))) ||
+      historyList.find(h => h.stage === 'initial' || h.stage === 'initial_sent');
+    const initialDate = initialHistoryEntry?.sentAt 
+      ? new Date(initialHistoryEntry.sentAt).toLocaleDateString()
+      : (initialSent ? (disc?.lastContactedAt && disc.lastContactedAt.includes('T') ? new Date(disc.lastContactedAt).toLocaleDateString() : 'Hostinger') : null);
+
+    // Check followup 1:
+    const followup1Sent = (outreachStatus === "contacted" || outreachStatus === "replied") && (
+      sentHistory.some(h => h.stage === 'followup_1' || h.stage === 'followup_ignored' || (h.subject?.toLowerCase().includes('re:') && !h.subject?.toLowerCase().includes('next step'))) ||
+      historyList.some(h => h.stage === 'followup_1' || h.stage === 'followup_ignored' || h.stage === 'followup_sent') ||
+      disc?.contactStage === 'followup_1' || disc?.contactStage === 'followup_ignored' || disc?.contactStage === 'followup_2' || disc?.contactStage === 'followup_sent' ||
+      contactCount >= 2
+    );
+
+    const followup1HistoryEntry = sentHistory.find(h => h.stage === 'followup_1' || h.stage === 'followup_ignored' || (h.subject?.toLowerCase().includes('re:') && !h.subject?.toLowerCase().includes('next step'))) ||
+      historyList.find(h => h.stage === 'followup_1' || h.stage === 'followup_ignored' || h.stage === 'followup_sent');
+    const followup1Date = followup1HistoryEntry?.sentAt 
+      ? new Date(followup1HistoryEntry.sentAt).toLocaleDateString()
+      : (followup1Sent ? (disc?.lastContactedAt && disc.lastContactedAt.includes('T') ? new Date(disc.lastContactedAt).toLocaleDateString() : 'Sent') : null);
+
+    // Check followup 2:
+    const followup2Sent = (outreachStatus === "contacted" || outreachStatus === "replied") && (
+      sentHistory.some(h => h.stage === 'followup_2' || h.stage === 'followup_silent' || h.subject?.toLowerCase().includes('next step')) ||
+      historyList.some(h => h.stage === 'followup_2' || h.stage === 'followup_silent') ||
+      disc?.contactStage === 'followup_2' || disc?.contactStage === 'followup_silent' ||
+      contactCount >= 3
+    );
+
+    const followup2HistoryEntry = sentHistory.find(h => h.stage === 'followup_2' || h.stage === 'followup_silent' || h.subject?.toLowerCase().includes('next step')) ||
+      historyList.find(h => h.stage === 'followup_2' || h.stage === 'followup_silent');
+    const followup2Date = followup2HistoryEntry?.sentAt 
+      ? new Date(followup2HistoryEntry.sentAt).toLocaleDateString()
+      : (followup2Sent ? (disc?.lastContactedAt && disc.lastContactedAt.includes('T') ? new Date(disc.lastContactedAt).toLocaleDateString() : 'Sent') : null);
+
+    const currentStage = outreachStatus === 'replied' ? 'replied' : (followup2Sent ? 'followup_2' : (followup1Sent ? 'followup_1' : (initialSent ? 'initial' : 'none')));
 
     return {
       id: slug,
@@ -92,9 +168,15 @@ function getActiveRoster() {
       manageUrl: `https://realestate-advisory.ayubkhokhar786.workers.dev/${slug}/manage`,
       outreachStatus, // 'needs_outreach' | 'contacted' | 'replied'
       contactCount,
-      lastContactedAt: disc?.lastContactedAt || lastHistory?.sentAt || null,
+      lastContactedAt: disc?.lastContactedAt || lastHistory?.sentAt || (outreachStatus === "contacted" ? "Hostinger Webmail" : null),
       lastSubject: disc?.lastSubject || lastHistory?.subject || null,
-      contactStage: disc?.contactStage || (lastHistory ? "initial_sent" : null),
+      contactStage: currentStage,
+      initialSent,
+      initialDate,
+      followup1Sent,
+      followup1Date,
+      followup2Sent,
+      followup2Date,
     };
   });
 }
@@ -288,8 +370,8 @@ app.post("/api/crm/render", (req, res) => {
 
 app.post("/api/crm/status", (req, res) => {
   try {
-    const { slug, status, contactStage, notes } = req.body;
-    const result = setAgentStatus(slug, { status, contactStage, notes });
+    const { slug, status, contactStage, notes, name, email } = req.body;
+    const result = setAgentStatus(slug, { status, contactStage, notes, name, email });
     res.json(result);
   } catch (e) {
     res.status(500).json({ success: false, error: e.message });
@@ -489,7 +571,7 @@ app.use((req, res) => {
           <h2 class="text-xl font-bold text-white">Live Client Portals & Outreach</h2>
           <p class="text-sm text-slate-400">Currently active isolated websites on Cloudflare Edge with real-time contact status.</p>
         </div>
-        <div class="flex items-center gap-2 text-xs">
+        <div class="flex items-center gap-2 text-xs flex-wrap">
           <span class="text-slate-500 font-medium">FILTER:</span>
           <button onclick="filterRoster('all')" id="rosterFilter-all" class="px-3 py-1 rounded-full bg-amber-500 text-slate-950 font-bold transition">
             All (<span id="countRosterAll">0</span>)
@@ -499,6 +581,9 @@ app.use((req, res) => {
           </button>
           <button onclick="filterRoster('contacted')" id="rosterFilter-contacted" class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white transition">
             ✓ Contacted (<span id="countRosterContacted">0</span>)
+          </button>
+          <button onclick="filterRoster('replied')" id="rosterFilter-replied" class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 hover:text-white transition">
+            💬 Replied (<span id="countRosterReplied">0</span>)
           </button>
         </div>
       </div>
@@ -525,6 +610,7 @@ app.use((req, res) => {
             <tr>
               <th class="px-4 py-3">Agent</th>
               <th class="px-4 py-3">Recipient</th>
+              <th class="px-4 py-3">Stage / Step</th>
               <th class="px-4 py-3">Subject</th>
               <th class="px-4 py-3">Sent At</th>
               <th class="px-4 py-3">Status</th>
@@ -533,7 +619,7 @@ app.use((req, res) => {
           </thead>
           <tbody id="historyTableBody" class="divide-y divide-slate-800">
             <tr>
-              <td colspan="6" class="px-4 py-6 text-center text-slate-500">Loading outreach log...</td>
+              <td colspan="7" class="px-4 py-6 text-center text-slate-500">Loading outreach log...</td>
             </tr>
           </tbody>
         </table>
@@ -997,7 +1083,7 @@ app.use((req, res) => {
 
     function filterRoster(filterType) {
       activeRosterFilter = filterType;
-      ['all', 'needs_outreach', 'contacted'].forEach(f => {
+      ['all', 'needs_outreach', 'contacted', 'replied'].forEach(f => {
         const btn = document.getElementById('rosterFilter-' + f);
         if (btn) {
           if (f === filterType) {
@@ -1025,7 +1111,8 @@ app.use((req, res) => {
     function updateRosterCounts() {
       const total = rawRosterList.length;
       const needs = rawRosterList.filter(r => r.outreachStatus === 'needs_outreach').length;
-      const contacted = rawRosterList.filter(r => r.outreachStatus === 'contacted' || r.outreachStatus === 'replied').length;
+      const contacted = rawRosterList.filter(r => r.outreachStatus === 'contacted').length;
+      const replied = rawRosterList.filter(r => r.outreachStatus === 'replied').length;
 
       const badgeHeader = document.getElementById('rosterCount');
       if (badgeHeader) badgeHeader.textContent = total;
@@ -1038,6 +1125,9 @@ app.use((req, res) => {
 
       const elContacted = document.getElementById('countRosterContacted');
       if (elContacted) elContacted.textContent = contacted;
+
+      const elReplied = document.getElementById('countRosterReplied');
+      if (elReplied) elReplied.textContent = replied;
     }
 
     function renderRosterGrid() {
@@ -1047,7 +1137,9 @@ app.use((req, res) => {
       if (activeRosterFilter === 'needs_outreach') {
         filtered = rawRosterList.filter(r => r.outreachStatus === 'needs_outreach');
       } else if (activeRosterFilter === 'contacted') {
-        filtered = rawRosterList.filter(r => r.outreachStatus === 'contacted' || r.outreachStatus === 'replied');
+        filtered = rawRosterList.filter(r => r.outreachStatus === 'contacted');
+      } else if (activeRosterFilter === 'replied') {
+        filtered = rawRosterList.filter(r => r.outreachStatus === 'replied');
       }
 
       if (filtered.length === 0) {
@@ -1056,12 +1148,115 @@ app.use((req, res) => {
       }
 
       grid.innerHTML = filtered.map(r => {
-        const isContacted = r.outreachStatus === 'contacted' || r.contactCount > 0;
         const isReplied = r.outreachStatus === 'replied';
-        const lastDate = r.lastContactedAt ? new Date(r.lastContactedAt).toLocaleDateString() : '';
+        const isContacted = r.outreachStatus === 'contacted' || r.contactCount > 0;
+        const safeName = (r.name || '').replace(/'/g, "\\'");
+
+        // Current status label for top badge
+        let badgeHtml = '';
+        if (isReplied) {
+          badgeHtml = '<span class="text-xs px-2.5 py-1 rounded-full font-mono bg-purple-500/20 text-purple-300 border border-purple-500/40 font-bold flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span> 🎉 Client Replied</span>';
+        } else if (r.followup2Sent) {
+          badgeHtml = '<span class="text-xs px-2.5 py-1 rounded-full font-mono bg-purple-500/20 text-purple-300 border border-purple-500/30 font-semibold">✓ Follow-Up #2 Sent (' + (r.followup2Date || 'Sent') + ')</span>';
+        } else if (r.followup1Sent) {
+          badgeHtml = '<span class="text-xs px-2.5 py-1 rounded-full font-mono bg-blue-500/20 text-blue-300 border border-blue-500/30 font-semibold">✓ Follow-Up #1 Sent (' + (r.followup1Date || 'Sent') + ')</span>';
+        } else if (r.initialSent) {
+          badgeHtml = '<span class="text-xs px-2.5 py-1 rounded-full font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 font-semibold">✓ Initial Pitch Sent (' + (r.initialDate || 'Sent') + ')</span>';
+        } else {
+          badgeHtml = '<span class="text-xs px-2.5 py-1 rounded-full font-mono bg-amber-500/20 text-amber-400 border border-amber-500/30 font-semibold">⏳ Built · Needs Outreach</span>';
+        }
+
+        // Stepper Journey Tracker (The Hint)
+        const stepProgressText = isReplied ? 'Replied' : (r.followup2Sent ? '3/3 Emails Sent' : (r.followup1Sent ? '2/3 Emails Sent' : (r.initialSent ? '1/3 Emails Sent' : '0/3 Sent')));
+
+        let actionControlsHtml = '';
+        if (isReplied) {
+          actionControlsHtml = \`
+            <div class="space-y-1.5 pt-1">
+              <div class="w-full py-1.5 px-3 bg-purple-600/20 border border-purple-500/40 rounded text-center text-xs text-purple-300 font-bold flex items-center justify-center gap-1.5 shadow-sm">
+                <i class="fa-solid fa-comment-dots"></i> Client Replied &middot; High Intent Lead
+              </div>
+              <div class="grid grid-cols-2 gap-1.5">
+                <button onclick="openEmailForAgent('\${safeName}', '\${r.slug}', '\${r.email}', 'followup_silent')" class="px-2 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 rounded text-[11px] text-center transition">
+                  ✉️ Dispatch Email
+                </button>
+                <button onclick="changeRosterAgentStatus('\${r.slug}', '\${safeName}', '\${r.email}', 'initial')" class="px-2 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-400 rounded text-[11px] text-center transition">
+                  Reset Stage
+                </button>
+              </div>
+            </div>
+          \`;
+        } else if (r.followup2Sent) {
+          actionControlsHtml = \`
+            <div class="space-y-1.5 pt-1">
+              <div class="w-full py-1.5 px-3 bg-emerald-500/10 border border-emerald-500/30 rounded text-center text-xs text-emerald-400 font-semibold flex items-center justify-center gap-1">
+                <i class="fa-solid fa-circle-check"></i> All 3 Outreach Emails Delivered
+              </div>
+              <div class="grid grid-cols-2 gap-1.5">
+                <button onclick="openEmailForAgent('\${safeName}', '\${r.slug}', '\${r.email}', 'followup_silent')" class="px-2 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-purple-300 rounded text-[11px] text-center transition">
+                  💬 Resend Follow #2
+                </button>
+                <button onclick="changeRosterAgentStatus('\${r.slug}', '\${safeName}', '\${r.email}', 'replied')" class="px-2 py-1.5 bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/40 text-purple-300 font-bold rounded text-[11px] text-center transition">
+                  🎉 Mark Replied
+                </button>
+              </div>
+            </div>
+          \`;
+        } else if (r.followup1Sent) {
+          actionControlsHtml = \`
+            <div class="space-y-1.5 pt-1">
+              <button onclick="openEmailForAgent('\${safeName}', '\${r.slug}', '\${r.email}', 'followup_silent')" class="w-full px-3 py-2 bg-purple-600 hover:bg-purple-500 text-white font-bold rounded text-xs text-center transition flex items-center justify-center gap-1.5 shadow-lg shadow-purple-600/20">
+                <i class="fa-solid fa-arrow-right"></i> Next Step: Send Follow-Up #2 (Silent)
+              </button>
+              <div class="grid grid-cols-2 gap-1.5">
+                <button onclick="openEmailForAgent('\${safeName}', '\${r.slug}', '\${r.email}', 'followup_ignored')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-blue-300 rounded text-[11px] text-center transition">
+                  <i class="fa-solid fa-rotate-left mr-1"></i> Resend Follow #1
+                </button>
+                <button onclick="changeRosterAgentStatus('\${r.slug}', '\${safeName}', '\${r.email}', 'replied')" class="px-2.5 py-1.5 bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/30 text-purple-300 rounded text-[11px] text-center font-semibold transition">
+                  🎉 Mark Replied
+                </button>
+              </div>
+            </div>
+          \`;
+        } else if (r.initialSent) {
+          actionControlsHtml = \`
+            <div class="space-y-1.5 pt-1">
+              <button onclick="openEmailForAgent('\${safeName}', '\${r.slug}', '\${r.email}', 'followup_ignored')" class="w-full px-3 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded text-xs text-center transition flex items-center justify-center gap-1.5 shadow-lg shadow-blue-600/20">
+                <i class="fa-solid fa-arrow-right"></i> Next Step: Send Follow-Up #1 (Ignored)
+              </button>
+              <div class="grid grid-cols-2 gap-1.5">
+                <button onclick="openEmailForAgent('\${safeName}', '\${r.slug}', '\${r.email}', 'followup_silent')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-purple-300 rounded text-[11px] text-center transition">
+                  💬 Jump to Follow #2
+                </button>
+                <button onclick="openEmailForAgent('\${safeName}', '\${r.slug}', '\${r.email}', 'initial')" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-300 rounded text-[11px] text-center transition">
+                  <i class="fa-solid fa-rotate-left mr-1"></i> Resend Initial
+                </button>
+              </div>
+            </div>
+          \`;
+        } else {
+          actionControlsHtml = \`
+            <div class="space-y-1.5 pt-1">
+              <button onclick="openEmailForAgent('\${safeName}', '\${r.slug}', '\${r.email}', 'initial')" class="w-full px-3 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs text-center transition flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/10">
+                <i class="fa-solid fa-paper-plane"></i> Send Initial Pitch (Step 1)
+              </button>
+              <div class="grid grid-cols-2 gap-1.5">
+                <button onclick="openEmailForAgent('\${safeName}', '\${r.slug}', '\${r.email}', 'followup_ignored')" title="Send Follow-Up #1 directly (if already emailed initial in Hostinger)" class="px-2 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-blue-500/50 text-blue-300 font-semibold rounded text-[11px] text-center transition flex items-center justify-center gap-1">
+                  🔄 Follow-Up #1
+                </button>
+                <button onclick="openEmailForAgent('\${safeName}', '\${r.slug}', '\${r.email}', 'followup_silent')" title="Send Follow-Up #2 directly" class="px-2 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-purple-500/50 text-purple-300 font-semibold rounded text-[11px] text-center transition flex items-center justify-center gap-1">
+                  💬 Follow-Up #2
+                </button>
+              </div>
+              <button onclick="changeRosterAgentStatus('\${r.slug}', '\${safeName}', '\${r.email}', 'initial')" class="w-full text-[11px] text-amber-400 hover:text-amber-300 hover:underline text-center py-0.5 flex items-center justify-center gap-1 transition">
+                <i class="fa-solid fa-check-double text-[10px]"></i> Emailed in Hostinger? Mark Initial Sent
+              </button>
+            </div>
+          \`;
+        }
 
         return \`
-          <div class="bg-slate-900 border \${isReplied ? 'border-purple-500/50 bg-purple-500/5' : (isContacted ? 'border-blue-500/40 bg-blue-500/5' : 'border-amber-500/30 bg-amber-500/5')} rounded-xl p-5 flex flex-col justify-between space-y-4">
+          <div class="bg-slate-900 border \${isReplied ? 'border-purple-500/50 bg-purple-500/5' : (r.followup2Sent ? 'border-purple-500/40 bg-purple-500/5' : (r.followup1Sent ? 'border-blue-500/40 bg-blue-500/5' : (r.initialSent ? 'border-emerald-500/40 bg-emerald-500/5' : 'border-amber-500/30 bg-amber-500/5')))} rounded-xl p-5 flex flex-col justify-between space-y-4">
             <div>
               <div class="flex items-center justify-between mb-1">
                 <h3 class="font-bold text-white text-base">\${r.name}</h3>
@@ -1082,22 +1277,62 @@ app.use((req, res) => {
                 \` : ''}
               </div>
 
-              <!-- Status Badge -->
-              <div class="flex items-center justify-between">
-                \${isReplied ? \`
-                  <span class="text-xs px-2.5 py-1 rounded font-mono bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                    💬 Replied
-                  </span>
-                \` : (isContacted ? \`
-                  <span class="text-xs px-2.5 py-1 rounded font-mono bg-blue-500/20 text-blue-300 border border-blue-500/30">
-                    ✓ Contacted (\${lastDate || 'Sent'})
-                  </span>
-                \` : \`
-                  <span class="text-xs px-2.5 py-1 rounded font-mono bg-amber-500/20 text-amber-400 border border-amber-500/30">
-                    ⏳ Built · Needs Outreach
-                  </span>
-                \`)}
+              <!-- Top Status Badge -->
+              <div class="flex items-center justify-between mb-3">
+                \${badgeHtml}
                 <span class="text-[11px] text-slate-500 font-mono">Cloudflare Edge</span>
+              </div>
+
+              <!-- 3-STEP OUTREACH JOURNEY HINTS (Visual Stepper) -->
+              <div class="bg-slate-950/80 p-2.5 rounded-lg border border-slate-800/90 space-y-2">
+                <div class="flex items-center justify-between text-[11px]">
+                  <span class="text-slate-400 font-semibold flex items-center gap-1">
+                    <i class="fa-solid fa-route text-amber-400"></i> Outreach Journey:
+                  </span>
+                  <span class="font-mono text-[11px] \${isReplied ? 'text-purple-400 font-bold' : (r.followup2Sent ? 'text-purple-300' : (r.followup1Sent ? 'text-blue-300' : (r.initialSent ? 'text-emerald-300' : 'text-slate-400')))}">
+                    \${stepProgressText}
+                  </span>
+                </div>
+
+                <div class="grid grid-cols-3 gap-1.5 text-center text-[10px]">
+                  <!-- Step 1: Initial -->
+                  <div class="p-1.5 rounded border transition \${r.initialSent ? 'bg-emerald-500/15 border-emerald-500/40 text-emerald-300 font-medium' : 'bg-slate-900 border-slate-800 text-slate-500'}">
+                    <div class="font-bold flex items-center justify-center gap-1">
+                      \${r.initialSent ? '<i class="fa-solid fa-check text-emerald-400"></i> 1. Initial' : '1. Initial'}
+                    </div>
+                    <div class="text-[9px] text-slate-400 truncate mt-0.5">\${r.initialSent ? (r.initialDate || 'Sent') : 'Pending'}</div>
+                  </div>
+
+                  <!-- Step 2: Follow-Up #1 -->
+                  <div class="p-1.5 rounded border transition \${r.followup1Sent ? 'bg-blue-500/15 border-blue-500/40 text-blue-300 font-medium' : (r.initialSent && !isReplied ? 'bg-amber-500/10 border-amber-500/40 text-amber-300 font-bold ring-1 ring-amber-500/30' : 'bg-slate-900 border-slate-800 text-slate-500')}">
+                    <div class="font-bold flex items-center justify-center gap-1">
+                      \${r.followup1Sent ? '<i class="fa-solid fa-check text-blue-400"></i> 2. Follow #1' : (r.initialSent && !isReplied ? '👉 2. Next' : '2. Follow #1')}
+                    </div>
+                    <div class="text-[9px] text-slate-400 truncate mt-0.5">\${r.followup1Sent ? (r.followup1Date || 'Sent') : (r.initialSent && !isReplied ? 'Ready' : 'Pending')}</div>
+                  </div>
+
+                  <!-- Step 3: Follow-Up #2 -->
+                  <div class="p-1.5 rounded border transition \${r.followup2Sent ? 'bg-purple-500/15 border-purple-500/40 text-purple-300 font-medium' : (r.followup1Sent && !isReplied ? 'bg-amber-500/10 border-amber-500/40 text-amber-300 font-bold ring-1 ring-amber-500/30' : 'bg-slate-900 border-slate-800 text-slate-500')}">
+                    <div class="font-bold flex items-center justify-center gap-1">
+                      \${r.followup2Sent ? '<i class="fa-solid fa-check text-purple-400"></i> 3. Follow #2' : (r.followup1Sent && !isReplied ? '👉 3. Next' : '3. Follow #2')}
+                    </div>
+                    <div class="text-[9px] text-slate-400 truncate mt-0.5">\${r.followup2Sent ? (r.followup2Date || 'Sent') : (r.followup1Sent && !isReplied ? 'Ready' : 'Pending')}</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick CRM Status Setting Dropdown -->
+              <div class="mt-2.5 flex items-center justify-between bg-slate-950/70 px-2.5 py-1.5 rounded border border-slate-800/80 text-xs">
+                <span class="text-slate-400 text-[11px] font-semibold flex items-center gap-1">
+                  <i class="fa-solid fa-sliders text-amber-400"></i> Stage Setting:
+                </span>
+                <select onchange="changeRosterAgentStatus('\${r.slug}', '\${safeName}', '\${r.email || ''}', this.value)" class="bg-slate-900 border border-slate-700 rounded px-2 py-0.5 text-xs text-slate-200 font-medium focus:outline-none focus:border-amber-400 cursor-pointer">
+                  <option value="needs_outreach" \${!r.initialSent && !isReplied ? 'selected' : ''}>⏳ Needs Outreach (0/3)</option>
+                  <option value="initial" \${r.initialSent && !r.followup1Sent && !isReplied ? 'selected' : ''}>✓ Initial Sent (1/3)</option>
+                  <option value="followup_1" \${r.followup1Sent && !r.followup2Sent && !isReplied ? 'selected' : ''}>🔄 Follow-Up #1 Sent (2/3)</option>
+                  <option value="followup_2" \${r.followup2Sent && !isReplied ? 'selected' : ''}>💬 Follow-Up #2 Sent (3/3)</option>
+                  <option value="replied" \${isReplied ? 'selected' : ''}>🎉 Replied / Interested</option>
+                </select>
               </div>
 
               \${r.lastSubject ? \`
@@ -1118,25 +1353,31 @@ app.use((req, res) => {
                 </a>
               </div>
 
-              <!-- Outreach Action Controls -->
-              \${isContacted ? \`
-                <div class="grid grid-cols-2 gap-2 pt-1">
-                  <button onclick="openEmailForAgent('\${r.name}', '\${r.slug}', '\${r.email}', 'followup_ignored')" class="px-2.5 py-1.5 bg-blue-600/30 hover:bg-blue-600/40 border border-blue-500/50 text-blue-300 font-semibold rounded text-xs text-center transition">
-                    🔄 Follow-Up #1
-                  </button>
-                  <button onclick="openEmailForAgent('\${r.name}', '\${r.slug}', '\${r.email}', 'followup_silent')" class="px-2.5 py-1.5 bg-purple-600/30 hover:bg-purple-600/40 border border-purple-500/50 text-purple-300 font-semibold rounded text-xs text-center transition">
-                    💬 Follow-Up #2
-                  </button>
-                </div>
-              \` : \`
-                <button onclick="openEmailForAgent('\${r.name}', '\${r.slug}', '\${r.email}', 'initial')" class="w-full px-3 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs text-center transition flex items-center justify-center gap-1.5 shadow-lg shadow-amber-500/10">
-                  <i class="fa-solid fa-paper-plane"></i> Send Initial Pitch
-                </button>
-              \`}
+              <!-- Smart Outreach Action Controls with Next-Step Hints -->
+              \${actionControlsHtml}
             </div>
           </div>
         \`;
       }).join('');
+    }
+
+    async function changeRosterAgentStatus(slug, name, email, newStatus) {
+      try {
+        const res = await fetch('/api/crm/status', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug, name, email, status: newStatus })
+        });
+        const data = await res.json();
+        if (data.success) {
+          await loadRoster();
+          await loadDiscoveredAgents();
+        } else {
+          alert('Failed to update status: ' + (data.error || 'Unknown error'));
+        }
+      } catch (e) {
+        alert('Failed to update status: ' + e.message);
+      }
     }
 
     // 5. Load Outreach History
@@ -1146,25 +1387,38 @@ app.use((req, res) => {
         const res = await fetch('/api/outreach/history');
         const data = await res.json();
         if (!data.history || data.history.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="6" class="px-4 py-8 text-center text-slate-500">No emails dispatched yet from this dashboard.</td></tr>';
+          tbody.innerHTML = '<tr><td colspan="7" class="px-4 py-8 text-center text-slate-500">No emails dispatched yet from this dashboard.</td></tr>';
           return;
         }
-        tbody.innerHTML = data.history.map(h => \`
-          <tr class="hover:bg-slate-800/40">
-            <td class="px-4 py-3 font-medium text-white">\${h.agentName}</td>
-            <td class="px-4 py-3 font-mono text-xs text-slate-300">\${h.recipient}</td>
-            <td class="px-4 py-3 text-slate-400 text-xs truncate max-w-xs">\${h.subject}</td>
-            <td class="px-4 py-3 text-slate-400 text-xs">\${new Date(h.sentAt).toLocaleString()}</td>
-            <td class="px-4 py-3"><span class="px-2 py-0.5 rounded text-xs bg-green-500/20 text-green-400 font-mono">Delivered</span></td>
-            <td class="px-4 py-3 text-right">
-              <button onclick="openEmailForAgent('\${h.agentName}', '\${h.slug}', '\${h.recipient}', 'followup_ignored')" class="px-2.5 py-1 bg-blue-600/30 hover:bg-blue-600/40 text-blue-300 text-xs font-semibold rounded">
-                Follow Up
-              </button>
-            </td>
-          </tr>
-        \`).join('');
+        tbody.innerHTML = data.history.map(h => {
+          let stageBadge = '<span class="px-2 py-0.5 rounded text-[11px] bg-emerald-500/20 text-emerald-300 font-mono font-medium">1. Initial Pitch</span>';
+          const subLower = (h.subject || '').toLowerCase();
+          if (h.stage === 'followup_2' || subLower.includes('next steps') || subLower.includes('next step')) {
+            stageBadge = '<span class="px-2 py-0.5 rounded text-[11px] bg-purple-500/20 text-purple-300 font-mono font-medium">3. Follow-Up #2</span>';
+          } else if (h.stage === 'followup_1' || h.stage === 'followup_sent' || subLower.includes('re:')) {
+            stageBadge = '<span class="px-2 py-0.5 rounded text-[11px] bg-blue-500/20 text-blue-300 font-mono font-medium">2. Follow-Up #1</span>';
+          }
+
+          const safeAgentName = (h.agentName || '').replace(/'/g, "\\'");
+
+          return \`
+            <tr class="hover:bg-slate-800/40">
+              <td class="px-4 py-3 font-medium text-white">\${h.agentName}</td>
+              <td class="px-4 py-3 font-mono text-xs text-slate-300">\${h.recipient}</td>
+              <td class="px-4 py-3">\${stageBadge}</td>
+              <td class="px-4 py-3 text-slate-400 text-xs truncate max-w-xs">\${h.subject}</td>
+              <td class="px-4 py-3 text-slate-400 text-xs">\${new Date(h.sentAt).toLocaleString()}</td>
+              <td class="px-4 py-3"><span class="px-2 py-0.5 rounded text-xs bg-green-500/20 text-green-400 font-mono">Delivered</span></td>
+              <td class="px-4 py-3 text-right">
+                <button onclick="openEmailForAgent('\${safeAgentName}', '\${h.slug}', '\${h.recipient}', 'followup_ignored')" class="px-2.5 py-1 bg-blue-600/30 hover:bg-blue-600/40 text-blue-300 text-xs font-semibold rounded">
+                  Follow Up
+                </button>
+              </td>
+            </tr>
+          \`;
+        }).join('');
       } catch (e) {
-        tbody.innerHTML = '<tr><td colspan="6" class="px-4 py-4 text-center text-red-400">Error loading outbox.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" class="px-4 py-4 text-center text-red-400">Error loading outbox.</td></tr>';
       }
     }
 
@@ -1257,6 +1511,7 @@ app.use((req, res) => {
     async function loadMailerSettings() {
       try {
         const res = await fetch('/api/mailer/settings');
+        const data = await res.json();
         const s = data.config || data.settings;
         if (s) {
           const hostEl = document.getElementById('smtpHost');

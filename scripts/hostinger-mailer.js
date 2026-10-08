@@ -185,6 +185,7 @@ export async function sendOutreachEmail({
   totalDeals,
   customSubject,
   customBody,
+  stage,
 }) {
   const cfg = getMailerConfig();
   const transporter = createTransporter();
@@ -218,6 +219,8 @@ export async function sendOutreachEmail({
     html,
   });
 
+  const normalizedStage = stage || (subject?.toLowerCase().includes("next steps") ? "followup_2" : (subject?.toLowerCase().includes("re:") ? "followup_1" : "initial"));
+
   // Record in outreach history
   const historyEntry = {
     id: "outreach-" + Date.now(),
@@ -226,6 +229,7 @@ export async function sendOutreachEmail({
     recipient: to,
     sender: cfg.user,
     subject,
+    stage: normalizedStage,
     sentAt: new Date().toISOString(),
     messageId: info.messageId,
     status: "sent",
@@ -243,7 +247,7 @@ export async function sendOutreachEmail({
       slug,
       email: to,
       name,
-      stage: customSubject?.toLowerCase().includes("re:") ? "followup_sent" : "initial_sent",
+      stage: normalizedStage,
       subject,
     });
   } catch (err) {

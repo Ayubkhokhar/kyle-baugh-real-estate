@@ -145,14 +145,70 @@ export function recordAgentContact({
   return { success: true, timestamp: now };
 }
 
-export function setAgentStatus(slug, { status, contactStage, notes }) {
+export function setAgentStatus(slug, { status, contactStage, notes, name, email }) {
   const agents = getDiscoveredAgents();
-  const match = agents.find((a) => a.slug === slug);
-  if (!match) return { success: false, error: "Agent not found" };
+  let match = agents.find((a) => a.slug === slug);
+  const now = new Date().toISOString();
 
-  if (status !== undefined) match.status = status;
-  if (contactStage !== undefined) match.contactStage = contactStage;
-  if (notes !== undefined) match.notes = notes;
+  // Normalize incoming status & stage
+  let effectiveStatus = status;
+  let effectiveStage = contactStage;
+  if (status === "initial") {
+    effectiveStatus = "contacted";
+    effectiveStage = "initial";
+  } else if (status === "followup_1") {
+    effectiveStatus = "contacted";
+    effectiveStage = "followup_1";
+  } else if (status === "followup_2") {
+    effectiveStatus = "contacted";
+    effectiveStage = "followup_2";
+  } else if (status === "contacted") {
+    effectiveStatus = "contacted";
+    effectiveStage = effectiveStage || "initial";
+  } else if (status === "replied") {
+    effectiveStatus = "replied";
+    effectiveStage = "replied";
+  } else if (status === "needs_outreach" || status === "new") {
+    effectiveStatus = "needs_outreach";
+    effectiveStage = null;
+  }
+
+  if (!match) {
+    const isNeeds = effectiveStatus === "needs_outreach";
+    match = {
+      slug,
+      name: name || slug,
+      email: email || `${slug.replace(/-/g, ".")}@compass.com`,
+      brokerage: "Compass RE Texas, LLC",
+      status: effectiveStatus || "contacted",
+      contactStage: effectiveStage,
+      contactCount: isNeeds ? 0 : (effectiveStage === "followup_2" ? 3 : (effectiveStage === "followup_1" ? 2 : 1)),
+      notes: notes || (isNeeds ? "Reset" : "Contacted via Hostinger webmail"),
+      lastContactedAt: isNeeds ? null : now,
+      liveUrl: `https://realestate-advisory.ayubkhokhar786.workers.dev/${slug}`,
+    };
+    agents.unshift(match);
+  } else {
+    match.status = effectiveStatus;
+    if (effectiveStatus === "contacted") {
+      match.contactStage = effectiveStage || match.contactStage || "initial";
+      if (effectiveStage === "followup_2") match.contactCount = Math.max(match.contactCount || 0, 3);
+      else if (effectiveStage === "followup_1") match.contactCount = Math.max(match.contactCount || 0, 2);
+      else match.contactCount = Math.max(match.contactCount || 0, 1);
+      if (!match.lastContactedAt) match.lastContactedAt = now;
+    } else if (effectiveStatus === "replied") {
+      match.contactStage = "replied";
+      match.contactCount = Math.max(match.contactCount || 0, 1);
+      if (!match.lastContactedAt) match.lastContactedAt = now;
+    } else if (effectiveStatus === "needs_outreach") {
+      match.contactCount = 0;
+      match.contactStage = null;
+      match.lastContactedAt = null;
+    }
+    if (notes !== undefined) match.notes = notes;
+    if (name && !match.name) match.name = name;
+    if (email && !match.email) match.email = email;
+  }
 
   saveDiscoveredAgents(agents);
   return { success: true, agent: match };

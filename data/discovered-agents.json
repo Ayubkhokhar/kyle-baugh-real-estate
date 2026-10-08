@@ -1,5 +1,25 @@
 [
   {
+    "slug": "kyle",
+    "name": "Kyle Baugh",
+    "email": "kyle.baugh@compass.com",
+    "brokerage": "Compass RE Texas, LLC",
+    "status": "contacted",
+    "contactStage": "followup_ignored",
+    "contactCount": 1,
+    "notes": "Contacted via Hostinger webmail",
+    "lastContactedAt": "2026-10-08T11:50:40.443Z",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/kyle",
+    "lastSubject": "Re: Kyle Baugh's portfolio (Did you get a chance to see this?)",
+    "history": [
+      {
+        "stage": "followup_ignored",
+        "subject": "Re: Kyle Baugh's portfolio (Did you get a chance to see this?)",
+        "sentAt": "2026-10-08T11:50:40.443Z"
+      }
+    ]
+  },
+  {
     "slug": "liz-chalfant",
     "name": "Liz Chalfant",
     "brokerage": "Compass RE Texas, LLC",
@@ -37,9 +57,20 @@
     "phone": "(214) 642-8800",
     "email": "christine.leite@compass.com",
     "activeListingsCount": 3,
-    "status": "launched",
+    "status": "contacted",
     "notes": "High-touch luxury advisor with background in custom residential design.",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/christine-leite"
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/christine-leite",
+    "contactStage": "followup_ignored",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-08T12:00:55.379Z",
+    "lastSubject": "Re: Christine Leite's portfolio (Did you get a chance to see this?)",
+    "history": [
+      {
+        "stage": "followup_ignored",
+        "subject": "Re: Christine Leite's portfolio (Did you get a chance to see this?)",
+        "sentAt": "2026-10-08T12:00:55.379Z"
+      }
+    ]
   },
   {
     "slug": "megan-johnson",
@@ -150,8 +181,19 @@
     "phone": "(214) 538-3400",
     "email": "katy.annett@compass.com",
     "activeListingsCount": 2,
-    "status": "discovered",
-    "notes": "Known for design and construction acumen in Dallas residential advisory."
+    "status": "contacted",
+    "notes": "Known for design and construction acumen in Dallas residential advisory.",
+    "contactStage": "initial_sent",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-08T08:54:03.612Z",
+    "lastSubject": "Katy Annett's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial_sent",
+        "subject": "Katy Annett's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-08T08:54:03.612Z"
+      }
+    ]
   },
   {
     "slug": "katie-aspen",
@@ -213,10 +255,22 @@
     "territory": "East Dallas & White Rock Lake",
     "url": "https://www.compass.com/agents/michele-balady-beach/",
     "phone": "(214) 674-3200",
-    "email": "michele.balady-beach@compass.com",
+    "email": "michele.beach@compass.com",
     "activeListingsCount": 4,
-    "status": "discovered",
-    "notes": "Recognized authority on White Rock Lake and historic Lakewood architecture."
+    "status": "contacted",
+    "notes": "Recognized authority on White Rock Lake and historic Lakewood architecture.",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/michele-balady-beach",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-08T13:15:32.404Z",
+    "lastSubject": "Michele Balady Beach's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Michele Balady Beach's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-08T13:15:32.404Z"
+      }
+    ]
   },
   {
     "slug": "erin-ballard",
@@ -508,7 +562,18 @@
     "phone": "",
     "email": "amy.detwiler@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "discovered"
+    "status": "contacted",
+    "contactStage": "followup_ignored",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-08T11:54:31.451Z",
+    "lastSubject": "Re: Amy Detwiler's portfolio (Did you get a chance to see this?)",
+    "history": [
+      {
+        "stage": "followup_ignored",
+        "subject": "Re: Amy Detwiler's portfolio (Did you get a chance to see this?)",
+        "sentAt": "2026-10-08T11:54:31.451Z"
+      }
+    ]
   },
   {
     "slug": "chelsea-adriaanse",
@@ -546,9 +611,14 @@
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/kyle-baugh-dallas/",
     "phone": "",
-    "email": "kyle.baugh.dallas@compass.com",
+    "email": "kyle.baugh@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "discovered"
+    "status": "needs_outreach",
+    "contactStage": "needs_outreach",
+    "contactCount": 0,
+    "history": [],
+    "lastSubject": null,
+    "lastContactedAt": null
   },
   {
     "slug": "diane-beaty",
@@ -728,7 +798,18 @@
     "phone": "",
     "email": "summer.graham@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "discovered"
+    "status": "contacted",
+    "contactStage": "followup_ignored",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-08T11:57:46.990Z",
+    "lastSubject": "Re: Summer Graham's portfolio (Did you get a chance to see this?)",
+    "history": [
+      {
+        "stage": "followup_ignored",
+        "subject": "Re: Summer Graham's portfolio (Did you get a chance to see this?)",
+        "sentAt": "2026-10-08T11:57:46.990Z"
+      }
+    ]
   },
   {
     "slug": "forrest-gregg",
@@ -886,7 +967,7 @@
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/kevin-blair-dallas/",
     "phone": "",
-    "email": "kevin.blair.dallas@compass.com",
+    "email": "kevinblair@compass.com",
     "territory": "East & Dallas",
     "status": "discovered"
   },
@@ -1166,7 +1247,7 @@
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/john-murray-da/",
     "phone": "",
-    "email": "john.murray.da@compass.com",
+    "email": "john.murray@compass.com",
     "territory": "Turtle creek & Dallas",
     "status": "discovered"
   },
@@ -1356,7 +1437,7 @@
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/thomas-byrd-dallas/",
     "phone": "",
-    "email": "thomas.byrd.dallas@compass.com",
+    "email": "thomas.byrd@compass.com",
     "territory": "Lower greenville & Dallas",
     "status": "discovered"
   },
@@ -1599,5 +1680,39 @@
     "email": "brenda.ray@compass.com",
     "territory": "Midway hollow & Dallas",
     "status": "discovered"
+  },
+  {
+    "slug": "carson",
+    "name": "Carson Hill",
+    "email": "carson.hill@compass.com",
+    "status": "contacted",
+    "contactStage": "followup_ignored",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-08T11:54:54.098Z",
+    "lastSubject": "Re: Carson Hill's portfolio (Did you get a chance to see this?)",
+    "history": [
+      {
+        "stage": "followup_ignored",
+        "subject": "Re: Carson Hill's portfolio (Did you get a chance to see this?)",
+        "sentAt": "2026-10-08T11:54:54.098Z"
+      }
+    ]
+  },
+  {
+    "slug": "alex",
+    "name": "Alex Marler",
+    "email": "alex.marler@compass.com",
+    "status": "contacted",
+    "contactStage": "followup_ignored",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-08T11:55:38.508Z",
+    "lastSubject": "Re: Alex Marler's portfolio (Did you get a chance to see this?)",
+    "history": [
+      {
+        "stage": "followup_ignored",
+        "subject": "Re: Alex Marler's portfolio (Did you get a chance to see this?)",
+        "sentAt": "2026-10-08T11:55:38.508Z"
+      }
+    ]
   }
 ]
