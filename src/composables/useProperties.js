@@ -2,6 +2,7 @@ import { ref, computed, watch } from "vue";
 import { defaultProperties } from "../data/seedProperties";
 import { compassProperties as kyleProperties, compassSyncMeta as kyleCompassMeta } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as micheleBaladyBeachProperties } from "../data/agents/micheleBaladyBeachProperties";
 import { compassProperties as katyAnnettProperties } from "../data/agents/katyAnnettProperties";
 import { compassProperties as annaleeAstonProperties } from "../data/agents/annaleeAstonProperties";
 import { compassProperties as brookeAltemoreProperties } from "../data/agents/brookeAltemoreProperties";
@@ -25,6 +26,17 @@ const amyCompassMeta = {
   imagesDownloaded: 45,
   agentUrl: "https://www.compass.com/agents/amy-detwiler/",
   syncedAgent: "Amy Detwiler",
+};
+
+const micheleBaladyBeachCompassMeta = {
+  lastSynced: "2026-10-08T08:52:02.778Z",
+  totalProperties: 28,
+  activeCount: 1,
+  soldCount: 22,
+  leasedCount: 0,
+  imagesDownloaded: 36,
+  agentUrl: "https://www.compass.com/agents/michele-balady-beach/",
+  syncedAgent: "Michele Balady Beach",
 };
 
 const katyAnnettCompassMeta = {
@@ -190,6 +202,10 @@ function mergeProperties(existingList, incomingCompassList) {
 }
 
 function getInitialListForAgent(agentId) {
+  if (agentId === "michele-balady-beach") {
+    return micheleBaladyBeachProperties;
+  }
+
   if (agentId === "katy-annett") {
     return katyAnnettProperties;
   }
@@ -241,6 +257,10 @@ function getInitialListForAgent(agentId) {
 }
 
 function getInitialMetaForAgent(agentId) {
+  if (agentId === "michele-balady-beach") {
+    return micheleBaladyBeachCompassMeta;
+  }
+
   if (agentId === "katy-annett") {
     return katyAnnettCompassMeta;
   }
@@ -353,7 +373,7 @@ export function useProperties() {
     const match = properties.value.find((p) => String(p.id) === String(id) || p.slug === String(id));
     if (match) return match;
     // Cross-agent fallback so direct links to any listing never fail
-    const allKnown = [...katyAnnettProperties, ...annaleeAstonProperties, ...brookeAltemoreProperties, ...jamieAdamsProperties, ...erikaOrbinProperties, ...meganJohnsonProperties, ...christineLeiteProperties, ...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
+    const allKnown = [...micheleBaladyBeachProperties, ...katyAnnettProperties, ...annaleeAstonProperties, ...brookeAltemoreProperties, ...jamieAdamsProperties, ...erikaOrbinProperties, ...meganJohnsonProperties, ...christineLeiteProperties, ...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
     return allKnown.find((p) => String(p.id) === String(id) || p.slug === String(id)) || null;
   }
 

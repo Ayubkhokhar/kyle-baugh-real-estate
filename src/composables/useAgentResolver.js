@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { micheleBaladyBeachProfile } from "../data/agents/micheleBaladyBeachProfile";
 import { katyAnnettProfile } from "../data/agents/katyAnnettProfile";
 import { annaleeAstonProfile } from "../data/agents/annaleeAstonProfile";
 import { brookeAltemoreProfile } from "../data/agents/brookeAltemoreProfile";
@@ -15,6 +16,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as micheleBaladyBeachProperties } from "../data/agents/micheleBaladyBeachProperties";
 import { compassProperties as katyAnnettProperties } from "../data/agents/katyAnnettProperties";
 import { compassProperties as annaleeAstonProperties } from "../data/agents/annaleeAstonProperties";
 import { compassProperties as brookeAltemoreProperties } from "../data/agents/brookeAltemoreProperties";
@@ -155,6 +157,15 @@ export const availableAgents = [
     slug: "katy-annett",
     profile: katyAnnettProfile,
     properties: katyAnnettProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "michele-balady-beach",
+    name: "Michele Balady Beach",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "michele-balady-beach",
+    profile: micheleBaladyBeachProfile,
+    properties: micheleBaladyBeachProperties,
     previewColor: "#BFA181",
   },
 ];
