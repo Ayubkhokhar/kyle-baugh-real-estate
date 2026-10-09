@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { jonathanRosenProfile } from "../data/agents/jonathanRosenProfile";
 import { katieAspenProfile } from "../data/agents/katieAspenProfile";
 import { micheleBaladyBeachProfile } from "../data/agents/micheleBaladyBeachProfile";
 import { katyAnnettProfile } from "../data/agents/katyAnnettProfile";
@@ -17,6 +18,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as jonathanRosenProperties } from "../data/agents/jonathanRosenProperties";
 import { compassProperties as katieAspenProperties } from "../data/agents/katieAspenProperties";
 import { compassProperties as micheleBaladyBeachProperties } from "../data/agents/micheleBaladyBeachProperties";
 import { compassProperties as katyAnnettProperties } from "../data/agents/katyAnnettProperties";
@@ -177,6 +179,15 @@ export const availableAgents = [
     slug: "katie-aspen",
     profile: katieAspenProfile,
     properties: katieAspenProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "jonathan-rosen",
+    name: "Jonathan Rosen",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "jonathan-rosen",
+    profile: jonathanRosenProfile,
+    properties: jonathanRosenProperties,
     previewColor: "#BFA181",
   },
 ];
