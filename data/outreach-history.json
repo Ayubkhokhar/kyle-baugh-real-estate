@@ -1,5 +1,18 @@
 [
   {
+    "id": "outreach-1791585907207",
+    "agentName": "Meg Beaird",
+    "slug": "meg-beaird",
+    "recipient": "meg.beaird@compass.com",
+    "sender": "ayub@webpenter.com",
+    "subject": "Meg Beaird's portfolio + your Dallas portfolio (Built this for you)",
+    "stage": "initial",
+    "sentAt": "2026-10-09T22:45:07.214Z",
+    "messageId": "<c047e885-4524-737b-b8ea-182023d47211@webpenter.com>",
+    "status": "sent",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/meg-beaird"
+  },
+  {
     "id": "outreach-1791551480708",
     "agentName": "JD Gonzales",
     "slug": "jd",

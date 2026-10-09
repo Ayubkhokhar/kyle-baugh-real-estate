@@ -316,8 +316,20 @@
     "phone": "(214) 770-4300",
     "email": "meg.beaird@compass.com",
     "activeListingsCount": 3,
-    "status": "discovered",
-    "notes": "Specializes in gated private estates and high-equity custom builds."
+    "status": "contacted",
+    "notes": "Specializes in gated private estates and high-equity custom builds.",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/meg-beaird",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-09T22:45:07.222Z",
+    "lastSubject": "Meg Beaird's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Meg Beaird's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-09T22:45:07.222Z"
+      }
+    ]
   },
   {
     "slug": "thomas-bellinger",
