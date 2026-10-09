@@ -168,9 +168,20 @@
     "phone": "(214) 642-8800",
     "email": "brooke.altemore@compass.com",
     "activeListingsCount": 3,
-    "status": "launched",
+    "status": "contacted",
     "notes": "High-touch luxury advisor with background in custom residential design.",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/brooke-altemore"
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/brooke-altemore",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-09T13:11:07.339Z",
+    "lastSubject": "Brooke Altemore's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Brooke Altemore's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-09T13:11:07.339Z"
+      }
+    ]
   },
   {
     "slug": "katy-annett",
@@ -204,9 +215,20 @@
     "phone": "(214) 912-7000",
     "email": "katie.aspen@compass.com",
     "activeListingsCount": 2,
-    "status": "launched",
+    "status": "contacted",
     "notes": "Deep family roots in Dallas residential development and estates.",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/katie-aspen"
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/katie-aspen",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-09T13:10:33.746Z",
+    "lastSubject": "Katie Aspen's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Katie Aspen's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-09T13:10:33.746Z"
+      }
+    ]
   },
   {
     "slug": "annalee-aston",
@@ -342,8 +364,20 @@
     "phone": "(214) 927-1313",
     "email": "jonathan.rosen@compass.com",
     "activeListingsCount": 5,
-    "status": "discovered",
-    "notes": "Consistently ranked among top Dallas luxury estate producers."
+    "status": "contacted",
+    "notes": "Consistently ranked among top Dallas luxury estate producers.",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/jonathan-rosen",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-09T13:10:54.278Z",
+    "lastSubject": "Jonathan Rosen's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Jonathan Rosen's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-09T13:10:54.278Z"
+      }
+    ]
   },
   {
     "slug": "diana-blackman",
@@ -789,7 +823,18 @@
     "phone": "",
     "email": "jd.gonzales@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "discovered"
+    "status": "contacted",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-09T13:11:20.713Z",
+    "lastSubject": "JD Gonzales's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "JD Gonzales's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-09T13:11:20.713Z"
+      }
+    ]
   },
   {
     "slug": "summer-graham",

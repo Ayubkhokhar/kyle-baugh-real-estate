@@ -412,8 +412,8 @@ export const ${ident}Profile = {
       logCallback(`Committing and pushing to GitHub...`);
       execSync("git add .", { cwd: rootDir, stdio: "pipe" });
       execSync(`git commit -m "feat: auto-onboard ${agentName} (${slug})"`, { cwd: rootDir, stdio: "pipe" });
-      execSync(`git pull --rebase ${GIT_PUSH_URL}`, { cwd: rootDir, stdio: "pipe" });
-      execSync(`git push ${GIT_PUSH_URL}`, { cwd: rootDir, stdio: "pipe" });
+      execSync(`git pull --rebase ${GIT_PUSH_URL}`, { cwd: rootDir, stdio: "pipe", env: { ...process.env, GIT_TERMINAL_PROMPT: "0" } });
+      execSync(`git push ${GIT_PUSH_URL}`, { cwd: rootDir, stdio: "pipe", env: { ...process.env, GIT_TERMINAL_PROMPT: "0" } });
       deploySuccess = true;
       logCallback(`✓ Successfully deployed to Cloudflare Edge!`);
     } catch (gitErr) {

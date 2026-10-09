@@ -1,5 +1,57 @@
 [
   {
+    "id": "outreach-1791551480708",
+    "agentName": "JD Gonzales",
+    "slug": "jd",
+    "recipient": "jd.gonzales@compass.com",
+    "sender": "ayub@webpenter.com",
+    "subject": "JD Gonzales's portfolio + your Dallas portfolio (Built this for you)",
+    "stage": "initial",
+    "sentAt": "2026-10-09T13:11:20.708Z",
+    "messageId": "<6b9fef0f-73d3-13d5-9dce-3ee922bf15bc@webpenter.com>",
+    "status": "sent",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/jd"
+  },
+  {
+    "id": "outreach-1791551467335",
+    "agentName": "Brooke Altemore",
+    "slug": "brooke-altemore",
+    "recipient": "brooke.altemore@compass.com",
+    "sender": "ayub@webpenter.com",
+    "subject": "Brooke Altemore's portfolio + your Dallas portfolio (Built this for you)",
+    "stage": "initial",
+    "sentAt": "2026-10-09T13:11:07.335Z",
+    "messageId": "<55b375ff-5918-7567-bcdc-61c1b4b77fb7@webpenter.com>",
+    "status": "sent",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/brooke-altemore"
+  },
+  {
+    "id": "outreach-1791551454273",
+    "agentName": "Jonathan Rosen",
+    "slug": "jonathan-rosen",
+    "recipient": "jonathan.rosen@compass.com",
+    "sender": "ayub@webpenter.com",
+    "subject": "Jonathan Rosen's portfolio + your Dallas portfolio (Built this for you)",
+    "stage": "initial",
+    "sentAt": "2026-10-09T13:10:54.273Z",
+    "messageId": "<0df4f55e-c0fc-79ef-92ea-50ecc74d59c8@webpenter.com>",
+    "status": "sent",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/jonathan-rosen"
+  },
+  {
+    "id": "outreach-1791551433734",
+    "agentName": "Katie Aspen",
+    "slug": "katie-aspen",
+    "recipient": "katie.aspen@compass.com",
+    "sender": "ayub@webpenter.com",
+    "subject": "Katie Aspen's portfolio + your Dallas portfolio (Built this for you)",
+    "stage": "initial",
+    "sentAt": "2026-10-09T13:10:33.734Z",
+    "messageId": "<8cfb4352-dd36-7c09-3523-7f95c7243467@webpenter.com>",
+    "status": "sent",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/katie-aspen"
+  },
+  {
     "id": "outreach-1791465332392",
     "agentName": "Michele Balady Beach",
     "slug": "michele-balady-beach",
