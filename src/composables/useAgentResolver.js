@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { megBeairdProfile } from "../data/agents/megBeairdProfile";
 import { jonathanRosenProfile } from "../data/agents/jonathanRosenProfile";
 import { katieAspenProfile } from "../data/agents/katieAspenProfile";
 import { micheleBaladyBeachProfile } from "../data/agents/micheleBaladyBeachProfile";
@@ -18,6 +19,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as megBeairdProperties } from "../data/agents/megBeairdProperties";
 import { compassProperties as jonathanRosenProperties } from "../data/agents/jonathanRosenProperties";
 import { compassProperties as katieAspenProperties } from "../data/agents/katieAspenProperties";
 import { compassProperties as micheleBaladyBeachProperties } from "../data/agents/micheleBaladyBeachProperties";
@@ -188,6 +190,15 @@ export const availableAgents = [
     slug: "jonathan-rosen",
     profile: jonathanRosenProfile,
     properties: jonathanRosenProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "meg-beaird",
+    name: "Meg Beaird",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "meg-beaird",
+    profile: megBeairdProfile,
+    properties: megBeairdProperties,
     previewColor: "#BFA181",
   },
 ];
