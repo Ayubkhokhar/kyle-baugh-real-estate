@@ -53,29 +53,34 @@ function navigateTo(hashOrPath) {
     class="bg-surface-alabaster/95 backdrop-blur-md text-primary sticky top-0 z-40 border-b border-border-subtle shadow-sm"
   >
     <div
-      class="flex justify-between items-center w-full px-5 py-3.5 max-w-7xl mx-auto"
+      class="flex justify-between items-center w-full px-4 sm:px-5 py-2.5 sm:py-3.5 max-w-7xl mx-auto gap-3"
     >
       <!-- Brand & Mobile Drawer Trigger -->
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2 sm:gap-3.5 min-w-0">
         <button
           @click="toggleDrawer"
           aria-label="Toggle Navigation Drawer"
-          class="p-1.5 -ml-1 text-primary hover:text-secondary transition-colors duration-150 flex items-center justify-center lg:hidden"
+          class="p-1.5 -ml-1 text-primary hover:text-secondary transition-colors duration-150 flex items-center justify-center lg:hidden shrink-0"
         >
           <span class="material-symbols-outlined text-2xl">menu</span>
         </button>
 
-        <router-link :to="currentAgentId === 'kyle' ? '/kyle' : `/${currentAgentId}`" class="flex flex-col group text-left">
-          <span
-            class="font-headline text-xl sm:text-2xl tracking-widest uppercase text-primary font-bold"
-          >
-            {{ siteSettings.advisorName }}
-          </span>
-          <span
-            class="text-[9px] tracking-[0.22em] text-charcoal-muted uppercase font-semibold"
-          >
-            {{ siteSettings.brokerage }}
-          </span>
+        <router-link :to="currentAgentId === 'kyle' ? '/kyle' : `/${currentAgentId}`" class="flex items-center gap-2 sm:gap-3 group text-left min-w-0">
+          <div v-if="siteSettings.headshot" class="w-7 h-7 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-border-brass shrink-0 bg-surface-linen">
+            <img :src="siteSettings.headshot" :alt="siteSettings.advisorName" class="w-full h-full object-cover object-top" />
+          </div>
+          <div class="flex flex-col min-w-0">
+            <span
+              class="font-headline text-sm sm:text-lg lg:text-2xl tracking-wider sm:tracking-widest uppercase text-primary font-bold truncate"
+            >
+              {{ siteSettings.advisorName }}
+            </span>
+            <span
+              class="text-[8px] sm:text-[9px] tracking-[0.15em] sm:tracking-[0.22em] text-charcoal-muted uppercase font-semibold truncate"
+            >
+              {{ siteSettings.brokerage }}
+            </span>
+          </div>
         </router-link>
       </div>
 
@@ -128,19 +133,21 @@ function navigateTo(hashOrPath) {
       </nav>
 
       <!-- Trailing Action Button + Direct Contact -->
-      <div class="flex items-center gap-5">
+      <div class="flex items-center gap-2 sm:gap-4 shrink-0">
         <a
           :href="'tel:' + siteSettings.phoneTel"
-          class="hidden xl:flex items-center gap-1.5 text-charcoal-body hover:text-secondary transition-colors duration-150"
+          class="flex items-center gap-1 px-2.5 py-1.5 sm:px-3 sm:py-2 bg-surface-linen hover:bg-secondary hover:text-canvas-white text-primary text-xs font-semibold rounded border border-border-brass/60 transition-all duration-150"
+          title="Direct Telephone"
         >
-          <span class="material-symbols-outlined text-[17px] text-secondary">phone</span>
-          <span class="text-xs tracking-widest font-semibold">{{ siteSettings.phone }}</span>
+          <span class="material-symbols-outlined text-[15px] text-secondary">phone</span>
+          <span class="hidden sm:inline text-xs tracking-wider font-semibold">{{ siteSettings.phone }}</span>
+          <span class="sm:hidden text-[10px] uppercase font-bold tracking-wider">Call</span>
         </a>
         <button
           @click="navigateTo('#consultation')"
-          class="text-xs uppercase tracking-widest px-4 py-2.5 bg-primary text-canvas-white hover:bg-secondary transition-colors duration-150 border border-primary rounded"
+          class="text-[10px] sm:text-xs uppercase tracking-wider sm:tracking-widest px-3 sm:px-4 py-1.5 sm:py-2 bg-primary text-canvas-white hover:bg-secondary transition-colors duration-150 border border-primary rounded font-semibold"
         >
-          CONSULT
+          Inquire
         </button>
       </div>
     </div>

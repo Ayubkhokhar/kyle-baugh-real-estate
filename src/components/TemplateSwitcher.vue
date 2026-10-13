@@ -49,7 +49,7 @@ async function handleCopyLink(themeId) {
 </script>
 
 <template>
-  <div v-if="!shouldHide" class="fixed bottom-5 right-5 z-50">
+  <div v-if="!shouldHide" class="hidden lg:block fixed bottom-5 right-5 z-50">
     <!-- Collapsed Floating Trigger Button -->
     <div v-if="!isOpen" class="flex items-center">
       <button

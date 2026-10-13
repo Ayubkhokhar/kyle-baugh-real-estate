@@ -78,7 +78,7 @@ watchEffect(() => {
     <!-- Agent Header (hidden on public Landing, Login, and Master Portal) -->
     <HeaderNav v-if="!isSpecialView" />
     
-    <main class="flex-grow">
+    <main class="flex-grow pb-20 lg:pb-0">
       <router-view @toast="handleToast" />
     </main>
 

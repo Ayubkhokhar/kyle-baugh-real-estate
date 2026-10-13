@@ -176,33 +176,35 @@ function printDossier() {
         </div>
 
         <!-- Specs Grid & Action Utilities -->
-        <div class="grid grid-cols-2 md:grid-cols-6 gap-4 pt-6 items-center">
-          <div class="border-r border-border-subtle pr-3">
-            <span class="text-xs uppercase text-charcoal-muted font-semibold block">Bedrooms</span>
-            <span class="font-headline text-xl text-primary font-medium">{{ property.bedrooms }} Beds</span>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 sm:gap-4 pt-6 items-center">
+          <div class="p-3 sm:p-0 bg-surface-linen/50 sm:bg-transparent rounded sm:rounded-none sm:border-r sm:border-border-subtle sm:pr-3">
+            <span class="text-[10px] sm:text-xs uppercase text-charcoal-muted font-semibold block">Bedrooms</span>
+            <span class="font-headline text-lg sm:text-xl text-primary font-medium">{{ property.bedrooms }} Beds</span>
           </div>
-          <div class="border-r border-border-subtle pr-3">
-            <span class="text-xs uppercase text-charcoal-muted font-semibold block">Bathrooms</span>
-            <span class="font-headline text-xl text-primary font-medium">{{ property.bathrooms }} Baths</span>
+          <div class="p-3 sm:p-0 bg-surface-linen/50 sm:bg-transparent rounded sm:rounded-none sm:border-r sm:border-border-subtle sm:pr-3">
+            <span class="text-[10px] sm:text-xs uppercase text-charcoal-muted font-semibold block">Bathrooms</span>
+            <span class="font-headline text-lg sm:text-xl text-primary font-medium">{{ property.bathrooms }} Baths</span>
           </div>
-          <div class="border-r border-border-subtle pr-3">
-            <span class="text-xs uppercase text-charcoal-muted font-semibold block">Conditioned Area</span>
-            <span class="font-headline text-xl text-primary font-medium">{{ property.sqft?.toLocaleString() }} Sq Ft</span>
+          <div class="p-3 sm:p-0 bg-surface-linen/50 sm:bg-transparent rounded sm:rounded-none sm:border-r sm:border-border-subtle sm:pr-3">
+            <span class="text-[10px] sm:text-xs uppercase text-charcoal-muted font-semibold block">Conditioned Area</span>
+            <span class="font-headline text-lg sm:text-xl text-primary font-medium">{{ property.sqft?.toLocaleString() }} Sq Ft</span>
           </div>
-          <div class="border-r border-border-subtle pr-3">
-            <span class="text-xs uppercase text-charcoal-muted font-semibold block">Parcel Size</span>
-            <span class="font-headline text-xl text-primary font-medium">{{ property.lotSize }}</span>
+          <div class="p-3 sm:p-0 bg-surface-linen/50 sm:bg-transparent rounded sm:rounded-none sm:border-r sm:border-border-subtle sm:pr-3">
+            <span class="text-[10px] sm:text-xs uppercase text-charcoal-muted font-semibold block">Parcel Size</span>
+            <span class="font-headline text-lg sm:text-xl text-primary font-medium truncate">{{ property.lotSize }}</span>
           </div>
-          <div class="border-r border-border-subtle pr-3">
-            <span class="text-xs uppercase text-charcoal-muted font-semibold block">Garage</span>
-            <span class="font-headline text-xl text-primary font-medium">{{ property.garage }}</span>
+          <div class="p-3 sm:p-0 bg-surface-linen/50 sm:bg-transparent rounded sm:rounded-none sm:border-r sm:border-border-subtle sm:pr-3">
+            <span class="text-[10px] sm:text-xs uppercase text-charcoal-muted font-semibold block">Garage</span>
+            <span class="font-headline text-lg sm:text-xl text-primary font-medium">{{ property.garage }}</span>
           </div>
-          <div class="flex items-center gap-2 justify-start md:justify-end">
-            <button @click="shareListing" class="p-2.5 rounded border border-border-subtle text-charcoal-body hover:bg-surface-linen hover:border-border-brass transition-all" title="Share Listing">
+          <div class="col-span-2 sm:col-span-1 flex items-center gap-2 justify-center sm:justify-start md:justify-end pt-1 sm:pt-0">
+            <button @click="shareListing" class="flex-1 sm:flex-none p-2.5 rounded border border-border-subtle text-charcoal-body hover:bg-surface-linen hover:border-border-brass transition-all flex items-center justify-center gap-1.5" title="Share Listing">
               <span class="material-symbols-outlined text-lg">share</span>
+              <span class="sm:hidden text-xs uppercase font-semibold">Share</span>
             </button>
-            <button @click="printDossier" class="p-2.5 rounded border border-border-subtle text-charcoal-body hover:bg-surface-linen hover:border-border-brass transition-all" title="Print Dossier Brochure">
+            <button @click="printDossier" class="flex-1 sm:flex-none p-2.5 rounded border border-border-subtle text-charcoal-body hover:bg-surface-linen hover:border-border-brass transition-all flex items-center justify-center gap-1.5" title="Print Dossier Brochure">
               <span class="material-symbols-outlined text-lg">print</span>
+              <span class="sm:hidden text-xs uppercase font-semibold">Print</span>
             </button>
           </div>
         </div>
@@ -287,23 +289,23 @@ function printDossier() {
           </div>
 
           <!-- Advisor Card -->
-          <div class="bg-canvas-white p-6 border border-border-subtle rounded shadow-sm">
+          <div class="bg-canvas-white p-6 border border-border-subtle rounded-xl sm:rounded shadow-sm">
             <div class="flex items-center gap-4 mb-4">
-              <div class="w-16 h-16 rounded-full overflow-hidden border border-border-brass shrink-0">
+              <div class="w-16 h-16 rounded-full overflow-hidden border border-border-brass shrink-0 bg-surface-linen">
                 <img
-                  class="w-full h-full object-cover"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAjYRx4css-T_-AENSBByIhtA1ar3h-k_YDrBx-q0I0TROujIGFVGNdJKUMkSWuarmqws42eeIs-XykO0t437gE720__boPCHG8giZD33unv4UuBcsiW5KTG-BKuAIjImAtBhkMhyRXohPFlTl_pYO5b_-iDsMjBqxvxuuymG-554tWTz9Isj4zRIMXmO6LoymP7wYyS6twqo0lzZEJjdOYmrolz-yjc0kZEd6cB_YvSBShcLeEG3Kzg"
+                  class="w-full h-full object-cover object-top"
+                  :src="siteSettings.headshot || '/images/compass/agent-headshot.webp'"
                   :alt="siteSettings.advisorName"
                 />
               </div>
               <div>
                 <h4 class="font-headline text-xl text-primary font-semibold">{{ siteSettings.advisorName }}</h4>
-                <p class="text-[10px] uppercase tracking-widest text-secondary font-semibold">Founder & Broker</p>
-                <p class="text-xs text-charcoal-muted mt-0.5">B.S. Construction Science</p>
+                <p class="text-[10px] uppercase tracking-widest text-secondary font-semibold">{{ siteSettings.title || 'Dallas Luxury Advisor' }}</p>
+                <p class="text-xs text-charcoal-muted mt-0.5 font-medium">{{ siteSettings.brokerage || 'Compass Real Estate' }}</p>
               </div>
             </div>
             <p class="text-xs text-charcoal-muted leading-relaxed border-t border-border-subtle pt-4">
-              Providing discrete luxury real estate advisory with 13+ years of construction forensics throughout Park Cities, Preston Hollow, and Lakewood.
+              {{ siteSettings.pedigreeBio || `Providing discrete luxury real estate advisory and verified market expertise across Dallas's premier historic and estate corridors.` }}
             </p>
             <div class="mt-4 pt-4 border-t border-border-subtle flex flex-col gap-2">
               <a :href="'tel:' + siteSettings.phoneTel" class="flex items-center gap-2 text-xs text-primary hover:text-secondary font-semibold">
