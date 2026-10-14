@@ -355,8 +355,9 @@
     "phone": "(214) 693-1600",
     "email": "christy.berry@compass.com",
     "activeListingsCount": 3,
-    "status": "discovered",
-    "notes": "Decades of fiduciary representation in Highland Park and University Park."
+    "status": "launched",
+    "notes": "Decades of fiduciary representation in Highland Park and University Park.",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/christy-berry"
   },
   {
     "slug": "caroline-summers",
@@ -367,8 +368,9 @@
     "phone": "(214) 597-7514",
     "email": "caroline.summers@compass.com",
     "activeListingsCount": 4,
-    "status": "discovered",
-    "notes": "Dallas modern and architectural home authority with prominent listings."
+    "status": "failed",
+    "notes": "Dallas modern and architectural home authority with prominent listings.",
+    "failReason": "Compass URL redirected to the generic search directory. No agent profile exists at: https://www.compass.com/agents/caroline-summers/"
   },
   {
     "slug": "jonathan-rosen",
@@ -402,7 +404,8 @@
     "phone": "",
     "email": "diana.blackman@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "discovered"
+    "status": "failed",
+    "failReason": "fetch failed"
   },
   {
     "slug": "chris-blackman",
