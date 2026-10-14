@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { gaylBraymerProfile } from "../data/agents/gaylBraymerProfile";
 import { gretchenBraschProfile } from "../data/agents/gretchenBraschProfile";
 import { kelseyBondProfile } from "../data/agents/kelseyBondProfile";
 import { hollyBockProfile } from "../data/agents/hollyBockProfile";
@@ -28,6 +29,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as gaylBraymerProperties } from "../data/agents/gaylBraymerProperties";
 import { compassProperties as gretchenBraschProperties } from "../data/agents/gretchenBraschProperties";
 import { compassProperties as kelseyBondProperties } from "../data/agents/kelseyBondProperties";
 import { compassProperties as hollyBockProperties } from "../data/agents/hollyBockProperties";
@@ -298,6 +300,15 @@ export const availableAgents = [
     slug: "gretchen-brasch",
     profile: gretchenBraschProfile,
     properties: gretchenBraschProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "gayl-braymer",
+    name: "Gayl Braymer",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "gayl-braymer",
+    profile: gaylBraymerProfile,
+    properties: gaylBraymerProperties,
     previewColor: "#BFA181",
   },
 ];
