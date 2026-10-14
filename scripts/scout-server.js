@@ -1297,6 +1297,19 @@ app.use((req, res) => {
         if (pText) pText.textContent = 'Autonomous Generator: Configure your daily target (e.g. 20 or 50 sites) and click Start.';
       }
 
+      const startBtn = document.getElementById('queueStartBtn');
+      if (startBtn) {
+        if (q.isRunning) {
+          startBtn.disabled = true;
+          startBtn.className = 'w-full py-3 bg-slate-800 text-slate-400 font-bold rounded-lg text-sm cursor-not-allowed flex items-center justify-center gap-2 border border-slate-700';
+          startBtn.innerHTML = '<i class="fa-solid fa-gear fa-spin text-amber-400"></i> Engine Running (' + q.completedToday + '/' + q.targetCount + ')';
+        } else {
+          startBtn.disabled = false;
+          startBtn.className = 'w-full py-3 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-black rounded-lg text-sm transition shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2';
+          startBtn.innerHTML = '<i class="fa-solid fa-play"></i> Start Autonomous Queue';
+        }
+      }
+
       if (pauseBtnText) {
         pauseBtnText.textContent = q.isPaused ? 'Resume' : 'Pause';
       }
@@ -1372,34 +1385,86 @@ app.use((req, res) => {
       const tbody = document.getElementById('sessionHistoryTableBody');
       if (!tbody) return;
 
+      tbody.innerHTML = '';
       if (!history || history.length === 0) {
         tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-6 text-center text-slate-500">No websites generated in this queue session yet.</td></tr>';
         return;
       }
 
-      tbody.innerHTML = history.map(function(h) {
-        var isSuccess = h.status === 'success';
-        var safeName = (h.name || '').replace(/'/g, "\\'");
-        var timeStr = h.timestamp ? new Date(h.timestamp).toLocaleTimeString() : '';
+      history.forEach(function(h) {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-800/40';
 
-        var html = '<tr class="hover:bg-slate-800/40">' +
-          '<td class="px-4 py-3 font-medium text-white">' +
-            h.name +
-            (h.error ? '<div class="text-[11px] text-red-400 mt-0.5 truncate max-w-xs font-mono">' + h.error + '</div>' : '') +
-          '</td>' +
-          '<td class="px-4 py-3 font-mono text-xs text-slate-300">' +
-            (isSuccess ? ('<a href="' + h.liveUrl + '" target="_blank" class="text-amber-400 hover:underline flex items-center gap-1"><span>' + h.slug + '</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>') : ('<span class="text-slate-500">' + h.slug + '</span>')) +
-          '</td>' +
-          '<td class="px-4 py-3">' +
-            (isSuccess ? '<span class="px-2 py-0.5 rounded text-xs bg-green-500/20 text-green-400 font-mono font-medium">✓ Live on Edge</span>' : '<span class="px-2 py-0.5 rounded text-xs bg-red-500/20 text-red-400 font-mono font-medium">⚠ Skipped / Failed</span>') +
-          '</td>' +
-          '<td class="px-4 py-3 text-slate-400 text-xs font-mono">' + timeStr + '</td>' +
-          '<td class="px-4 py-3 text-right">' +
-            (isSuccess ? ('<button onclick="openEmailForAgent(\'' + safeName + '\', \'' + h.slug + '\', \'\', \'initial\')" class="px-3 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs transition inline-flex items-center gap-1"><i class="fa-solid fa-paper-plane text-[10px]"></i> Pitch</button>') : ('<button onclick="launchFromDiscovery(\'' + h.slug + '\', \'https://www.compass.com/agents/' + h.slug + '/\')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-xs transition">Retry</button>')) +
-          '</td>' +
-        '</tr>';
-        return html;
-      }).join('');
+        // 1. Agent Name & Error
+        const tdName = document.createElement('td');
+        tdName.className = 'px-4 py-3 font-medium text-white';
+        tdName.textContent = h.name || h.slug || 'Unknown';
+        if (h.error) {
+          const errDiv = document.createElement('div');
+          errDiv.className = 'text-[11px] text-red-400 mt-0.5 truncate max-w-xs font-mono';
+          errDiv.textContent = h.error;
+          tdName.appendChild(errDiv);
+        }
+        tr.appendChild(tdName);
+
+        // 2. Slug / Live Link
+        const tdSlug = document.createElement('td');
+        tdSlug.className = 'px-4 py-3 font-mono text-xs text-slate-300';
+        if (h.status === 'success' && h.liveUrl) {
+          const a = document.createElement('a');
+          a.href = h.liveUrl;
+          a.target = '_blank';
+          a.className = 'text-amber-400 hover:underline inline-flex items-center gap-1';
+          a.innerHTML = '<span>' + h.slug + '</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>';
+          tdSlug.appendChild(a);
+        } else {
+          const s = document.createElement('span');
+          s.className = 'text-slate-500';
+          s.textContent = h.slug || '-';
+          tdSlug.appendChild(s);
+        }
+        tr.appendChild(tdSlug);
+
+        // 3. Status Badge
+        const tdStatus = document.createElement('td');
+        tdStatus.className = 'px-4 py-3';
+        if (h.status === 'success') {
+          tdStatus.innerHTML = '<span class="px-2 py-0.5 rounded text-xs bg-green-500/20 text-green-400 font-mono font-medium">✓ Live on Edge</span>';
+        } else {
+          tdStatus.innerHTML = '<span class="px-2 py-0.5 rounded text-xs bg-red-500/20 text-red-400 font-mono font-medium">⚠ Skipped / Failed</span>';
+        }
+        tr.appendChild(tdStatus);
+
+        // 4. Timestamp
+        const tdTime = document.createElement('td');
+        tdTime.className = 'px-4 py-3 text-slate-400 text-xs font-mono';
+        tdTime.textContent = h.timestamp ? new Date(h.timestamp).toLocaleTimeString() : '';
+        tr.appendChild(tdTime);
+
+        // 5. Action Button (Pitch / Retry)
+        const tdAction = document.createElement('td');
+        tdAction.className = 'px-4 py-3 text-right';
+        if (h.status === 'success') {
+          const pitchBtn = document.createElement('button');
+          pitchBtn.className = 'px-3 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs transition inline-flex items-center gap-1';
+          pitchBtn.innerHTML = '<i class="fa-solid fa-paper-plane text-[10px]"></i> Pitch';
+          pitchBtn.onclick = function() {
+            openEmailForAgent(h.name || '', h.slug || '', '', 'initial');
+          };
+          tdAction.appendChild(pitchBtn);
+        } else {
+          const retryBtn = document.createElement('button');
+          retryBtn.className = 'px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-xs transition';
+          retryBtn.textContent = 'Retry';
+          retryBtn.onclick = function() {
+            launchFromDiscovery(h.slug, 'https://www.compass.com/agents/' + h.slug + '/');
+          };
+          tdAction.appendChild(retryBtn);
+        }
+        tr.appendChild(tdAction);
+
+        tbody.appendChild(tr);
+      });
     }
 
     // Tab Switching

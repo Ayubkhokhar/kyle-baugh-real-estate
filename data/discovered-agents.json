@@ -305,8 +305,9 @@
     "phone": "(214) 551-7800",
     "email": "erin.ballard@compass.com",
     "activeListingsCount": 2,
-    "status": "discovered",
-    "notes": "Modern custom home expert in Dallas urban enclaves."
+    "status": "launched",
+    "notes": "Modern custom home expert in Dallas urban enclaves.",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/erin-ballard"
   },
   {
     "slug": "meg-beaird",
