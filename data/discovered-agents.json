@@ -514,7 +514,8 @@
     "phone": "",
     "email": "neil.broussard@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/neil-broussard"
   },
   {
     "slug": "mark-cain",

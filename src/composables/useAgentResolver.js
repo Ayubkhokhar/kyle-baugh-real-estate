@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { markCainProfile } from "../data/agents/markCainProfile";
 import { neilBroussardProfile } from "../data/agents/neilBroussardProfile";
 import { adeleBroughtonProfile } from "../data/agents/adeleBroughtonProfile";
 import { jimBroscheProfile } from "../data/agents/jimBroscheProfile";
@@ -33,6 +34,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as markCainProperties } from "../data/agents/markCainProperties";
 import { compassProperties as neilBroussardProperties } from "../data/agents/neilBroussardProperties";
 import { compassProperties as adeleBroughtonProperties } from "../data/agents/adeleBroughtonProperties";
 import { compassProperties as jimBroscheProperties } from "../data/agents/jimBroscheProperties";
@@ -353,6 +355,15 @@ export const availableAgents = [
     slug: "neil-broussard",
     profile: neilBroussardProfile,
     properties: neilBroussardProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "mark-cain",
+    name: "Mark Cain",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "mark-cain",
+    profile: markCainProfile,
+    properties: markCainProperties,
     previewColor: "#BFA181",
   },
 ];
