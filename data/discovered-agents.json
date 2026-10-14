@@ -342,8 +342,9 @@
     "phone": "(214) 392-1100",
     "email": "thomas.bellinger@compass.com",
     "activeListingsCount": 2,
-    "status": "discovered",
-    "notes": "Luxury penthouse and condominium specialist in Turtle Creek corridor."
+    "status": "launched",
+    "notes": "Luxury penthouse and condominium specialist in Turtle Creek corridor.",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/thomas-bellinger"
   },
   {
     "slug": "christy-berry",

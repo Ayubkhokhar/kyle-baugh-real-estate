@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { christyBerryProfile } from "../data/agents/christyBerryProfile";
 import { thomasBellingerProfile } from "../data/agents/thomasBellingerProfile";
 import { erinBallardProfile } from "../data/agents/erinBallardProfile";
 import { jacquelynAustinProfile } from "../data/agents/jacquelynAustinProfile";
@@ -22,6 +23,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as christyBerryProperties } from "../data/agents/christyBerryProperties";
 import { compassProperties as thomasBellingerProperties } from "../data/agents/thomasBellingerProperties";
 import { compassProperties as erinBallardProperties } from "../data/agents/erinBallardProperties";
 import { compassProperties as jacquelynAustinProperties } from "../data/agents/jacquelynAustinProperties";
@@ -232,6 +234,15 @@ export const availableAgents = [
     slug: "thomas-bellinger",
     profile: thomasBellingerProfile,
     properties: thomasBellingerProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "christy-berry",
+    name: "Christy Berry",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "christy-berry",
+    profile: christyBerryProfile,
+    properties: christyBerryProperties,
     previewColor: "#BFA181",
   },
 ];
