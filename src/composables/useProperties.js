@@ -2,6 +2,7 @@ import { ref, computed, watch } from "vue";
 import { defaultProperties } from "../data/seedProperties";
 import { compassProperties as kyleProperties, compassSyncMeta as kyleCompassMeta } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as shannonBlountProperties } from "../data/agents/shannonBlountProperties";
 import { compassProperties as chrisBlackmanProperties } from "../data/agents/chrisBlackmanProperties";
 import { compassProperties as christyBerryProperties } from "../data/agents/christyBerryProperties";
 import { compassProperties as thomasBellingerProperties } from "../data/agents/thomasBellingerProperties";
@@ -34,6 +35,17 @@ const amyCompassMeta = {
   imagesDownloaded: 45,
   agentUrl: "https://www.compass.com/agents/amy-detwiler/",
   syncedAgent: "Amy Detwiler",
+};
+
+const shannonBlountCompassMeta = {
+  lastSynced: "2026-10-14T17:18:10.969Z",
+  totalProperties: 24,
+  activeCount: 0,
+  soldCount: 19,
+  leasedCount: 0,
+  imagesDownloaded: 32,
+  agentUrl: "https://www.compass.com/agents/shannon-blount/",
+  syncedAgent: "Shannon Blount",
 };
 
 const chrisBlackmanCompassMeta = {
@@ -298,6 +310,10 @@ function mergeProperties(existingList, incomingCompassList) {
 }
 
 function getInitialListForAgent(agentId) {
+  if (agentId === "shannon-blount") {
+    return shannonBlountProperties;
+  }
+
   if (agentId === "chris-blackman") {
     return chrisBlackmanProperties;
   }
@@ -385,6 +401,10 @@ function getInitialListForAgent(agentId) {
 }
 
 function getInitialMetaForAgent(agentId) {
+  if (agentId === "shannon-blount") {
+    return shannonBlountCompassMeta;
+  }
+
   if (agentId === "chris-blackman") {
     return chrisBlackmanCompassMeta;
   }
@@ -533,7 +553,7 @@ export function useProperties() {
     const match = properties.value.find((p) => String(p.id) === String(id) || p.slug === String(id));
     if (match) return match;
     // Cross-agent fallback so direct links to any listing never fail
-    const allKnown = [...chrisBlackmanProperties, ...christyBerryProperties, ...thomasBellingerProperties, ...erinBallardProperties, ...jacquelynAustinProperties, ...megBeairdProperties, ...jonathanRosenProperties, ...katieAspenProperties, ...micheleBaladyBeachProperties, ...katyAnnettProperties, ...annaleeAstonProperties, ...brookeAltemoreProperties, ...jamieAdamsProperties, ...erikaOrbinProperties, ...meganJohnsonProperties, ...christineLeiteProperties, ...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
+    const allKnown = [...shannonBlountProperties, ...chrisBlackmanProperties, ...christyBerryProperties, ...thomasBellingerProperties, ...erinBallardProperties, ...jacquelynAustinProperties, ...megBeairdProperties, ...jonathanRosenProperties, ...katieAspenProperties, ...micheleBaladyBeachProperties, ...katyAnnettProperties, ...annaleeAstonProperties, ...brookeAltemoreProperties, ...jamieAdamsProperties, ...erikaOrbinProperties, ...meganJohnsonProperties, ...christineLeiteProperties, ...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
     return allKnown.find((p) => String(p.id) === String(id) || p.slug === String(id)) || null;
   }
 

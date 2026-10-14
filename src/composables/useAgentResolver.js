@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { shannonBlountProfile } from "../data/agents/shannonBlountProfile";
 import { chrisBlackmanProfile } from "../data/agents/chrisBlackmanProfile";
 import { christyBerryProfile } from "../data/agents/christyBerryProfile";
 import { thomasBellingerProfile } from "../data/agents/thomasBellingerProfile";
@@ -24,6 +25,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as shannonBlountProperties } from "../data/agents/shannonBlountProperties";
 import { compassProperties as chrisBlackmanProperties } from "../data/agents/chrisBlackmanProperties";
 import { compassProperties as christyBerryProperties } from "../data/agents/christyBerryProperties";
 import { compassProperties as thomasBellingerProperties } from "../data/agents/thomasBellingerProperties";
@@ -254,6 +256,15 @@ export const availableAgents = [
     slug: "chris-blackman",
     profile: chrisBlackmanProfile,
     properties: chrisBlackmanProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "shannon-blount",
+    name: "Shannon Blount",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "shannon-blount",
+    profile: shannonBlountProfile,
+    properties: shannonBlountProperties,
     previewColor: "#BFA181",
   },
 ];
