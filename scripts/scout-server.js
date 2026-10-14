@@ -12,6 +12,7 @@ import { runAgentPipeline } from "./agent-pipeline.js";
 import { getMailerConfig, saveMailerConfig, testConnection, sendOutreachEmail, generatePitch } from "./hostinger-mailer.js";
 import { getGroqApiKey, saveGroqApiKey, testGroqKey, generateAIPitch } from "./groq-generator.js";
 import { getTemplates, saveTemplates, renderTemplate, setAgentStatus } from "./crm-manager.js";
+import { batchQueue } from "./batch-queue.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -399,6 +400,61 @@ app.get("/api/outreach/history", (req, res) => {
   }
 });
 
+// 4d. API: AUTONOMOUS BATCH GENERATOR QUEUE
+app.get("/api/queue/status", (req, res) => {
+  try {
+    res.json({ success: true, queue: batchQueue.getStatus() });
+  } catch (e) {
+    res.status(500).json({ success: false, error: e.message });
+  }
+});
+
+app.post("/api/queue/start", (req, res) => {
+  try {
+    const { targetCount = 20, intervalMinutes = 10 } = req.body;
+    const status = batchQueue.start({ targetCount, intervalMinutes });
+    res.json({ success: true, queue: status });
+  } catch (e) {
+    res.status(500).json({ success: false, error: e.message });
+  }
+});
+
+app.post("/api/queue/pause", (req, res) => {
+  try {
+    const status = batchQueue.pause();
+    res.json({ success: true, queue: status });
+  } catch (e) {
+    res.status(500).json({ success: false, error: e.message });
+  }
+});
+
+app.post("/api/queue/resume", (req, res) => {
+  try {
+    const status = batchQueue.resume();
+    res.json({ success: true, queue: status });
+  } catch (e) {
+    res.status(500).json({ success: false, error: e.message });
+  }
+});
+
+app.post("/api/queue/stop", (req, res) => {
+  try {
+    const status = batchQueue.stop();
+    res.json({ success: true, queue: status });
+  } catch (e) {
+    res.status(500).json({ success: false, error: e.message });
+  }
+});
+
+app.post("/api/queue/skip", (req, res) => {
+  try {
+    const status = batchQueue.skipWait();
+    res.json({ success: true, queue: status });
+  } catch (e) {
+    res.status(500).json({ success: false, error: e.message });
+  }
+});
+
 // 5. EMBEDDED DASHBOARD HTML UI (Catch-all fallback)
 app.use((req, res) => {
   res.send(`<!DOCTYPE html>
@@ -447,20 +503,23 @@ app.use((req, res) => {
 
   <!-- Navigation Tabs -->
   <div class="border-b border-slate-800 bg-slate-900">
-    <div class="max-w-7xl mx-auto flex gap-8 px-6 text-sm">
-      <button onclick="switchTab('discovery')" id="tab-discovery" class="py-3 text-slate-400 hover:text-white tab-active">
+    <div class="max-w-7xl mx-auto flex gap-6 px-6 text-sm overflow-x-auto">
+      <button onclick="switchTab('autopilot')" id="tab-autopilot" class="py-3 text-slate-400 hover:text-white tab-active flex items-center gap-2 shrink-0">
+        <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> Auto-Generator (<span id="tabQueueBadge" class="text-xs font-mono text-slate-400">IDLE</span>)
+      </button>
+      <button onclick="switchTab('discovery')" id="tab-discovery" class="py-3 text-slate-400 hover:text-white shrink-0">
         <i class="fa-solid fa-compass mr-2"></i> Agent Discovery Pool
       </button>
-      <button onclick="switchTab('custom')" id="tab-custom" class="py-3 text-slate-400 hover:text-white">
+      <button onclick="switchTab('custom')" id="tab-custom" class="py-3 text-slate-400 hover:text-white shrink-0">
         <i class="fa-solid fa-rocket mr-2"></i> Custom URL Onboarder
       </button>
-      <button onclick="switchTab('roster')" id="tab-roster" class="py-3 text-slate-400 hover:text-white">
-        <i class="fa-solid fa-users mr-2"></i> Live Portals Roster (<span id="rosterCount">6</span>)
+      <button onclick="switchTab('roster')" id="tab-roster" class="py-3 text-slate-400 hover:text-white shrink-0">
+        <i class="fa-solid fa-users mr-2"></i> Live Portals Roster (<span id="rosterCount">19</span>)
       </button>
-      <button onclick="switchTab('outbox')" id="tab-outbox" class="py-3 text-slate-400 hover:text-white">
+      <button onclick="switchTab('outbox')" id="tab-outbox" class="py-3 text-slate-400 hover:text-white shrink-0">
         <i class="fa-solid fa-paper-plane mr-2"></i> Email Outbox & Logs
       </button>
-      <button onclick="switchTab('settings')" id="tab-settings" class="py-3 text-slate-400 hover:text-white">
+      <button onclick="switchTab('settings')" id="tab-settings" class="py-3 text-slate-400 hover:text-white shrink-0">
         <i class="fa-solid fa-gear mr-2"></i> Settings (Hostinger & Groq AI)
       </button>
     </div>
@@ -469,8 +528,256 @@ app.use((req, res) => {
   <!-- Main Content -->
   <main class="flex-1 max-w-7xl w-full mx-auto p-6 space-y-6">
 
+    <!-- Persistent Global Autonomous Status Strip -->
+    <div id="persistentQueueBar" class="bg-slate-900/90 border border-slate-800 rounded-xl px-4 py-3 flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div class="flex items-center gap-3">
+        <span id="persistentPill" class="px-2.5 py-1 rounded-full font-mono font-bold bg-slate-800 text-slate-400 border border-slate-700 flex items-center gap-1.5">
+          <span id="persistentDot" class="w-2 h-2 rounded-full bg-slate-500"></span>
+          <span id="persistentPillText">IDLE</span>
+        </span>
+        <span id="persistentStatusText" class="text-slate-300 font-medium">
+          Autonomous Generator: Configure your daily target (e.g. 20 or 50 sites) and click Start.
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="switchTab('autopilot')" class="px-3 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-300 font-semibold rounded transition flex items-center gap-1.5">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Open Batch Queue Console &rarr;
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB 0: AUTONOMOUS BATCH GENERATOR -->
+    <section id="view-autopilot" class="space-y-6">
+      <!-- Header Card -->
+      <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-amber-950/40 border border-amber-500/30 rounded-xl p-6 relative overflow-hidden">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
+          <div>
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                <i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Autonomous Daily Engine
+              </span>
+              <span id="queueMainStateBadge" class="text-xs px-2.5 py-0.5 rounded-full font-mono bg-slate-800 text-slate-300 border border-slate-700">
+                ⚪ IDLE
+              </span>
+            </div>
+            <h2 class="text-2xl font-black text-white tracking-tight">Auto-Generate Real Estate Portals</h2>
+            <p class="text-sm text-slate-400 max-w-2xl mt-1 leading-relaxed">
+              Autonomous background engine that scrapes Dallas boutique producers, extracts listings & media, auto-wires the codebase, and deploys to Cloudflare Edge with a safe interval gap.
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="text-right">
+              <span class="text-xs text-slate-400 block uppercase font-mono">Today's Progress</span>
+              <span id="queueProgressFraction" class="text-2xl font-mono font-black text-amber-400">0 / 20</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Settings & Controls Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Left: Configuration & Trigger Card -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-5">
+          <h3 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-amber-400"></i> Generation Parameters
+          </h3>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+              Target Websites to Create Today
+            </label>
+            <div class="flex items-center gap-2">
+              <input
+                type="number"
+                id="queueTargetInput"
+                min="1"
+                max="100"
+                value="20"
+                class="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-white font-mono text-base font-bold focus:outline-none focus:border-amber-500"
+              />
+              <span class="text-xs text-slate-400 font-mono">Sites</span>
+            </div>
+            <div class="flex gap-2 mt-2">
+              <button onclick="setTargetPreset(10)" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 rounded font-mono">10</button>
+              <button onclick="setTargetPreset(20)" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 rounded font-mono font-bold">20</button>
+              <button onclick="setTargetPreset(50)" class="px-2.5 py-1 bg-amber-500/20 hover:bg-amber-500/30 text-xs text-amber-300 rounded font-mono font-bold">50 (Goal)</button>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
+              Safe Delay Gap Between Sites
+            </label>
+            <div class="flex items-center gap-2">
+              <input
+                type="number"
+                id="queueIntervalInput"
+                min="1"
+                max="60"
+                value="10"
+                class="w-full px-4 py-2.5 bg-slate-950 border border-slate-800 rounded-lg text-white font-mono text-base font-bold focus:outline-none focus:border-amber-500"
+              />
+              <span class="text-xs text-slate-400 font-mono">Minutes</span>
+            </div>
+            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+              <i class="fa-solid fa-shield-halved text-green-400 mr-1"></i> A safe 10-minute gap prevents Compass rate-limiting and ensures clean Cloudflare Edge builds.
+            </p>
+          </div>
+
+          <div class="p-3 bg-slate-950/70 border border-slate-800 rounded-lg text-xs text-slate-400 space-y-1">
+            <div class="flex items-center gap-1.5 text-amber-400 font-semibold">
+              <i class="fa-solid fa-envelope-circle-check"></i> Manual Outbound Approval:
+            </div>
+            <p>
+              Websites are created and placed on the roster in <strong>Needs Outreach</strong>. Emails are <strong>NEVER</strong> automatically blasted without your review.
+            </p>
+          </div>
+
+          <div class="pt-2 space-y-2">
+            <button
+              id="queueStartBtn"
+              onclick="startBatchQueue()"
+              class="w-full py-3 bg-gradient-to-r from-amber-500 to-amber-400 hover:from-amber-400 hover:to-amber-300 text-slate-950 font-black rounded-lg text-sm transition shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2"
+            >
+              <i class="fa-solid fa-play"></i> Start Autonomous Queue
+            </button>
+
+            <div class="grid grid-cols-3 gap-2">
+              <button
+                id="queuePauseBtn"
+                onclick="togglePauseBatchQueue()"
+                class="py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-semibold transition flex items-center justify-center gap-1.5"
+              >
+                <i class="fa-solid fa-pause"></i> <span id="queuePauseBtnText">Pause</span>
+              </button>
+              <button
+                id="queueSkipBtn"
+                onclick="skipBatchQueueWait()"
+                class="py-2 bg-blue-900/40 hover:bg-blue-800/50 border border-blue-500/40 text-blue-300 rounded-lg text-xs font-semibold transition flex items-center justify-center gap-1.5"
+                title="Skip the countdown gap and generate the next agent immediately"
+              >
+                <i class="fa-solid fa-forward-step"></i> Skip Wait
+              </button>
+              <button
+                id="queueStopBtn"
+                onclick="stopBatchQueue()"
+                class="py-2 bg-red-950/40 hover:bg-red-900/50 border border-red-500/40 text-red-300 rounded-lg text-xs font-semibold transition flex items-center justify-center gap-1.5"
+              >
+                <i class="fa-solid fa-stop"></i> Stop
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle & Right: Live Status & Visual Progress -->
+        <div class="lg:col-span-2 space-y-6">
+          <!-- Active Execution & Countdown Display -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-5">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800">
+              <span class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-2">
+                <span id="queueLiveDot" class="w-2.5 h-2.5 rounded-full bg-slate-600"></span> Live Queue State
+              </span>
+              <span id="queueNextTimerText" class="text-sm font-mono font-bold text-amber-400">
+                Engine Idle
+              </span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-slate-300 font-semibold">Daily Target Progress</span>
+                <span id="queueProgressPercentText" class="font-mono text-amber-400 font-bold">0%</span>
+              </div>
+              <div class="w-full bg-slate-950 rounded-full h-3.5 p-0.5 border border-slate-800 overflow-hidden">
+                <div
+                  id="queueProgressBar"
+                  class="bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-300 h-full rounded-full transition-all duration-500"
+                  style="width: 0%;"
+                ></div>
+              </div>
+            </div>
+
+            <!-- 4-Metric Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+              <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800/80 text-center">
+                <span class="text-[10px] uppercase text-slate-500 font-mono block">Daily Target</span>
+                <span id="metricTarget" class="text-xl font-bold font-mono text-white">20</span>
+              </div>
+              <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800/80 text-center">
+                <span class="text-[10px] uppercase text-slate-500 font-mono block">Completed</span>
+                <span id="metricCompleted" class="text-xl font-bold font-mono text-green-400">0</span>
+              </div>
+              <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800/80 text-center">
+                <span class="text-[10px] uppercase text-slate-500 font-mono block">Auto-Retried / Skipped</span>
+                <span id="metricFailed" class="text-xl font-bold font-mono text-red-400">0</span>
+              </div>
+              <div class="bg-slate-950 p-3.5 rounded-lg border border-slate-800/80 text-center">
+                <span class="text-[10px] uppercase text-slate-500 font-mono block">Cooldown Gap</span>
+                <span id="metricGap" class="text-xl font-bold font-mono text-amber-400">10m</span>
+              </div>
+            </div>
+
+            <!-- Current Active Agent Banner -->
+            <div id="queueCurrentAgentBox" class="bg-slate-950 border border-slate-800 rounded-lg p-4 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <div id="queueCurrentSpinner" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-400">
+                  <i class="fa-solid fa-pause text-xs"></i>
+                </div>
+                <div>
+                  <span id="queueCurrentName" class="text-sm font-bold text-white block">No agent currently building</span>
+                  <span id="queueCurrentStep" class="text-xs text-slate-400 block font-mono">Waiting for queue to start</span>
+                </div>
+              </div>
+              <span id="queueCurrentTime" class="text-xs text-slate-500 font-mono">--:--</span>
+            </div>
+          </div>
+
+          <!-- Live Activity Log Terminal -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-xs text-slate-400">
+              <span class="font-mono flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span> Auto-Queue Terminal Stream
+              </span>
+              <button onclick="clearQueueTerminal()" class="hover:text-white">Clear</button>
+            </div>
+            <div id="queueTerminal" class="font-mono text-xs text-slate-300 p-3 h-52 overflow-y-auto space-y-1 bg-slate-950 rounded mt-3">
+              <div class="text-slate-500">// Autonomous queue ready. Configure target and click 'Start Autonomous Queue'.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Generated Websites Table -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+        <div class="p-4 border-b border-slate-800 flex items-center justify-between">
+          <h3 class="text-sm font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-globe text-amber-400"></i> Websites Generated in This Session (<span id="sessionGeneratedCount">0</span>)
+          </h3>
+          <button onclick="switchTab('roster')" class="text-xs text-amber-400 hover:underline font-mono">
+            View All in Live Roster &rarr;
+          </button>
+        </div>
+        <table class="w-full text-left text-sm text-slate-300">
+          <thead class="bg-slate-950/80 text-xs uppercase text-slate-400 border-b border-slate-800">
+            <tr>
+              <th class="px-4 py-3">Agent</th>
+              <th class="px-4 py-3">Slug / Live Portal</th>
+              <th class="px-4 py-3">Status</th>
+              <th class="px-4 py-3">Time</th>
+              <th class="px-4 py-3 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="sessionHistoryTableBody" class="divide-y divide-slate-800">
+            <tr>
+              <td colspan="5" class="px-4 py-6 text-center text-slate-500">No websites generated in this queue session yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
     <!-- TAB 1: AGENT DISCOVERY POOL -->
-    <section id="view-discovery" class="space-y-4">
+    <section id="view-discovery" class="hidden space-y-4">
       <div class="flex items-center justify-between">
         <div>
           <h2 class="text-xl font-bold text-white">Dallas High-Potential Agent Pool</h2>
@@ -822,19 +1129,295 @@ app.use((req, res) => {
     let currentPreparedPayload = {};
     let cachedTemplates = {};
 
+    // AUTONOMOUS BATCH GENERATOR CONTROLS
+    let queueLastStatus = null;
+    let queuePollInterval = null;
+
+    function setTargetPreset(num) {
+      const el = document.getElementById('queueTargetInput');
+      if (el) el.value = num;
+    }
+
+    async function startBatchQueue() {
+      const targetCount = parseInt(document.getElementById('queueTargetInput').value, 10) || 20;
+      const intervalMinutes = parseFloat(document.getElementById('queueIntervalInput').value) || 10;
+
+      const btn = document.getElementById('queueStartBtn');
+      if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Starting Engine...';
+      }
+
+      try {
+        const res = await fetch('/api/queue/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ targetCount, intervalMinutes })
+        });
+        const data = await res.json();
+        if (data.success) {
+          renderQueueUI(data.queue);
+        } else {
+          alert('Error starting queue: ' + data.error);
+        }
+      } catch (e) {
+        alert('Failed to start queue: ' + e.message);
+      } finally {
+        if (btn) btn.disabled = false;
+        pollQueueStatus();
+      }
+    }
+
+    async function togglePauseBatchQueue() {
+      if (!queueLastStatus || !queueLastStatus.isRunning) return;
+      const endpoint = queueLastStatus.isPaused ? '/api/queue/resume' : '/api/queue/pause';
+      try {
+        const res = await fetch(endpoint, { method: 'POST' });
+        const data = await res.json();
+        if (data.success) renderQueueUI(data.queue);
+      } catch (e) {
+        console.error('Pause/resume failed:', e);
+      }
+    }
+
+    async function skipBatchQueueWait() {
+      try {
+        const res = await fetch('/api/queue/skip', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) renderQueueUI(data.queue);
+      } catch (e) {
+        console.error('Skip wait failed:', e);
+      }
+    }
+
+    async function stopBatchQueue() {
+      if (!confirm('Are you sure you want to stop the autonomous queue and reset counters?')) return;
+      try {
+        const res = await fetch('/api/queue/stop', { method: 'POST' });
+        const data = await res.json();
+        if (data.success) renderQueueUI(data.queue);
+      } catch (e) {
+        console.error('Stop queue failed:', e);
+      }
+    }
+
+    function clearQueueTerminal() {
+      const term = document.getElementById('queueTerminal');
+      if (term) term.innerHTML = '<div class="text-slate-500">// Terminal cleared.</div>';
+    }
+
+    async function pollQueueStatus() {
+      try {
+        const res = await fetch('/api/queue/status');
+        const data = await res.json();
+        if (data.success && data.queue) {
+          renderQueueUI(data.queue);
+        }
+      } catch (e) {
+        // Silently retry on next tick
+      }
+    }
+
+    function renderQueueUI(q) {
+      if (!q) return;
+      queueLastStatus = q;
+
+      // Badges & States
+      const mainBadge = document.getElementById('queueMainStateBadge');
+      const tabBadge = document.getElementById('tabQueueBadge');
+      const liveDot = document.getElementById('queueLiveDot');
+      const nextTimer = document.getElementById('queueNextTimerText');
+      const pPill = document.getElementById('persistentPill');
+      const pPillText = document.getElementById('persistentPillText');
+      const pDot = document.getElementById('persistentDot');
+      const pText = document.getElementById('persistentStatusText');
+      const pauseBtnText = document.getElementById('queuePauseBtnText');
+
+      if (q.isGenerating) {
+        const stateText = '🟢 GENERATING (' + (q.completedToday + 1) + '/' + q.targetCount + ')';
+        if (mainBadge) {
+          mainBadge.className = 'text-xs px-2.5 py-0.5 rounded-full font-mono bg-green-500/20 text-green-300 border border-green-500/50 animate-pulse';
+          mainBadge.textContent = stateText;
+        }
+        if (tabBadge) {
+          tabBadge.className = 'text-xs font-mono text-green-400 font-bold';
+          tabBadge.textContent = 'BUILDING ' + (q.completedToday + 1) + '/' + q.targetCount;
+        }
+        if (liveDot) liveDot.className = 'w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse';
+        if (nextTimer) nextTimer.textContent = 'Building portal & assets...';
+        if (pPillText) pPillText.textContent = 'GENERATING';
+        if (pDot) pDot.className = 'w-2 h-2 rounded-full bg-green-400 animate-ping';
+        if (pText) pText.textContent = 'Active site generation: ' + (q.currentAgent ? (q.currentAgent.name + ' (' + q.currentAgent.slug + ') — ' + (q.currentAgent.step || 'Processing')) : 'Agent');
+      } else if (q.isRunning && q.secondsRemaining > 0) {
+        const m = Math.floor(q.secondsRemaining / 60);
+        const s = q.secondsRemaining % 60;
+        const timeFmt = String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
+        const stateText = '⏳ SAFE COOLDOWN (' + timeFmt + ')';
+
+        if (mainBadge) {
+          mainBadge.className = 'text-xs px-2.5 py-0.5 rounded-full font-mono bg-amber-500/20 text-amber-300 border border-amber-500/50';
+          mainBadge.textContent = stateText;
+        }
+        if (tabBadge) {
+          tabBadge.className = 'text-xs font-mono text-amber-400 font-semibold';
+          tabBadge.textContent = timeFmt;
+        }
+        if (liveDot) liveDot.className = 'w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse';
+        if (nextTimer) nextTimer.textContent = 'Next site in: ' + timeFmt;
+        if (pPillText) pPillText.textContent = 'COOLDOWN';
+        if (pDot) pDot.className = 'w-2 h-2 rounded-full bg-amber-400';
+        if (pText) pText.textContent = 'Safe gap: Next agent generation starts automatically in ' + timeFmt + ' (' + q.completedToday + '/' + q.targetCount + ' completed today).';
+      } else if (q.isPaused) {
+        if (mainBadge) {
+          mainBadge.className = 'text-xs px-2.5 py-0.5 rounded-full font-mono bg-yellow-500/20 text-yellow-300 border border-yellow-500/50';
+          mainBadge.textContent = '⏸ PAUSED';
+        }
+        if (tabBadge) {
+          tabBadge.className = 'text-xs font-mono text-yellow-400';
+          tabBadge.textContent = 'PAUSED';
+        }
+        if (liveDot) liveDot.className = 'w-2.5 h-2.5 rounded-full bg-yellow-500';
+        if (nextTimer) nextTimer.textContent = 'Queue Paused';
+        if (pPillText) pPillText.textContent = 'PAUSED';
+        if (pDot) pDot.className = 'w-2 h-2 rounded-full bg-yellow-500';
+        if (pText) pText.textContent = 'Autonomous queue is paused (' + q.completedToday + '/' + q.targetCount + ' completed). Click Resume to continue.';
+      } else {
+        if (mainBadge) {
+          mainBadge.className = 'text-xs px-2.5 py-0.5 rounded-full font-mono bg-slate-800 text-slate-400 border border-slate-700';
+          mainBadge.textContent = '⚪ IDLE';
+        }
+        if (tabBadge) {
+          tabBadge.className = 'text-xs font-mono text-slate-400';
+          tabBadge.textContent = 'IDLE';
+        }
+        if (liveDot) liveDot.className = 'w-2.5 h-2.5 rounded-full bg-slate-600';
+        if (nextTimer) nextTimer.textContent = 'Engine Idle';
+        if (pPillText) pPillText.textContent = 'IDLE';
+        if (pDot) pDot.className = 'w-2 h-2 rounded-full bg-slate-500';
+        if (pText) pText.textContent = 'Autonomous Generator: Configure your daily target (e.g. 20 or 50 sites) and click Start.';
+      }
+
+      if (pauseBtnText) {
+        pauseBtnText.textContent = q.isPaused ? 'Resume' : 'Pause';
+      }
+
+      // Progress bar & counters
+      const frac = document.getElementById('queueProgressFraction');
+      if (frac) frac.textContent = q.completedToday + ' / ' + q.targetCount;
+
+      const pctText = document.getElementById('queueProgressPercentText');
+      if (pctText) pctText.textContent = q.progressPercent + '%';
+
+      const pBar = document.getElementById('queueProgressBar');
+      if (pBar) pBar.style.width = q.progressPercent + '%';
+
+      const mTarget = document.getElementById('metricTarget');
+      if (mTarget) mTarget.textContent = q.targetCount;
+
+      const mCompleted = document.getElementById('metricCompleted');
+      if (mCompleted) mCompleted.textContent = q.completedToday;
+
+      const mFailed = document.getElementById('metricFailed');
+      if (mFailed) mFailed.textContent = q.failedCount;
+
+      const mGap = document.getElementById('metricGap');
+      if (mGap) mGap.textContent = q.intervalMinutes + 'm';
+
+      // Active Agent Box
+      const currName = document.getElementById('queueCurrentName');
+      const currStep = document.getElementById('queueCurrentStep');
+      const currSpinner = document.getElementById('queueCurrentSpinner');
+      const currTime = document.getElementById('queueCurrentTime');
+
+      if (q.currentAgent) {
+        if (currName) currName.textContent = q.currentAgent.name + ' (' + q.currentAgent.slug + ')';
+        if (currStep) currStep.textContent = q.currentAgent.step || 'Processing pipeline...';
+        if (currSpinner) {
+          currSpinner.className = 'w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center';
+          currSpinner.innerHTML = '<i class="fa-solid fa-spinner fa-spin text-sm"></i>';
+        }
+        if (currTime) currTime.textContent = new Date(q.currentAgent.startedAt).toLocaleTimeString();
+      } else {
+        if (currName) currName.textContent = q.isRunning && q.secondsRemaining > 0 ? 'Resting in safe cooldown gap' : 'No agent currently building';
+        if (currStep) currStep.textContent = q.isRunning && q.secondsRemaining > 0 ? 'Protecting Compass scraping & Cloudflare builds' : 'Ready to start';
+        if (currSpinner) {
+          currSpinner.className = 'w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-slate-500';
+          currSpinner.innerHTML = '<i class="fa-solid fa-clock text-xs"></i>';
+        }
+        if (currTime) currTime.textContent = '--:--';
+      }
+
+      // Terminal Logs Stream
+      const term = document.getElementById('queueTerminal');
+      if (term && q.logs && q.logs.length > 0) {
+        term.innerHTML = q.logs.map(function(l) {
+          var color = 'text-slate-300';
+          if (l.indexOf('✅') !== -1 || l.indexOf('SUCCESS') !== -1) color = 'text-green-300 font-semibold';
+          else if (l.indexOf('❌') !== -1 || l.indexOf('failed') !== -1 || l.indexOf('ERROR') !== -1) color = 'text-red-300 font-semibold';
+          else if (l.indexOf('🚀') !== -1 || l.indexOf('STARTED') !== -1) color = 'text-amber-300 font-bold';
+          else if (l.indexOf('⏳') !== -1 || l.indexOf('cooldown') !== -1) color = 'text-yellow-300';
+          return '<div class="' + color + '">' + l + '</div>';
+        }).join('');
+        term.scrollTop = term.scrollHeight;
+      }
+
+      // Session History Table
+      renderSessionHistory(q.history || []);
+    }
+
+    function renderSessionHistory(history) {
+      const countEl = document.getElementById('sessionGeneratedCount');
+      if (countEl) countEl.textContent = history.length;
+
+      const tbody = document.getElementById('sessionHistoryTableBody');
+      if (!tbody) return;
+
+      if (!history || history.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-6 text-center text-slate-500">No websites generated in this queue session yet.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = history.map(function(h) {
+        var isSuccess = h.status === 'success';
+        var safeName = (h.name || '').replace(/'/g, "\\'");
+        var timeStr = h.timestamp ? new Date(h.timestamp).toLocaleTimeString() : '';
+
+        var html = '<tr class="hover:bg-slate-800/40">' +
+          '<td class="px-4 py-3 font-medium text-white">' +
+            h.name +
+            (h.error ? '<div class="text-[11px] text-red-400 mt-0.5 truncate max-w-xs font-mono">' + h.error + '</div>' : '') +
+          '</td>' +
+          '<td class="px-4 py-3 font-mono text-xs text-slate-300">' +
+            (isSuccess ? ('<a href="' + h.liveUrl + '" target="_blank" class="text-amber-400 hover:underline flex items-center gap-1"><span>' + h.slug + '</span> <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>') : ('<span class="text-slate-500">' + h.slug + '</span>')) +
+          '</td>' +
+          '<td class="px-4 py-3">' +
+            (isSuccess ? '<span class="px-2 py-0.5 rounded text-xs bg-green-500/20 text-green-400 font-mono font-medium">✓ Live on Edge</span>' : '<span class="px-2 py-0.5 rounded text-xs bg-red-500/20 text-red-400 font-mono font-medium">⚠ Skipped / Failed</span>') +
+          '</td>' +
+          '<td class="px-4 py-3 text-slate-400 text-xs font-mono">' + timeStr + '</td>' +
+          '<td class="px-4 py-3 text-right">' +
+            (isSuccess ? ('<button onclick="openEmailForAgent(\'' + safeName + '\', \'' + h.slug + '\', \'\', \'initial\')" class="px-3 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs transition inline-flex items-center gap-1"><i class="fa-solid fa-paper-plane text-[10px]"></i> Pitch</button>') : ('<button onclick="launchFromDiscovery(\'' + h.slug + '\', \'https://www.compass.com/agents/' + h.slug + '/\')" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded text-xs transition">Retry</button>')) +
+          '</td>' +
+        '</tr>';
+        return html;
+      }).join('');
+    }
+
     // Tab Switching
     function switchTab(tab) {
-      ['discovery', 'custom', 'roster', 'outbox', 'settings'].forEach(t => {
+      ['autopilot', 'discovery', 'custom', 'roster', 'outbox', 'settings'].forEach(t => {
         const el = document.getElementById('view-' + t);
         const btn = document.getElementById('tab-' + t);
-        if (t === tab) {
-          el.classList.remove('hidden');
-          btn.classList.add('tab-active');
-        } else {
-          el.classList.add('hidden');
-          btn.classList.remove('tab-active');
+        if (el && btn) {
+          if (t === tab) {
+            el.classList.remove('hidden');
+            btn.classList.add('tab-active');
+          } else {
+            el.classList.add('hidden');
+            btn.classList.remove('tab-active');
+          }
         }
       });
+      if (tab === 'autopilot') pollQueueStatus();
       if (tab === 'discovery') loadDiscoveredAgents();
       if (tab === 'roster') loadRoster();
       if (tab === 'outbox') loadOutreachHistory();
@@ -1755,6 +2338,8 @@ app.use((req, res) => {
     }
 
     // Initial Load
+    pollQueueStatus();
+    setInterval(pollQueueStatus, 1500);
     loadDiscoveredAgents();
     loadRoster();
     loadGroqSettings();

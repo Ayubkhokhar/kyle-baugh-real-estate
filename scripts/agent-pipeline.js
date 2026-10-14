@@ -10,9 +10,14 @@ import { fileURLToPath } from "url";
 import { registerAgentInCodebase, toIdentifier } from "./auto-register.js";
 import { sendOutreachEmail, generatePitch } from "./hostinger-mailer.js";
 
+import dotenv from "dotenv";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, "..");
+
+// Load environment variables (.env) safely
+dotenv.config({ path: path.join(rootDir, ".env") });
 
 const USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36";
 const IMAGES_DIR = path.join(rootDir, "public", "images", "compass");
@@ -411,7 +416,11 @@ export const ${ident}Profile = {
     try {
       logCallback(`Committing and pushing to GitHub...`);
       execSync("git add .", { cwd: rootDir, stdio: "pipe" });
-      execSync(`git commit -m "feat: auto-onboard ${agentName} (${slug})"`, { cwd: rootDir, stdio: "pipe" });
+      try {
+        execSync(`git commit -m "feat: auto-onboard ${agentName} (${slug})"`, { cwd: rootDir, stdio: "pipe" });
+      } catch (commitErr) {
+        // Nothing to commit or already committed
+      }
       execSync(`git pull --rebase ${GIT_PUSH_URL}`, { cwd: rootDir, stdio: "pipe", env: { ...process.env, GIT_TERMINAL_PROMPT: "0" } });
       execSync(`git push ${GIT_PUSH_URL}`, { cwd: rootDir, stdio: "pipe", env: { ...process.env, GIT_TERMINAL_PROMPT: "0" } });
       deploySuccess = true;
