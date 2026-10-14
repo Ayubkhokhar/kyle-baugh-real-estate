@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { jimBroscheProfile } from "../data/agents/jimBroscheProfile";
 import { callieBrickmanProfile } from "../data/agents/callieBrickmanProfile";
 import { gaylBraymerProfile } from "../data/agents/gaylBraymerProfile";
 import { gretchenBraschProfile } from "../data/agents/gretchenBraschProfile";
@@ -30,6 +31,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as jimBroscheProperties } from "../data/agents/jimBroscheProperties";
 import { compassProperties as callieBrickmanProperties } from "../data/agents/callieBrickmanProperties";
 import { compassProperties as gaylBraymerProperties } from "../data/agents/gaylBraymerProperties";
 import { compassProperties as gretchenBraschProperties } from "../data/agents/gretchenBraschProperties";
@@ -320,6 +322,15 @@ export const availableAgents = [
     slug: "callie-brickman",
     profile: callieBrickmanProfile,
     properties: callieBrickmanProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "jim-brosche",
+    name: "Jim Brosche",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "jim-brosche",
+    profile: jimBroscheProfile,
+    properties: jimBroscheProperties,
     previewColor: "#BFA181",
   },
 ];

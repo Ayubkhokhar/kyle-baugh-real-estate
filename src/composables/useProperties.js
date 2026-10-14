@@ -2,6 +2,7 @@ import { ref, computed, watch } from "vue";
 import { defaultProperties } from "../data/seedProperties";
 import { compassProperties as kyleProperties, compassSyncMeta as kyleCompassMeta } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as jimBroscheProperties } from "../data/agents/jimBroscheProperties";
 import { compassProperties as callieBrickmanProperties } from "../data/agents/callieBrickmanProperties";
 import { compassProperties as gaylBraymerProperties } from "../data/agents/gaylBraymerProperties";
 import { compassProperties as gretchenBraschProperties } from "../data/agents/gretchenBraschProperties";
@@ -40,6 +41,17 @@ const amyCompassMeta = {
   imagesDownloaded: 45,
   agentUrl: "https://www.compass.com/agents/amy-detwiler/",
   syncedAgent: "Amy Detwiler",
+};
+
+const jimBroscheCompassMeta = {
+  lastSynced: "2026-10-14T18:33:25.840Z",
+  totalProperties: 23,
+  activeCount: 1,
+  soldCount: 22,
+  leasedCount: 0,
+  imagesDownloaded: 31,
+  agentUrl: "https://www.compass.com/agents/jim-brosche/",
+  syncedAgent: "Jim Brosche",
 };
 
 const callieBrickmanCompassMeta = {
@@ -370,6 +382,10 @@ function mergeProperties(existingList, incomingCompassList) {
 }
 
 function getInitialListForAgent(agentId) {
+  if (agentId === "jim-brosche") {
+    return jimBroscheProperties;
+  }
+
   if (agentId === "callie-brickman") {
     return callieBrickmanProperties;
   }
@@ -481,6 +497,10 @@ function getInitialListForAgent(agentId) {
 }
 
 function getInitialMetaForAgent(agentId) {
+  if (agentId === "jim-brosche") {
+    return jimBroscheCompassMeta;
+  }
+
   if (agentId === "callie-brickman") {
     return callieBrickmanCompassMeta;
   }
@@ -653,7 +673,7 @@ export function useProperties() {
     const match = properties.value.find((p) => String(p.id) === String(id) || p.slug === String(id));
     if (match) return match;
     // Cross-agent fallback so direct links to any listing never fail
-    const allKnown = [...callieBrickmanProperties, ...gaylBraymerProperties, ...gretchenBraschProperties, ...kelseyBondProperties, ...hollyBockProperties, ...shannonBlountProperties, ...chrisBlackmanProperties, ...christyBerryProperties, ...thomasBellingerProperties, ...erinBallardProperties, ...jacquelynAustinProperties, ...megBeairdProperties, ...jonathanRosenProperties, ...katieAspenProperties, ...micheleBaladyBeachProperties, ...katyAnnettProperties, ...annaleeAstonProperties, ...brookeAltemoreProperties, ...jamieAdamsProperties, ...erikaOrbinProperties, ...meganJohnsonProperties, ...christineLeiteProperties, ...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
+    const allKnown = [...jimBroscheProperties, ...callieBrickmanProperties, ...gaylBraymerProperties, ...gretchenBraschProperties, ...kelseyBondProperties, ...hollyBockProperties, ...shannonBlountProperties, ...chrisBlackmanProperties, ...christyBerryProperties, ...thomasBellingerProperties, ...erinBallardProperties, ...jacquelynAustinProperties, ...megBeairdProperties, ...jonathanRosenProperties, ...katieAspenProperties, ...micheleBaladyBeachProperties, ...katyAnnettProperties, ...annaleeAstonProperties, ...brookeAltemoreProperties, ...jamieAdamsProperties, ...erikaOrbinProperties, ...meganJohnsonProperties, ...christineLeiteProperties, ...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
     return allKnown.find((p) => String(p.id) === String(id) || p.slug === String(id)) || null;
   }
 
