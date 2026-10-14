@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { centreLivingHomesTeamProfile } from "../data/agents/centreLivingHomesTeamProfile";
 import { markCainProfile } from "../data/agents/markCainProfile";
 import { neilBroussardProfile } from "../data/agents/neilBroussardProfile";
 import { adeleBroughtonProfile } from "../data/agents/adeleBroughtonProfile";
@@ -34,6 +35,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as centreLivingHomesTeamProperties } from "../data/agents/centreLivingHomesTeamProperties";
 import { compassProperties as markCainProperties } from "../data/agents/markCainProperties";
 import { compassProperties as neilBroussardProperties } from "../data/agents/neilBroussardProperties";
 import { compassProperties as adeleBroughtonProperties } from "../data/agents/adeleBroughtonProperties";
@@ -364,6 +366,15 @@ export const availableAgents = [
     slug: "mark-cain",
     profile: markCainProfile,
     properties: markCainProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "centre-living-homes-team",
+    name: "Centre Living Homes Team",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "centre-living-homes-team",
+    profile: centreLivingHomesTeamProfile,
+    properties: centreLivingHomesTeamProperties,
     previewColor: "#BFA181",
   },
 ];

@@ -195,6 +195,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/centre-living-homes-team",
+    name: "centreLivingHomesTeam-home",
+    component: HomeView,
+  },
+  {
     path: "/agent/:agentSlug",
     name: "agent-home",
     component: HomeView,
@@ -377,6 +382,11 @@ const routes = [
   {
     path: "/mark-cain/manage",
     name: "markCain-manage",
+    component: ManageView,
+  },
+  {
+    path: "/centre-living-homes-team/manage",
+    name: "centreLivingHomesTeam-manage",
     component: ManageView,
   },
   {

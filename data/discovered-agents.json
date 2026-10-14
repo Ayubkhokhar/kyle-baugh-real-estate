@@ -525,7 +525,8 @@
     "phone": "",
     "email": "mark.cain@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/mark-cain"
   },
   {
     "slug": "centre-living-homes-team",
