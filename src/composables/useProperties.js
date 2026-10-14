@@ -2,6 +2,7 @@ import { ref, computed, watch } from "vue";
 import { defaultProperties } from "../data/seedProperties";
 import { compassProperties as kyleProperties, compassSyncMeta as kyleCompassMeta } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as gretchenBraschProperties } from "../data/agents/gretchenBraschProperties";
 import { compassProperties as kelseyBondProperties } from "../data/agents/kelseyBondProperties";
 import { compassProperties as hollyBockProperties } from "../data/agents/hollyBockProperties";
 import { compassProperties as shannonBlountProperties } from "../data/agents/shannonBlountProperties";
@@ -37,6 +38,17 @@ const amyCompassMeta = {
   imagesDownloaded: 45,
   agentUrl: "https://www.compass.com/agents/amy-detwiler/",
   syncedAgent: "Amy Detwiler",
+};
+
+const gretchenBraschCompassMeta = {
+  lastSynced: "2026-10-14T17:53:32.549Z",
+  totalProperties: 22,
+  activeCount: 1,
+  soldCount: 18,
+  leasedCount: 0,
+  imagesDownloaded: 30,
+  agentUrl: "https://www.compass.com/agents/gretchen-brasch/",
+  syncedAgent: "Gretchen Brasch",
 };
 
 const kelseyBondCompassMeta = {
@@ -334,6 +346,10 @@ function mergeProperties(existingList, incomingCompassList) {
 }
 
 function getInitialListForAgent(agentId) {
+  if (agentId === "gretchen-brasch") {
+    return gretchenBraschProperties;
+  }
+
   if (agentId === "kelsey-bond") {
     return kelseyBondProperties;
   }
@@ -433,6 +449,10 @@ function getInitialListForAgent(agentId) {
 }
 
 function getInitialMetaForAgent(agentId) {
+  if (agentId === "gretchen-brasch") {
+    return gretchenBraschCompassMeta;
+  }
+
   if (agentId === "kelsey-bond") {
     return kelseyBondCompassMeta;
   }
@@ -593,7 +613,7 @@ export function useProperties() {
     const match = properties.value.find((p) => String(p.id) === String(id) || p.slug === String(id));
     if (match) return match;
     // Cross-agent fallback so direct links to any listing never fail
-    const allKnown = [...kelseyBondProperties, ...hollyBockProperties, ...shannonBlountProperties, ...chrisBlackmanProperties, ...christyBerryProperties, ...thomasBellingerProperties, ...erinBallardProperties, ...jacquelynAustinProperties, ...megBeairdProperties, ...jonathanRosenProperties, ...katieAspenProperties, ...micheleBaladyBeachProperties, ...katyAnnettProperties, ...annaleeAstonProperties, ...brookeAltemoreProperties, ...jamieAdamsProperties, ...erikaOrbinProperties, ...meganJohnsonProperties, ...christineLeiteProperties, ...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
+    const allKnown = [...gretchenBraschProperties, ...kelseyBondProperties, ...hollyBockProperties, ...shannonBlountProperties, ...chrisBlackmanProperties, ...christyBerryProperties, ...thomasBellingerProperties, ...erinBallardProperties, ...jacquelynAustinProperties, ...megBeairdProperties, ...jonathanRosenProperties, ...katieAspenProperties, ...micheleBaladyBeachProperties, ...katyAnnettProperties, ...annaleeAstonProperties, ...brookeAltemoreProperties, ...jamieAdamsProperties, ...erikaOrbinProperties, ...meganJohnsonProperties, ...christineLeiteProperties, ...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
     return allKnown.find((p) => String(p.id) === String(id) || p.slug === String(id)) || null;
   }
 

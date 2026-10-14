@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { gretchenBraschProfile } from "../data/agents/gretchenBraschProfile";
 import { kelseyBondProfile } from "../data/agents/kelseyBondProfile";
 import { hollyBockProfile } from "../data/agents/hollyBockProfile";
 import { shannonBlountProfile } from "../data/agents/shannonBlountProfile";
@@ -27,6 +28,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as gretchenBraschProperties } from "../data/agents/gretchenBraschProperties";
 import { compassProperties as kelseyBondProperties } from "../data/agents/kelseyBondProperties";
 import { compassProperties as hollyBockProperties } from "../data/agents/hollyBockProperties";
 import { compassProperties as shannonBlountProperties } from "../data/agents/shannonBlountProperties";
@@ -287,6 +289,15 @@ export const availableAgents = [
     slug: "kelsey-bond",
     profile: kelseyBondProfile,
     properties: kelseyBondProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "gretchen-brasch",
+    name: "Gretchen Brasch",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "gretchen-brasch",
+    profile: gretchenBraschProfile,
+    properties: gretchenBraschProperties,
     previewColor: "#BFA181",
   },
 ];

@@ -160,6 +160,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/gretchen-brasch",
+    name: "gretchenBrasch-home",
+    component: HomeView,
+  },
+  {
     path: "/agent/:agentSlug",
     name: "agent-home",
     component: HomeView,
@@ -307,6 +312,11 @@ const routes = [
   {
     path: "/kelsey-bond/manage",
     name: "kelseyBond-manage",
+    component: ManageView,
+  },
+  {
+    path: "/gretchen-brasch/manage",
+    name: "gretchenBrasch-manage",
     component: ManageView,
   },
   {
