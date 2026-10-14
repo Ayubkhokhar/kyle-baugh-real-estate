@@ -155,6 +155,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/kelsey-bond",
+    name: "kelseyBond-home",
+    component: HomeView,
+  },
+  {
     path: "/agent/:agentSlug",
     name: "agent-home",
     component: HomeView,
@@ -297,6 +302,11 @@ const routes = [
   {
     path: "/holly-bock/manage",
     name: "hollyBock-manage",
+    component: ManageView,
+  },
+  {
+    path: "/kelsey-bond/manage",
+    name: "kelseyBond-manage",
     component: ManageView,
   },
   {
