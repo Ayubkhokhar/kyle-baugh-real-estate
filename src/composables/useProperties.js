@@ -2,6 +2,7 @@ import { ref, computed, watch } from "vue";
 import { defaultProperties } from "../data/seedProperties";
 import { compassProperties as kyleProperties, compassSyncMeta as kyleCompassMeta } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as erinBallardProperties } from "../data/agents/erinBallardProperties";
 import { compassProperties as jacquelynAustinProperties } from "../data/agents/jacquelynAustinProperties";
 import { compassProperties as megBeairdProperties } from "../data/agents/megBeairdProperties";
 import { compassProperties as jonathanRosenProperties } from "../data/agents/jonathanRosenProperties";
@@ -30,6 +31,17 @@ const amyCompassMeta = {
   imagesDownloaded: 45,
   agentUrl: "https://www.compass.com/agents/amy-detwiler/",
   syncedAgent: "Amy Detwiler",
+};
+
+const erinBallardCompassMeta = {
+  lastSynced: "2026-10-14T12:34:19.044Z",
+  totalProperties: 25,
+  activeCount: 0,
+  soldCount: 18,
+  leasedCount: 0,
+  imagesDownloaded: 33,
+  agentUrl: "https://www.compass.com/agents/erin-ballard/",
+  syncedAgent: "Erin Ballard",
 };
 
 const jacquelynAustinCompassMeta = {
@@ -250,6 +262,10 @@ function mergeProperties(existingList, incomingCompassList) {
 }
 
 function getInitialListForAgent(agentId) {
+  if (agentId === "erin-ballard") {
+    return erinBallardProperties;
+  }
+
   if (agentId === "jacquelyn-austin") {
     return jacquelynAustinProperties;
   }
@@ -321,6 +337,10 @@ function getInitialListForAgent(agentId) {
 }
 
 function getInitialMetaForAgent(agentId) {
+  if (agentId === "erin-ballard") {
+    return erinBallardCompassMeta;
+  }
+
   if (agentId === "jacquelyn-austin") {
     return jacquelynAustinCompassMeta;
   }
@@ -453,7 +473,7 @@ export function useProperties() {
     const match = properties.value.find((p) => String(p.id) === String(id) || p.slug === String(id));
     if (match) return match;
     // Cross-agent fallback so direct links to any listing never fail
-    const allKnown = [...jacquelynAustinProperties, ...megBeairdProperties, ...jonathanRosenProperties, ...katieAspenProperties, ...micheleBaladyBeachProperties, ...katyAnnettProperties, ...annaleeAstonProperties, ...brookeAltemoreProperties, ...jamieAdamsProperties, ...erikaOrbinProperties, ...meganJohnsonProperties, ...christineLeiteProperties, ...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
+    const allKnown = [...erinBallardProperties, ...jacquelynAustinProperties, ...megBeairdProperties, ...jonathanRosenProperties, ...katieAspenProperties, ...micheleBaladyBeachProperties, ...katyAnnettProperties, ...annaleeAstonProperties, ...brookeAltemoreProperties, ...jamieAdamsProperties, ...erikaOrbinProperties, ...meganJohnsonProperties, ...christineLeiteProperties, ...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
     return allKnown.find((p) => String(p.id) === String(id) || p.slug === String(id)) || null;
   }
 
