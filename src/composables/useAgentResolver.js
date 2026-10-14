@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { callieBrickmanProfile } from "../data/agents/callieBrickmanProfile";
 import { gaylBraymerProfile } from "../data/agents/gaylBraymerProfile";
 import { gretchenBraschProfile } from "../data/agents/gretchenBraschProfile";
 import { kelseyBondProfile } from "../data/agents/kelseyBondProfile";
@@ -29,6 +30,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as callieBrickmanProperties } from "../data/agents/callieBrickmanProperties";
 import { compassProperties as gaylBraymerProperties } from "../data/agents/gaylBraymerProperties";
 import { compassProperties as gretchenBraschProperties } from "../data/agents/gretchenBraschProperties";
 import { compassProperties as kelseyBondProperties } from "../data/agents/kelseyBondProperties";
@@ -309,6 +311,15 @@ export const availableAgents = [
     slug: "gayl-braymer",
     profile: gaylBraymerProfile,
     properties: gaylBraymerProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "callie-brickman",
+    name: "Callie Brickman",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "callie-brickman",
+    profile: callieBrickmanProfile,
+    properties: callieBrickmanProperties,
     previewColor: "#BFA181",
   },
 ];
