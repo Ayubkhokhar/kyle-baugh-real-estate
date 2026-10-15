@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { bradfordCoffmanProfile } from "../data/agents/bradfordCoffmanProfile";
 import { billChurchillProfile } from "../data/agents/billChurchillProfile";
 import { katieChuProfile } from "../data/agents/katieChuProfile";
 import { kelleyChristianProfile } from "../data/agents/kelleyChristianProfile";
@@ -40,6 +41,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as bradfordCoffmanProperties } from "../data/agents/bradfordCoffmanProperties";
 import { compassProperties as billChurchillProperties } from "../data/agents/billChurchillProperties";
 import { compassProperties as katieChuProperties } from "../data/agents/katieChuProperties";
 import { compassProperties as kelleyChristianProperties } from "../data/agents/kelleyChristianProperties";
@@ -430,6 +432,15 @@ export const availableAgents = [
     slug: "bill-churchill",
     profile: billChurchillProfile,
     properties: billChurchillProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "bradford-coffman",
+    name: "Bradford Coffman",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "bradford-coffman",
+    profile: bradfordCoffmanProfile,
+    properties: bradfordCoffmanProperties,
     previewColor: "#BFA181",
   },
 ];
