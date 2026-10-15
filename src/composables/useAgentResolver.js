@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { kelleyChristianProfile } from "../data/agents/kelleyChristianProfile";
 import { stevieChaddickProfile } from "../data/agents/stevieChaddickProfile";
 import { giannaCerulloProfile } from "../data/agents/giannaCerulloProfile";
 import { centreLivingHomesTeamProfile } from "../data/agents/centreLivingHomesTeamProfile";
@@ -37,6 +38,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as kelleyChristianProperties } from "../data/agents/kelleyChristianProperties";
 import { compassProperties as stevieChaddickProperties } from "../data/agents/stevieChaddickProperties";
 import { compassProperties as giannaCerulloProperties } from "../data/agents/giannaCerulloProperties";
 import { compassProperties as centreLivingHomesTeamProperties } from "../data/agents/centreLivingHomesTeamProperties";
@@ -397,6 +399,15 @@ export const availableAgents = [
     slug: "stevie-chaddick",
     profile: stevieChaddickProfile,
     properties: stevieChaddickProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "kelley-christian",
+    name: "Kelley Christian",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "kelley-christian",
+    profile: kelleyChristianProfile,
+    properties: kelleyChristianProperties,
     previewColor: "#BFA181",
   },
 ];
