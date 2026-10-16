@@ -1003,7 +1003,8 @@
     "phone": "",
     "email": "chris.cannon@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/chris-cannon"
   },
   {
     "slug": "jason-castro",
