@@ -305,6 +305,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/carmen-dipenti",
+    name: "carmenDipenti-home",
+    component: HomeView,
+  },
+  {
     path: "/agent/:agentSlug",
     name: "agent-home",
     component: HomeView,
@@ -597,6 +602,11 @@ const routes = [
   {
     path: "/coastal-lifestyles/manage",
     name: "coastalLifestyles-manage",
+    component: ManageView,
+  },
+  {
+    path: "/carmen-dipenti/manage",
+    name: "carmenDipenti-manage",
     component: ManageView,
   },
   {

@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { carmenDipentiProfile } from "../data/agents/carmenDipentiProfile";
 import { coastalLifestylesProfile } from "../data/agents/coastalLifestylesProfile";
 import { jasonCastroProfile } from "../data/agents/jasonCastroProfile";
 import { chrisCannonProfile } from "../data/agents/chrisCannonProfile";
@@ -56,6 +57,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as carmenDipentiProperties } from "../data/agents/carmenDipentiProperties";
 import { compassProperties as coastalLifestylesProperties } from "../data/agents/coastalLifestylesProperties";
 import { compassProperties as jasonCastroProperties } from "../data/agents/jasonCastroProperties";
 import { compassProperties as chrisCannonProperties } from "../data/agents/chrisCannonProperties";
@@ -606,6 +608,15 @@ export const availableAgents = [
     slug: "coastal-lifestyles",
     profile: coastalLifestylesProfile,
     properties: coastalLifestylesProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "carmen-dipenti",
+    name: "Carmen DiPenti",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "carmen-dipenti",
+    profile: carmenDipentiProfile,
+    properties: carmenDipentiProperties,
     previewColor: "#BFA181",
   },
 ];
