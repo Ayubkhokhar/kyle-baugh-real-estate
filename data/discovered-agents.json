@@ -1058,7 +1058,8 @@
     "phone": "",
     "email": "bill.farrell@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/bill-farrell"
   },
   {
     "slug": "meredith-ferrell",
