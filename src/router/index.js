@@ -300,6 +300,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/coastal-lifestyles",
+    name: "coastalLifestyles-home",
+    component: HomeView,
+  },
+  {
     path: "/agent/:agentSlug",
     name: "agent-home",
     component: HomeView,
@@ -587,6 +592,11 @@ const routes = [
   {
     path: "/jason-castro/manage",
     name: "jasonCastro-manage",
+    component: ManageView,
+  },
+  {
+    path: "/coastal-lifestyles/manage",
+    name: "coastalLifestyles-manage",
     component: ManageView,
   },
   {
