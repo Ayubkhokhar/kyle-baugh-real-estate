@@ -970,7 +970,8 @@
     "phone": "",
     "email": "michael.brink@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/michael-brink"
   },
   {
     "slug": "justin-bustamante",

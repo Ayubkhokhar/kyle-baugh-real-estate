@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { justinBustamanteProfile } from "../data/agents/justinBustamanteProfile";
 import { michaelBrinkProfile } from "../data/agents/michaelBrinkProfile";
 import { catherineBlevensProfile } from "../data/agents/catherineBlevensProfile";
 import { dianeBeatyProfile } from "../data/agents/dianeBeatyProfile";
@@ -51,6 +52,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as justinBustamanteProperties } from "../data/agents/justinBustamanteProperties";
 import { compassProperties as michaelBrinkProperties } from "../data/agents/michaelBrinkProperties";
 import { compassProperties as catherineBlevensProperties } from "../data/agents/catherineBlevensProperties";
 import { compassProperties as dianeBeatyProperties } from "../data/agents/dianeBeatyProperties";
@@ -551,6 +553,15 @@ export const availableAgents = [
     slug: "michael-brink",
     profile: michaelBrinkProfile,
     properties: michaelBrinkProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "justin-bustamante",
+    name: "Justin Bustamante",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "justin-bustamante",
+    profile: justinBustamanteProfile,
+    properties: justinBustamanteProperties,
     previewColor: "#BFA181",
   },
 ];
