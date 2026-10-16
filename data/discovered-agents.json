@@ -932,12 +932,13 @@
     "phone": "",
     "email": "kyle.baugh@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "needs_outreach",
+    "status": "launched",
     "contactStage": "needs_outreach",
     "contactCount": 0,
     "history": [],
     "lastSubject": null,
-    "lastContactedAt": null
+    "lastContactedAt": null,
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/kyle-baugh-dallas"
   },
   {
     "slug": "diane-beaty",

@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { dianeBeatyProfile } from "../data/agents/dianeBeatyProfile";
 import { kyleBaughDallasProfile } from "../data/agents/kyleBaughDallasProfile";
 import { jolieBarriosProfile } from "../data/agents/jolieBarriosProfile";
 import { annAndrewsProfile } from "../data/agents/annAndrewsProfile";
@@ -48,6 +49,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as dianeBeatyProperties } from "../data/agents/dianeBeatyProperties";
 import { compassProperties as kyleBaughDallasProperties } from "../data/agents/kyleBaughDallasProperties";
 import { compassProperties as jolieBarriosProperties } from "../data/agents/jolieBarriosProperties";
 import { compassProperties as annAndrewsProperties } from "../data/agents/annAndrewsProperties";
@@ -518,6 +520,15 @@ export const availableAgents = [
     slug: "kyle-baugh-dallas",
     profile: kyleBaughDallasProfile,
     properties: kyleBaughDallasProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "diane-beaty",
+    name: "Diane Beaty",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "diane-beaty",
+    profile: dianeBeatyProfile,
+    properties: dianeBeatyProperties,
     previewColor: "#BFA181",
   },
 ];
