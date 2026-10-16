@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { tJFrankProfile } from "../data/agents/tJFrankProfile";
 import { meredithFerrellProfile } from "../data/agents/meredithFerrellProfile";
 import { billFarrellProfile } from "../data/agents/billFarrellProfile";
 import { nydaFaithProfile } from "../data/agents/nydaFaithProfile";
@@ -60,6 +61,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as tJFrankProperties } from "../data/agents/tJFrankProperties";
 import { compassProperties as meredithFerrellProperties } from "../data/agents/meredithFerrellProperties";
 import { compassProperties as billFarrellProperties } from "../data/agents/billFarrellProperties";
 import { compassProperties as nydaFaithProperties } from "../data/agents/nydaFaithProperties";
@@ -650,6 +652,15 @@ export const availableAgents = [
     slug: "meredith-ferrell",
     profile: meredithFerrellProfile,
     properties: meredithFerrellProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "t.j-.-frank",
+    name: "T.J. Frank",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "t.j-.-frank",
+    profile: tJFrankProfile,
+    properties: tJFrankProperties,
     previewColor: "#BFA181",
   },
 ];
