@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { annAndrewsProfile } from "../data/agents/annAndrewsProfile";
 import { chelseaAdriaanseProfile } from "../data/agents/chelseaAdriaanseProfile";
 import { amyDetwilerProfile } from "../data/agents/amyDetwilerProfile";
 import { jillDerkachProfile } from "../data/agents/jillDerkachProfile";
@@ -45,6 +46,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as annAndrewsProperties } from "../data/agents/annAndrewsProperties";
 import { compassProperties as chelseaAdriaanseProperties } from "../data/agents/chelseaAdriaanseProperties";
 import { compassProperties as amyDetwilerProperties } from "../data/agents/amyDetwilerProperties";
 import { compassProperties as jillDerkachProperties } from "../data/agents/jillDerkachProperties";
@@ -485,6 +487,15 @@ export const availableAgents = [
     slug: "chelsea-adriaanse",
     profile: chelseaAdriaanseProfile,
     properties: chelseaAdriaanseProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "ann-andrews",
+    name: "Ann Andrews",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "ann-andrews",
+    profile: annAndrewsProfile,
+    properties: annAndrewsProperties,
     previewColor: "#BFA181",
   },
 ];
