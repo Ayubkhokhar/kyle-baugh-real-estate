@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { billFarrellProfile } from "../data/agents/billFarrellProfile";
 import { nydaFaithProfile } from "../data/agents/nydaFaithProfile";
 import { carmenDipentiProfile } from "../data/agents/carmenDipentiProfile";
 import { coastalLifestylesProfile } from "../data/agents/coastalLifestylesProfile";
@@ -58,6 +59,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as billFarrellProperties } from "../data/agents/billFarrellProperties";
 import { compassProperties as nydaFaithProperties } from "../data/agents/nydaFaithProperties";
 import { compassProperties as carmenDipentiProperties } from "../data/agents/carmenDipentiProperties";
 import { compassProperties as coastalLifestylesProperties } from "../data/agents/coastalLifestylesProperties";
@@ -628,6 +630,15 @@ export const availableAgents = [
     slug: "nyda-faith",
     profile: nydaFaithProfile,
     properties: nydaFaithProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "bill-farrell",
+    name: "Bill Farrell",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "bill-farrell",
+    profile: billFarrellProfile,
+    properties: billFarrellProperties,
     previewColor: "#BFA181",
   },
 ];
