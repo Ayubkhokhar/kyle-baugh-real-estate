@@ -268,9 +268,20 @@
     "phone": "(214) 435-8900",
     "email": "jacquelyn.austin@compass.com",
     "activeListingsCount": 2,
-    "status": "launched",
+    "status": "contacted",
     "notes": "High client retention in Preston Hollow and Lakewood luxury markets.",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/jacquelyn-austin"
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/jacquelyn-austin",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-15T06:43:09.586Z",
+    "lastSubject": "Jacquelyn Austin's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Jacquelyn Austin's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-15T06:43:09.586Z"
+      }
+    ]
   },
   {
     "slug": "michele-balady-beach",
@@ -305,9 +316,20 @@
     "phone": "(214) 551-7800",
     "email": "erin.ballard@compass.com",
     "activeListingsCount": 2,
-    "status": "launched",
+    "status": "contacted",
     "notes": "Modern custom home expert in Dallas urban enclaves.",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/erin-ballard"
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/erin-ballard",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-15T06:43:23.589Z",
+    "lastSubject": "Erin Ballard's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Erin Ballard's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-15T06:43:23.589Z"
+      }
+    ]
   },
   {
     "slug": "meg-beaird",
@@ -342,9 +364,20 @@
     "phone": "(214) 392-1100",
     "email": "thomas.bellinger@compass.com",
     "activeListingsCount": 2,
-    "status": "launched",
+    "status": "contacted",
     "notes": "Luxury penthouse and condominium specialist in Turtle Creek corridor.",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/thomas-bellinger"
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/thomas-bellinger",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-15T06:43:35.810Z",
+    "lastSubject": "Thomas Bellinger's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Thomas Bellinger's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-15T06:43:35.810Z"
+      }
+    ]
   },
   {
     "slug": "christy-berry",
@@ -355,9 +388,20 @@
     "phone": "(214) 693-1600",
     "email": "christy.berry@compass.com",
     "activeListingsCount": 3,
-    "status": "launched",
+    "status": "contacted",
     "notes": "Decades of fiduciary representation in Highland Park and University Park.",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/christy-berry"
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/christy-berry",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-15T13:37:27.275Z",
+    "lastSubject": "Christy Berry's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Christy Berry's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-15T13:37:27.275Z"
+      }
+    ]
   },
   {
     "slug": "caroline-summers",
@@ -415,8 +459,19 @@
     "phone": "",
     "email": "chris.blackman@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/chris-blackman"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/chris-blackman",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-15T13:37:39.208Z",
+    "lastSubject": "Chris Blackman's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Chris Blackman's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-15T13:37:39.208Z"
+      }
+    ]
   },
   {
     "slug": "shannon-blount",
@@ -426,8 +481,19 @@
     "phone": "",
     "email": "shannon.blount@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/shannon-blount"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/shannon-blount",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-15T13:37:50.202Z",
+    "lastSubject": "Shannon Blount's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Shannon Blount's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-15T13:37:50.202Z"
+      }
+    ]
   },
   {
     "slug": "holly-bock",
@@ -437,8 +503,19 @@
     "phone": "",
     "email": "holly.bock@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/holly-bock"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/holly-bock",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-16T08:11:20.579Z",
+    "lastSubject": "Holly Bock's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Holly Bock's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-16T08:11:20.579Z"
+      }
+    ]
   },
   {
     "slug": "kelsey-bond",
@@ -448,8 +525,19 @@
     "phone": "",
     "email": "kelsey.bond@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/kelsey-bond"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/kelsey-bond",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-16T08:12:54.409Z",
+    "lastSubject": "Kelsey Bond's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Kelsey Bond's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-16T08:12:54.409Z"
+      }
+    ]
   },
   {
     "slug": "gretchen-brasch",
@@ -459,8 +547,19 @@
     "phone": "",
     "email": "gretchen.brasch@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/gretchen-brasch"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/gretchen-brasch",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-16T08:19:16.898Z",
+    "lastSubject": "Gretchen Brasch's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Gretchen Brasch's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-16T08:19:16.898Z"
+      }
+    ]
   },
   {
     "slug": "gayl-braymer",
@@ -470,8 +569,19 @@
     "phone": "",
     "email": "gayl.braymer@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/gayl-braymer"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/gayl-braymer",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-16T08:49:24.507Z",
+    "lastSubject": "Gayl Braymer's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Gayl Braymer's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-16T08:49:24.507Z"
+      }
+    ]
   },
   {
     "slug": "callie-brickman",
@@ -481,8 +591,19 @@
     "phone": "",
     "email": "callie.brickman@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/callie-brickman"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/callie-brickman",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-16T08:54:23.167Z",
+    "lastSubject": "Callie Brickman's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Callie Brickman's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-16T08:54:23.167Z"
+      }
+    ]
   },
   {
     "slug": "jim-brosche",
@@ -492,8 +613,19 @@
     "phone": "",
     "email": "jim.brosche@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/jim-brosche"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/jim-brosche",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-16T08:54:34.370Z",
+    "lastSubject": "Jim Brosche's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Jim Brosche's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-16T08:54:34.370Z"
+      }
+    ]
   },
   {
     "slug": "adele-broughton",
@@ -503,8 +635,19 @@
     "phone": "",
     "email": "adele.broughton@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/adele-broughton"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/adele-broughton",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-16T08:54:49.667Z",
+    "lastSubject": "Adele Broughton's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Adele Broughton's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-16T08:54:49.667Z"
+      }
+    ]
   },
   {
     "slug": "neil-broussard",
@@ -514,8 +657,19 @@
     "phone": "",
     "email": "neil.broussard@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/neil-broussard"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/neil-broussard",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-16T09:07:31.237Z",
+    "lastSubject": "Neil Broussard's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Neil Broussard's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-16T09:07:31.237Z"
+      }
+    ]
   },
   {
     "slug": "mark-cain",
@@ -525,8 +679,19 @@
     "phone": "",
     "email": "mark.cain@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/mark-cain"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/mark-cain",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-16T09:11:31.508Z",
+    "lastSubject": "Mark Cain's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Mark Cain's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-16T09:11:31.508Z"
+      }
+    ]
   },
   {
     "slug": "centre-living-homes-team",
@@ -536,8 +701,19 @@
     "phone": "",
     "email": "centre.living.homes.team@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/centre-living-homes-team"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/centre-living-homes-team",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-16T10:33:49.873Z",
+    "lastSubject": "Centre Living Homes Team's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Centre Living Homes Team's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-16T10:33:49.873Z"
+      }
+    ]
   },
   {
     "slug": "gianna-cerullo",
@@ -547,8 +723,19 @@
     "phone": "",
     "email": "gianna.cerullo@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/gianna-cerullo"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/gianna-cerullo",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-16T10:34:32.915Z",
+    "lastSubject": "Gianna Cerullo's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Gianna Cerullo's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-16T10:34:32.915Z"
+      }
+    ]
   },
   {
     "slug": "stevie-chaddick",
@@ -558,8 +745,19 @@
     "phone": "",
     "email": "stevie.chaddick@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/stevie-chaddick"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/stevie-chaddick",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-16T10:34:42.536Z",
+    "lastSubject": "Stevie Chaddick's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Stevie Chaddick's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-16T10:34:42.536Z"
+      }
+    ]
   },
   {
     "slug": "kelley-christian",
@@ -569,8 +767,19 @@
     "phone": "",
     "email": "kelley.christian@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/kelley-christian"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/kelley-christian",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-16T10:34:54.551Z",
+    "lastSubject": "Kelley Christian's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Kelley Christian's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-16T10:34:54.551Z"
+      }
+    ]
   },
   {
     "slug": "katie-chu",
@@ -580,8 +789,19 @@
     "phone": "",
     "email": "katie.chu@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/katie-chu"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/katie-chu",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-16T10:35:05.227Z",
+    "lastSubject": "Katie Chu's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Katie Chu's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-16T10:35:05.227Z"
+      }
+    ]
   },
   {
     "slug": "bill-churchill",
@@ -591,8 +811,19 @@
     "phone": "",
     "email": "bill.churchill@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/bill-churchill"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/bill-churchill",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-16T10:35:46.494Z",
+    "lastSubject": "Bill Churchill's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Bill Churchill's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-16T10:35:46.494Z"
+      }
+    ]
   },
   {
     "slug": "bradford-coffman",
@@ -602,7 +833,19 @@
     "phone": "",
     "email": "bradford.coffman@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "discovered"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/bradford-coffman",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-16T10:36:01.463Z",
+    "lastSubject": "Bradford Coffman's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Bradford Coffman's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-16T10:36:01.463Z"
+      }
+    ]
   },
   {
     "slug": "christine-danuser",
