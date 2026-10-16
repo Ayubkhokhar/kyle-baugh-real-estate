@@ -877,7 +877,7 @@
     "phone": "",
     "email": "amy.detwiler@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "contacted",
+    "status": "launched",
     "contactStage": "followup_ignored",
     "contactCount": 1,
     "lastContactedAt": "2026-10-08T11:54:31.451Z",
@@ -888,7 +888,8 @@
         "subject": "Re: Amy Detwiler's portfolio (Did you get a chance to see this?)",
         "sentAt": "2026-10-08T11:54:31.451Z"
       }
-    ]
+    ],
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/amy-detwiler"
   },
   {
     "slug": "chelsea-adriaanse",
