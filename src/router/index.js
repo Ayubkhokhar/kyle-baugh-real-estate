@@ -310,6 +310,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/nyda-faith",
+    name: "nydaFaith-home",
+    component: HomeView,
+  },
+  {
     path: "/agent/:agentSlug",
     name: "agent-home",
     component: HomeView,
@@ -607,6 +612,11 @@ const routes = [
   {
     path: "/carmen-dipenti/manage",
     name: "carmenDipenti-manage",
+    component: ManageView,
+  },
+  {
+    path: "/nyda-faith/manage",
+    name: "nydaFaith-manage",
     component: ManageView,
   },
   {

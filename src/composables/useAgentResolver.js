@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { nydaFaithProfile } from "../data/agents/nydaFaithProfile";
 import { carmenDipentiProfile } from "../data/agents/carmenDipentiProfile";
 import { coastalLifestylesProfile } from "../data/agents/coastalLifestylesProfile";
 import { jasonCastroProfile } from "../data/agents/jasonCastroProfile";
@@ -57,6 +58,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as nydaFaithProperties } from "../data/agents/nydaFaithProperties";
 import { compassProperties as carmenDipentiProperties } from "../data/agents/carmenDipentiProperties";
 import { compassProperties as coastalLifestylesProperties } from "../data/agents/coastalLifestylesProperties";
 import { compassProperties as jasonCastroProperties } from "../data/agents/jasonCastroProperties";
@@ -617,6 +619,15 @@ export const availableAgents = [
     slug: "carmen-dipenti",
     profile: carmenDipentiProfile,
     properties: carmenDipentiProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "nyda-faith",
+    name: "Nyda Faith",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "nyda-faith",
+    profile: nydaFaithProfile,
+    properties: nydaFaithProperties,
     previewColor: "#BFA181",
   },
 ];
