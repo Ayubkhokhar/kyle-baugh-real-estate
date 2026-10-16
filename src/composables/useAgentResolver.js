@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { kyleBaughDallasProfile } from "../data/agents/kyleBaughDallasProfile";
 import { jolieBarriosProfile } from "../data/agents/jolieBarriosProfile";
 import { annAndrewsProfile } from "../data/agents/annAndrewsProfile";
 import { chelseaAdriaanseProfile } from "../data/agents/chelseaAdriaanseProfile";
@@ -47,6 +48,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as kyleBaughDallasProperties } from "../data/agents/kyleBaughDallasProperties";
 import { compassProperties as jolieBarriosProperties } from "../data/agents/jolieBarriosProperties";
 import { compassProperties as annAndrewsProperties } from "../data/agents/annAndrewsProperties";
 import { compassProperties as chelseaAdriaanseProperties } from "../data/agents/chelseaAdriaanseProperties";
@@ -507,6 +509,15 @@ export const availableAgents = [
     slug: "jolie-barrios",
     profile: jolieBarriosProfile,
     properties: jolieBarriosProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "kyle-baugh-dallas",
+    name: "Kyle Baugh",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "kyle-baugh-dallas",
+    profile: kyleBaughDallasProfile,
+    properties: kyleBaughDallasProperties,
     previewColor: "#BFA181",
   },
 ];

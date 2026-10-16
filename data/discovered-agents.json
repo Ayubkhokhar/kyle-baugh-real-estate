@@ -921,7 +921,8 @@
     "phone": "",
     "email": "jolie.barrios@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/jolie-barrios"
   },
   {
     "slug": "kyle-baugh-dallas",
