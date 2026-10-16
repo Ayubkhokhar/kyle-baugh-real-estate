@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { emilyRuthCannonProfile } from "../data/agents/emilyRuthCannonProfile";
 import { justinBustamanteProfile } from "../data/agents/justinBustamanteProfile";
 import { michaelBrinkProfile } from "../data/agents/michaelBrinkProfile";
 import { catherineBlevensProfile } from "../data/agents/catherineBlevensProfile";
@@ -52,6 +53,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as emilyRuthCannonProperties } from "../data/agents/emilyRuthCannonProperties";
 import { compassProperties as justinBustamanteProperties } from "../data/agents/justinBustamanteProperties";
 import { compassProperties as michaelBrinkProperties } from "../data/agents/michaelBrinkProperties";
 import { compassProperties as catherineBlevensProperties } from "../data/agents/catherineBlevensProperties";
@@ -562,6 +564,15 @@ export const availableAgents = [
     slug: "justin-bustamante",
     profile: justinBustamanteProfile,
     properties: justinBustamanteProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "emily-ruth-cannon",
+    name: "Emily Ruth Cannon",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "emily-ruth-cannon",
+    profile: emilyRuthCannonProfile,
+    properties: emilyRuthCannonProperties,
     previewColor: "#BFA181",
   },
 ];

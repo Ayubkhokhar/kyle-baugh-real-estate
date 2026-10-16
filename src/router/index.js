@@ -285,6 +285,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/emily-ruth-cannon",
+    name: "emilyRuthCannon-home",
+    component: HomeView,
+  },
+  {
     path: "/agent/:agentSlug",
     name: "agent-home",
     component: HomeView,
@@ -557,6 +562,11 @@ const routes = [
   {
     path: "/justin-bustamante/manage",
     name: "justinBustamante-manage",
+    component: ManageView,
+  },
+  {
+    path: "/emily-ruth-cannon/manage",
+    name: "emilyRuthCannon-manage",
     component: ManageView,
   },
   {
