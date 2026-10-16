@@ -910,7 +910,8 @@
     "phone": "",
     "email": "ann.andrews@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/ann-andrews"
   },
   {
     "slug": "jolie-barrios",

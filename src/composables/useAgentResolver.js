@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { jolieBarriosProfile } from "../data/agents/jolieBarriosProfile";
 import { annAndrewsProfile } from "../data/agents/annAndrewsProfile";
 import { chelseaAdriaanseProfile } from "../data/agents/chelseaAdriaanseProfile";
 import { amyDetwilerProfile } from "../data/agents/amyDetwilerProfile";
@@ -46,6 +47,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as jolieBarriosProperties } from "../data/agents/jolieBarriosProperties";
 import { compassProperties as annAndrewsProperties } from "../data/agents/annAndrewsProperties";
 import { compassProperties as chelseaAdriaanseProperties } from "../data/agents/chelseaAdriaanseProperties";
 import { compassProperties as amyDetwilerProperties } from "../data/agents/amyDetwilerProperties";
@@ -496,6 +498,15 @@ export const availableAgents = [
     slug: "ann-andrews",
     profile: annAndrewsProfile,
     properties: annAndrewsProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "jolie-barrios",
+    name: "Jolie Barrios",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "jolie-barrios",
+    profile: jolieBarriosProfile,
+    properties: jolieBarriosProperties,
     previewColor: "#BFA181",
   },
 ];
