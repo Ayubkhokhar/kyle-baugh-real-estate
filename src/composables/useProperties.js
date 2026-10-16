@@ -2,6 +2,7 @@ import { ref, computed, watch } from "vue";
 import { defaultProperties } from "../data/seedProperties";
 import { compassProperties as kyleProperties, compassSyncMeta as kyleCompassMeta } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as michaelBrinkProperties } from "../data/agents/michaelBrinkProperties";
 import { compassProperties as catherineBlevensProperties } from "../data/agents/catherineBlevensProperties";
 import { compassProperties as dianeBeatyProperties } from "../data/agents/dianeBeatyProperties";
 import { compassProperties as kyleBaughDallasProperties } from "../data/agents/kyleBaughDallasProperties";
@@ -60,6 +61,17 @@ const amyCompassMeta = {
   imagesDownloaded: 45,
   agentUrl: "https://www.compass.com/agents/amy-detwiler/",
   syncedAgent: "Amy Detwiler",
+};
+
+const michaelBrinkCompassMeta = {
+  lastSynced: "2026-10-16T12:40:54.183Z",
+  totalProperties: 38,
+  activeCount: 1,
+  soldCount: 19,
+  leasedCount: 0,
+  imagesDownloaded: 46,
+  agentUrl: "https://www.compass.com/agents/michael-brink/",
+  syncedAgent: "Michael Brink",
 };
 
 const catherineBlevensCompassMeta = {
@@ -610,6 +622,10 @@ function mergeProperties(existingList, incomingCompassList) {
 }
 
 function getInitialListForAgent(agentId) {
+  if (agentId === "michael-brink") {
+    return michaelBrinkProperties;
+  }
+
   if (agentId === "catherine-blevens") {
     return catherineBlevensProperties;
   }
@@ -801,6 +817,10 @@ function getInitialListForAgent(agentId) {
 }
 
 function getInitialMetaForAgent(agentId) {
+  if (agentId === "michael-brink") {
+    return michaelBrinkCompassMeta;
+  }
+
   if (agentId === "catherine-blevens") {
     return catherineBlevensCompassMeta;
   }
@@ -1053,7 +1073,7 @@ export function useProperties() {
     const match = properties.value.find((p) => String(p.id) === String(id) || p.slug === String(id));
     if (match) return match;
     // Cross-agent fallback so direct links to any listing never fail
-    const allKnown = [...catherineBlevensProperties, ...dianeBeatyProperties, ...kyleBaughDallasProperties, ...jolieBarriosProperties, ...annAndrewsProperties, ...chelseaAdriaanseProperties, ...amyDetwilerProperties, ...jillDerkachProperties, ...christineDanuserProperties, ...bradfordCoffmanProperties, ...billChurchillProperties, ...katieChuProperties, ...kelleyChristianProperties, ...stevieChaddickProperties, ...giannaCerulloProperties, ...centreLivingHomesTeamProperties, ...markCainProperties, ...neilBroussardProperties, ...adeleBroughtonProperties, ...jimBroscheProperties, ...callieBrickmanProperties, ...gaylBraymerProperties, ...gretchenBraschProperties, ...kelseyBondProperties, ...hollyBockProperties, ...shannonBlountProperties, ...chrisBlackmanProperties, ...christyBerryProperties, ...thomasBellingerProperties, ...erinBallardProperties, ...jacquelynAustinProperties, ...megBeairdProperties, ...jonathanRosenProperties, ...katieAspenProperties, ...micheleBaladyBeachProperties, ...katyAnnettProperties, ...annaleeAstonProperties, ...brookeAltemoreProperties, ...jamieAdamsProperties, ...erikaOrbinProperties, ...meganJohnsonProperties, ...christineLeiteProperties, ...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
+    const allKnown = [...michaelBrinkProperties, ...catherineBlevensProperties, ...dianeBeatyProperties, ...kyleBaughDallasProperties, ...jolieBarriosProperties, ...annAndrewsProperties, ...chelseaAdriaanseProperties, ...amyDetwilerProperties, ...jillDerkachProperties, ...christineDanuserProperties, ...bradfordCoffmanProperties, ...billChurchillProperties, ...katieChuProperties, ...kelleyChristianProperties, ...stevieChaddickProperties, ...giannaCerulloProperties, ...centreLivingHomesTeamProperties, ...markCainProperties, ...neilBroussardProperties, ...adeleBroughtonProperties, ...jimBroscheProperties, ...callieBrickmanProperties, ...gaylBraymerProperties, ...gretchenBraschProperties, ...kelseyBondProperties, ...hollyBockProperties, ...shannonBlountProperties, ...chrisBlackmanProperties, ...christyBerryProperties, ...thomasBellingerProperties, ...erinBallardProperties, ...jacquelynAustinProperties, ...megBeairdProperties, ...jonathanRosenProperties, ...katieAspenProperties, ...micheleBaladyBeachProperties, ...katyAnnettProperties, ...annaleeAstonProperties, ...brookeAltemoreProperties, ...jamieAdamsProperties, ...erikaOrbinProperties, ...meganJohnsonProperties, ...christineLeiteProperties, ...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
     return allKnown.find((p) => String(p.id) === String(id) || p.slug === String(id)) || null;
   }
 
