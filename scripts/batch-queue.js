@@ -269,6 +269,13 @@ class BatchQueueManager {
       if (match) {
         match.status = "launched";
         match.liveUrl = result.liveUrl;
+        if (result.agentEmail) {
+          match.email = result.agentEmail;
+          match.isEmailVerified = true;
+        }
+        if (result.agentPhone) {
+          match.phone = result.agentPhone;
+        }
         saveDiscoveredAgents(allDiscovered);
       }
 
@@ -276,6 +283,8 @@ class BatchQueueManager {
       this.history.unshift({
         slug: candidate.slug,
         name: candidate.name,
+        email: result.agentEmail || match?.email || "",
+        phone: result.agentPhone || match?.phone || "",
         status: "success",
         liveUrl: result.liveUrl,
         timestamp: new Date().toISOString(),

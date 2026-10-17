@@ -70,30 +70,28 @@ function getActiveRoster() {
     const name = m[2];
     const title = m[3];
 
+    // Priority 1: Check verified Profile.js in codebase (scraped directly from Compass JSON-LD)
+    let profileEmail = "";
+    let profilePhone = "";
+    try {
+      const camel = slug.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+      const pPath = slug === "kyle"
+        ? path.join(rootDir, "src", "data", "agentProfile.js")
+        : path.join(rootDir, "src", "data", "agents", `${camel}Profile.js`);
+      if (fs.existsSync(pPath)) {
+        const content = fs.readFileSync(pPath, "utf-8");
+        const em = content.match(/email:\s*["']([^"']+)["']/i);
+        if (em) profileEmail = em[1].trim();
+        const ph = content.match(/phone:\s*["']([^"']+)["']/i);
+        if (ph) profilePhone = ph[1].trim();
+      }
+    } catch (e) {}
+
     const disc = discovered.find((d) => d.slug === slug || (d.name && d.name.toLowerCase() === name.toLowerCase()));
     const fallback = profileContacts[slug] || {};
-    let email = disc?.email || fallback.email || "";
-    let phone = disc?.phone || fallback.phone || "";
-
-    if (!email || !phone) {
-      try {
-        const camel = slug.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
-        const pPath = slug === "kyle"
-          ? path.join(rootDir, "src", "data", "agentProfile.js")
-          : path.join(rootDir, "src", "data", "agents", `${camel}Profile.js`);
-        if (fs.existsSync(pPath)) {
-          const content = fs.readFileSync(pPath, "utf-8");
-          if (!email) {
-            const em = content.match(/email:\s*["']([^"']+)["']/i);
-            if (em) email = em[1].trim();
-          }
-          if (!phone) {
-            const ph = content.match(/phone:\s*["']([^"']+)["']/i);
-            if (ph) phone = ph[1].trim();
-          }
-        }
-      } catch (e) {}
-    }
+    let email = profileEmail || disc?.email || fallback.email || "";
+    let phone = profilePhone || disc?.phone || fallback.phone || "";
+    const isEmailVerified = Boolean(profileEmail || disc?.isEmailVerified);
 
     const sentHistory = history.filter((h) => h.slug === slug || (email && h.recipient && h.recipient.toLowerCase() === email.toLowerCase()));
     const lastHistory = sentHistory[0];
@@ -165,6 +163,7 @@ function getActiveRoster() {
       title,
       email,
       phone,
+      isEmailVerified,
       liveUrl: `https://realestate-advisory.ayubkhokhar786.workers.dev/${slug}`,
       manageUrl: `https://realestate-advisory.ayubkhokhar786.workers.dev/${slug}/manage`,
       outreachStatus, // 'needs_outreach' | 'contacted' | 'replied'
@@ -245,6 +244,13 @@ app.post("/api/agents/onboard", async (req, res) => {
     if (match) {
       match.status = "launched";
       match.liveUrl = result.liveUrl;
+      if (result.agentEmail) {
+        match.email = result.agentEmail;
+        match.isEmailVerified = true;
+      }
+      if (result.agentPhone) {
+        match.phone = result.agentPhone;
+      }
       saveDiscoveredAgents(discovered);
     }
 
@@ -1098,7 +1104,10 @@ app.use((req, res) => {
 
       <div class="space-y-3">
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Recipient</label>
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-xs font-semibold text-slate-400">Recipient Email</label>
+            <span id="modalEmailBadge" class="text-[11px] font-mono px-2 py-0.5 rounded"></span>
+          </div>
           <input type="email" id="modalRecipient" class="w-full px-3 py-2 bg-slate-950 border border-slate-800 rounded text-sm text-white font-mono">
         </div>
         <div>
@@ -1449,7 +1458,7 @@ app.use((req, res) => {
           pitchBtn.className = 'px-3 py-1 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded text-xs transition inline-flex items-center gap-1';
           pitchBtn.innerHTML = '<i class="fa-solid fa-paper-plane text-[10px]"></i> Pitch';
           pitchBtn.onclick = function() {
-            openEmailForAgent(h.name || '', h.slug || '', '', 'initial');
+            openEmailForAgent(h.name || '', h.slug || '', h.email || '', 'initial');
           };
           tdAction.appendChild(pitchBtn);
         } else {
@@ -2072,9 +2081,38 @@ app.use((req, res) => {
 
     // 6. Email Modal & Follow-Up Functions
     async function openEmailForAgent(name, slug, email, templateKey = 'initial') {
-      currentPreparedPayload = { name, slug, to: email, templateKey };
-      document.getElementById('modalRecipient').value = email || '';
+      let finalEmail = email || '';
+      let isVerified = false;
+
+      // Look up in loaded roster
+      const rosterAgent = (typeof rawRosterList !== 'undefined' ? rawRosterList : []).find(a => a.slug === slug);
+      if (rosterAgent) {
+        if (rosterAgent.email) finalEmail = rosterAgent.email;
+        if (rosterAgent.isEmailVerified) isVerified = true;
+      }
+      if (!isVerified) {
+        const discAgent = (rawAgentsList || []).find(a => a.slug === slug);
+        if (discAgent && discAgent.email) {
+          if (!finalEmail) finalEmail = discAgent.email;
+          if (discAgent.isEmailVerified) isVerified = true;
+        }
+      }
+
+      currentPreparedPayload = { name, slug, to: finalEmail, templateKey };
+      document.getElementById('modalRecipient').value = finalEmail;
       document.getElementById('modalTemplateSelect').value = templateKey;
+
+      const badge = document.getElementById('modalEmailBadge');
+      if (badge) {
+        if (isVerified) {
+          badge.className = 'text-[11px] font-mono px-2 py-0.5 rounded bg-green-500/20 text-green-300 border border-green-500/40 inline-flex items-center gap-1';
+          badge.innerHTML = '<i class="fa-solid fa-circle-check text-[10px]"></i> Verified Compass Email';
+        } else {
+          badge.className = 'text-[11px] font-mono px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 inline-flex items-center gap-1';
+          badge.innerHTML = '<i class="fa-solid fa-triangle-exclamation text-[10px]"></i> Unverified Guess (Verify on Compass)';
+        }
+      }
+
       document.getElementById('emailModal').classList.remove('hidden');
 
       loadTemplateIntoModal(templateKey);
