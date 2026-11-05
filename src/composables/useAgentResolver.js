@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { tomHughesProfile } from "../data/agents/tomHughesProfile";
 import { michelleHopsonProfile } from "../data/agents/michelleHopsonProfile";
 import { ericHolmesProfile } from "../data/agents/ericHolmesProfile";
 import { natalieHatchettProfile } from "../data/agents/natalieHatchettProfile";
@@ -73,6 +74,7 @@ import { gayaYaffaProfile } from "../data/agents/gayaYaffaProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as tomHughesProperties } from "../data/agents/tomHughesProperties";
 import { compassProperties as michelleHopsonProperties } from "../data/agents/michelleHopsonProperties";
 import { compassProperties as ericHolmesProperties } from "../data/agents/ericHolmesProperties";
 import { compassProperties as natalieHatchettProperties } from "../data/agents/natalieHatchettProperties";
@@ -793,6 +795,15 @@ export const availableAgents = [
     slug: "michelle-hopson",
     profile: michelleHopsonProfile,
     properties: michelleHopsonProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "tom-hughes",
+    name: "Tom Hughes",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "tom-hughes",
+    profile: tomHughesProfile,
+    properties: tomHughesProperties,
     previewColor: "#BFA181",
   },
 ];
