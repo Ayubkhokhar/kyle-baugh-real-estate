@@ -1335,10 +1335,12 @@
     "name": "Amy Galley",
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/amy-galley/",
-    "phone": "",
+    "phone": "+1-214-906-2232",
     "email": "amy.galley@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/amy-galley",
+    "isEmailVerified": true
   },
   {
     "slug": "susan-georgeson",
