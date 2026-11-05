@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { ericHolmesProfile } from "../data/agents/ericHolmesProfile";
 import { natalieHatchettProfile } from "../data/agents/natalieHatchettProfile";
 import { heatherGuildProfile } from "../data/agents/heatherGuildProfile";
 import { forrestGreggProfile } from "../data/agents/forrestGreggProfile";
@@ -70,6 +71,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as ericHolmesProperties } from "../data/agents/ericHolmesProperties";
 import { compassProperties as natalieHatchettProperties } from "../data/agents/natalieHatchettProperties";
 import { compassProperties as heatherGuildProperties } from "../data/agents/heatherGuildProperties";
 import { compassProperties as forrestGreggProperties } from "../data/agents/forrestGreggProperties";
@@ -760,6 +762,15 @@ export const availableAgents = [
     slug: "natalie-hatchett",
     profile: natalieHatchettProfile,
     properties: natalieHatchettProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "eric-holmes",
+    name: "Eric Holmes",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "eric-holmes",
+    profile: ericHolmesProfile,
+    properties: ericHolmesProperties,
     previewColor: "#BFA181",
   },
 ];

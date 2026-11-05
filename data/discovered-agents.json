@@ -1440,10 +1440,12 @@
     "name": "Natalie Hatchett",
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/natalie-hatchett/",
-    "phone": "",
+    "phone": "+1-469-733-6442",
     "email": "natalie.hatchett@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/natalie-hatchett",
+    "isEmailVerified": true
   },
   {
     "slug": "eric-holmes",
