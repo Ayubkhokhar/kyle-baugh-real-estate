@@ -1537,10 +1537,12 @@
     "name": "Amanda Austin",
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/amanda-austin/",
-    "phone": "",
+    "phone": "+1-817-729-2804",
     "email": "amanda.austin@compass.com",
     "territory": "East & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/amanda-austin",
+    "isEmailVerified": true
   },
   {
     "slug": "katie-bader",
