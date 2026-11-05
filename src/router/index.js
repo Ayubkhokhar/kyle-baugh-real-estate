@@ -360,6 +360,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/forrest-gregg",
+    name: "forrestGregg-home",
+    component: HomeView,
+  },
+  {
     path: "/agent/:agentSlug",
     name: "agent-home",
     component: HomeView,
@@ -707,6 +712,11 @@ const routes = [
   {
     path: "/summer-graham/manage",
     name: "summerGraham-manage",
+    component: ManageView,
+  },
+  {
+    path: "/forrest-gregg/manage",
+    name: "forrestGregg-manage",
     component: ManageView,
   },
   {

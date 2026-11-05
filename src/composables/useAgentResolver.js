@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { forrestGreggProfile } from "../data/agents/forrestGreggProfile";
 import { summerGrahamProfile } from "../data/agents/summerGrahamProfile";
 import { jdGonzalesProfile } from "../data/agents/jdGonzalesProfile";
 import { susanGeorgesonProfile } from "../data/agents/susanGeorgesonProfile";
@@ -67,6 +68,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as forrestGreggProperties } from "../data/agents/forrestGreggProperties";
 import { compassProperties as summerGrahamProperties } from "../data/agents/summerGrahamProperties";
 import { compassProperties as jdGonzalesProperties } from "../data/agents/jdGonzalesProperties";
 import { compassProperties as susanGeorgesonProperties } from "../data/agents/susanGeorgesonProperties";
@@ -727,6 +729,15 @@ export const availableAgents = [
     slug: "summer-graham",
     profile: summerGrahamProfile,
     properties: summerGrahamProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "forrest-gregg",
+    name: "Forrest Gregg",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "forrest-gregg",
+    profile: forrestGreggProfile,
+    properties: forrestGreggProperties,
     previewColor: "#BFA181",
   },
 ];

@@ -483,10 +483,21 @@
     "phone": "+1-214-773-3454",
     "email": "diana.blackman@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
+    "status": "contacted",
     "failReason": "fetch failed",
     "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/diana-blackman",
-    "isEmailVerified": true
+    "isEmailVerified": true,
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-11-05T11:29:33.090Z",
+    "lastSubject": "Diana Blackman's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Diana Blackman's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-11-05T11:29:33.090Z"
+      }
+    ]
   },
   {
     "slug": "chris-blackman",
@@ -1385,7 +1396,7 @@
     "phone": "+1-214-699-6640",
     "email": "summer.graham@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "contacted",
+    "status": "launched",
     "contactStage": "followup_ignored",
     "contactCount": 1,
     "lastContactedAt": "2026-10-08T11:57:46.990Z",
@@ -1396,7 +1407,9 @@
         "subject": "Re: Summer Graham's portfolio (Did you get a chance to see this?)",
         "sentAt": "2026-10-08T11:57:46.990Z"
       }
-    ]
+    ],
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/summer-graham",
+    "isEmailVerified": true
   },
   {
     "slug": "forrest-gregg",
