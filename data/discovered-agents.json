@@ -1525,10 +1525,12 @@
     "name": "Mo Atunrase",
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/mo-atunrase/",
-    "phone": "",
+    "phone": "+1-469-712-6584",
     "email": "mo.atunrase@compass.com",
     "territory": "East & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/mo-atunrase",
+    "isEmailVerified": true
   },
   {
     "slug": "amanda-austin",
