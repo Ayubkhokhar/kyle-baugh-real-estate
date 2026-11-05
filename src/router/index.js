@@ -425,6 +425,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/oracle-batie-smith",
+    name: "oracleBatieSmith-home",
+    component: HomeView,
+  },
+  {
     path: "/agent/:agentSlug",
     name: "agent-home",
     component: HomeView,
@@ -827,6 +832,11 @@ const routes = [
   {
     path: "/katie-bader/manage",
     name: "katieBader-manage",
+    component: ManageView,
+  },
+  {
+    path: "/oracle-batie-smith/manage",
+    name: "oracleBatieSmith-manage",
     component: ManageView,
   },
   {

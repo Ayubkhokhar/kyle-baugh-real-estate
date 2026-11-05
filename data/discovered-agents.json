@@ -1549,10 +1549,12 @@
     "name": "Katie Bader",
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/katie-bader/",
-    "phone": "",
+    "phone": "+1-407-497-7046",
     "email": "katie.bader@compass.com",
     "territory": "East & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/katie-bader",
+    "isEmailVerified": true
   },
   {
     "slug": "oracle-batie-smith",
