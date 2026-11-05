@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { michelleHopsonProfile } from "../data/agents/michelleHopsonProfile";
 import { ericHolmesProfile } from "../data/agents/ericHolmesProfile";
 import { natalieHatchettProfile } from "../data/agents/natalieHatchettProfile";
 import { heatherGuildProfile } from "../data/agents/heatherGuildProfile";
@@ -68,9 +69,11 @@ import { lizChalfantProfile } from "../data/agents/lizChalfantProfile";
 import { carsonProfile } from "../data/agents/carsonProfile";
 import { alexProfile } from "../data/agents/alexProfile";
 import { summerProfile } from "../data/agents/summerProfile";
+import { gayaYaffaProfile } from "../data/agents/gayaYaffaProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as michelleHopsonProperties } from "../data/agents/michelleHopsonProperties";
 import { compassProperties as ericHolmesProperties } from "../data/agents/ericHolmesProperties";
 import { compassProperties as natalieHatchettProperties } from "../data/agents/natalieHatchettProperties";
 import { compassProperties as heatherGuildProperties } from "../data/agents/heatherGuildProperties";
@@ -139,6 +142,7 @@ import { compassProperties as carsonProperties } from "../data/agents/carsonProp
 import { compassProperties as alexProperties } from "../data/agents/alexProperties";
 import { compassProperties as summerProperties } from "../data/agents/summerProperties";
 import { compassProperties as jdProperties } from "../data/agents/jdProperties";
+import { compassProperties as gayaYaffaProperties } from "../data/agents/gayaYaffaProperties";
 
 const AGENT_STORAGE_KEY = "kyle_active_agent_v1";
 
@@ -771,6 +775,24 @@ export const availableAgents = [
     slug: "eric-holmes",
     profile: ericHolmesProfile,
     properties: ericHolmesProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "gaya-yaffa",
+    name: "Gayane \"Gaya\" Yaffa, Ph.D.",
+    title: "Multilingual Luxury Broker Associate · Christie's International Real Estate",
+    slug: "gaya-yaffa",
+    profile: gayaYaffaProfile,
+    properties: gayaYaffaProperties,
+    previewColor: "#D4AF37",
+  },
+  {
+    id: "michelle-hopson",
+    name: "Michelle Hopson",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "michelle-hopson",
+    profile: michelleHopsonProfile,
+    properties: michelleHopsonProperties,
     previewColor: "#BFA181",
   },
 ];
