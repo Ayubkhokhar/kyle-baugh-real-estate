@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { amyGalleyProfile } from "../data/agents/amyGalleyProfile";
 import { beckyFreyProfile } from "../data/agents/beckyFreyProfile";
 import { dianaBlackmanProfile } from "../data/agents/dianaBlackmanProfile";
 import { tJFrankProfile } from "../data/agents/tJFrankProfile";
@@ -63,6 +64,7 @@ import { summerProfile } from "../data/agents/summerProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as amyGalleyProperties } from "../data/agents/amyGalleyProperties";
 import { compassProperties as beckyFreyProperties } from "../data/agents/beckyFreyProperties";
 import { compassProperties as dianaBlackmanProperties } from "../data/agents/dianaBlackmanProperties";
 import { compassProperties as tJFrankProperties } from "../data/agents/tJFrankProperties";
@@ -683,6 +685,15 @@ export const availableAgents = [
     slug: "becky-frey",
     profile: beckyFreyProfile,
     properties: beckyFreyProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "amy-galley",
+    name: "Amy Galley",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "amy-galley",
+    profile: amyGalleyProfile,
+    properties: amyGalleyProperties,
     previewColor: "#BFA181",
   },
 ];

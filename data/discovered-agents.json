@@ -1323,10 +1323,12 @@
     "name": "Becky Frey",
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/becky-frey/",
-    "phone": "",
+    "phone": "+1-214-536-4727",
     "email": "becky.frey@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/becky-frey",
+    "isEmailVerified": true
   },
   {
     "slug": "amy-galley",
