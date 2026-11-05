@@ -1,21 +1,51 @@
 [
   {
+    "slug": "amy",
+    "name": "Amy Detwiler",
+    "email": "amy.detwiler@compass.com",
+    "brokerage": "Compass RE Texas, LLC",
+    "status": "contacted",
+    "contactStage": "followup_silent",
+    "contactCount": 4,
+    "notes": "Contacted via Hostinger webmail",
+    "lastContactedAt": "2026-11-05T08:11:20.075Z",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/amy",
+    "lastSubject": "Re: Next steps for Amy's custom Dallas showcase",
+    "history": [
+      {
+        "stage": "followup_silent",
+        "subject": "Re: Next steps for Amy's custom Dallas showcase",
+        "sentAt": "2026-11-05T08:11:20.075Z"
+      }
+    ]
+  },
+  {
     "slug": "kyle",
     "name": "Kyle Baugh",
     "email": "kyle.baugh@compass.com",
     "brokerage": "Compass RE Texas, LLC",
     "status": "contacted",
-    "contactStage": "followup_ignored",
-    "contactCount": 1,
+    "contactStage": "followup_silent",
+    "contactCount": 3,
     "notes": "Contacted via Hostinger webmail",
-    "lastContactedAt": "2026-10-08T11:50:40.443Z",
+    "lastContactedAt": "2026-11-05T08:10:31.585Z",
     "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/kyle",
-    "lastSubject": "Re: Kyle Baugh's portfolio (Did you get a chance to see this?)",
+    "lastSubject": "Kyle - Built a bespoke Dallas digital showcase for your portfolio",
     "history": [
       {
         "stage": "followup_ignored",
         "subject": "Re: Kyle Baugh's portfolio (Did you get a chance to see this?)",
         "sentAt": "2026-10-08T11:50:40.443Z"
+      },
+      {
+        "stage": "followup_silent",
+        "subject": "Re: Next steps for Kyle's custom Dallas showcase",
+        "sentAt": "2026-10-19T22:19:37.873Z"
+      },
+      {
+        "stage": "followup_silent",
+        "subject": "Kyle - Built a bespoke Dallas digital showcase for your portfolio",
+        "sentAt": "2026-11-05T08:10:31.585Z"
       }
     ]
   },
@@ -81,13 +111,13 @@
     "phone": "+1-214-707-9917",
     "email": "megan.johnson@compass.com",
     "activeListingsCount": 2,
-    "status": "replied",
+    "status": "contacted",
     "notes": "Replied to follow-up asking about pricing and what is offered. Direct Cell: 214.707.9917.",
     "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/megan-johnson",
-    "contactStage": "followup_sent",
-    "contactCount": 2,
-    "lastContactedAt": "2026-10-05T12:10:25.597Z",
-    "lastSubject": "Re: Megan Johnson's portfolio (Did you get a chance to see this?)",
+    "contactStage": "followup_silent",
+    "contactCount": 3,
+    "lastContactedAt": "2026-11-05T08:42:19.608Z",
+    "lastSubject": "Re: Next steps for Megan's custom Dallas showcase",
     "history": [
       {
         "stage": "initial_sent",
@@ -98,6 +128,11 @@
         "stage": "followup_sent",
         "subject": "Re: Megan Johnson's portfolio (Did you get a chance to see this?)",
         "sentAt": "2026-10-05T12:10:25.597Z"
+      },
+      {
+        "stage": "followup_silent",
+        "subject": "Re: Next steps for Megan's custom Dallas showcase",
+        "sentAt": "2026-11-05T08:42:19.608Z"
       }
     ]
   },
@@ -855,8 +890,19 @@
     "phone": "+1-214-724-3105",
     "email": "christine.danuser@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/christine-danuser"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/christine-danuser",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-11-05T08:11:36.941Z",
+    "lastSubject": "Christine Danuser's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Christine Danuser's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-11-05T08:11:36.941Z"
+      }
+    ]
   },
   {
     "slug": "jill-derkach",
@@ -866,8 +912,19 @@
     "phone": "+1-214-542-1206",
     "email": "jill.derkach@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/jill-derkach"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/jill-derkach",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-11-05T08:11:47.294Z",
+    "lastSubject": "Jill Derkach's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Jill Derkach's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-11-05T08:11:47.294Z"
+      }
+    ]
   },
   {
     "slug": "amy-detwiler",
@@ -1135,8 +1192,19 @@
     "phone": "+1-214-555-0100",
     "email": "ctcoastallifestyles@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/coastal-lifestyles"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/coastal-lifestyles",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-11-05T08:12:32.271Z",
+    "lastSubject": "Coastal Lifestyles's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Coastal Lifestyles's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-11-05T08:12:32.271Z"
+      }
+    ]
   },
   {
     "slug": "carmen-dipenti",
@@ -1146,8 +1214,19 @@
     "phone": "+1-214-784-3880",
     "email": "carmen.dipenti@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/carmen-dipenti"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/carmen-dipenti",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-19T21:26:22.021Z",
+    "lastSubject": "Carmen DiPenti's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Carmen DiPenti's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-19T21:26:22.021Z"
+      }
+    ]
   },
   {
     "slug": "nyda-faith",
@@ -1157,8 +1236,19 @@
     "phone": "+1-469-416-7889",
     "email": "nyda.faith@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/nyda-faith"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/nyda-faith",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-11-05T08:14:44.292Z",
+    "lastSubject": "Nyda Faith's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Nyda Faith's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-11-05T08:14:44.292Z"
+      }
+    ]
   },
   {
     "slug": "bill-farrell",
@@ -1168,8 +1258,19 @@
     "phone": "+1-214-455-1630",
     "email": "billfarrell@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/bill-farrell"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/bill-farrell",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-19T21:26:10.297Z",
+    "lastSubject": "Bill Farrell's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Bill Farrell's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-19T21:26:10.297Z"
+      }
+    ]
   },
   {
     "slug": "meredith-ferrell",
@@ -1179,8 +1280,19 @@
     "phone": "+1-214-868-1177",
     "email": "meredith.ferrell@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/meredith-ferrell"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/meredith-ferrell",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-19T21:22:56.498Z",
+    "lastSubject": "Meredith Ferrell's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "Meredith Ferrell's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-19T21:22:56.498Z"
+      }
+    ]
   },
   {
     "slug": "t.j-.-frank",
@@ -1190,8 +1302,19 @@
     "phone": "+1-214-709-2229",
     "email": "tj.frank@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "launched",
-    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/t.j-.-frank"
+    "status": "contacted",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/t.j-.-frank",
+    "contactStage": "initial",
+    "contactCount": 1,
+    "lastContactedAt": "2026-10-19T21:22:37.180Z",
+    "lastSubject": "T.J. Frank's portfolio + your Dallas portfolio (Built this for you)",
+    "history": [
+      {
+        "stage": "initial",
+        "subject": "T.J. Frank's portfolio + your Dallas portfolio (Built this for you)",
+        "sentAt": "2026-10-19T21:22:37.180Z"
+      }
+    ]
   },
   {
     "slug": "becky-frey",
