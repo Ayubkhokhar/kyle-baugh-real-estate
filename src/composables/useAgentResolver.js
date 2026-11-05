@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { ninaBhanotProfile } from "../data/agents/ninaBhanotProfile";
 import { meganBelmoreProfile } from "../data/agents/meganBelmoreProfile";
 import { oracleBatieSmithProfile } from "../data/agents/oracleBatieSmithProfile";
 import { katieBaderProfile } from "../data/agents/katieBaderProfile";
@@ -81,6 +82,7 @@ import { gayaYaffaProfile } from "../data/agents/gayaYaffaProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as ninaBhanotProperties } from "../data/agents/ninaBhanotProperties";
 import { compassProperties as meganBelmoreProperties } from "../data/agents/meganBelmoreProperties";
 import { compassProperties as oracleBatieSmithProperties } from "../data/agents/oracleBatieSmithProperties";
 import { compassProperties as katieBaderProperties } from "../data/agents/katieBaderProperties";
@@ -881,6 +883,15 @@ export const availableAgents = [
     slug: "megan-belmore",
     profile: meganBelmoreProfile,
     properties: meganBelmoreProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "nina-bhanot",
+    name: "Nina Bhanot",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "nina-bhanot",
+    profile: ninaBhanotProfile,
+    properties: ninaBhanotProperties,
     previewColor: "#BFA181",
   },
 ];

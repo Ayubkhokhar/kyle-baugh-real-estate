@@ -1573,10 +1573,12 @@
     "name": "Megan Belmore",
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/megan-belmore/",
-    "phone": "",
+    "phone": "+1-214-417-3916",
     "email": "megan.belmore@compass.com",
     "territory": "East & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/megan-belmore",
+    "isEmailVerified": true
   },
   {
     "slug": "nina-bhanot",

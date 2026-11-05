@@ -2,6 +2,7 @@ import { ref, computed, watch } from "vue";
 import { defaultProperties } from "../data/seedProperties";
 import { compassProperties as kyleProperties, compassSyncMeta as kyleCompassMeta } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as ninaBhanotProperties } from "../data/agents/ninaBhanotProperties";
 import { compassProperties as meganBelmoreProperties } from "../data/agents/meganBelmoreProperties";
 import { compassProperties as oracleBatieSmithProperties } from "../data/agents/oracleBatieSmithProperties";
 import { compassProperties as katieBaderProperties } from "../data/agents/katieBaderProperties";
@@ -90,6 +91,17 @@ const gayaYaffaCompassMeta = {
   imagesDownloaded: 5,
   agentUrl: "https://www.gayaffa.com/",
   syncedAgent: "Gayane \"Gaya\" Yaffa, Ph.D.",
+};
+
+const ninaBhanotCompassMeta = {
+  lastSynced: "2026-11-05T15:10:45.336Z",
+  totalProperties: 43,
+  activeCount: 1,
+  soldCount: 24,
+  leasedCount: 0,
+  imagesDownloaded: 51,
+  agentUrl: "https://www.compass.com/agents/nina-bhanot/",
+  syncedAgent: "Nina Bhanot",
 };
 
 const meganBelmoreCompassMeta = {
@@ -982,6 +994,10 @@ function mergeProperties(existingList, incomingCompassList) {
 }
 
 function getInitialListForAgent(agentId) {
+  if (agentId === "nina-bhanot") {
+    return ninaBhanotProperties;
+  }
+
   if (agentId === "megan-belmore") {
     return meganBelmoreProperties;
   }
@@ -1296,6 +1312,10 @@ function getInitialListForAgent(agentId) {
 }
 
 function getInitialMetaForAgent(agentId) {
+  if (agentId === "nina-bhanot") {
+    return ninaBhanotCompassMeta;
+  }
+
   if (agentId === "megan-belmore") {
     return meganBelmoreCompassMeta;
   }
@@ -1671,7 +1691,7 @@ export function useProperties() {
     const match = properties.value.find((p) => String(p.id) === String(id) || p.slug === String(id));
     if (match) return match;
     // Cross-agent fallback so direct links to any listing never fail
-    const allKnown = [...meganBelmoreProperties, ...oracleBatieSmithProperties, ...katieBaderProperties, ...amandaAustinProperties, ...moAtunraseProperties, ...taylorAndrewsProperties, ...decarlaAndersonProperties, ...tomHughesProperties, ...michelleHopsonProperties, ...ericHolmesProperties, ...natalieHatchettProperties, ...heatherGuildProperties, ...forrestGreggProperties, ...summerGrahamProperties, ...jdGonzalesProperties, ...susanGeorgesonProperties, ...amyGalleyProperties, ...beckyFreyProperties, ...dianaBlackmanProperties, ...tJFrankProperties, ...meredithFerrellProperties, ...billFarrellProperties, ...nydaFaithProperties, ...carmenDipentiProperties, ...coastalLifestylesProperties, ...jasonCastroProperties, ...chrisCannonProperties, ...emilyRuthCannonProperties, ...justinBustamanteProperties, ...michaelBrinkProperties, ...catherineBlevensProperties, ...dianeBeatyProperties, ...kyleBaughDallasProperties, ...jolieBarriosProperties, ...annAndrewsProperties, ...chelseaAdriaanseProperties, ...amyDetwilerProperties, ...jillDerkachProperties, ...christineDanuserProperties, ...bradfordCoffmanProperties, ...billChurchillProperties, ...katieChuProperties, ...kelleyChristianProperties, ...stevieChaddickProperties, ...giannaCerulloProperties, ...centreLivingHomesTeamProperties, ...markCainProperties, ...neilBroussardProperties, ...adeleBroughtonProperties, ...jimBroscheProperties, ...callieBrickmanProperties, ...gaylBraymerProperties, ...gretchenBraschProperties, ...kelseyBondProperties, ...hollyBockProperties, ...shannonBlountProperties, ...chrisBlackmanProperties, ...christyBerryProperties, ...thomasBellingerProperties, ...erinBallardProperties, ...jacquelynAustinProperties, ...megBeairdProperties, ...jonathanRosenProperties, ...katieAspenProperties, ...micheleBaladyBeachProperties, ...katyAnnettProperties, ...annaleeAstonProperties, ...brookeAltemoreProperties, ...jamieAdamsProperties, ...erikaOrbinProperties, ...meganJohnsonProperties, ...christineLeiteProperties, ...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
+    const allKnown = [...ninaBhanotProperties, ...meganBelmoreProperties, ...oracleBatieSmithProperties, ...katieBaderProperties, ...amandaAustinProperties, ...moAtunraseProperties, ...taylorAndrewsProperties, ...decarlaAndersonProperties, ...tomHughesProperties, ...michelleHopsonProperties, ...ericHolmesProperties, ...natalieHatchettProperties, ...heatherGuildProperties, ...forrestGreggProperties, ...summerGrahamProperties, ...jdGonzalesProperties, ...susanGeorgesonProperties, ...amyGalleyProperties, ...beckyFreyProperties, ...dianaBlackmanProperties, ...tJFrankProperties, ...meredithFerrellProperties, ...billFarrellProperties, ...nydaFaithProperties, ...carmenDipentiProperties, ...coastalLifestylesProperties, ...jasonCastroProperties, ...chrisCannonProperties, ...emilyRuthCannonProperties, ...justinBustamanteProperties, ...michaelBrinkProperties, ...catherineBlevensProperties, ...dianeBeatyProperties, ...kyleBaughDallasProperties, ...jolieBarriosProperties, ...annAndrewsProperties, ...chelseaAdriaanseProperties, ...amyDetwilerProperties, ...jillDerkachProperties, ...christineDanuserProperties, ...bradfordCoffmanProperties, ...billChurchillProperties, ...katieChuProperties, ...kelleyChristianProperties, ...stevieChaddickProperties, ...giannaCerulloProperties, ...centreLivingHomesTeamProperties, ...markCainProperties, ...neilBroussardProperties, ...adeleBroughtonProperties, ...jimBroscheProperties, ...callieBrickmanProperties, ...gaylBraymerProperties, ...gretchenBraschProperties, ...kelseyBondProperties, ...hollyBockProperties, ...shannonBlountProperties, ...chrisBlackmanProperties, ...christyBerryProperties, ...thomasBellingerProperties, ...erinBallardProperties, ...jacquelynAustinProperties, ...megBeairdProperties, ...jonathanRosenProperties, ...katieAspenProperties, ...micheleBaladyBeachProperties, ...katyAnnettProperties, ...annaleeAstonProperties, ...brookeAltemoreProperties, ...jamieAdamsProperties, ...erikaOrbinProperties, ...meganJohnsonProperties, ...christineLeiteProperties, ...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
     return allKnown.find((p) => String(p.id) === String(id) || p.slug === String(id)) || null;
   }
 
