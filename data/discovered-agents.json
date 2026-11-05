@@ -1362,7 +1362,7 @@
     "phone": "+1-214-450-2611",
     "email": "jd.gonzales@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "contacted",
+    "status": "launched",
     "contactStage": "initial",
     "contactCount": 1,
     "lastContactedAt": "2026-10-09T13:11:20.713Z",
@@ -1373,7 +1373,9 @@
         "subject": "JD Gonzales's portfolio + your Dallas portfolio (Built this for you)",
         "sentAt": "2026-10-09T13:11:20.713Z"
       }
-    ]
+    ],
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/jd-gonzales",
+    "isEmailVerified": true
   },
   {
     "slug": "summer-graham",
