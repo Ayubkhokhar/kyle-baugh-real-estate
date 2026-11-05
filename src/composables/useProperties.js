@@ -2,6 +2,7 @@ import { ref, computed, watch } from "vue";
 import { defaultProperties } from "../data/seedProperties";
 import { compassProperties as kyleProperties, compassSyncMeta as kyleCompassMeta } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as taylorAndrewsProperties } from "../data/agents/taylorAndrewsProperties";
 import { compassProperties as decarlaAndersonProperties } from "../data/agents/decarlaAndersonProperties";
 import { compassProperties as tomHughesProperties } from "../data/agents/tomHughesProperties";
 import { compassProperties as michelleHopsonProperties } from "../data/agents/michelleHopsonProperties";
@@ -84,6 +85,17 @@ const gayaYaffaCompassMeta = {
   imagesDownloaded: 5,
   agentUrl: "https://www.gayaffa.com/",
   syncedAgent: "Gayane \"Gaya\" Yaffa, Ph.D.",
+};
+
+const taylorAndrewsCompassMeta = {
+  lastSynced: "2026-11-05T12:56:31.489Z",
+  totalProperties: 15,
+  activeCount: 0,
+  soldCount: 9,
+  leasedCount: 0,
+  imagesDownloaded: 23,
+  agentUrl: "https://www.compass.com/agents/taylor-andrews/",
+  syncedAgent: "Taylor Andrews",
 };
 
 const decarlaAndersonCompassMeta = {
@@ -910,6 +922,10 @@ function mergeProperties(existingList, incomingCompassList) {
 }
 
 function getInitialListForAgent(agentId) {
+  if (agentId === "taylor-andrews") {
+    return taylorAndrewsProperties;
+  }
+
   if (agentId === "decarla-anderson") {
     return decarlaAndersonProperties;
   }
@@ -1200,6 +1216,10 @@ function getInitialListForAgent(agentId) {
 }
 
 function getInitialMetaForAgent(agentId) {
+  if (agentId === "taylor-andrews") {
+    return taylorAndrewsCompassMeta;
+  }
+
   if (agentId === "decarla-anderson") {
     return decarlaAndersonCompassMeta;
   }
@@ -1551,7 +1571,7 @@ export function useProperties() {
     const match = properties.value.find((p) => String(p.id) === String(id) || p.slug === String(id));
     if (match) return match;
     // Cross-agent fallback so direct links to any listing never fail
-    const allKnown = [...decarlaAndersonProperties, ...tomHughesProperties, ...michelleHopsonProperties, ...ericHolmesProperties, ...natalieHatchettProperties, ...heatherGuildProperties, ...forrestGreggProperties, ...summerGrahamProperties, ...jdGonzalesProperties, ...susanGeorgesonProperties, ...amyGalleyProperties, ...beckyFreyProperties, ...dianaBlackmanProperties, ...tJFrankProperties, ...meredithFerrellProperties, ...billFarrellProperties, ...nydaFaithProperties, ...carmenDipentiProperties, ...coastalLifestylesProperties, ...jasonCastroProperties, ...chrisCannonProperties, ...emilyRuthCannonProperties, ...justinBustamanteProperties, ...michaelBrinkProperties, ...catherineBlevensProperties, ...dianeBeatyProperties, ...kyleBaughDallasProperties, ...jolieBarriosProperties, ...annAndrewsProperties, ...chelseaAdriaanseProperties, ...amyDetwilerProperties, ...jillDerkachProperties, ...christineDanuserProperties, ...bradfordCoffmanProperties, ...billChurchillProperties, ...katieChuProperties, ...kelleyChristianProperties, ...stevieChaddickProperties, ...giannaCerulloProperties, ...centreLivingHomesTeamProperties, ...markCainProperties, ...neilBroussardProperties, ...adeleBroughtonProperties, ...jimBroscheProperties, ...callieBrickmanProperties, ...gaylBraymerProperties, ...gretchenBraschProperties, ...kelseyBondProperties, ...hollyBockProperties, ...shannonBlountProperties, ...chrisBlackmanProperties, ...christyBerryProperties, ...thomasBellingerProperties, ...erinBallardProperties, ...jacquelynAustinProperties, ...megBeairdProperties, ...jonathanRosenProperties, ...katieAspenProperties, ...micheleBaladyBeachProperties, ...katyAnnettProperties, ...annaleeAstonProperties, ...brookeAltemoreProperties, ...jamieAdamsProperties, ...erikaOrbinProperties, ...meganJohnsonProperties, ...christineLeiteProperties, ...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
+    const allKnown = [...taylorAndrewsProperties, ...decarlaAndersonProperties, ...tomHughesProperties, ...michelleHopsonProperties, ...ericHolmesProperties, ...natalieHatchettProperties, ...heatherGuildProperties, ...forrestGreggProperties, ...summerGrahamProperties, ...jdGonzalesProperties, ...susanGeorgesonProperties, ...amyGalleyProperties, ...beckyFreyProperties, ...dianaBlackmanProperties, ...tJFrankProperties, ...meredithFerrellProperties, ...billFarrellProperties, ...nydaFaithProperties, ...carmenDipentiProperties, ...coastalLifestylesProperties, ...jasonCastroProperties, ...chrisCannonProperties, ...emilyRuthCannonProperties, ...justinBustamanteProperties, ...michaelBrinkProperties, ...catherineBlevensProperties, ...dianeBeatyProperties, ...kyleBaughDallasProperties, ...jolieBarriosProperties, ...annAndrewsProperties, ...chelseaAdriaanseProperties, ...amyDetwilerProperties, ...jillDerkachProperties, ...christineDanuserProperties, ...bradfordCoffmanProperties, ...billChurchillProperties, ...katieChuProperties, ...kelleyChristianProperties, ...stevieChaddickProperties, ...giannaCerulloProperties, ...centreLivingHomesTeamProperties, ...markCainProperties, ...neilBroussardProperties, ...adeleBroughtonProperties, ...jimBroscheProperties, ...callieBrickmanProperties, ...gaylBraymerProperties, ...gretchenBraschProperties, ...kelseyBondProperties, ...hollyBockProperties, ...shannonBlountProperties, ...chrisBlackmanProperties, ...christyBerryProperties, ...thomasBellingerProperties, ...erinBallardProperties, ...jacquelynAustinProperties, ...megBeairdProperties, ...jonathanRosenProperties, ...katieAspenProperties, ...micheleBaladyBeachProperties, ...katyAnnettProperties, ...annaleeAstonProperties, ...brookeAltemoreProperties, ...jamieAdamsProperties, ...erikaOrbinProperties, ...meganJohnsonProperties, ...christineLeiteProperties, ...lizChalfantProperties, ...jdProperties, ...summerProperties, ...alexProperties, ...carsonProperties, ...amyProperties, ...kyleProperties, ...defaultProperties];
     return allKnown.find((p) => String(p.id) === String(id) || p.slug === String(id)) || null;
   }
 

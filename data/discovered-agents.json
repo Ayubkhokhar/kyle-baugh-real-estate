@@ -1501,10 +1501,12 @@
     "name": "DeCarla Anderson",
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/decarla-anderson/",
-    "phone": "",
-    "email": "decarla.anderson@compass.com",
+    "phone": "+1-214-695-9043",
+    "email": "decarlaanderson@compass.com",
     "territory": "East & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/decarla-anderson",
+    "isEmailVerified": true
   },
   {
     "slug": "taylor-andrews",
