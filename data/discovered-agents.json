@@ -1,5 +1,18 @@
 [
   {
+    "slug": "gaya-yaffa",
+    "name": "Gayane \"Gaya\" Yaffa, Ph.D.",
+    "brokerage": "Christie's International Real Estate SoCal | AKG",
+    "url": "https://www.gayaffa.com/",
+    "phone": "(818) 844-7109",
+    "email": "gayaffa@gmail.com",
+    "isEmailVerified": true,
+    "territory": "Woodland Hills, Encino, Beverly Hills & LA",
+    "status": "needs_outreach",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/gaya-yaffa",
+    "notes": "RealTrends Top 1.5% Producer with Christie's. Multilingual, Ph.D. in Psychology."
+  },
+  {
     "slug": "amy",
     "name": "Amy Detwiler",
     "email": "amy.detwiler@compass.com",
@@ -1464,10 +1477,12 @@
     "name": "Michelle Hopson",
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/michelle-hopson/",
-    "phone": "",
+    "phone": "+1-469-583-5441",
     "email": "michelle.hopson@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/michelle-hopson",
+    "isEmailVerified": true
   },
   {
     "slug": "tom-hughes",

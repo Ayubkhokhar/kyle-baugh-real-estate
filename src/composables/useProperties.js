@@ -71,6 +71,18 @@ import { compassProperties as carsonProperties } from "../data/agents/carsonProp
 import { compassProperties as alexProperties } from "../data/agents/alexProperties";
 import { compassProperties as summerProperties } from "../data/agents/summerProperties";
 import { compassProperties as jdProperties } from "../data/agents/jdProperties";
+import { compassProperties as gayaYaffaProperties } from "../data/agents/gayaYaffaProperties";
+
+const gayaYaffaCompassMeta = {
+  lastSynced: "2026-11-05T12:00:00.000Z",
+  totalProperties: 4,
+  activeCount: 3,
+  soldCount: 1,
+  leasedCount: 0,
+  imagesDownloaded: 5,
+  agentUrl: "https://www.gayaffa.com/",
+  syncedAgent: "Gayane \"Gaya\" Yaffa, Ph.D.",
+};
 import { useAgentResolver } from "./useAgentResolver";
 
 const amyCompassMeta = {
@@ -874,6 +886,9 @@ function mergeProperties(existingList, incomingCompassList) {
 }
 
 function getInitialListForAgent(agentId) {
+  if (agentId === "gaya-yaffa") {
+    return gayaYaffaProperties;
+  }
   if (agentId === "michelle-hopson") {
     return michelleHopsonProperties;
   }
@@ -1153,6 +1168,9 @@ function getInitialListForAgent(agentId) {
 }
 
 function getInitialMetaForAgent(agentId) {
+  if (agentId === "gaya-yaffa") {
+    return gayaYaffaCompassMeta;
+  }
   if (agentId === "michelle-hopson") {
     return michelleHopsonCompassMeta;
   }

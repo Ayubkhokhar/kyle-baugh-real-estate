@@ -30,6 +30,16 @@ const routes = [
     meta: { hideAgentNav: true },
   },
   {
+    path: "/gaya-yaffa",
+    name: "gayaYaffa-home",
+    component: HomeView,
+  },
+  {
+    path: "/gaya-yaffa/manage",
+    name: "gayaYaffa-manage",
+    component: ManageView,
+  },
+  {
     path: "/kyle",
     name: "kyle-home",
     component: HomeView,
