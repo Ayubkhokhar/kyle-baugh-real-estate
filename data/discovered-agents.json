@@ -480,11 +480,13 @@
     "name": "Diana Blackman",
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/diana-blackman/",
-    "phone": "",
+    "phone": "+1-214-773-3454",
     "email": "diana.blackman@compass.com",
     "territory": "Park cities & Dallas",
-    "status": "failed",
-    "failReason": "fetch failed"
+    "status": "launched",
+    "failReason": "fetch failed",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/diana-blackman",
+    "isEmailVerified": true
   },
   {
     "slug": "chris-blackman",
