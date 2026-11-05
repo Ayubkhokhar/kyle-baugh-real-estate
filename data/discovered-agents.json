@@ -1416,10 +1416,12 @@
     "name": "Forrest Gregg",
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/forrest-gregg/",
-    "phone": "",
+    "phone": "+1-214-923-4668",
     "email": "forrest.gregg@compass.com",
     "territory": "Lakewood & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/forrest-gregg",
+    "isEmailVerified": true
   },
   {
     "slug": "heather-guild",
