@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { agentProfile as kyleProfile } from "../data/agentProfile";
 import { amyProfile } from "../data/agents/amyProfile";
+import { meganBelmoreProfile } from "../data/agents/meganBelmoreProfile";
 import { oracleBatieSmithProfile } from "../data/agents/oracleBatieSmithProfile";
 import { katieBaderProfile } from "../data/agents/katieBaderProfile";
 import { amandaAustinProfile } from "../data/agents/amandaAustinProfile";
@@ -80,6 +81,7 @@ import { gayaYaffaProfile } from "../data/agents/gayaYaffaProfile";
 import { jdProfile } from "../data/agents/jdProfile";
 import { compassProperties as kyleProperties } from "../data/compassProperties";
 import { compassProperties as amyProperties } from "../data/agents/amyProperties";
+import { compassProperties as meganBelmoreProperties } from "../data/agents/meganBelmoreProperties";
 import { compassProperties as oracleBatieSmithProperties } from "../data/agents/oracleBatieSmithProperties";
 import { compassProperties as katieBaderProperties } from "../data/agents/katieBaderProperties";
 import { compassProperties as amandaAustinProperties } from "../data/agents/amandaAustinProperties";
@@ -870,6 +872,15 @@ export const availableAgents = [
     slug: "oracle-batie-smith",
     profile: oracleBatieSmithProfile,
     properties: oracleBatieSmithProperties,
+    previewColor: "#BFA181",
+  },
+  {
+    id: "megan-belmore",
+    name: "Megan Belmore",
+    title: "Dallas Luxury & Architectural Specialist",
+    slug: "megan-belmore",
+    profile: meganBelmoreProfile,
+    properties: meganBelmoreProperties,
     previewColor: "#BFA181",
   },
 ];

@@ -1561,10 +1561,12 @@
     "name": "Oracle Batie-Smith",
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/oracle-batie-smith/",
-    "phone": "",
-    "email": "oracle.batie.smith@compass.com",
+    "phone": "+1-972-854-9277",
+    "email": "oracle.smith@compass.com",
     "territory": "East & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/oracle-batie-smith",
+    "isEmailVerified": true
   },
   {
     "slug": "megan-belmore",
