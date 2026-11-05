@@ -410,6 +410,11 @@ const routes = [
     component: HomeView,
   },
   {
+    path: "/mo-atunrase",
+    name: "moAtunrase-home",
+    component: HomeView,
+  },
+  {
     path: "/agent/:agentSlug",
     name: "agent-home",
     component: HomeView,
@@ -797,6 +802,11 @@ const routes = [
   {
     path: "/taylor-andrews/manage",
     name: "taylorAndrews-manage",
+    component: ManageView,
+  },
+  {
+    path: "/mo-atunrase/manage",
+    name: "moAtunrase-manage",
     component: ManageView,
   },
   {

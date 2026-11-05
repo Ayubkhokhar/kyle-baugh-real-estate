@@ -1513,10 +1513,12 @@
     "name": "Taylor Andrews",
     "brokerage": "Compass RE Texas, LLC",
     "url": "https://www.compass.com/agents/taylor-andrews/",
-    "phone": "",
+    "phone": "+1-281-841-0677",
     "email": "taylor.andrews@compass.com",
     "territory": "East & Dallas",
-    "status": "discovered"
+    "status": "launched",
+    "liveUrl": "https://realestate-advisory.ayubkhokhar786.workers.dev/taylor-andrews",
+    "isEmailVerified": true
   },
   {
     "slug": "mo-atunrase",
