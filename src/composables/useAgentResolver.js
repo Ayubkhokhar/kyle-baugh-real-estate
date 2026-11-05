@@ -779,7 +779,7 @@ export const availableAgents = [
   },
   {
     id: "gaya-yaffa",
-    name: "Gayane \"Gaya\" Yaffa, Ph.D.",
+    name: "Dr. Gaya Yaffa",
     title: "Multilingual Luxury Broker Associate · Christie's International Real Estate",
     slug: "gaya-yaffa",
     profile: gayaYaffaProfile,
